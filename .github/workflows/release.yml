@@ -1,0 +1,83 @@
+name: Release
+on:
+  push:
+    tags: ['v*.*.*']
+
+permissions:
+  contents: write
+
+jobs:
+  create-release:
+    runs-on: ubuntu-latest
+    outputs:
+      id: ${{ steps.release.outputs.id }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check tag matches app version
+        run: |
+          TAG_VERSION="${GITHUB_REF_NAME#v}"
+          APP_VERSION="$(node -p "require('./src-tauri/tauri.conf.json').version")"
+          if [ "$TAG_VERSION" != "$APP_VERSION" ]; then
+            echo "::error::Tag $GITHUB_REF_NAME does not match version $APP_VERSION in src-tauri/tauri.conf.json"
+            exit 1
+          fi
+      - name: Create draft release
+        id: release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAG: ${{ github.ref_name }}
+        run: |
+          cat > notes.md <<'NOTES'
+          Install guide: see docs/INSTALL.md in the repository.
+
+          **macOS** (TrackMyBids_<version>_universal.dmg)
+          1. Open the .dmg and drag TrackMyBids into Applications.
+          2. Open TrackMyBids from Applications.
+          3. If macOS says it can't verify the developer: open System Settings → Privacy & Security, scroll down, click **Open Anyway**, then confirm (macOS 15+). On older macOS, right-click the app → Open also works.
+          4. Allow notifications. Tip: System Settings → Notifications → TrackMyBids → style **Persistent** keeps reminders on screen.
+
+          **Windows** (.msi or -setup.exe)
+          Run the installer. If SmartScreen appears: More info → Run anyway.
+          NOTES
+          # Re-runs reuse the draft created by an earlier attempt.
+          if ! gh release view "$TAG" >/dev/null 2>&1; then
+            gh release create "$TAG" --draft --verify-tag --title "TrackMyBids $TAG" --notes-file notes.md
+          fi
+          # Drafts aren't reachable via the tag endpoint, so look the id up in the release list.
+          ID="$(gh api "repos/$GITHUB_REPOSITORY/releases?per_page=100" --jq "map(select(.tag_name == \"$TAG\")) | .[0].id")"
+          if [ -z "$ID" ] || [ "$ID" = "null" ]; then
+            ID="$(gh release view "$TAG" --json databaseId -q .databaseId)"
+          fi
+          echo "id=$ID" >> "$GITHUB_OUTPUT"
+
+  build:
+    needs: create-release
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - platform: macos-latest
+            args: --target universal-apple-darwin
+          - platform: windows-latest
+            args: ''
+    runs-on: ${{ matrix.platform }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: ${{ matrix.platform == 'macos-latest' && 'aarch64-apple-darwin,x86_64-apple-darwin' || '' }}
+      - uses: swatinem/rust-cache@v2
+        with:
+          workspaces: './src-tauri -> target'
+      - run: npm ci
+      - run: npm test
+      - uses: tauri-apps/tauri-action@v0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          releaseId: ${{ needs.create-release.outputs.id }}
+          args: ${{ matrix.args }}

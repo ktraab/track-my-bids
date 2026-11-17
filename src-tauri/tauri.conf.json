@@ -1,0 +1,34 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "TrackMyBids",
+  "version": "0.6.0",
+  "identifier": "com.trackmybids.app",
+  "build": {
+    "beforeDevCommand": "npm run dev",
+    "devUrl": "http://localhost:1420",
+    "beforeBuildCommand": "npm run build",
+    "frontendDist": "../build"
+  },
+  "app": {
+    "windows": [
+      { "title": "TrackMyBids", "width": 1320, "height": 880, "minWidth": 900, "minHeight": 600, "visible": false }
+    ],
+    "security": {
+      "csp": null
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": "all",
+    "icon": [
+      "icons/32x32.png",
+      "icons/128x128.png",
+      "icons/128x128@2x.png",
+      "icons/icon.icns",
+      "icons/icon.ico"
+    ],
+    "macOS": { "signingIdentity": "-", "minimumSystemVersion": "11.0" },
+    "category": "Business",
+    "shortDescription": "Bid tracker for public-sector sales"
+  }
+}
