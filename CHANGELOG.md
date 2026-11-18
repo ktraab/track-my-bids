@@ -2,6 +2,10 @@
 
 All notable changes to TrackMyBids.
 
+## v0.7.1 — 2026-11-18
+
+- **Fix: Open at login could stop working.** If TrackMyBids was ever opened straight from Downloads or the .dmg, the login item pointed at a temporary copy that macOS later deletes, so the app didn't start at login (and the morning briefing didn't come). The app now re-points the login item at itself on every launch, and never at a temporary copy. Updating to 0.7.1 and opening it once from Applications fixes it.
+
 ## v0.7.0 — 2026-11-18
 
 - **Automatic updates** — TrackMyBids checks for a new version at startup and every few hours. When one is out, a banner offers **Update & restart** (or **Later**); nothing installs until you click. Settings → General also has **Check for updates**. Updates are signed, and the app refuses any that aren't. Coming from v0.6.0 or older? Install v0.7.0 by hand once; after that it updates itself.

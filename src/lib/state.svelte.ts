@@ -359,7 +359,7 @@ class AppState {
     try {
       if (this.#isRelease()) {
         const enabled = await autostartEnabled();
-        if (on && !enabled) await enableAutostart();
+        if (on) await enableAutostart(); // rewrites it, so it points at this copy of the app
         if (!on && enabled) await disableAutostart();
       }
       await this.repos.settings.setRaw('launch_at_login', on ? '1' : '0');

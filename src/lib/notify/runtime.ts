@@ -1,6 +1,8 @@
 import { listen, type UnlistenFn } from '@tauri-apps/api/event';
 import { TrayIcon } from '@tauri-apps/api/tray';
-import { enable, isEnabled } from '@tauri-apps/plugin-autostart';
+import { enable } from '@tauri-apps/plugin-autostart';
+import { resourceDir } from '@tauri-apps/api/path';
+import { isStableAppLocation } from '../domain/loginItem';
 import { app } from '../state.svelte';
 import { buildDigest } from '../domain/digest';
 import { createScheduler } from './scheduler';
@@ -30,12 +32,14 @@ async function ensureAutostart() {
   // Only release builds register as a login item (never `tauri dev` or `tauri build --debug`).
   if (!import.meta.env.PROD || import.meta.env.TAURI_ENV_DEBUG === 'true') return;
   // Default on: enable when the user never chose (no pref) or chose on ('1'). Anything else —
-  // in particular '0' from turning it off in Settings — means hands off. Re-enabling on every
-  // launch keeps the login item pointing at the copy of the app that is actually running
-  // (e.g. after moving or reinstalling it). OS-side removal can't be detected; that's accepted.
+  // in particular '0' from turning it off in Settings — means hands off. enable() rewrites the
+  // login item every launch, so it follows the copy of the app that is actually running (after
+  // moving or reinstalling it, or after a run from a temporary location left it pointing there).
   const pref = await app.repos.settings.getRaw('launch_at_login');
   if (pref !== null && pref !== '1') return;
-  if (!(await isEnabled())) await enable();
+  // Never point it at a translocated copy or a mounted .dmg; the next normal launch fixes it.
+  if (!isStableAppLocation(await resourceDir())) return;
+  await enable();
 }
 
 /** Call once after app.init succeeded. Safe to call again (no-op). */
