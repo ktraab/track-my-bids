@@ -22,7 +22,7 @@ Team mode: everyone on the team sees every bid, filtered by owner. Optional — 
 - **Sync status dot** next to Settings (synced, syncing, offline with changes waiting, needs sign-in).
 - Reminders and the morning briefing cover only your own bids.
 - Contacts → Restore from backup is disabled in Team mode (it would overwrite shared data).
-- **Open source** — published under the MIT license at https://github.com/ktraab/track-my-bids (installers are built there from `v*` tags). Decided against live Outlook calendar sync: the team's Outlook calendars are local IMAP calendars with no server to sync with (details in the design spec, §12).
+- **Open source** — published under the MIT license at https://github.com/ktraab/track-my-bids (installers are built there from `v*` tags). Decided against live Outlook calendar sync: the team's Outlook calendars are local IMAP calendars with no server to sync with.
 - **Closed bids findable again** — new Awarded / Lost / No bid filter chips bring closed bids back onto the map so they can be opened or reopened.
 
 ## v0.5.0 — 2026-11-17
