@@ -1,7 +1,7 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
   "productName": "TrackMyBids",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "identifier": "com.trackmybids.app",
   "build": {
     "beforeDevCommand": "npm run dev",
@@ -11,7 +11,14 @@
   },
   "app": {
     "windows": [
-      { "title": "TrackMyBids", "width": 1320, "height": 880, "minWidth": 900, "minHeight": 600, "visible": false }
+      {
+        "title": "TrackMyBids",
+        "width": 1320,
+        "height": 880,
+        "minWidth": 900,
+        "minHeight": 600,
+        "visible": false
+      }
     ],
     "security": {
       "csp": null
@@ -27,8 +34,23 @@
       "icons/icon.icns",
       "icons/icon.ico"
     ],
-    "macOS": { "signingIdentity": "-", "minimumSystemVersion": "11.0" },
+    "macOS": {
+      "signingIdentity": "-",
+      "minimumSystemVersion": "11.0"
+    },
     "category": "Business",
-    "shortDescription": "Bid tracker for public-sector sales"
+    "shortDescription": "Bid tracker for public-sector sales",
+    "createUpdaterArtifacts": true
+  },
+  "plugins": {
+    "updater": {
+      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDIwN0E0REY5NzA3Mzg3MUEKUldRYWgzTncrVTE2SUxxYlNVZ0hFR2ZTdDBkUDBBVmZFdzBnRmZiSjcxQ3hGeFBjUDdRbDdNdXkK",
+      "endpoints": [
+        "https://github.com/ktraab/track-my-bids/releases/latest/download/latest.json"
+      ],
+      "windows": {
+        "installMode": "passive"
+      }
+    }
   }
 }

@@ -162,8 +162,16 @@ export function createTeamController(d: TeamDeps) {
     emit({ members: await refreshMembers(d.sql, r.backend) });
   }
 
+  async function removeMember(userId: string) {
+    const r = need();
+    await r.backend.removeMember(userId);
+    emit({ members: await refreshMembers(d.sql, r.backend) });
+    // Pull the reassigned bids straight away.
+    void engine?.syncNow();
+  }
+
   return {
-    load, join, signUp, signIn, disconnect, setMember,
+    load, join, signUp, signIn, disconnect, setMember, removeMember,
     syncNow: () => engine?.syncNow() ?? Promise.resolve(),
     poke: () => engine?.poke(),
     get state() { return state; },

@@ -17,6 +17,8 @@ A free desktop app (macOS and Windows) for sales teams that chase public-sector 
   - An admin approves who joins.
   - No central server, no account with us, no cost.
 
+- **Automatic updates** (from v0.7.0): the app tells you when a new version is out and installs it when you click **Update & restart**. Updates are signed.
+
 Your data stays on your computer unless you turn on Team mode, and then it goes only to your own Supabase project.
 
 ## Install

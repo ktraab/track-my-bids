@@ -72,6 +72,48 @@ describe('team controller', () => {
     expect(b.ctl.state.members.map((m) => m.displayName)).toEqual(['Ann', 'Bo']);
   });
 
+  it('admin removes a member: their bids (trash too) move to the admin, they drop off the list and are signed out', async () => {
+    const a = await device();
+    await a.ctl.join(CODE);
+    await a.ctl.signUp('a@x.org', 'pw-aaaaaaaa', 'Ann');
+    await a.ctl.syncNow();
+    const b = await device();
+    await b.ctl.join(CODE);
+    await b.ctl.signUp('b@x.org', 'pw-bbbbbbbb', 'Bo');
+    server.approve('u2');
+    const kept = await b.bids.create(input);
+    const trashed = await b.bids.create({ ...input, title: 'Old bid' });
+    await b.bids.remove(trashed);
+    await b.ctl.syncNow();
+
+    await expect(b.ctl.removeMember('u1')).rejects.toThrow('not_admin');
+    await expect(a.ctl.removeMember('u1')).rejects.toThrow('cannot_remove_self');
+    await a.ctl.removeMember('u2');
+    expect(a.ctl.state.members.map((m) => m.id)).toEqual(['u1']);
+    expect([...server.rows.values()].filter((r) => r.tbl === 'bids').map((r) => r.data.owner_id)).toEqual(['u1', 'u1']);
+
+    await a.ctl.syncNow();
+    const mine = await a.bids.listAll();
+    expect(mine.map((d) => [d.bid.id, d.bid.ownerId])).toEqual([[kept, 'u1']]);
+    expect((await a.bids.listTrash()).map((x) => x.ownerId)).toEqual(['u1']);
+
+    await b.ctl.syncNow();
+    expect(b.ctl.state.sync).toMatchObject({ status: 'signed_out', message: expect.stringMatching(/removed you/) });
+  });
+
+  it('a turned-off member is told so, not asked to wait for approval', async () => {
+    const a = await device();
+    await a.ctl.join(CODE);
+    await a.ctl.signUp('a@x.org', 'pw-aaaaaaaa', 'Ann');
+    const b = await device();
+    await b.ctl.join(CODE);
+    await b.ctl.signUp('b@x.org', 'pw-bbbbbbbb', 'Bo');
+    server.approve('u2');
+    await a.ctl.setMember('u2', 'member', false);
+    await b.ctl.syncNow();
+    expect(b.ctl.state.sync).toMatchObject({ status: 'pending', message: expect.stringMatching(/turned off/) });
+  });
+
   it('offline edits to different fields both survive; same field → newest wins', async () => {
     const a = await device();
     await a.ctl.join(CODE);

@@ -103,6 +103,10 @@ export function createSupabaseRemote(info: JoinInfo, storage: AuthStorage): Remo
         await uid();
         await call(client.rpc('set_member', { target: userId, new_role: role, new_active: active }));
       },
+      async removeMember(userId) {
+        await uid();
+        await call(client.rpc('remove_member', { target: userId }));
+      },
       async applyChanges(changes) {
         await uid();
         const out = await call<(ChangeResult & { row?: RawRow | null })[]>(client.rpc('apply_changes', { changes }));

@@ -5,6 +5,7 @@ import { app } from '../state.svelte';
 import { buildDigest } from '../domain/digest';
 import { createScheduler } from './scheduler';
 import { tauriNotifier } from './notifier';
+import { updater, autoCheck } from '../update';
 
 const zone = () => Intl.DateTimeFormat().resolvedOptions().timeZone;
 let started = false;
@@ -72,6 +73,7 @@ async function start() {
     const fired = await scheduler.tick();
     if (fired.length) await app.refreshNotifications();
     await updateTray().catch((e) => console.error('[tray]', e));
+    if (autoCheck) void updater.maybeCheck(); // throttled to every few hours; the first tick is at startup
   };
 
   unlisteners.push(await listen('scheduler-tick', onTick));

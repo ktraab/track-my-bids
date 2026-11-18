@@ -15,6 +15,9 @@
   let busy = $state(false);
   let info = $state<string | null>(null);
   let confirmLeave = $state(false);
+  let confirmRemove = $state<string | null>(null);
+  // Bids (open, closed and trashed) that will move to the admin. Counted from this computer's copy.
+  const ownedCount = (id: string) => app.bids.filter((d) => d.bid.ownerId === id).length + app.trash.filter((b) => b.ownerId === id).length;
 
   const t = $derived(app.team);
   const isAdmin = $derived(t.mode === 'team' && t.me?.role === 'admin' && !!t.me?.active);
@@ -112,7 +115,18 @@
             </select>
             <label class="check"><input type="checkbox" checked={m.active} disabled={busy || m.id === t.userId}
               onchange={(e) => { const el = e.currentTarget; void run(async () => { if (!(await app.teamSetMember(m.id, m.role, el.checked))) el.checked = m.active; }); }} /> Active</label>
+            {#if m.id !== t.userId && confirmRemove !== m.id}
+              <button class="btn small" disabled={busy} onclick={() => (confirmRemove = m.id)}>Remove…</button>
+            {/if}
           </li>
+          {#if confirmRemove === m.id}
+            {@const n = ownedCount(m.id)}
+            <li class="confirm" role="group" aria-label="Confirm removing {m.displayName || m.email}">
+              <span class="hint">Remove {m.displayName || m.email}? {n ? `Their ${n} bid${n === 1 ? '' : 's'} move to you. ` : ''}They lose access right away and would have to sign up again to rejoin. Bids already on their computer stay there.</span>
+              <button class="btn danger" disabled={busy} onclick={() => run(async () => { if (await app.teamRemoveMember(m.id)) confirmRemove = null; })}>Remove</button>
+              <button class="btn" disabled={busy} onclick={() => (confirmRemove = null)}>Cancel</button>
+            </li>
+          {/if}
         {/each}
       </ul>
 
@@ -172,6 +186,8 @@
   .rows li { display: flex; gap: 12px; align-items: center; padding: 6px 0; border-top: 1px solid var(--line-soft, #eef1f5); }
   .who { flex: 1; display: flex; flex-direction: column; min-width: 0; }
   .who small { color: var(--muted); }
+  .rows li.confirm { border-top: none; padding-top: 0; flex-wrap: wrap; }
+  .rows li.confirm .hint { flex: 1 1 100%; }
   .err { margin: 0; color: var(--red); font-size: 13px; }
   .leave { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin-top: 6px; }
 </style>

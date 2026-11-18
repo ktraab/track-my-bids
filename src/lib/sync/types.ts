@@ -32,6 +32,8 @@ export interface SyncBackend {
   me(): Promise<Profile | null>;
   listProfiles(): Promise<Profile[]>;
   setMember(userId: string, role: Role, active: boolean): Promise<void>;
+  /** Admin only: move the member's bids (trash included) to the caller, then delete their account. */
+  removeMember(userId: string): Promise<void>;
   applyChanges(changes: OutgoingChange[]): Promise<ChangeResult[]>;
   pullSince(seq: number, limit: number): Promise<RemoteRow[]>;
 }
@@ -54,7 +56,7 @@ export interface Remote {
   auth: RemoteAuth;
 }
 
-export type SyncErrorKind = 'network' | 'auth' | 'not_approved' | 'schema' | 'other';
+export type SyncErrorKind = 'network' | 'auth' | 'not_approved' | 'removed' | 'schema' | 'other';
 
 export class SyncError extends Error {
   constructor(public kind: SyncErrorKind, message: string) {

@@ -2,6 +2,11 @@
 
 All notable changes to TrackMyBids.
 
+## v0.7.0 — 2026-11-18
+
+- **Automatic updates** — TrackMyBids checks for a new version at startup and every few hours. When one is out, a banner offers **Update & restart** (or **Later**); nothing installs until you click. Settings → General also has **Check for updates**. Updates are signed, and the app refuses any that aren't. Coming from v0.6.0 or older? Install v0.7.0 by hand once; after that it updates itself.
+- **Remove a team member** (admins) — Settings → Team → Remove. Their bids, including ones in the trash, move to the admin who removed them. Team servers need the new `supabase/migrations/20261118000000_remove_member.sql` applied (see `docs/TEAM-SETUP.md`).
+
 ## v0.6.0 — 2026-11-17
 
 Team mode: everyone on the team sees every bid, filtered by owner. Optional — the app works exactly as before when you stay Local.
@@ -17,7 +22,7 @@ Team mode: everyone on the team sees every bid, filtered by owner. Optional — 
 - **Sync status dot** next to Settings (synced, syncing, offline with changes waiting, needs sign-in).
 - Reminders and the morning briefing cover only your own bids.
 - Contacts → Restore from backup is disabled in Team mode (it would overwrite shared data).
-- **Open source** — published under the MIT license at https://github.com/ktraab/track-my-bids (installers are built there from `v*` tags). Decided against live Outlook calendar sync: the team's Outlook calendars are local IMAP calendars with no server to sync with.
+- **Open source** — published under the MIT license at https://github.com/ktraab/track-my-bids (installers are built there from `v*` tags). Decided against live Outlook calendar sync: the team's Outlook calendars are local IMAP calendars with no server to sync with (details in the design spec, §12).
 - **Closed bids findable again** — new Awarded / Lost / No bid filter chips bring closed bids back onto the map so they can be opened or reopened.
 
 ## v0.5.0 — 2026-11-17

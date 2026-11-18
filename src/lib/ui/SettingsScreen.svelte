@@ -10,6 +10,7 @@
   import { hasTemplateItem, type TemplateItem } from '$lib/domain/checklist';
   import { reveal } from '$lib/files';
   import OffsetEditor from './OffsetEditor.svelte';
+  import { updater } from '$lib/update';
 
   const DAYS = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
   const TYPES = Object.keys(MILESTONE_TYPE_LABELS) as MilestoneType[];
@@ -191,6 +192,13 @@
       <button class="btn" onclick={showData}>Show data folder</button>
       <span class="hint">Version {version || '—'}</span>
     </div>
+    <div class="inline">
+      <button class="btn" disabled={updater.busy} onclick={() => updater.checkNow()}>{updater.status === 'checking' ? 'Checking…' : 'Check for updates'}</button>
+      {#if updater.status === 'current'}<span class="hint">You have the latest version.</span>
+      {:else if updater.status === 'available' && !updater.error}<span class="hint">Version {updater.version} is available.</span><button class="btn primary" onclick={() => updater.install()}>Update &amp; restart</button>
+      {:else if updater.error}<span class="err">{updater.error}</span>{/if}
+    </div>
+    <p class="hint">TrackMyBids checks for updates every few hours and asks before installing.</p>
   </div>
 </section>
 

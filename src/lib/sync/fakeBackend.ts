@@ -94,6 +94,21 @@ export function createFakeServer(schemaVersion = SCHEMA_VERSION) {
         const t = profiles.get(target);
         if (t) profiles.set(target, { ...t, role, active });
       },
+      async removeMember(target) {
+        const u = guard();
+        const p = profiles.get(u);
+        if (!p || p.role !== 'admin' || !p.active) throw new SyncError('other', 'not_admin');
+        if (target === u) throw new SyncError('other', 'cannot_remove_self');
+        if (!profiles.has(target)) throw new SyncError('other', 'not_found');
+        const now = new Date().toISOString();
+        for (const [key, r] of rows) {
+          if (r.tbl !== 'bids' || r.data.owner_id !== target) continue;
+          const t = r.times.owner_id && r.times.owner_id > now ? r.times.owner_id : now;
+          rows.set(key, { ...r, data: { ...r.data, owner_id: u }, times: { ...r.times, owner_id: t }, seq: ++seq, updatedBy: u });
+        }
+        profiles.delete(target);
+        for (const [email, a] of accounts) if (a.id === target) accounts.delete(email);
+      },
       async applyChanges(changes) {
         const u = guard();
         if (!approved(u)) throw new SyncError('not_approved', 'not_approved');

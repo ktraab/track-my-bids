@@ -11,8 +11,12 @@
     {
       "identifier": "opener:allow-open-url",
       "allow": [
-        { "url": "x-apple.systempreferences:com.apple.preference.notifications" },
-        { "url": "ms-settings:notifications" }
+        {
+          "url": "x-apple.systempreferences:com.apple.preference.notifications"
+        },
+        {
+          "url": "ms-settings:notifications"
+        }
       ]
     },
     "dialog:allow-save",
@@ -22,12 +26,31 @@
     "fs:allow-read-text-file",
     "fs:allow-read-file",
     "fs:allow-mkdir",
-    { "identifier": "fs:scope", "allow": [{ "path": "$APPCACHE" }, { "path": "$APPCACHE/**" }] },
+    {
+      "identifier": "fs:scope",
+      "allow": [
+        {
+          "path": "$APPCACHE"
+        },
+        {
+          "path": "$APPCACHE/**"
+        }
+      ]
+    },
     "opener:allow-reveal-item-in-dir",
-    { "identifier": "opener:allow-open-path", "allow": [{ "path": "$APPCACHE/**" }] },
+    {
+      "identifier": "opener:allow-open-path",
+      "allow": [
+        {
+          "path": "$APPCACHE/**"
+        }
+      ]
+    },
     "sql:default",
     "sql:allow-execute",
     "notification:default",
-    "autostart:default"
+    "autostart:default",
+    "updater:default",
+    "process:allow-restart"
   ]
 }

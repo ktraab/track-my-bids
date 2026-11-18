@@ -47,7 +47,11 @@ function errorInfo(e: unknown): Pick<SyncInfo, 'status' | 'message'> {
   const kind = e instanceof SyncError ? e.kind : 'other';
   if (kind === 'network') return { status: 'offline', message: 'No connection — your changes are saved and will sync.' };
   if (kind === 'auth') return { status: 'signed_out', message: 'Sign in again to keep syncing.' };
-  if (kind === 'not_approved') return { status: 'pending', message: 'Waiting for an admin to approve your account.' };
+  if (kind === 'not_approved') {
+    const off = e instanceof SyncError && e.message === 'disabled';
+    return { status: 'pending', message: off ? 'An admin turned off your access to this team.' : 'Waiting for an admin to approve your account.' };
+  }
+  if (kind === 'removed') return { status: 'signed_out', message: 'An admin removed you from this team. Leave team to keep using TrackMyBids on your own.' };
   if (kind === 'schema') return { status: 'server_update', message: SCHEMA_MESSAGE };
   return { status: 'error', message: e instanceof Error ? e.message : String(e) };
 }
@@ -83,7 +87,9 @@ export function createSyncEngine(d: EngineDeps) {
       }
       const me = await d.backend.me();
       if (me && !halted) d.onMe(me);
-      if (!me || !me.active || me.role === 'pending') throw new SyncError('not_approved', 'not_approved');
+      if (!me) throw new SyncError('removed', 'removed');
+      if (!me.active) throw new SyncError('not_approved', 'disabled');
+      if (me.role === 'pending') throw new SyncError('not_approved', 'not_approved');
       if (halted) return;
       const pushed = await pushAll(d.sql, d.backend, d.exclusive, d.now, isHalted);
       if (halted) return;

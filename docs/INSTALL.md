@@ -12,6 +12,9 @@
 2. Run it. If Windows SmartScreen appears: **More info → Run anyway**.
 3. TrackMyBids lives in the system tray (bottom right). Closing the window keeps reminders running.
 
+## Updates
+TrackMyBids updates itself from v0.7.0 on. When a new version is out, a banner asks **Update & restart**; click it and the app reinstalls and reopens (no Open Anyway or SmartScreen step this time). Settings → General → **Check for updates** checks right away. Versions before v0.7.0 can't update themselves: download v0.7.0 once and install it over the old one.
+
 ## Your data
 Everything is stored on your computer. Use **Contacts → Back up all data** to save a backup file, and **Restore from backup** on a new computer.
 

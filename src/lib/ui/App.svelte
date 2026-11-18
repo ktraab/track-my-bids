@@ -10,6 +10,7 @@
   import ContactsScreen from './ContactsScreen.svelte';
   import SettingsScreen from './SettingsScreen.svelte';
   import ImportScreen from './ImportScreen.svelte';
+  import UpdateBanner from './UpdateBanner.svelte';
   import { startRuntime } from '$lib/notify/runtime';
 
   const bidId = $derived(app.view.name === 'bid' ? app.view.id : null);
@@ -49,13 +50,16 @@
   </div>
 {/if}
 
-{#if app.notice}
-  <div class="notice" role="status">
-    <span>{app.notice.text}</span>
-    {#if app.notice.path}<button class="btn" onclick={() => app.revealNotice()}>Show file</button>{/if}
-    <button class="btn" onclick={() => (app.notice = null)}>OK</button>
-  </div>
-{/if}
+<div class="corner">
+  <UpdateBanner />
+  {#if app.notice}
+    <div class="notice" role="status">
+      <span>{app.notice.text}</span>
+      {#if app.notice.path}<button class="btn" onclick={() => app.revealNotice()}>Show file</button>{/if}
+      <button class="btn" onclick={() => (app.notice = null)}>OK</button>
+    </div>
+  {/if}
+</div>
 
 {#if app.ready && app.view.name !== 'network'}
   <nav class="appbar" aria-label="App">
@@ -97,7 +101,9 @@
     background: #fff; border: 1px solid var(--red); border-radius: 12px; color: var(--red);
     box-shadow: 0 8px 24px rgba(22, 32, 44, 0.15);
   }
-  .notice { position: fixed; left: 20px; bottom: 20px; z-index: 50; max-width: min(460px, calc(50vw - 30px)); display: flex; gap: 12px; align-items: center; padding: 12px 14px; background: #fff; border: 1px solid #b7d7c0; border-radius: 12px; color: #1d5c2e; box-shadow: 0 8px 24px rgba(22, 32, 44, 0.15); }
+  .corner { position: fixed; left: 20px; bottom: 20px; z-index: 50; max-width: min(460px, calc(50vw - 30px)); display: flex; flex-direction: column; gap: 10px; }
+  .corner:empty { display: none; }
+  .notice { display: flex; gap: 12px; align-items: center; padding: 12px 14px; background: #fff; border: 1px solid #b7d7c0; border-radius: 12px; color: #1d5c2e; box-shadow: 0 8px 24px rgba(22, 32, 44, 0.15); }
   .loading { padding: 40px; color: var(--muted); }
   .appbar {
     position: sticky; top: 0; z-index: 30; display: flex; align-items: center;

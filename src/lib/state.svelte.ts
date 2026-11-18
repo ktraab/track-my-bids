@@ -308,6 +308,13 @@ class AppState {
   async teamSetMember(id: string, role: Role, active: boolean): Promise<boolean> {
     try { await this.#teamCtl().setMember(id, role, active); return true; } catch (e) { this.#fail(e); return false; }
   }
+  async teamRemoveMember(id: string): Promise<boolean> {
+    try {
+      await this.#teamCtl().removeMember(id);
+      this.notice = { text: 'Member removed. Their bids are now yours.' };
+      return true;
+    } catch (e) { this.#fail(e); return false; }
+  }
   teamSyncNow() {
     try { void this.#teamCtl().syncNow(); } catch (e) { this.#fail(e); }
   }
