@@ -4,6 +4,7 @@
   import { openTauriSql } from '$lib/db/tauriSql';
   import TransitMap from './TransitMap.svelte';
   import BidDetail from './BidDetail.svelte';
+  import QuoteDetail from './QuoteDetail.svelte';
   import QuickAdd from './QuickAdd.svelte';
   import NotificationsPanel from './NotificationsPanel.svelte';
   import DigestPanel from './DigestPanel.svelte';
@@ -14,6 +15,8 @@
   import { startRuntime } from '$lib/notify/runtime';
 
   const bidId = $derived(app.view.name === 'bid' ? app.view.id : null);
+  /** Quotes open the quote panel; Convert to bid flips this live to BidDetail. */
+  const isQuote = $derived(bidId ? app.bids.find((d) => d.bid.id === bidId)?.bid.kind === 'rfq' : false);
 
   onMount(() => {
     void app.init(openTauriSql);
@@ -73,7 +76,9 @@
 {#if !app.ready}
   <p class="loading">Loading…</p>
 {:else if bidId}
-  {#key bidId}<BidDetail id={bidId} />{/key}
+  {#key bidId}
+    {#if isQuote}<QuoteDetail id={bidId} />{:else}<BidDetail id={bidId} />{/if}
+  {/key}
 {:else if app.view.name === 'contacts'}
   <ContactsScreen />
 {:else if app.view.name === 'import'}

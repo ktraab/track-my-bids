@@ -43,7 +43,7 @@
         <strong>{n.title}</strong>
         <p>{n.body}</p>
         <div class="row">
-          {#if n.bidId}<button class="btn" onclick={() => openBid(n.bidId!)}>Open bid</button>{/if}
+          {#if n.bidId}<button class="btn" onclick={() => openBid(n.bidId!)}>{n.kind === 'needs' ? 'Open' : 'Open bid'}</button>{/if}
           {#if n.kind === 'reminder' || n.kind === 'shipby'}
             {#if app.canSnooze(n.key, 'hour')}
               <button class="btn" onclick={() => app.snooze(n.key, 'hour')}>Snooze 1 h</button>

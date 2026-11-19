@@ -16,13 +16,13 @@ Nothing secret is stored in the code. The app only ever uses a Supabase *publish
    git archive main | tar -x -C <scratch>
    rm -rf <scratch>/docs/superpowers
    ```
-2. Copy the public README over the exported one. Change the CHANGELOG intro to "All notable changes to TrackMyBids." (the private version points to internal docs).
+2. Copy the public README over the exported one. Change the CHANGELOG intro to "All notable changes to TrackMyBids." (the private version points to internal docs), and drop the v0.6.0 line's "(details in the design spec, §12)": that spec isn't in the public repo. The public README has its own feature list (it mentions automatic updates); add new features there by hand.
 3. Check for anything private before pushing: `grep -rnE "dxpkzj|sb_secret|service_role|@gmail"`.
 4. In a clone of `track-my-bids`, replace the files with the snapshot, then commit as `TrackMyBids <trackmybids@users.noreply.github.com>` and push `main`.
 
 ## Releases
 
-Push a `vX.Y.Z` tag **to the public repo**. Bump `package.json`, `src-tauri/tauri.conf.json`, `src-tauri/Cargo.toml` and `Cargo.lock` together first. The Release workflow then builds an unsigned macOS universal `.dmg` and Windows `.msi`/`-setup.exe` into a **draft** release; check it, then publish.
+Push a `vX.Y.Z` tag **to the public repo**. Bump `package.json`, `src-tauri/tauri.conf.json`, `src-tauri/Cargo.toml` and `Cargo.lock` together first (`npm install --package-lock-only` and `cargo update -p trackmybids` refresh the lock files). The Release workflow then builds an unsigned macOS universal `.dmg` and Windows `.msi`/`-setup.exe` into a **draft** release; check it, then publish. Installed apps (v0.7.0+) only see a release once it's published; within ~6 hours they show an "Update & restart" banner. Auto-update was verified end to end with v0.7.0 → v0.7.1 on macOS.
 
 ### Update signing key
 

@@ -5,6 +5,7 @@ import { resourceDir } from '@tauri-apps/api/path';
 import { isStableAppLocation } from '../domain/loginItem';
 import { app } from '../state.svelte';
 import { buildDigest } from '../domain/digest';
+import { needsAlerts, needsYou, snoozesFromLog } from '../domain/needsYou';
 import { createScheduler } from './scheduler';
 import { tauriNotifier } from './notifier';
 import { updater, autoCheck } from '../update';
@@ -67,6 +68,12 @@ async function start() {
     settings: async () => app.notificationSettings,
     log: app.repos.notificationLog,
     notifier: tauriNotifier,
+    // Same list as the hand icon (mine, unowned, or owned by a deactivated teammate; snoozes from the log),
+    // so a notification never names a hidden item.
+    needs: ({ nowMs, zone: z, log }) => needsAlerts(needsYou(app.needsRowsSnapshot(), {
+      nowMs, zone: z, team: app.team.mode === 'team', followUp: app.followUp, snoozes: snoozesFromLog(log),
+      activeMemberIds: app.activeMemberIds,
+    })),
     onError: (e) => console.error('[scheduler]', e),
     onPermission: (granted) => { app.notificationsAllowed = granted; },
   });

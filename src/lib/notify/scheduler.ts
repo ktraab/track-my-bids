@@ -1,4 +1,4 @@
-import { computeDueAlerts, type Alert, type LogEntry } from '../domain/alerts';
+import { computeDueAlerts, type Alert, type LogEntry, type NeedsAlert } from '../domain/alerts';
 import type { BidWithChildren } from '../domain/types';
 import type { NotificationSettings } from '../domain/settings';
 
@@ -17,9 +17,12 @@ export interface SchedulerDeps {
   log: {
     loadMap(): Promise<Map<string, LogEntry>>;
     record(alert: Alert, firedAt: string): Promise<void>;
-    prune(beforeIso: string): Promise<void>;
+    /** `keep`: current Needs-you keys (never pruned while active); `nowIso`: running snoozes are kept too. */
+    prune(beforeIso: string, opts?: { keep?: readonly string[]; nowIso?: string }): Promise<void>;
   };
   notifier: Notifier;
+  /** Current Needs-you items as alerts; gets the log so it can drop snoozed items. */
+  needs?: (input: { nowMs: number; zone: string; bids: BidWithChildren[]; log: Map<string, LogEntry> }) => NeedsAlert[];
   onError?: (e: unknown) => void;
   /** Reported once per tick with the current OS notification permission. */
   onPermission?: (granted: boolean) => void;
@@ -62,7 +65,8 @@ export function createScheduler(deps: SchedulerDeps) {
   /** Returns false if the alert should be retried next tick (not recorded). */
   async function deliver(a: Alert, granted: boolean): Promise<boolean> {
     if (!granted) return true;
-    const fk = a.kind === 'catchup' ? 'catchup' : a.key; // catch-up keys change every tick
+    // Catch-up keys change every tick: count per summary type (`catchup` / `needs-catchup`).
+    const fk = a.kind === 'catchup' ? a.key.split(':')[0] : a.key;
     try {
       await deps.notifier.send(a.title, a.body);
       failures.delete(fk);
@@ -84,8 +88,11 @@ export function createScheduler(deps: SchedulerDeps) {
     running = true;
     try {
       const nowMs = deps.now();
-      const [bids, settings, log] = await Promise.all([deps.bids(), deps.settings(), deps.log.loadMap()]);
-      const alerts = computeDueAlerts({ nowMs, zone: deps.zone(), bids, settings, log: withHandled(log) });
+      const [bids, settings, raw] = await Promise.all([deps.bids(), deps.settings(), deps.log.loadMap()]);
+      const zone = deps.zone();
+      const log = withHandled(raw);
+      const needs = deps.needs?.({ nowMs, zone, bids, log }) ?? [];
+      const alerts = computeDueAlerts({ nowMs, zone, bids, settings, log, needs });
       const granted = await permission();
       const firedAt = new Date(nowMs).toISOString();
       const done: Alert[] = [];
@@ -104,7 +111,7 @@ export function createScheduler(deps: SchedulerDeps) {
         lastPruneDay = day;
         const cutoff = nowMs - PRUNE_AFTER_MS;
         for (const [k, at] of handled) if (at < cutoff) handled.delete(k);
-        await deps.log.prune(new Date(cutoff).toISOString());
+        await deps.log.prune(new Date(cutoff).toISOString(), { keep: needs.map((n) => n.key), nowIso: firedAt });
       }
       return done;
     } catch (e) {

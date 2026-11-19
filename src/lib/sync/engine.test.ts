@@ -93,6 +93,21 @@ describe('sync engine', () => {
     expect(infos.at(-1)!.status).toBe('server_update');
   });
 
+  it('re-checks the server schema after a failed cycle', async () => {
+    let ver = 2;
+    const backend = { ...remote.backend, schemaVersion: async () => ver };
+    const e = engine(undefined, backend);
+    await e.syncNow();
+    expect(infos.at(-1)!.status).toBe('synced');
+    ver = 99; // server upgraded while the app stayed open
+    remote.backend.offline = true;
+    await e.syncNow();
+    expect(infos.at(-1)!.status).toBe('offline');
+    remote.backend.offline = false;
+    await e.syncNow();
+    expect(infos.at(-1)!.status).toBe('server_update');
+  });
+
   it('waiting for approval retries every 60s, not on the backoff schedule', async () => {
     const other = server.remote();
     await other.auth.signUp('b@x.org', 'pw-bbbbbbbb', 'Bo');

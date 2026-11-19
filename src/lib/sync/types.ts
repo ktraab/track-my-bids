@@ -21,7 +21,7 @@ export interface OutgoingChange {
 }
 
 export type ChangeResult =
-  /** `row`: the server's current row, sent when at least one incoming field lost last-writer-wins. */
+  /** `row`: the server's current row, sent when at least one incoming field lost last-writer-wins, or when an insert was stored with a server-set value (defaulted owner). */
   | { tbl: SyncTable; id: string; status: 'accepted'; row?: RemoteRow }
   | { tbl: SyncTable; id: string; status: 'incomplete' }
   | { tbl: SyncTable; id: string; status: 'rejected'; reason: string; row: RemoteRow | null }
@@ -66,5 +66,5 @@ export class SyncError extends Error {
 }
 
 /** Must equal `sync_schema_version()` on the server. */
-export const SCHEMA_VERSION = 1;
+export const SCHEMA_VERSION = 2;
 export const SCHEMA_MESSAGE = 'The team server needs an update — see docs/TEAM-SETUP.md.';

@@ -66,6 +66,10 @@ describe('suggestGroups', () => {
 describe('matching existing bids', () => {
   const target = (title: string, bids: ReturnType<typeof withChildren>[]) =>
     suggestGroups([item('x', title, '2026-11-24T10:00:00-06:00')], bids, NOW, new Set())[0].target;
+  it('never matches a quote (quotes take no imported milestones)', () => {
+    const quotes = [withChildren(makeBid({ id: 'q', kind: 'rfq', agencyName: 'Harbor County' }), [])];
+    expect(target('harbor county RFP due', quotes)).toEqual({ kind: 'new' });
+  });
   it('a short agency name inside a longer word is not a match', () => {
     const city = [withChildren(makeBid({ id: 'c', agencyName: 'City' }), [])];
     expect(target('Capacity planning sync', city)).not.toEqual({ kind: 'existing', bidId: 'c' });

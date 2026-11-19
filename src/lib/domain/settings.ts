@@ -13,6 +13,14 @@ export interface NotificationSettings {
   shipByOffsets: number[]; // minutes before the derived ship-by time
   staleDays: number;
   staleStages: Stage[];
+  /** Needs you (spec §5): a pending vendor lands in Needs you this many business days after it was asked / last nudged. */
+  vendorQuietBusinessDays: number;
+  /** A quoted RFQ lands in Needs you this many business days after it was sent / last followed up. */
+  customerBusinessDays: number;
+  /** Team mode: a new RFQ with no owner lands in Needs you after this many work hours (08:00–17:00, business days). */
+  unclaimedWorkHours: number;
+  /** A bid's mandatory stop lands in Needs you this many hours before it. */
+  stopWithinHours: number;
 }
 
 export const DEFAULT_NOTIFICATION_SETTINGS: NotificationSettings = {
@@ -33,6 +41,10 @@ export const DEFAULT_NOTIFICATION_SETTINGS: NotificationSettings = {
   shipByOffsets: [2 * DAY, DAY],
   staleDays: 7,
   staleStages: [...OPEN_STAGES],
+  vendorQuietBusinessDays: 1,
+  customerBusinessDays: 3,
+  unclaimedWorkHours: 4,
+  stopWithinHours: 24,
 };
 
 const HHMM = /^([01]\d|2[0-3]):([0-5]\d)$/;
@@ -55,6 +67,25 @@ export function normalizeOffsets(v: unknown): number[] | null {
 }
 
 export const MAX_STALE_DAYS = 60;
+
+/** Upper bounds for the Needs-you thresholds (each also has a minimum of 1). */
+export const NEEDS_LIMITS = {
+  vendorQuietBusinessDays: 10,
+  customerBusinessDays: 30,
+  unclaimedWorkHours: 40,
+  stopWithinHours: 72,
+} as const;
+export type NeedsLimitKey = keyof typeof NEEDS_LIMITS;
+export const NEEDS_KEYS = Object.keys(NEEDS_LIMITS) as NeedsLimitKey[];
+const NEEDS_NAMES: Record<NeedsLimitKey, string> = {
+  vendorQuietBusinessDays: 'Vendor quiet',
+  customerBusinessDays: 'Customer follow-up',
+  unclaimedWorkHours: 'New RFQ unclaimed',
+  stopWithinHours: 'Mandatory bid stop',
+};
+
+const inNeedsRange = (k: NeedsLimitKey, v: unknown): v is number =>
+  typeof v === 'number' && Number.isInteger(v) && v >= 1 && v <= NEEDS_LIMITS[k];
 
 export const isTime = (v: unknown): v is string => typeof v === 'string' && parseHHmm(v) !== null;
 const STALE_OK: Stage[] = [...OPEN_STAGES, 'submitted'];
@@ -87,6 +118,10 @@ export function withDefaults(raw: unknown): NotificationSettings {
       Array.isArray(r.staleStages) && r.staleStages.every((s) => STALE_OK.includes(s as Stage))
         ? (r.staleStages as Stage[])
         : d.staleStages,
+    vendorQuietBusinessDays: inNeedsRange('vendorQuietBusinessDays', r.vendorQuietBusinessDays) ? r.vendorQuietBusinessDays : d.vendorQuietBusinessDays,
+    customerBusinessDays: inNeedsRange('customerBusinessDays', r.customerBusinessDays) ? r.customerBusinessDays : d.customerBusinessDays,
+    unclaimedWorkHours: inNeedsRange('unclaimedWorkHours', r.unclaimedWorkHours) ? r.unclaimedWorkHours : d.unclaimedWorkHours,
+    stopWithinHours: inNeedsRange('stopWithinHours', r.stopWithinHours) ? r.stopWithinHours : d.stopWithinHours,
   };
 }
 
@@ -94,6 +129,7 @@ export interface SettingsDraftErrors {
   digestTimes?: string;
   quiet?: string;
   staleDays?: string;
+  needs?: Partial<Record<NeedsLimitKey, string>>;
 }
 
 /** Check what the user typed on the Settings screen before saving (withDefaults would otherwise silently fix it). */
@@ -104,5 +140,10 @@ export function validateSettingsDraft(s: NotificationSettings): SettingsDraftErr
   if (!Number.isInteger(s.staleDays) || s.staleDays < 1 || s.staleDays > MAX_STALE_DAYS) {
     e.staleDays = `Enter a whole number of days from 1 to ${MAX_STALE_DAYS}.`;
   }
+  const needs: Partial<Record<NeedsLimitKey, string>> = {};
+  for (const k of NEEDS_KEYS) {
+    if (!inNeedsRange(k, s[k])) needs[k] = `${NEEDS_NAMES[k]}: enter a whole number from 1 to ${NEEDS_LIMITS[k]}.`;
+  }
+  if (Object.keys(needs).length) e.needs = needs;
   return e;
 }

@@ -95,6 +95,16 @@ describe('runImportPlan', () => {
     await repos.milestones.remove(mid);
     expect((await importedUids(sql)).has('x1')).toBe(false);
   });
+
+  it('an existing target that is a quote is reported, not given milestones', async () => {
+    const qid = await repos.bids.createQuote({ title: 'Toner', agencyName: 'Chesterfield', agencyType: 'county', timezone: 'America/New_York' });
+    const r = await runImportPlan(repos, {
+      errors: [], newBids: [],
+      existing: [{ bidId: qid, milestones: [{ uid: 'u1', type: 'site_walk', label: null, iso: '2026-11-25T09:00:00.000-05:00', mandatory: false, location: null, allDay: false }] }],
+    });
+    expect(r.milestones).toBe(0);
+    expect(r.failed).toEqual(["Skipped: quotes don't have milestones — convert it to a bid first."]);
+  });
 });
 
 describe('importContacts', () => {
@@ -117,5 +127,14 @@ describe('importContacts', () => {
     const r = await importContacts(repos, bad);
     expect(r.failed).toBe(5);
     expect(r.errors).toEqual(['P0: Email looks wrong', 'P1: Email looks wrong', 'P2: Email looks wrong']);
+  });
+});
+
+describe('runImportPlan quote targets', () => {
+  it('emits one message per quote target and adds nothing', async () => {
+    const q = await repos.bids.createQuote({ title: 'Toner', agencyName: 'City', agencyType: 'city', timezone: 'UTC' });
+    const mk = (uid: string, type: 'due' | 'pre_bid') => ({ uid, type, label: null, iso: '2026-12-01T10:00:00.000Z', mandatory: false, location: null, allDay: false });
+    const r = await runImportPlan(repos, { errors: [], newBids: [], existing: [{ bidId: q, milestones: [mk('u1', 'due'), mk('u2', 'pre_bid')] }] });
+    expect(r).toEqual({ bids: 0, milestones: 0, failed: ["Skipped: quotes don't have milestones — convert it to a bid first."] });
   });
 });

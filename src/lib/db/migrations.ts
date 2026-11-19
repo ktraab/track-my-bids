@@ -1,4 +1,4 @@
-import { SYNC_COLUMNS_V6, SYNC_TABLES } from '../sync/tables';
+import { SYNC_COLUMNS_V6, SYNC_COLUMNS_V7, SYNC_TABLES_V6 } from '../sync/tables';
 import { syncTriggerSql } from '../sync/triggers';
 import type { Sql } from './sql';
 
@@ -110,7 +110,39 @@ export const MIGRATIONS: string[][] = [
     `CREATE TABLE IF NOT EXISTS sync_state (key TEXT PRIMARY KEY, value TEXT NOT NULL)`,
     `CREATE TABLE IF NOT EXISTS team_members (
       id TEXT PRIMARY KEY, email TEXT, display_name TEXT, role TEXT NOT NULL, active INTEGER NOT NULL)`,
-    ...SYNC_TABLES.flatMap((t) => syncTriggerSql(t, SYNC_COLUMNS_V6[t])),
+    ...SYNC_TABLES_V6.flatMap((t) => syncTriggerSql(t, SYNC_COLUMNS_V6[t])),
+  ],
+  [
+    // v7: RFQ quotes. Every bid can carry vendor quotes, quote lines and vendor prices.
+    `ALTER TABLE bids ADD COLUMN kind TEXT NOT NULL DEFAULT 'bid'`,
+    `ALTER TABLE bids ADD COLUMN received_at TEXT`,
+    `ALTER TABLE bids ADD COLUMN quoted_at TEXT`,
+    `ALTER TABLE bids ADD COLUMN followed_up_at TEXT`,
+    `ALTER TABLE bids ADD COLUMN pricing_mode TEXT NOT NULL DEFAULT 'whole'`,
+    `ALTER TABLE bids ADD COLUMN markup_type TEXT`,
+    `ALTER TABLE bids ADD COLUMN markup_value REAL`,
+    `ALTER TABLE bids ADD COLUMN sell_rounding REAL NOT NULL DEFAULT 0.01`,
+    `ALTER TABLE bids ADD COLUMN whole_vendor_id TEXT`,
+    `CREATE INDEX IF NOT EXISTS idx_bids_kind ON bids(kind)`,
+    // contact_id has no FK: contact merges hard-delete never-synced duplicates (see applyRemote).
+    `CREATE TABLE IF NOT EXISTS vendor_quotes (
+      id TEXT PRIMARY KEY, bid_id TEXT NOT NULL REFERENCES bids(id), contact_id TEXT, vendor_name TEXT NOT NULL,
+      asked_at TEXT NOT NULL, replied_at TEXT, nudged_at TEXT, skipped INTEGER NOT NULL DEFAULT 0, skipped_at TEXT, notes TEXT, ${STAMPS})`,
+    `CREATE INDEX IF NOT EXISTS idx_vendor_quotes_bid ON vendor_quotes(bid_id)`,
+    `CREATE INDEX IF NOT EXISTS idx_vendor_quotes_contact ON vendor_quotes(contact_id)`,
+    `CREATE TABLE IF NOT EXISTS quote_lines (
+      id TEXT PRIMARY KEY, bid_id TEXT NOT NULL REFERENCES bids(id), position INTEGER NOT NULL,
+      qty REAL NOT NULL DEFAULT 1, description TEXT NOT NULL, part_no TEXT, markup_type TEXT, markup_value REAL,
+      sell_override REAL, chosen_vendor_id TEXT, ${STAMPS})`,
+    `CREATE INDEX IF NOT EXISTS idx_quote_lines_bid ON quote_lines(bid_id)`,
+    // id = vendor_quote_id || ':' || line_id, so concurrent edits of one cell merge into one row.
+    `CREATE TABLE IF NOT EXISTS vendor_line_prices (
+      id TEXT PRIMARY KEY, bid_id TEXT NOT NULL REFERENCES bids(id),
+      vendor_quote_id TEXT NOT NULL REFERENCES vendor_quotes(id), line_id TEXT NOT NULL REFERENCES quote_lines(id),
+      unit_cost REAL, ${STAMPS})`,
+    `CREATE INDEX IF NOT EXISTS idx_vendor_line_prices_bid ON vendor_line_prices(bid_id)`,
+    ...(['bids', 'vendor_quotes', 'quote_lines', 'vendor_line_prices'] as const)
+      .flatMap((t) => syncTriggerSql(t, SYNC_COLUMNS_V7[t])),
   ],
 ];
 

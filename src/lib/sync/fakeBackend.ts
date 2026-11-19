@@ -50,11 +50,16 @@ export function createFakeServer(schemaVersion = SCHEMA_VERSION) {
       const dup = findDup(ch.tbl, ch.id, ch.values);
       if (dup) return { ...base, status: 'remapped', to: dup.id, row: toRemote(dup) };
       const data = { ...ch.values };
-      if (ch.tbl === 'bids' && data.owner_id == null) data.owner_id = me;
-      rows.set(k(ch.tbl, ch.id), { tbl: ch.tbl, id: ch.id, data, times: { ...ch.times }, seq: ++seq, updatedBy: me });
-      return { ...base, status: 'accepted' };
+      // Formal bids default to the pusher; quotes (kind 'rfq') may stay unassigned.
+      const defaulted = ch.tbl === 'bids' && data.owner_id == null && (data.kind ?? 'bid') !== 'rfq';
+      if (defaulted) data.owner_id = me;
+      const row: ServerRow = { tbl: ch.tbl, id: ch.id, data, times: { ...ch.times }, seq: ++seq, updatedBy: me };
+      rows.set(k(ch.tbl, ch.id), row);
+      // The stored row differs from what was sent: hand it back so the sender converges.
+      return defaulted ? { ...base, status: 'accepted', row: toRemote(row) } : { ...base, status: 'accepted' };
     }
-    if (ch.tbl === 'bids' && role !== 'admin' && cur.data.owner_id !== me) {
+    // Owned bids: only the owner or an admin may delete/restore/reassign. Unowned rows: any member.
+    if (ch.tbl === 'bids' && role !== 'admin' && cur.data.owner_id != null && cur.data.owner_id !== me) {
       const del = 'deleted_at' in ch.values && (ch.values.deleted_at == null) !== (cur.data.deleted_at == null);
       const own = 'owner_id' in ch.values && ch.values.owner_id !== cur.data.owner_id;
       if (del || own) return { ...base, status: 'rejected', reason: 'not_owner', row: toRemote(cur) };

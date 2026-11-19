@@ -69,3 +69,25 @@ describe('strict parsing', () => {
     expect(() => isoToLocalInput('2026-11-24T10:00:00.000-06:00', 'Not/AZone')).toThrow('Invalid date');
   });
 });
+
+describe('business day guards', () => {
+  it('returns promptly for invalid input', async () => {
+    const { DateTime } = await import('luxon');
+    const { addBusinessDays, subtractBusinessDays } = await import('./time');
+    for (const dt of [DateTime.fromISO('nope'), DateTime.fromISO(''), DateTime.fromISO('2026-11-18T10:00', { zone: 'Not/AZone' })]) {
+      expect(addBusinessDays(dt, 3).isValid).toBe(false);
+      expect(subtractBusinessDays(dt, 3).isValid).toBe(false);
+    }
+    const ok = DateTime.fromISO('2026-11-18T10:00', { zone: 'America/Chicago' });
+    expect(addBusinessDays(ok, NaN)).toBe(ok);
+    expect(addBusinessDays(ok, Infinity)).toBe(ok);
+    expect(subtractBusinessDays(ok, NaN)).toBe(ok);
+  });
+  it('keeps wall time across spring-forward', async () => {
+    const { DateTime } = await import('luxon');
+    const { addBusinessDays } = await import('./time');
+    const r = addBusinessDays(DateTime.fromISO('2026-03-06T02:30', { zone: 'America/New_York' }), 3); // Fri -> Wed, crosses Mar 8
+    expect(r.toISODate()).toBe('2026-03-11');
+    expect(r.hour).toBe(2);
+  });
+});

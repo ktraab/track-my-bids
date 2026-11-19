@@ -1,4 +1,5 @@
 import type { Alert, LogEntry } from '../domain/alerts';
+import { snoozesFromLog } from '../domain/needsYou';
 import type { Row, Sql } from './sql';
 
 export interface FiredNotification {
@@ -59,9 +60,49 @@ export function createNotificationLogRepo(sql: Sql) {
     await sql.execute('UPDATE notification_log SET snoozed_until = ?, read = 1 WHERE key = ?', [untilIso, key]);
   }
 
-  async function prune(beforeIso: string): Promise<void> {
-    await sql.execute('DELETE FROM notification_log WHERE fired_at < ?', [beforeIso]);
+  /**
+   * Needs-you snooze (spec §5): per user, local, never synced. Upserts a hidden ('covered', read) row so an item
+   * that never notified can still be snoozed; an existing row only gets the new snooze time. The item's own
+   * notifications (`<key>:<startMs>`) are marked read too.
+   */
+  async function snoozeKey(key: string, untilIso: string, nowIso: string): Promise<void> {
+    await sql.execute(
+      `INSERT INTO notification_log (key, fired_at, snoozed_until, kind, title, body, bid_id, read)
+       VALUES (?, ?, ?, 'covered', '', '', NULL, 1)
+       ON CONFLICT(key) DO UPDATE SET snoozed_until = excluded.snoozed_until, read = 1`,
+      [key, nowIso, untilIso],
+    );
+    // substr, not LIKE: ids may contain LIKE wildcards ('_').
+    await sql.execute(
+      'UPDATE notification_log SET read = 1 WHERE read = 0 AND substr(key, 1, length(?) + 1) = ? || \':\'', [key, key]);
   }
 
-  return { loadMap, record, recent, unreadCount, markAllRead, snooze, prune };
+  /** Snooze times for Needs-you items (`needs:<rule>:<id>` → ISO); a snoozed notification row counts for its item. */
+  async function needsSnoozes(): Promise<Map<string, string>> {
+    const rows = await sql.select<Row>(
+      `SELECT key, snoozed_until FROM notification_log WHERE key LIKE 'needs:%' AND snoozed_until IS NOT NULL`);
+    return snoozesFromLog(new Map(rows.map((r) => [r.key as string, { key: r.key, firedAt: '', snoozedUntil: r.snoozed_until }])));
+  }
+
+  /**
+   * Delete rows fired before `beforeIso`, except `keep` (keys still in Needs you, so they never re-notify) and
+   * Needs-you snoozes still running at `nowIso` together with their item's notification rows.
+   */
+  async function prune(beforeIso: string, opts: { keep?: readonly string[]; nowIso?: string } = {}): Promise<void> {
+    const keep = [...new Set(opts.keep ?? [])];
+    const params: unknown[] = [beforeIso];
+    let q = 'DELETE FROM notification_log WHERE fired_at < ?';
+    if (keep.length) {
+      q += ` AND key NOT IN (${keep.map(() => '?').join(', ')})`;
+      params.push(...keep);
+    }
+    if (opts.nowIso) {
+      q += ` AND NOT EXISTS (SELECT 1 FROM notification_log s WHERE s.key LIKE 'needs:%' AND s.snoozed_until > ?
+        AND (notification_log.key = s.key OR substr(notification_log.key, 1, length(s.key) + 1) = s.key || ':'))`;
+      params.push(opts.nowIso);
+    }
+    await sql.execute(q, params);
+  }
+
+  return { loadMap, record, recent, unreadCount, markAllRead, snooze, snoozeKey, needsSnoozes, prune };
 }

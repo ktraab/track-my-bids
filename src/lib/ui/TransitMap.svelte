@@ -1,18 +1,25 @@
 <script lang="ts">
   import { app } from '$lib/state.svelte';
-  import { makeWindow, layoutLine, weekTicks, sortByNextMilestone, pctOf } from '$lib/domain/transitLayout';
+  import { makeWindow, layoutLine, weekTicks, pctOf } from '$lib/domain/transitLayout';
+  import { rowStatus, sortByUrgency } from '$lib/domain/rowStatus';
   import { networkSummary } from '$lib/domain/summary';
   import { formatMoneyShort } from '$lib/domain/format';
-  import { formatCountdown, formatDateTime, toMs } from '$lib/domain/time';
+  import { formatCountdown, formatDateTime, formatStopDate, toMs } from '$lib/domain/time';
   import { idleDays, isStale } from '$lib/domain/stale';
-  import { applyNetworkFilters, networkPool, activeFilterCount, EMPTY_NETWORK_FILTERS, type NetworkFilters } from '$lib/domain/networkFilters';
-  import { OPEN_STAGES, OUTCOMES, STAGE_LABELS } from '$lib/domain/stages';
+  import {
+    applyNetworkFilters, applySavedView, networkPool, activeFilterCount, EMPTY_NETWORK_FILTERS,
+    SAVED_VIEWS, SAVED_VIEW_LABELS, CLOSED_RFQ_DAYS, type KindFilter, type NetworkFilters,
+  } from '$lib/domain/networkFilters';
+  import { OPEN_STAGES, OUTCOMES, STAGE_LABELS, RFQ_STAGE_LABELS, stageLabel } from '$lib/domain/stages';
   import { AGENCY_TYPE_LABELS, METHOD_LABELS } from '$lib/domain/labels';
-  import type { AgencyType, BidWithChildren, Method, Stage } from '$lib/domain/types';
+  import { HOLDERS, receivedIso, type Holder } from '$lib/domain/rfq';
+  import type { AgencyType, Method, Stage } from '$lib/domain/types';
   import { initials } from '$lib/domain/ownership';
   import { syncLabel, syncTone } from '$lib/sync/statusText';
   import TransitLine from './TransitLine.svelte';
   import HoverCard from './HoverCard.svelte';
+  import StatusCell from './StatusCell.svelte';
+  import NeedsYou from './NeedsYou.svelte';
 
   const DAY = 86_400_000;
   const zone = Intl.DateTimeFormat().resolvedOptions().timeZone;
@@ -20,14 +27,17 @@
   let span = $state(30);
 
   const win = $derived(makeWindow({ nowMs: app.nowMs, zone, anchorMs: app.nowMs + offsetWeeks * 7 * DAY, daysAhead: span }));
-  const onNetwork = $derived(networkPool(app.bids, app.networkFilters));
-  const visible = $derived(applyNetworkFilters(onNetwork, app.networkFilters, app.meId));
+  const ctx = $derived({ nowMs: app.nowMs, zone, followUp: app.followUp, team: app.team.mode === 'team', activeMemberIds: app.activeMemberIds });
+  const f = $derived(app.networkFilters);
+  const onNetwork = $derived(networkPool(app.bids, f, app.nowMs));
+  const visible = $derived(applyNetworkFilters(onNetwork, f, app.meId, ctx));
   const teamOn = $derived(app.team.mode === 'team');
   const others = $derived(app.team.members.filter((m) => m.active && m.role !== 'pending' && m.id !== app.meId));
   const rows = $derived(
-    sortByNextMilestone(visible, app.nowMs).map((data) => ({
+    sortByUrgency(visible, ctx).map((data) => ({
       data,
-      line: layoutLine(data, win),
+      line: layoutLine(data, win, { zone, followUp: app.followUp }),
+      status: rowStatus(data, ctx),
     })),
   );
   // Hide week labels that would sit under the TODAY pill; keep edge labels inside the track.
@@ -39,12 +49,22 @@
   const todayPct = $derived(app.nowMs >= win.startMs && app.nowMs <= win.endMs ? pctOf(app.nowMs, win) : null);
   const summary = $derived(networkSummary(app.bids, app.nowMs));
   const FILTER_STAGES: Stage[] = [...OPEN_STAGES, 'submitted'];
-  function toggle<K extends keyof NetworkFilters>(key: K, v: NetworkFilters[K][number]) {
-    const cur = app.networkFilters[key] as string[];
-    const next = cur.includes(v) ? cur.filter((x) => x !== v) : [...cur, v];
-    void app.setNetworkFilters({ ...app.networkFilters, [key]: next });
+  const RFQ_FILTER_STAGES: Stage[] = ['reviewing', 'submitted'];
+  const routeChips = $derived(f.kind === 'rfq' ? RFQ_FILTER_STAGES : FILTER_STAGES);
+  const chipLabel = (s: Stage) => (f.kind === 'rfq' ? RFQ_STAGE_LABELS[s] : STAGE_LABELS[s]);
+  const KINDS: [KindFilter, string][] = [['all', 'All'], ['bid', 'Bids'], ['rfq', 'Quotes']];
+  const BALL_CHIPS: Record<Holder, string> = { us: 'On us', vendor: 'Waiting on vendor', customer: 'With customer' };
+  const BALL_COLORS: Record<Holder, string> = { us: 'var(--us)', vendor: 'var(--vendor)', customer: 'var(--cust)' };
+
+  /** Any manual filter change leaves the active saved view (search does not). */
+  function setFilters(patch: Partial<NetworkFilters>) {
+    void app.setNetworkFilters({ ...app.networkFilters, ...patch, view: null });
   }
-  // Hover card: only when the pointer rests on a bid's name column (or the
+  function toggle<K extends 'stages' | 'agencyTypes' | 'methods' | 'balls'>(key: K, v: NetworkFilters[K][number]) {
+    const cur = app.networkFilters[key] as string[];
+    setFilters({ [key]: cur.includes(v) ? cur.filter((x) => x !== v) : [...cur, v] } as Partial<NetworkFilters>);
+  }
+  // Hover card: only when the pointer rests on a row's name column (or the
   // name button has keyboard focus) for HOVER_DELAY ms. Moving restarts the wait.
   const HOVER_DELAY = 600;
   const HOVER_ID = 'bid-hover-card';
@@ -58,7 +78,7 @@
   function scheduleHover(id: string, el: HTMLElement) {
     clearTimer();
     if (hover && hover.id !== id) hover = null;
-    if (hover) return; // already showing for this bid
+    if (hover) return; // already showing for this row
     hoverTimer = setTimeout(() => {
       hoverTimer = null;
       const r = el.getBoundingClientRect();
@@ -82,7 +102,6 @@
   }
   $effect(() => () => clearTimer());
   const hovered = $derived(hover ? app.bids.find((d) => d.bid.id === hover!.id) ?? null : null);
-  const doneCount = (d: BidWithChildren) => d.checklist.filter((c) => c.done).length;
 </script>
 
 <svelte:window onkeydown={(e) => e.key === 'Escape' && hideHover()} onscroll={hideHover} />
@@ -91,7 +110,7 @@
   <header class="top">
     <div>
       <h1>Your bid network</h1>
-      <p class="sub">Each bid is a line. Stops are milestones. The terminus is submission.</p>
+      <p class="sub">Each bid is a line to its due date. Each quote is a line colored by who has the ball.</p>
     </div>
     <div class="controls">
       <div class="legend" aria-hidden="true">
@@ -99,6 +118,9 @@
         <span><i class="lg mand"></i>Mandatory</span>
         <span><i class="lg ship"></i>Ship by</span>
         <span><i class="lg term"></i>Due</span>
+        <span><i class="lg hold" style:background="var(--us)"></i>On us</span>
+        <span><i class="lg hold" style:background="var(--vendor)"></i>Vendor</span>
+        <span><i class="lg hold" style:background="var(--cust)"></i>Customer</span>
       </div>
       <div class="nav">
         <button class="btn" aria-label="Previous week" onclick={() => offsetWeeks--}>‹</button>
@@ -112,6 +134,7 @@
       </div>
       <button class="btn" onclick={() => app.showContacts()}>Contacts</button>
       <button class="btn" onclick={() => (app.panel = 'digest')}>Briefing</button>
+      <NeedsYou />
       <button class="btn bell" aria-label="Notifications, {app.unread} unread" onclick={() => (app.panel = 'inbox')}>
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
         {#if app.unread > 0}<span class="count">{app.unread}</span>{/if}
@@ -124,50 +147,78 @@
       <button class="btn bell" aria-label="Settings" onclick={() => app.showSettings()}>
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
       </button>
-      <button class="btn primary" onclick={() => (app.quickAddOpen = true)}>+ New bid</button>
+      <button class="btn primary" onclick={() => (app.quickAddOpen = true)} title="New bid or quote (Ctrl/⌘ + N)">+ New</button>
     </div>
   </header>
 
   <div class="filters" role="group" aria-label="Filter the network">
+    <div class="kind-seg" role="group" aria-label="Show">
+      {#each KINDS as [k, label] (k)}
+        <button class:on={f.kind === k} aria-pressed={f.kind === k} onclick={() => setFilters(k === 'bid' ? { kind: k, balls: [] } : { kind: k })}>{label}</button>
+      {/each}
+    </div>
+    <span class="sep" aria-hidden="true"></span>
     {#if teamOn}
-      <select class="btn owner-filter" aria-label="Whose bids" value={app.networkFilters.owner}
-        onchange={(e) => app.setNetworkFilters({ ...app.networkFilters, owner: e.currentTarget.value })}>
-        <option value="mine">My bids</option>
+      <select class="btn owner-filter" aria-label="Whose work" value={f.owner}
+        onchange={(e) => setFilters({ owner: e.currentTarget.value })}>
+        <option value="mine">Mine</option>
         <option value="all">Everyone</option>
         {#each others as m (m.id)}<option value={m.id}>{m.displayName || m.email}</option>{/each}
-        {#if !['mine', 'all'].includes(app.networkFilters.owner) && !others.some((m) => m.id === app.networkFilters.owner)}
-          <option value={app.networkFilters.owner}>{app.memberName(app.networkFilters.owner)}</option>
+        {#if !['mine', 'all'].includes(f.owner) && !others.some((m) => m.id === f.owner)}
+          <option value={f.owner}>{app.memberName(f.owner)}</option>
         {/if}
       </select>
       <span class="sep" aria-hidden="true"></span>
     {/if}
-    {#each FILTER_STAGES as s (s)}
-      <button class="fchip" class:on={app.networkFilters.stages.includes(s)} aria-pressed={app.networkFilters.stages.includes(s)} onclick={() => toggle('stages', s)}>{STAGE_LABELS[s]}</button>
+    {#if f.kind !== 'bid'}
+      <!-- Who-has-the-ball applies to quotes only; picking Bids clears it. -->
+      {#each HOLDERS as h (h)}
+        <button class="fchip" class:on={f.balls.includes(h)} aria-pressed={f.balls.includes(h)} title="Quotes only" onclick={() => toggle('balls', h)}>
+          <i class="dot" style:background={BALL_COLORS[h]}></i>{BALL_CHIPS[h]}
+        </button>
+      {/each}
+    {/if}
+    <button class="fchip" class:on={f.overdueOnly} aria-pressed={f.overdueOnly} onclick={() => setFilters({ overdueOnly: !f.overdueOnly })}>
+      <i class="dot" style:background="var(--red)"></i>Overdue only
+    </button>
+    <input class="search" type="search" placeholder="Search agency, item, vendor" aria-label="Search the network"
+      value={f.search} oninput={(e) => app.setNetworkSearch(e.currentTarget.value)} />
+    <span class="sep" aria-hidden="true"></span>
+    {#each routeChips as s (s)}
+      <button class="fchip" class:on={f.stages.includes(s)} aria-pressed={f.stages.includes(s)} onclick={() => toggle('stages', s)}>{chipLabel(s)}</button>
     {/each}
     <span class="sep" aria-hidden="true"></span>
     {#each OUTCOMES as s (s)}
-      <button class="fchip" class:on={app.networkFilters.stages.includes(s)} aria-pressed={app.networkFilters.stages.includes(s)} title="Show closed bids marked {STAGE_LABELS[s]}" onclick={() => toggle('stages', s)}>{STAGE_LABELS[s]}</button>
+      <button class="fchip" class:on={f.stages.includes(s)} aria-pressed={f.stages.includes(s)} title="Show closed items marked {chipLabel(s)}" onclick={() => toggle('stages', s)}>{chipLabel(s)}</button>
     {/each}
     <span class="sep" aria-hidden="true"></span>
     {#each Object.entries(AGENCY_TYPE_LABELS) as [v, l] (v)}
-      <button class="fchip" class:on={app.networkFilters.agencyTypes.includes(v as AgencyType)} aria-pressed={app.networkFilters.agencyTypes.includes(v as AgencyType)} onclick={() => toggle('agencyTypes', v as AgencyType)}>{l}</button>
+      <button class="fchip" class:on={f.agencyTypes.includes(v as AgencyType)} aria-pressed={f.agencyTypes.includes(v as AgencyType)} onclick={() => toggle('agencyTypes', v as AgencyType)}>{l}</button>
     {/each}
     <span class="sep" aria-hidden="true"></span>
     {#each Object.entries(METHOD_LABELS) as [v, l] (v)}
-      <button class="fchip" class:on={app.networkFilters.methods.includes(v as Method)} aria-pressed={app.networkFilters.methods.includes(v as Method)} onclick={() => toggle('methods', v as Method)}>{l}</button>
+      <button class="fchip" class:on={f.methods.includes(v as Method)} aria-pressed={f.methods.includes(v as Method)} onclick={() => toggle('methods', v as Method)}>{l}</button>
     {/each}
-    {#if activeFilterCount(app.networkFilters)}
+    {#if activeFilterCount(f)}
       <button class="linkish" onclick={() => app.setNetworkFilters(EMPTY_NETWORK_FILTERS)}>Clear filters</button>
     {/if}
-    {#if activeFilterCount(app.networkFilters) || visible.length < onNetwork.length}
+    {#if activeFilterCount(f) || visible.length < onNetwork.length}
       <span class="hint">Showing {visible.length} of {onNetwork.length}</span>
     {/if}
+  </div>
+  <div class="filters saved" role="group" aria-label="Saved views">
+    <span class="hint">Saved views:</span>
+    {#each SAVED_VIEWS as v (v)}
+      <button class="fchip view" class:on={f.view === v} aria-pressed={f.view === v} onclick={() => app.setNetworkFilters(applySavedView(f, v))}>{SAVED_VIEW_LABELS[v]}</button>
+    {/each}
+    <span class="hint">· Won, lost and no-reply quotes leave the map {CLOSED_RFQ_DAYS} days after their last update.</span>
   </div>
 
   <div class="card map">
     <div class="inner">
       <div class="axis">
         <div class="meta-col eyebrow">Line</div>
+        <div class="status-head eyebrow">Status</div>
         <div class="ticks">
           {#each ticks as t (t.label)}
             <span class="tick {t.edge}" style:left="{t.pct}%">{t.label}</span>
@@ -183,7 +234,7 @@
         <div
           class="row"
           role="group"
-          aria-label="{b.agencyName} {b.title}"
+          aria-label="{b.kind === 'rfq' ? 'Quote' : 'Bid'}: {b.agencyName} {b.title}"
           onfocusout={onRowFocusOut}
         >
           <button
@@ -195,36 +246,41 @@
             onfocus={(e) => scheduleHover(b.id, e.currentTarget)}
             aria-describedby={hover?.id === b.id ? HOVER_ID : undefined}
           >
-            <span class="badge" style:background={b.lineColor}>{r.line.letter}</span>
+            <span class="badge" class:qbadge={b.kind === 'rfq'} style:background={b.kind === 'rfq' ? null : b.lineColor}>{r.line.letter}</span>
             <span class="text">
               <strong>{b.agencyName}{#if teamOn && b.ownerId}<em class="owner" title="Owner: {app.memberName(b.ownerId)}">{initials(app.memberName(b.ownerId))}</em>{/if}</strong>
               <span>{b.title}</span>
               <small>
-                {formatMoneyShort(b.estValue)} · {METHOD_LABELS[b.submissionMethod]} · {doneCount(r.data)}/{r.data.checklist.length} done{#if b.stage === 'submitted'} · Submitted{/if}
+                {#if b.kind === 'rfq'}
+                  Quote · {stageLabel('rfq', b.stage)} · received {formatStopDate(receivedIso(b), zone)}
+                {:else}
+                  {formatMoneyShort(b.estValue)} · {METHOD_LABELS[b.submissionMethod]}{#if b.stage === 'submitted'} · Submitted{/if}
+                {/if}
               </small>
               {#if isStale(b, app.nowMs)}
                 <small class="idle">Idle {idleDays(b.lastTouchedAt, app.nowMs)} days</small>
               {/if}
             </span>
           </button>
+          <StatusCell status={r.status} bid={b} />
           <TransitLine line={r.line} {todayPct} />
         </div>
       {:else}
         <div class="empty">
           {#if onNetwork.length > 0 && visible.length === 0}
-            <p>No bids match these filters.</p>
-            {#if activeFilterCount(app.networkFilters)}
+            <p>Nothing matches these filters.</p>
+            {#if activeFilterCount(f)}
               <button class="btn" onclick={() => app.setNetworkFilters(EMPTY_NETWORK_FILTERS)}>Clear filters</button>
             {:else}
-              <button class="btn" onclick={() => app.setNetworkFilters({ ...app.networkFilters, owner: 'all' })}>Show everyone’s bids</button>
+              <button class="btn" onclick={() => app.setNetworkFilters({ ...f, owner: 'all' })}>Show everyone’s work</button>
             {/if}
           {:else if app.bids.length > 0}
-            <p>No open bids. Awarded/lost bids are hidden from the network.</p>
+            <p>Nothing open. Closed bids and older closed quotes are hidden from the network.</p>
           {:else}
-            <p>No bids on the network yet.</p>
+            <p>Nothing on the network yet.</p>
           {/if}
           {#if !(onNetwork.length > 0 && visible.length === 0)}
-            <button class="btn primary" onclick={() => (app.quickAddOpen = true)}>{app.bids.length > 0 ? 'New bid' : 'Add your first bid'}</button>
+            <button class="btn primary" onclick={() => (app.quickAddOpen = true)}>{app.bids.length > 0 ? 'New bid or quote' : 'Add your first bid or quote'}</button>
             <p class="hint">Shortcut: Ctrl/⌘ + N</p>
           {/if}
         </div>
@@ -255,12 +311,13 @@
     </div>
     <div class="card info">
       <div class="eyebrow">On the network</div>
-      <div class="big">{summary.openCount} open · {formatMoneyShort(summary.pipeline)}</div>
+      <div class="big">{summary.openCount} open {summary.openCount === 1 ? 'bid' : 'bids'} · {summary.quoteCount} {summary.quoteCount === 1 ? 'quote' : 'quotes'}</div>
+      <div class="small">{formatMoneyShort(summary.pipeline)} in open bids</div>
       <div class="small">{summary.idleCount} idle 7+ days</div>
     </div>
   </div>
-  {#if activeFilterCount(app.networkFilters)}
-    <p class="hint cards-hint">Cards show all open bids</p>
+  {#if activeFilterCount(f)}
+    <p class="hint cards-hint">Cards show all open work</p>
   {/if}
   {#if hover && hovered}<HoverCard id={HOVER_ID} data={hovered} top={hover.top} bottom={hover.bottom} left={hover.left} bind:height={cardHeight} />{/if}
 </section>
@@ -285,7 +342,7 @@
   .lg.term { width: 16px; height: 12px; border-radius: 3px; background: var(--ink); }
   .nav { display: flex; gap: 6px; }
   .map { overflow-x: auto; }
-  .inner { min-width: 1000px; padding: 8px 24px 16px; }
+  .inner { min-width: 1200px; padding: 8px 24px 16px; }
   .axis, .row { display: flex; align-items: stretch; }
   .meta-col { width: 300px; flex: none; position: sticky; left: 0; z-index: 1; background: var(--card); }
   .axis { height: 40px; align-items: flex-end; }
@@ -322,4 +379,14 @@
   @media (prefers-reduced-motion: reduce) { .dot.busy { animation: none; } }
   .dot.bad { background: var(--red); }
   @keyframes pulse { 50% { opacity: 0.35; } }
+  .status-head { width: 200px; flex: none; position: sticky; left: 300px; z-index: 1; background: var(--card); padding: 0 10px 6px; }
+  .kind-seg { display: inline-flex; border: 1px solid var(--line); border-radius: 15px; overflow: hidden; }
+  .kind-seg button { height: 30px; padding: 0 12px; border: 0; background: #fff; font-size: 13px; font-weight: 600; color: var(--ink-2); }
+  .kind-seg button + button { border-left: 1px solid var(--line); }
+  .kind-seg button.on { background: var(--ink); color: #fff; }
+  .fchip .dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 6px; vertical-align: 0; }
+  .search { height: 30px; width: 220px; padding: 0 12px; border: 1px solid var(--line); border-radius: 15px; background: #fff; font-size: 13px; }
+  .saved { margin-top: -12px; }
+  .fchip.view { height: 26px; font-size: 12px; border-style: dashed; }
+  .lg.hold { width: 16px; height: 4px; border-radius: 2px; }
 </style>

@@ -90,3 +90,11 @@ describe('milestone repo', () => {
     expect(m.reminderOffsets).toBeNull();
   });
 });
+
+describe('milestones on quotes', () => {
+  it('a quote takes no milestones (convert it to a bid first)', async () => {
+    const qid = await bids.createQuote({ title: 'Toner', agencyName: 'Chesterfield', agencyType: 'county', timezone: 'America/New_York' });
+    await expect(repo.add({ bidId: qid, type: 'due', at: '2026-12-01T10:00:00.000-05:00' })).rejects.toThrow('convert it to a bid');
+    await expect(repo.add({ bidId: qid, type: 'qa_deadline', at: '2026-12-01T10:00:00.000-05:00' })).rejects.toThrow('Quotes have no milestones');
+  });
+});

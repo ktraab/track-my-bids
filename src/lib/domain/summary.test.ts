@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { networkSummary } from './summary';
-import { makeBid, makeMilestone, withChildren } from './fixtures';
+import { makeBid, makeMilestone, makeQuote, withChildren } from './fixtures';
 
 const NOW = Date.parse('2026-11-16T13:42:00Z');
 
@@ -27,6 +27,12 @@ describe('networkSummary', () => {
     expect(s.openCount).toBe(1);
     expect(s.pipeline).toBe(480_000);
     expect(s.idleCount).toBe(1);
+  });
+
+  it('quotes are counted separately from open bids', () => {
+    const quote = withChildren(makeQuote({ id: 'q', estValue: 5_000, lastTouchedAt: '2026-11-01T00:00:00.000Z' }), []);
+    const r = networkSummary([open, submitted, lost, quote], NOW);
+    expect([r.openCount, r.quoteCount, r.pipeline, r.idleCount]).toEqual([1, 1, 480_000, 1]);
   });
 
   it('next arrival is the soonest future milestone on the network', () => {

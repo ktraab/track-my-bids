@@ -22,7 +22,7 @@ export interface LogEntry {
   snoozedUntil: string | null;
 }
 
-export type AlertKind = 'reminder' | 'shipby' | 'digest' | 'catchup';
+export type AlertKind = 'reminder' | 'shipby' | 'digest' | 'catchup' | 'needs';
 
 export interface Alert {
   key: string;
@@ -34,12 +34,25 @@ export interface Alert {
   alsoLog: string[];
 }
 
+/** An item that just entered Needs you (built by needsYou.ts `needsAlerts`). */
+export interface NeedsAlert {
+  /** `needs:<rule>:<id>:<startMs>` — one notification per entry. */
+  key: string;
+  title: string;
+  body: string;
+  bidId: string;
+  /** When it entered Needs you (an item that entered during quiet hours waits for the briefing, like a reminder). */
+  dueMs: number;
+}
+
 export interface AlertInput {
   nowMs: number;
   zone: string;
   bids: BidWithChildren[];
   settings: NotificationSettings;
   log: Map<string, LogEntry>;
+  /** Current Needs-you items (snoozed ones already removed). */
+  needs?: NeedsAlert[];
 }
 
 function isPending(key: string, log: Map<string, LogEntry>, nowMs: number): boolean {
@@ -131,14 +144,34 @@ function quietEndMs(nowMs: number, zone: string, settings: NotificationSettings)
   return end.toMillis();
 }
 
+/** A Needs-you item from the night waits for a briefing at most this long after quiet hours end. */
+const BRIEFING_NEAR_MS = 60 * MIN;
+
+/** The most recent quiet window that has ended by `nowMs`; null when quiet hours are off or invalid. */
+function lastQuietWindow(nowMs: number, zone: string, settings: NotificationSettings): { startMs: number; endMs: number } | null {
+  const s = parseHHmm(settings.quietStart);
+  const e = parseHHmm(settings.quietEnd);
+  if (!s || !e || (s.hour === e.hour && s.minute === e.minute)) return null;
+  const at = (d: DateTime, p: { hour: number; minute: number }) => d.set({ hour: p.hour, minute: p.minute, second: 0, millisecond: 0 });
+  let end = at(DateTime.fromMillis(nowMs, { zone }), e);
+  if (end.toMillis() > nowMs) end = at(end.minus({ days: 1 }), e);
+  let start = at(end, s);
+  if (start >= end) start = at(start.minus({ days: 1 }), s);
+  return { startMs: start.toMillis(), endMs: end.toMillis() };
+}
+
 const toAlert = (r: PendingReminder): Alert => ({
   key: r.key, kind: r.kind, title: r.title, body: r.body, bidId: r.bidId, alsoLog: r.others,
 });
+
+const needsToAlert = (n: NeedsAlert): Alert => ({ key: n.key, kind: 'needs', title: n.title, body: n.body, bidId: n.bidId, alsoLog: [] });
 
 /** Pure: everything that should be shown (or silently logged) right now. */
 export function computeDueAlerts(input: AlertInput): Alert[] {
   const { nowMs, zone, settings, log } = input;
   if (!settings.enabled) return [];
+  const allNeeds = input.needs ?? [];
+  const needs = allNeeds.filter((n) => isPending(n.key, log, nowMs));
   const quiet = (ms: number) => inQuietHours(ms, zone, settings.quietStart, settings.quietEnd);
   const quietNow = quiet(nowMs);
 
@@ -157,16 +190,20 @@ export function computeDueAlerts(input: AlertInput): Alert[] {
     // The digest only lists stops within 7 days (ship-by: 3). Only those reminders count as covered;
     // anything further out stays pending and fires on its own next tick.
     const listed = (r: PendingReminder) => r.stopMs - nowMs <= (r.kind === 'shipby' ? 3 : 7) * 86_400_000;
+    // Needs-you follow-ups (vendor / customer / unclaimed; bid stops have their own reminders) ride along with
+    // the briefing: one line in its body, no separate pop-ups.
+    const needsLine = allNeeds.length ? `Needs you: ${allNeeds.length} follow-up${allNeeds.length === 1 ? '' : 's'}` : '';
     return [
       {
         key: slot.key,
         kind: 'digest',
         title: dg.title,
-        body: dg.body,
+        body: needsLine ? `${dg.body}\n${needsLine}` : dg.body,
         bidId: null,
         alsoLog: [
           ...dueSlots.slice(0, -1).map((s) => s.key),
           ...reminders.filter((r) => !urgent(r) && listed(r)).flatMap((r) => [r.key, ...r.others]),
+          ...needs.map((n) => n.key),
         ],
       },
       ...reminders.filter(urgent).map(toAlert),
@@ -183,8 +220,16 @@ export function computeDueAlerts(input: AlertInput): Alert[] {
     return quietEnd !== null && quietEnd <= latest;
   };
   const ready = reminders.filter((r) => !held(r));
-  if (!ready.length) return [];
+  // Needs you is never urgent: hold it through quiet hours. After them, an item that entered during the night
+  // waits for the briefing only when one comes right after quiet hours end; otherwise it is delivered now.
+  const night = quietNow ? null : lastQuietWindow(nowMs, zone, settings);
+  const waitsForBriefing = (n: NeedsAlert) => night !== null && nextDigestToday !== null
+    && n.dueMs >= night.startMs && n.dueMs < night.endMs && nextDigestToday <= night.endMs + BRIEFING_NEAR_MS;
+  const readyNeeds = quietNow ? [] : needs.filter((n) => !waitsForBriefing(n));
+  return [...reminderAlerts(ready, nowMs), ...needsNotifications(readyNeeds, nowMs)];
+}
 
+function reminderAlerts(ready: PendingReminder[], nowMs: number): Alert[] {
   if (ready.length > CATCHUP_THRESHOLD) {
     return [{
       key: `catchup:${nowMs}`,
@@ -195,6 +240,20 @@ export function computeDueAlerts(input: AlertInput): Alert[] {
       alsoLog: ready.flatMap((r) => [r.key, ...r.others]),
     }];
   }
-
   return ready.map(toAlert);
+}
+
+/** One notification per item; more than CATCHUP_THRESHOLD at once become one summary. */
+function needsNotifications(ready: NeedsAlert[], nowMs: number): Alert[] {
+  if (ready.length > CATCHUP_THRESHOLD) {
+    return [{
+      key: `needs-catchup:${nowMs}`,
+      kind: 'catchup',
+      title: `Needs you: ${ready.length} items`,
+      body: ready.map((n) => `${n.title} — ${n.body}`).join('\n'),
+      bidId: null,
+      alsoLog: ready.map((n) => n.key),
+    }];
+  }
+  return ready.map(needsToAlert);
 }

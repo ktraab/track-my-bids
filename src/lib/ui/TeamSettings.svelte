@@ -53,8 +53,7 @@
   }
 </script>
 
-<div class="card box team">
-  <h2>Team</h2>
+<div class="col team">
 
   {#if t.mode === 'local'}
     <p class="hint">Your bids are stored on this computer only. To share bids with your team, paste the join code your admin sent you.</p>
@@ -169,6 +168,7 @@
 {/snippet}
 
 <style>
+  .col { display: flex; flex-direction: column; gap: 12px; }
   h3 { margin: 8px 0 0; font-size: 15px; }
   .inline { display: flex; gap: 10px; align-items: flex-end; flex-wrap: wrap; }
   .stack { display: flex; flex-direction: column; gap: 8px; max-width: 420px; }

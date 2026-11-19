@@ -79,4 +79,42 @@ describe('notification log', () => {
     await repo.record(alert({ key: 'rem:y:60:1' }), '2026-11-16T14:00:00.000Z');
     expect((await repo.recent()).map((n) => n.key)).toEqual(['rem:y:60:1', 'digest:1']);
   });
+
+  it('snoozeKey: snoozes a Needs-you item that never notified, hidden from the inbox', async () => {
+    await repo.snoozeKey('needs:vendor:v1', '2026-11-17T14:00:00.000Z', '2026-11-16T14:00:00.000Z');
+    expect(await repo.recent()).toEqual([]);
+    expect(await repo.unreadCount()).toBe(0);
+    expect([...(await repo.needsSnoozes())]).toEqual([['needs:vendor:v1', '2026-11-17T14:00:00.000Z']]);
+    expect((await repo.loadMap()).get('needs:vendor:v1')!.snoozedUntil).toBe('2026-11-17T14:00:00.000Z');
+  });
+
+  it('snoozeKey again moves the snooze; other keys are not listed as Needs-you snoozes', async () => {
+    await repo.snoozeKey('needs:vendor:v1', '2026-11-17T14:00:00.000Z', '2026-11-16T14:00:00.000Z');
+    await repo.snoozeKey('needs:vendor:v1', '2026-11-18T09:00:00.000Z', '2026-11-17T09:00:00.000Z');
+    await repo.record(alert(), '2026-11-16T14:00:00.000Z');
+    await repo.snooze('rem:x:60:1', '2026-11-16T15:00:00.000Z');
+    expect([...(await repo.needsSnoozes())]).toEqual([['needs:vendor:v1', '2026-11-18T09:00:00.000Z']]);
+  });
+
+  it('snoozeKey marks the item\'s notification (suffixed key) read and keeps its text', async () => {
+    await repo.record(alert({ key: 'needs:customer:q1:123', kind: 'needs', title: 'Needs you · Follow up' }), '2026-11-16T14:00:00.000Z');
+    await repo.record(alert({ key: 'needs:customer:q10:123', kind: 'needs', title: 'Other' }), '2026-11-16T14:00:00.000Z');
+    await repo.snoozeKey('needs:customer:q1', '2026-11-17T14:00:00.000Z', '2026-11-16T15:00:00.000Z');
+    const inbox = await repo.recent();
+    expect(inbox.find((n) => n.key === 'needs:customer:q1:123')).toMatchObject({ kind: 'needs', title: 'Needs you · Follow up', read: true });
+    expect(inbox.find((n) => n.key === 'needs:customer:q10:123')).toMatchObject({ read: false });
+    expect([...(await repo.needsSnoozes())]).toEqual([['needs:customer:q1', '2026-11-17T14:00:00.000Z']]);
+  });
+
+  it('prune keeps still-active keys and live Needs-you snoozes (with their notification rows)', async () => {
+    const old = '2026-09-01T00:00:00.000Z';
+    await repo.record(alert({ key: 'needs:vendor:v1:1', kind: 'needs' }), old); // still in Needs you
+    await repo.record(alert({ key: 'needs:vendor:v2:1', kind: 'needs' }), old); // gone
+    await repo.record(alert({ key: 'needs:vendor:v3:1', kind: 'needs' }), old); // snoozed (item hidden)
+    await repo.snoozeKey('needs:vendor:v3', '2026-11-20T00:00:00.000Z', old);
+    await repo.snoozeKey('needs:vendor:v4', '2026-10-15T00:00:00.000Z', old); // snooze over
+    await repo.record(alert({ key: 'rem:old' }), old);
+    await repo.prune('2026-10-01T00:00:00.000Z', { keep: ['needs:vendor:v1:1'], nowIso: '2026-11-16T00:00:00.000Z' });
+    expect([...(await repo.loadMap()).keys()].sort()).toEqual(['needs:vendor:v1:1', 'needs:vendor:v3', 'needs:vendor:v3:1']);
+  });
 });

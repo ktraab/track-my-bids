@@ -1,6 +1,8 @@
 import type { Sql } from './db/sql';
 import { migrate } from './db/migrations';
 import { createBidRepo, type BidPatch } from './db/bids';
+import { createVendorQuoteRepo, type NewVendorQuote } from './db/vendorQuotes';
+import { createQuoteLineRepo, type NewQuoteLine, type QuoteLinePatch } from './db/quoteLines';
 import { createMilestoneRepo, type MilestonePatch, type NewMilestoneInput } from './db/milestones';
 import { createChecklistRepo } from './db/checklist';
 import { createSettingsRepo } from './db/settings';
@@ -10,7 +12,7 @@ import { createBackupRepo } from './db/backup';
 import { importContacts, importedUids, runImportPlan } from './db/importer';
 import type { ImportPlan } from './domain/importClassify';
 import type { ContactInput } from './domain/contacts';
-import type { Bid, BidWithChildren, ContactRole, NewBidInput } from './domain/types';
+import type { Bid, BidWithChildren, ContactRole, NewBidInput, NewQuoteInput, PricingMode, Stage } from './domain/types';
 import { createTeamController, LOCAL_TEAM_STATE, type TeamState } from './sync/team';
 import { createSupabaseRemote } from './sync/supabase';
 import { encodeJoinCode } from './sync/joinCode';
@@ -19,7 +21,7 @@ import { canManage, isMine, memberName } from './domain/ownership';
 import { isoNow } from './db/ids';
 import {
   DEFAULT_REPORT_FILTERS, describeFilters, filterReportRows, reportFileName, summarizeByStage, toCsv,
-  withReportDefaults, type ReportFilters, type ReportRow,
+  withOurPrice, withReportDefaults, type ReportFilters, type ReportRow,
 } from './domain/report';
 import { parseBackup } from './domain/backup';
 import { eventsForBid, googleCalendarUrl, outlookCalendarUrl, outlookPersonalCalendarUrl, safeFileStem, toIcs, type CalEvent } from './domain/calendar';
@@ -28,15 +30,27 @@ import { openUrl } from '@tauri-apps/plugin-opener';
 import { enable as enableAutostart, disable as disableAutostart, isEnabled as autostartEnabled } from '@tauri-apps/plugin-autostart';
 import { createChecklistTemplateRepo } from './db/checklistTemplate';
 import { DEFAULT_TEMPLATE, type TemplateItem } from './domain/checklist';
-import { applyNetworkFilters, EMPTY_NETWORK_FILTERS, withNetworkDefaults, type NetworkFilters } from './domain/networkFilters';
+import {
+  applyNetworkFilters, EMPTY_NETWORK_FILTERS, storedFilters, withNetworkDefaults, type FilterCtx, type NetworkFilters,
+} from './domain/networkFilters';
+import { nudgeMessage } from './domain/rfq';
+import {
+  inNeedsList, needsBaseKey, needsSnoozeUntil, needsYou, thresholdsFromSettings, type NeedsItem, type NeedsThresholds,
+} from './domain/needsYou';
+import { localToIso } from './domain/time';
 import { DEFAULT_NOTIFICATION_SETTINGS, withDefaults, type NotificationSettings } from './domain/settings';
 import { snoozeUntil, stopMsFromKey, type SnoozeChoice } from './domain/snooze';
+import {
+  DEFAULT_PRICING, gridVendors, parsePaste, pasteNotice, quoteTotal, seedMarkup, withPricingDefaults, type Markup, type PricingDefaults,
+} from './domain/pricing';
 
 export type View = { name: 'network' } | { name: 'bid'; id: string } | { name: 'contacts' } | { name: 'settings' } | { name: 'import' };
 
 type Repos = {
   bids: ReturnType<typeof createBidRepo>;
   milestones: ReturnType<typeof createMilestoneRepo>;
+  vendorQuotes: ReturnType<typeof createVendorQuoteRepo>;
+  quoteLines: ReturnType<typeof createQuoteLineRepo>;
   checklist: ReturnType<typeof createChecklistRepo>;
   settings: ReturnType<typeof createSettingsRepo>;
   notificationLog: ReturnType<typeof createNotificationLogRepo>;
@@ -67,10 +81,28 @@ class AppState {
   launchAtLogin = $state(true);
   team = $state<TeamState>(LOCAL_TEAM_STATE);
   trash = $state<Bid[]>([]);
+  /** Settings → Pricing: the markup a bid gets pinned with when its first line is added. */
+  pricingDefaults = $state<PricingDefaults>(DEFAULT_PRICING);
+  /** Needs-you thresholds (incl. Plan 2's follow-up clocks), from Settings → Notifications. */
+  followUp = $derived<NeedsThresholds>(thresholdsFromSettings(this.notificationSettings));
+  /** Needs-you snoozes on this device (key → ISO end). Never synced. */
+  needsSnoozes = $state<Map<string, string>>(new Map());
   /** Team user id, or null in Local mode (Local mode owns everything). */
   meId = $derived(this.team.mode === 'team' ? this.team.userId : null);
   myRole = $derived(this.team.mode === 'team' ? this.team.me?.role ?? null : null);
   unread = $derived(this.notifications.filter((n) => !n.read).length);
+  /** Team mode: ids of active members (empty in Local mode). An RFQ owned by anyone else counts as unclaimed. */
+  activeMemberIds = $derived<ReadonlySet<string>>(new Set(
+    this.team.mode === 'team' ? this.team.members.filter((m) => m.active).map((m) => m.id) : []));
+  /** The Needs-you list: this user's rows (unowned, or owned by a deactivated teammate, count as mine), snoozes removed. */
+  needs = $derived<NeedsItem[]>(needsYou(this.bids.filter((d) => inNeedsList(d.bid, this.meId, this.activeMemberIds)), {
+    nowMs: this.nowMs,
+    zone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+    team: this.team.mode === 'team',
+    followUp: this.followUp,
+    snoozes: this.needsSnoozes,
+    activeMemberIds: this.activeMemberIds,
+  }));
   #repos: Repos | null = null;
   #sql: Sql | null = null;
   #factory: (() => Promise<Sql>) | null = null;
@@ -110,6 +142,8 @@ class AppState {
     this.#repos = {
       bids: createBidRepo(sql, undefined, undefined, () => templates.load(), () => this.meId),
       milestones: createMilestoneRepo(sql),
+      vendorQuotes: createVendorQuoteRepo(sql),
+      quoteLines: createQuoteLineRepo(sql),
       checklist: createChecklistRepo(sql),
       settings: createSettingsRepo(sql),
       notificationLog: createNotificationLogRepo(sql),
@@ -131,9 +165,11 @@ class AppState {
     this.notificationSettings = await this.#repos.settings.getNotifications();
     this.reportFilters = withReportDefaults(this.#parse(await this.#repos.settings.getRaw('export_filters')));
     this.networkFilters = withNetworkDefaults(this.#parse(await this.#repos.settings.getRaw('network_filters')));
+    this.pricingDefaults = withPricingDefaults(this.#parse(await this.#repos.settings.getRaw('pricing')));
     this.checklistTemplate = await this.#repos.templates.load();
     this.launchAtLogin = await this.#readLaunchAtLogin();
     await this.refreshNotifications();
+    await this.loadNeedsSnoozes();
     this.ready = true;
     this.#timer = setInterval(() => (this.nowMs = Date.now()), 60_000);
   }
@@ -187,11 +223,34 @@ class AppState {
     try {
       const until = this.#snoozeTarget(key, choice, Date.now());
       if (until === null) throw new Error('Too close to the deadline to snooze.');
+      // A Needs-you notification snoozes its item (the list hides it too), not just this inbox row.
+      const base = needsBaseKey(key);
+      if (base) return await this.snoozeNeeds(base, until);
       await this.repos.notificationLog.snooze(key, until);
     } catch (e) {
       this.error = e instanceof Error ? e.message : String(e);
     }
     await this.refreshNotifications();
+  }
+
+  async loadNeedsSnoozes() {
+    try { this.needsSnoozes = await this.repos.notificationLog.needsSnoozes(); } catch (e) { this.#fail(e); }
+  }
+
+  /** Needs you → Snooze 1 day, or until `untilIso` (this device only). */
+  async snoozeNeeds(key: string, untilIso?: string) {
+    try {
+      const now = Date.now();
+      await this.repos.notificationLog.snoozeKey(key, untilIso ?? needsSnoozeUntil(now), new Date(now).toISOString());
+    } catch (e) { this.#fail(e); }
+    await this.loadNeedsSnoozes();
+    await this.refreshNotifications();
+  }
+
+  /** Needs you → Claim (Team mode). */
+  claim(bidId: string) {
+    if (!this.meId) return Promise.resolve(false);
+    return this.setOwner(bidId, this.meId);
   }
 
   async markAllRead() {
@@ -260,7 +319,29 @@ class AppState {
 
   async setNetworkFilters(f: NetworkFilters) {
     this.networkFilters = f;
-    try { await this.repos.settings.setRaw('network_filters', JSON.stringify(f)); } catch (e) { this.#fail(e); }
+    try { await this.repos.settings.setRaw('network_filters', JSON.stringify(storedFilters(f))); } catch (e) { this.#fail(e); }
+  }
+
+  /** Search box: filters immediately, never saved. */
+  setNetworkSearch(search: string) {
+    this.networkFilters = { ...this.networkFilters, search };
+  }
+
+  /** Clock, zone and follow-up thresholds for filters, sorting and the Status column. */
+  filterCtx(): FilterCtx {
+    return {
+      nowMs: this.nowMs, zone: this.#zone(), followUp: this.followUp, team: this.team.mode === 'team', activeMemberIds: this.activeMemberIds,
+    };
+  }
+
+  async savePricingDefaults(d: PricingDefaults): Promise<boolean> {
+    try {
+      const clean = withPricingDefaults(d);
+      await this.repos.settings.setRaw('pricing', JSON.stringify(clean));
+      this.pricingDefaults = clean;
+      this.notice = { text: 'Default markup saved. Quotes and bids get it when you add their first line.' };
+      return true;
+    } catch (e) { this.#fail(e); return false; }
   }
 
   async saveChecklistTemplate(items: TemplateItem[]): Promise<boolean> {
@@ -333,6 +414,10 @@ class AppState {
   /** Bids that drive this user's notifications, tray count and briefing. */
   myBidsSnapshot(): BidWithChildren[] {
     return this.bidsSnapshot().filter((d) => isMine(d.bid, this.meId));
+  }
+  /** Rows for this user's Needs you: mine, unowned, or owned by a deactivated teammate. */
+  needsRowsSnapshot(): BidWithChildren[] {
+    return this.bidsSnapshot().filter((d) => inNeedsList(d.bid, this.meId, this.activeMemberIds));
   }
   async loadTrash() {
     try { this.trash = await this.repos.bids.listTrash(); } catch (e) { this.#fail(e); }
@@ -407,7 +492,7 @@ class AppState {
   /** Returns an error message (shown inside the export dialog) or null. */
   async loadReportRows(): Promise<string | null> {
     try {
-      this.reportRows = await this.repos.contacts.reportRows();
+      this.reportRows = withOurPrice(await this.repos.contacts.reportRows(), this.quoteTotals());
       return null;
     } catch (e) {
       return `Couldn't load contacts: ${e instanceof Error ? e.message : String(e)}`;
@@ -420,7 +505,7 @@ class AppState {
     let path: string | null;
     let count: number;
     try {
-      const rows = filterReportRows(await this.repos.contacts.reportRows(), filters, now, zone);
+      const rows = filterReportRows(withOurPrice(await this.repos.contacts.reportRows(), this.quoteTotals()), filters, now, zone);
       count = rows.length;
       const name = reportFileName(filters, now, zone, format);
       if (format === 'csv') {
@@ -471,6 +556,7 @@ class AppState {
         await this.reloadNotificationSettings();
         // networkFilters are device-local (never restored), so they stay as they are.
         this.checklistTemplate = await this.repos.templates.load();
+        this.pricingDefaults = withPricingDefaults(this.#parse(await this.repos.settings.getRaw('pricing')));
       });
       if (ok) this.notice = { text: `Restored: ${out.inserted} added, ${out.updated} updated, ${out.skipped} skipped.` };
     } catch (e) { this.#fail(e); } finally { this.restoring = false; }
@@ -506,20 +592,158 @@ class AppState {
     this.quickAddOpen = false;
   }
 
+  #hiddenByFilters(id: string): boolean {
+    const created = this.bids.find((d) => d.bid.id === id);
+    return !!created && !applyNetworkFilters([created], this.networkFilters, this.meId, this.filterCtx()).length;
+  }
+
   async createBid(input: NewBidInput): Promise<string | null> {
     const out = { id: '' };
     const ok = await this.#run(async () => { out.id = await this.repos.bids.create(input); });
     if (ok) {
-      const created = this.bids.find((d) => d.bid.id === out.id);
-      if (created && !applyNetworkFilters([created], this.networkFilters, this.meId).length) {
-        this.notice = { text: 'Bid saved — hidden by your filters.' };
-      }
+      if (this.#hiddenByFilters(out.id)) this.notice = { text: 'Bid saved — hidden by your filters.' };
       this.open(out.id);
     }
     return ok ? out.id : null;
   }
+
+  /** New RFQ; optionally link an existing contact or create one, as Procurement. A contact failure keeps the quote. */
+  async createQuote(
+    input: NewQuoteInput, contact: { existingId: string } | { input: ContactInput } | null = null,
+  ): Promise<string | null> {
+    const out = { id: '', contactError: '' };
+    const ok = await this.#run(async () => {
+      out.id = await this.repos.bids.createQuote(input);
+      if (!contact) return;
+      try {
+        const contactId = 'existingId' in contact ? contact.existingId : (await this.repos.contacts.create(contact.input)).id;
+        await this.repos.contacts.linkToBid(out.id, contactId, 'procurement');
+      } catch (e) {
+        out.contactError = e instanceof Error ? e.message : String(e);
+      }
+    });
+    if (!ok) return null;
+    if (out.contactError) this.error = `Quote saved, but the contact wasn’t added: ${out.contactError}`;
+    if (this.#hiddenByFilters(out.id)) this.notice = { text: 'Quote saved — hidden by your filters.' };
+    this.open(out.id);
+    return out.id;
+  }
   updateBid(id: string, patch: BidPatch) { return this.#run(() => this.repos.bids.update(id, patch)); }
   async removeBid(id: string) { if (await this.#run(() => this.repos.bids.remove(id))) this.home(); }
+
+  // Quotes (RFQs)
+  markQuoteSent(id: string) { return this.#run(() => this.repos.bids.update(id, { stage: 'submitted', quotedAt: isoNow() })); }
+  /** "Back to open" after marking sent by mistake: clears the quote time too. */
+  unsendQuote(id: string) { return this.#run(() => this.repos.bids.update(id, { stage: 'reviewing', quotedAt: null })); }
+  markFollowedUp(id: string) { return this.#run(() => this.repos.bids.update(id, { followedUpAt: isoNow() })); }
+  setQuoteStage(id: string, stage: Stage) { return this.#run(() => this.repos.bids.update(id, { stage })); }
+  async convertToBid(id: string, dueAtLocal: string, timezone: string): Promise<boolean> {
+    let dueIso: string;
+    try { dueIso = localToIso(dueAtLocal, timezone); } catch (e) { this.#fail(e); return false; }
+    // One repo call: the timezone is written with the kind flip, after everything is validated.
+    const ok = await this.#run(() => this.repos.bids.convertToBid(id, dueIso, timezone));
+    if (ok) this.notice = { text: 'Converted to a bid. Add its other milestones below.' };
+    return ok;
+  }
+
+  // Vendor requests (RFQs and bids)
+  addVendor(bidId: string, input: NewVendorQuote) { return this.#run(() => this.repos.vendorQuotes.add(bidId, input)); }
+  updateVendor(id: string, patch: { vendorName?: string; notes?: string | null }) { return this.#run(() => this.repos.vendorQuotes.update(id, patch)); }
+  setVendorReplied(id: string, replied: boolean) { return this.#run(() => this.repos.vendorQuotes.setReplied(id, replied)); }
+  setVendorSkipped(id: string, skipped: boolean) { return this.#run(() => this.repos.vendorQuotes.setSkipped(id, skipped)); }
+  removeVendor(id: string) { return this.#run(() => this.repos.vendorQuotes.remove(id)); }
+  /** Copy a follow-up message to the clipboard, then record the nudge (recorded even if the copy fails). */
+  async nudgeVendor(bidId: string, vendorQuoteId: string): Promise<boolean> {
+    const d = this.bids.find((x) => x.bid.id === bidId);
+    const v = d?.vendorQuotes.find((x) => x.id === vendorQuoteId);
+    if (!d || !v) return false;
+    const contact = v.contactId ? this.contactList.find((c) => c.contact.id === v.contactId)?.contact : undefined;
+    let copied = true;
+    try {
+      await navigator.clipboard.writeText(nudgeMessage(v, d.bid, this.#zone(), contact?.firstName ?? null));
+    } catch {
+      copied = false;
+    }
+    const ok = await this.#run(() => this.repos.vendorQuotes.nudge(vendorQuoteId));
+    if (ok) {
+      this.notice = {
+        text: copied
+          ? `Follow-up for ${v.vendorName} copied — paste it into your email.`
+          : `Nudge recorded, but the message couldn’t be copied.`,
+      };
+    }
+    return ok;
+  }
+
+  // Pricing (RFQs and bids)
+  /** "Our price" (quote total) for every bid with priced lines — reports and export. */
+  quoteTotals(): Map<string, number> {
+    const m = new Map<string, number>();
+    for (const d of this.bidsSnapshot()) {
+      const t = quoteTotal(d, this.pricingDefaults);
+      if (t !== null) m.set(d.bid.id, t);
+    }
+    return m;
+  }
+  /** After a bid's first line is added: pin the Settings markup on it, so every teammate prices it the same. */
+  async #seedMarkup(bidId: string, lineCountBefore: number) {
+    const d = this.bids.find((x) => x.bid.id === bidId);
+    const patch = d ? seedMarkup(d.bid, lineCountBefore, this.pricingDefaults) : null;
+    if (patch) await this.repos.bids.update(bidId, patch);
+  }
+  addLine(bidId: string, input: NewQuoteLine) {
+    return this.#run(async () => {
+      const before = this.bids.find((x) => x.bid.id === bidId)?.lines.length ?? 0;
+      await this.repos.quoteLines.add(bidId, input); // validates first, so a bad add never pins the markup
+      await this.#seedMarkup(bidId, before);
+    });
+  }
+  updateLine(id: string, patch: QuoteLinePatch) { return this.#run(() => this.repos.quoteLines.update(id, patch)); }
+  removeLine(id: string) { return this.#run(() => this.repos.quoteLines.remove(id)); }
+  /** One vendor's unit cost for one line; null clears it. */
+  setLinePrice(vendorQuoteId: string, lineId: string, unitCost: number | null) {
+    return this.#run(() => this.repos.quoteLines.setPrice(vendorQuoteId, lineId, unitCost));
+  }
+  setPricingMode(bidId: string, pricingMode: PricingMode) { return this.#run(() => this.repos.bids.update(bidId, { pricingMode })); }
+  setQuoteMarkup(bidId: string, m: Markup) {
+    return this.#run(() => this.repos.bids.update(bidId, { markupType: m.type, markupValue: m.value }));
+  }
+  setSellRounding(bidId: string, sellRounding: number) { return this.#run(() => this.repos.bids.update(bidId, { sellRounding })); }
+  /** Whole mode: buy everything from this vendor; null = the lowest complete total. */
+  setWholeVendor(bidId: string, wholeVendorId: string | null) { return this.#run(() => this.repos.bids.update(bidId, { wholeVendorId })); }
+  /** Paste from Excel: add the rows as lines, then any vendor prices (columns matched to the grid's vendor order). */
+  async pasteLines(bidId: string, text: string): Promise<boolean> {
+    let notice = '';
+    // Everything reads state inside the queue, so a vendor removed by an earlier queued write is already gone.
+    const ok = await this.#run(async () => {
+      const d = this.bids.find((x) => x.bid.id === bidId);
+      if (!d) throw new Error('Bid not found');
+      const vendors = gridVendors(d.vendorQuotes);
+      const parsed = parsePaste(text, vendors.length);
+      if (!parsed.rows.length) throw new Error('Nothing to add. Paste rows with at least a Qty and a Description column.');
+      const before = d.lines.length;
+      // Every parsed row has a description, so addMany keeps them all and ids line up with rows.
+      const ids = await this.repos.quoteLines.addMany(bidId, parsed.rows);
+      await this.#seedMarkup(bidId, before);
+      let priced = 0;
+      let skipped = 0;
+      for (let i = 0; i < ids.length; i++) {
+        for (let k = 0; k < vendors.length; k++) {
+          const cost = parsed.rows[i].prices[k];
+          if (cost === null) continue;
+          try {
+            await this.repos.quoteLines.setPrice(vendors[k].id, ids[i], cost);
+            priced++;
+          } catch {
+            skipped++; // vendor gone since the grid loaded: keep the rest of the paste
+          }
+        }
+      }
+      notice = pasteNotice(parsed, priced) + (skipped ? ` ${skipped} price${skipped === 1 ? '' : 's'} skipped (vendor no longer on this request).` : '');
+    });
+    if (ok) this.notice = { text: notice };
+    return ok;
+  }
 
   addMilestone(input: NewMilestoneInput) { return this.#run(() => this.repos.milestones.add(input)); }
   updateMilestone(id: string, patch: MilestonePatch) { return this.#run(() => this.repos.milestones.update(id, patch)); }

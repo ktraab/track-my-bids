@@ -1,13 +1,20 @@
 /** Tables that sync in Team mode, parents first (the order rows are applied locally because of foreign keys). */
-export const SYNC_TABLES = ['bids', 'contacts', 'milestones', 'checklist_items', 'bid_contacts'] as const;
+export const SYNC_TABLES = [
+  'bids', 'contacts', 'milestones', 'checklist_items', 'bid_contacts',
+  'vendor_quotes', 'quote_lines', 'vendor_line_prices',
+] as const;
 export type SyncTable = (typeof SYNC_TABLES)[number];
+
+/** Tables that existed at schema v6. */
+export const SYNC_TABLES_V6 = ['bids', 'contacts', 'milestones', 'checklist_items', 'bid_contacts'] as const;
+type SyncTableV6 = (typeof SYNC_TABLES_V6)[number];
 
 /**
  * Columns (except `id`) per table as of schema v6. FROZEN: migration v6 builds its triggers from this.
- * When a later migration adds a column, add SYNC_COLUMNS_V7 (etc.), rebuild triggers in that migration,
+ * When a later migration adds a column, add SYNC_COLUMNS_V8 (etc.), rebuild triggers in that migration,
  * and point SYNC_COLUMNS at the newest list.
  */
-export const SYNC_COLUMNS_V6: Record<SyncTable, readonly string[]> = {
+export const SYNC_COLUMNS_V6: Record<SyncTableV6, readonly string[]> = {
   bids: [
     'bid_number', 'title', 'agency_name', 'agency_type', 'est_value', 'scope', 'submission_method',
     'portal_name', 'portal_url', 'delivery_address', 'copies_required', 'notarize_required', 'ship_method',
@@ -23,7 +30,26 @@ export const SYNC_COLUMNS_V6: Record<SyncTable, readonly string[]> = {
   bid_contacts: ['bid_id', 'contact_id', 'role', 'created_at', 'updated_at', 'deleted_at'],
 };
 
-export const SYNC_COLUMNS = SYNC_COLUMNS_V6;
+/** Columns as of schema v7 (RFQ quotes). FROZEN: migration v7 builds its triggers from this. */
+export const SYNC_COLUMNS_V7: Record<SyncTable, readonly string[]> = {
+  ...SYNC_COLUMNS_V6,
+  bids: [
+    ...SYNC_COLUMNS_V6.bids,
+    'kind', 'received_at', 'quoted_at', 'followed_up_at', 'pricing_mode', 'markup_type', 'markup_value',
+    'sell_rounding', 'whole_vendor_id',
+  ],
+  vendor_quotes: [
+    'bid_id', 'contact_id', 'vendor_name', 'asked_at', 'replied_at', 'nudged_at', 'skipped', 'skipped_at', 'notes',
+    'created_at', 'updated_at', 'deleted_at',
+  ],
+  quote_lines: [
+    'bid_id', 'position', 'qty', 'description', 'part_no', 'markup_type', 'markup_value', 'sell_override',
+    'chosen_vendor_id', 'created_at', 'updated_at', 'deleted_at',
+  ],
+  vendor_line_prices: ['bid_id', 'vendor_quote_id', 'line_id', 'unit_cost', 'created_at', 'updated_at', 'deleted_at'],
+};
+
+export const SYNC_COLUMNS = SYNC_COLUMNS_V7;
 
 export const TABLE_ORDER: ReadonlyMap<SyncTable, number> = new Map(SYNC_TABLES.map((t, i) => [t, i]));
 

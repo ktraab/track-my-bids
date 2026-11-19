@@ -5,7 +5,7 @@
   import { ROUTE, OUTCOMES, STAGE_LABELS, routeIndex } from '$lib/domain/stages';
   import { AGENCY_TYPE_LABELS, METHOD_LABELS, SHIP_METHOD_LABELS } from '$lib/domain/labels';
   import { dayWarnings } from '$lib/domain/dayWarnings';
-  import { formatMoneyShort } from '$lib/domain/format';
+  import { formatMoney, formatMoneyShort } from '$lib/domain/format';
   import { formatCountdown, formatDateTime, shipByIso, toMs } from '$lib/domain/time';
   import type { Stage } from '$lib/domain/types';
   import TransitLine from './TransitLine.svelte';
@@ -14,6 +14,9 @@
   import Checklist from './Checklist.svelte';
   import CalendarMenu from './CalendarMenu.svelte';
   import ContactsSection from './ContactsSection.svelte';
+  import VendorsSection from './VendorsSection.svelte';
+  import PricingSection from './PricingSection.svelte';
+  import { pricingOf, quoteTotal } from '$lib/domain/pricing';
 
   let { id }: { id: string } = $props();
   let editing = $state(false);
@@ -22,10 +25,14 @@
   const data = $derived(app.bids.find((d) => d.bid.id === id));
   const due = $derived(data?.milestones.find((m) => m.type === 'due'));
   const win = $derived(data ? windowAround(data, app.nowMs, data.bid.timezone) : null);
-  const line = $derived(data && win ? layoutLine(data, win) : null);
+  const zone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+  const line = $derived(data && win ? layoutLine(data, win, { zone, followUp: app.followUp }) : null);
   const todayPct = $derived(win ? pctOf(app.nowMs, win) : null);
   const warnings = $derived(data ? dayWarnings(data, app.nowMs) : []);
   const stageIdx = $derived(data ? routeIndex(data.bid.stage) : 0);
+  /** "Our price": the quote total once the bid has priced lines. */
+  const ourPrice = $derived(data ? quoteTotal(data, app.pricingDefaults) : null);
+  const unpriced = $derived(data && ourPrice !== null ? pricingOf(data, app.pricingDefaults).summary.flagged : 0);
 
   /** Ship-by is derived; never let a bad value crash rendering. */
   function shipByLabel(dueAt: string, tz: string, lead: number): string {
@@ -78,7 +85,7 @@
       <div class="titles">
         <div class="eyebrow">{b.bidNumber ?? 'No bid #'} · {AGENCY_TYPE_LABELS[b.agencyType]}</div>
         <h1>{b.title}</h1>
-        <div class="sub">{b.agencyName} · {formatMoneyShort(b.estValue)} · <span class="method">{METHOD_LABELS[b.submissionMethod]}</span>
+        <div class="sub">{b.agencyName} · {formatMoneyShort(b.estValue)}{#if ourPrice !== null} · Our price <strong>{formatMoney(ourPrice)}</strong>{#if unpriced > 0} · {unpriced} unpriced{/if}{/if} · <span class="method">{METHOD_LABELS[b.submissionMethod]}</span>
           {#if app.team.mode === 'team'}
             · Owner
             {#if app.canManage(b)}
@@ -136,6 +143,8 @@
       <div class="col main">
         <Checklist {data} />
         <MilestoneList {data} />
+        <VendorsSection {data} collapsible />
+        <PricingSection {data} collapsible />
       </div>
       <div class="col side">
       <ContactsSection {data} />

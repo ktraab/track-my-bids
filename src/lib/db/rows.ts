@@ -1,6 +1,8 @@
-import type { Bid, ChecklistItem, Contact, Milestone } from '../domain/types';
+import type { Bid, ChecklistItem, Contact, Milestone, QuoteLine, VendorLinePrice, VendorQuote } from '../domain/types';
 import type { Row } from './sql';
 import { normalizeOffsets } from '../domain/settings';
+
+const numOrNull = (v: unknown): number | null => (v === null || v === undefined || v === '' ? null : Number(v));
 
 export function rowToBid(r: Row): Bid {
   return {
@@ -11,6 +13,10 @@ export function rowToBid(r: Row): Bid {
     notarizeRequired: !!r.notarize_required, shipMethod: r.ship_method,
     shipLeadBusinessDays: Number(r.ship_lead_business_days), stage: r.stage, timezone: r.timezone,
     rfpUrl: r.rfp_url, notes: r.notes, lastTouchedAt: r.last_touched_at, lineColor: r.line_color, ownerId: r.owner_id ?? null,
+    kind: r.kind === 'rfq' ? 'rfq' : 'bid', receivedAt: r.received_at ?? null, quotedAt: r.quoted_at ?? null,
+    followedUpAt: r.followed_up_at ?? null, pricingMode: r.pricing_mode === 'per_line' ? 'per_line' : 'whole',
+    markupType: r.markup_type ?? null, markupValue: numOrNull(r.markup_value),
+    sellRounding: Number(r.sell_rounding ?? 0.01) || 0.01, wholeVendorId: r.whole_vendor_id ?? null,
     createdAt: r.created_at, updatedAt: r.updated_at, deletedAt: r.deleted_at,
   };
 }
@@ -54,4 +60,28 @@ export function toDb(v: unknown): unknown {
   if (typeof v === 'boolean') return v ? 1 : 0;
   if (v === undefined) return null;
   return v;
+}
+
+export function rowToVendorQuote(r: Row): VendorQuote {
+  return {
+    id: r.id, bidId: r.bid_id, contactId: r.contact_id ?? null, vendorName: r.vendor_name, askedAt: r.asked_at,
+    repliedAt: r.replied_at ?? null, nudgedAt: r.nudged_at ?? null, skipped: !!r.skipped, skippedAt: r.skipped_at ?? null, notes: r.notes ?? null,
+    createdAt: r.created_at, updatedAt: r.updated_at, deletedAt: r.deleted_at ?? null,
+  };
+}
+
+export function rowToQuoteLine(r: Row): QuoteLine {
+  return {
+    id: r.id, bidId: r.bid_id, position: Number(r.position), qty: Number(r.qty), description: r.description,
+    partNo: r.part_no ?? null, markupType: r.markup_type ?? null, markupValue: numOrNull(r.markup_value),
+    sellOverride: numOrNull(r.sell_override), chosenVendorId: r.chosen_vendor_id ?? null,
+    createdAt: r.created_at, updatedAt: r.updated_at, deletedAt: r.deleted_at ?? null,
+  };
+}
+
+export function rowToVendorLinePrice(r: Row): VendorLinePrice {
+  return {
+    id: r.id, bidId: r.bid_id, vendorQuoteId: r.vendor_quote_id, lineId: r.line_id, unitCost: numOrNull(r.unit_cost),
+    createdAt: r.created_at, updatedAt: r.updated_at, deletedAt: r.deleted_at ?? null,
+  };
 }

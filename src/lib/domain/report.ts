@@ -1,6 +1,6 @@
 import { DateTime } from 'luxon';
-import type { AgencyType, ContactRole, Method, Stage } from './types';
-import { OUTCOMES, ROUTE, STAGE_LABELS } from './stages';
+import type { AgencyType, BidKind, ContactRole, Method, Stage } from './types';
+import { OUTCOMES, ROUTE, STAGE_LABELS, stageLabel } from './stages';
 import { AGENCY_TYPE_LABELS, METHOD_LABELS } from './labels';
 import { CONTACT_ROLE_LABELS } from './contacts';
 
@@ -48,7 +48,18 @@ export interface ReportRow {
   dueAt: string | null;
   bidTimezone: string;
   bidCreatedAt: string;
+  kind: BidKind;
+  receivedAt: string | null; // quotes: when the request came in
+  ourPrice: number | null; // quote total when the bid has priced lines (filled by withOurPrice)
 }
+
+/** Attach each bid's quote total ("Our price"); bids without priced lines get null. */
+export function withOurPrice(rows: ReportRow[], totals: ReadonlyMap<string, number>): ReportRow[] {
+  return rows.map((r) => ({ ...r, ourPrice: totals.get(r.bidId) ?? null }));
+}
+
+/** A quote is worth its quote total (falling back to its estimate); a bid, its estimate. */
+export const reportValue = (r: ReportRow): number | null => (r.kind === 'rfq' ? r.ourPrice ?? r.estValue : r.estValue);
 
 const ALL_STAGES: Stage[] = [...ROUTE, ...OUTCOMES];
 const DATE_RE = /^\d{4}-\d{2}-\d{2}$/;
@@ -77,9 +88,13 @@ export function rangeFor(f: ReportFilters, nowMs: number, zone: string): { start
   }
 }
 
+/** The row's date for the "Due date" field: the due date, or for a quote (no due date) when it came in. */
+export const reportDueDate = (r: ReportRow): string | null => r.dueAt ?? (r.kind === 'rfq' ? r.receivedAt : null);
+
 export function filterReportRows(rows: ReportRow[], f: ReportFilters, nowMs: number, zone: string): ReportRow[] {
   const range = rangeFor(f, nowMs, zone);
-  const dateOf = (r: ReportRow) => (f.dateField === 'due' ? r.dueAt : r.bidCreatedAt);
+  const dateOf = (r: ReportRow) => (f.dateField === 'due' ? reportDueDate(r) : r.bidCreatedAt);
+  const sortMs = (r: ReportRow) => { const d = reportDueDate(r); return d ? Date.parse(d) : Infinity; };
   return rows
     .filter((r) => {
       if (range) {
@@ -91,13 +106,14 @@ export function filterReportRows(rows: ReportRow[], f: ReportFilters, nowMs: num
       if (f.stages.length && !f.stages.includes(r.stage)) return false;
       if (f.agencyTypes.length && !f.agencyTypes.includes(r.agencyType)) return false;
       if (f.roles.length && !f.roles.includes(r.role)) return false;
-      if ((f.minValue != null || f.maxValue != null) && r.estValue == null) return false;
-      if (f.minValue != null && r.estValue! < f.minValue) return false;
-      if (f.maxValue != null && r.estValue! > f.maxValue) return false;
+      const value = reportValue(r);
+      if ((f.minValue != null || f.maxValue != null) && value == null) return false;
+      if (f.minValue != null && value! < f.minValue) return false;
+      if (f.maxValue != null && value! > f.maxValue) return false;
       return true;
     })
     .sort((a, b) =>
-      (a.dueAt ? Date.parse(a.dueAt) : Infinity) - (b.dueAt ? Date.parse(b.dueAt) : Infinity)
+      (sortMs(a) - sortMs(b) || 0)
       || a.agencyName.localeCompare(b.agencyName)
       || (a.lastName ?? '').localeCompare(b.lastName ?? '')
       || (a.firstName ?? '').localeCompare(b.firstName ?? '')
@@ -105,26 +121,42 @@ export function filterReportRows(rows: ReportRow[], f: ReportFilters, nowMs: num
 }
 
 export interface StageSummary {
+  kind: BidKind;
   stage: Stage;
   bids: number;
   value: number;
 }
 
+/** Unique bids and their value per kind + stage: bids first, then quotes, each in pipeline order. */
 export function summarizeByStage(rows: ReportRow[]): StageSummary[] {
-  const seen = new Map<Stage, Map<string, number>>();
+  const seen = new Map<string, Map<string, number>>();
   for (const r of rows) {
-    const m = seen.get(r.stage) ?? seen.set(r.stage, new Map()).get(r.stage)!;
-    m.set(r.bidId, r.estValue ?? 0);
+    const key = `${r.kind}:${r.stage}`;
+    const m = seen.get(key) ?? seen.set(key, new Map()).get(key)!;
+    m.set(r.bidId, reportValue(r) ?? 0);
   }
-  return ALL_STAGES.filter((s) => seen.has(s)).map((stage) => {
-    const m = seen.get(stage)!;
-    return { stage, bids: m.size, value: [...m.values()].reduce((a, b) => a + b, 0) };
-  });
+  const out: StageSummary[] = [];
+  for (const kind of ['bid', 'rfq'] as const) {
+    for (const stage of ALL_STAGES) {
+      const m = seen.get(`${kind}:${stage}`);
+      if (m) out.push({ kind, stage, bids: m.size, value: [...m.values()].reduce((a, b) => a + b, 0) });
+    }
+  }
+  return out;
 }
+
+export const stageSummaryLabel = (s: StageSummary): string =>
+  s.kind === 'rfq' ? `Quote · ${stageLabel('rfq', s.stage)}` : STAGE_LABELS[s.stage];
 
 function fmtDue(r: ReportRow): string {
   if (!r.dueAt) return '';
   const d = DateTime.fromISO(r.dueAt).setZone(r.bidTimezone);
+  return d.isValid ? d.toFormat('yyyy-MM-dd h:mm a ZZZZ') : '';
+}
+
+function fmtReceived(r: ReportRow): string {
+  if (r.kind !== 'rfq' || !r.receivedAt) return '';
+  const d = DateTime.fromISO(r.receivedAt).setZone(r.bidTimezone);
   return d.isValid ? d.toFormat('yyyy-MM-dd h:mm a ZZZZ') : '';
 }
 
@@ -140,10 +172,13 @@ export const REPORT_COLUMNS: { header: string; width: number; value: (r: ReportR
   { header: 'Agency Type', width: 12, value: (r) => AGENCY_TYPE_LABELS[r.agencyType] },
   { header: 'Bid #', width: 14, value: (r) => r.bidNumber },
   { header: 'Bid Title', width: 30, value: (r) => r.bidTitle },
-  { header: 'Est. Value', width: 14, value: (r) => r.estValue },
-  { header: 'Stage', width: 12, value: (r) => STAGE_LABELS[r.stage] },
+  { header: 'Est. Value', width: 14, value: reportValue },
+  { header: 'Our Price', width: 14, value: (r) => (r.kind === 'bid' ? r.ourPrice : null) },
+  { header: 'Kind', width: 8, value: (r) => (r.kind === 'rfq' ? 'Quote' : 'Bid') },
+  { header: 'Stage', width: 12, value: (r) => stageLabel(r.kind, r.stage) },
   { header: 'Method', width: 10, value: (r) => METHOD_LABELS[r.method] },
   { header: 'Due Date', width: 20, value: fmtDue },
+  { header: 'Received', width: 20, value: fmtReceived },
 ];
 
 function csvCell(v: string | number | null): string {

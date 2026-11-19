@@ -4,8 +4,10 @@
   import { appDataDir } from '@tauri-apps/api/path';
   import { app } from '$lib/state.svelte';
   import TeamSettings from './TeamSettings.svelte';
+  import PricingSettings from './PricingSettings.svelte';
+  import SettingsSection from './SettingsSection.svelte';
   import { MILESTONE_TYPE_LABELS } from '$lib/domain/labels';
-  import { MAX_STALE_DAYS, validateSettingsDraft, type NotificationSettings } from '$lib/domain/settings';
+  import { MAX_STALE_DAYS, NEEDS_LIMITS, validateSettingsDraft, type NotificationSettings } from '$lib/domain/settings';
   import type { MilestoneType } from '$lib/domain/types';
   import { hasTemplateItem, type TemplateItem } from '$lib/domain/checklist';
   import { reveal } from '$lib/files';
@@ -27,6 +29,26 @@
   const dirtyNotif = $derived(JSON.stringify(s) !== JSON.stringify(app.notificationSettings));
   const dirtyTpl = $derived(JSON.stringify(tpl) !== JSON.stringify(app.checklistTemplate));
   const errors = $derived(validateSettingsDraft(s));
+
+  // Accordion: all sections start collapsed; opening one closes the others.
+  let openSection = $state<string | null>(null);
+  function toggle(id: string) { openSection = openSection === id ? null : id; }
+  function clock(hhmm: string): string {
+    const [h, m] = hhmm.split(':').map(Number);
+    if (!Number.isFinite(h) || !Number.isFinite(m)) return hhmm;
+    return `${((h + 11) % 12) + 1}:${String(m).padStart(2, '0')} ${h < 12 ? 'AM' : 'PM'}`;
+  }
+  const notifSummary = $derived(
+    !app.notificationSettings.enabled ? 'Off'
+      : app.notificationSettings.digestTimes.length ? `On · briefing ${app.notificationSettings.digestTimes.map(clock).join(', ')}`
+      : 'On · no briefing',
+  );
+  const pricingSummary = $derived.by(() => {
+    const { markupType, markupValue } = app.pricingDefaults;
+    if (markupType === 'pct') return `${markupValue}% default markup`;
+    return `$${markupValue} per ${markupType === 'unit' ? 'unit' : 'line'} default markup`;
+  });
+  const teamSummary = $derived(app.team.mode === 'team' ? 'Team mode · shared with your team' : 'Local · this computer only');
   const invalid = $derived(Object.keys(errors).length > 0);
 
   $effect(() => { getVersion().then((v) => (version = v)).catch(() => {}); });
@@ -83,11 +105,8 @@
     <h1>Settings</h1>
   </div>
 
-  <div class="card box">
-    <div class="head">
-      <h2>Notifications</h2>
-      <label class="check"><input type="checkbox" bind:checked={s.enabled} /> Notifications on</label>
-    </div>
+  <SettingsSection id="notifications" title="Notifications" summary={notifSummary} badge={dirtyNotif ? 'Unsaved' : ''} open={openSection === 'notifications'} ontoggle={toggle}>
+    <label class="check"><input type="checkbox" bind:checked={s.enabled} /> Notifications on</label>
 
     <div class="grid2">
       <fieldset>
@@ -135,16 +154,34 @@
     </div>
     {#if errors.staleDays}<p class="err" role="alert">{errors.staleDays}</p>{/if}
 
+    <h3>Needs you</h3>
+    <p class="hint">When something lands in the hand-icon list (you get one notification, held during quiet hours).</p>
+    <div class="inline">
+      <label class="field"><span>Vendor quiet after (business days)</span>
+        <input type="number" min="1" max={NEEDS_LIMITS.vendorQuietBusinessDays} step="1" bind:value={s.vendorQuietBusinessDays} aria-invalid={!!errors.needs?.vendorQuietBusinessDays} />
+      </label>
+      <label class="field"><span>Customer follow-up after (business days)</span>
+        <input type="number" min="1" max={NEEDS_LIMITS.customerBusinessDays} step="1" bind:value={s.customerBusinessDays} aria-invalid={!!errors.needs?.customerBusinessDays} />
+      </label>
+      <label class="field"><span>New RFQ unclaimed after (work hours, Team mode)</span>
+        <input type="number" min="1" max={NEEDS_LIMITS.unclaimedWorkHours} step="1" bind:value={s.unclaimedWorkHours} aria-invalid={!!errors.needs?.unclaimedWorkHours} />
+      </label>
+      <label class="field"><span>Mandatory bid stop within (hours)</span>
+        <input type="number" min="1" max={NEEDS_LIMITS.stopWithinHours} step="1" bind:value={s.stopWithinHours} aria-invalid={!!errors.needs?.stopWithinHours} />
+      </label>
+    </div>
+    {#each Object.entries(errors.needs ?? {}) as [k, msg] (k)}<p class="err" role="alert">{msg}</p>{/each}
+    <p class="hint">Business days skip weekends and US holidays. Work hours are 8 AM–5 PM, Monday to Friday.</p>
+
     <div class="actions">
       {#if dirtyNotif}<span class="hint">Unsaved changes</span>{/if}
       <button class="btn" disabled={!dirtyNotif} onclick={() => (s = structuredClone($state.snapshot(app.notificationSettings)))}>Discard</button>
       {#if invalid}<span class="err">Fix the errors above to save.</span>{/if}
       <button class="btn primary" disabled={!dirtyNotif || saving || invalid} onclick={saveNotif}>Save notification settings</button>
     </div>
-  </div>
+  </SettingsSection>
 
-  <div class="card box">
-    <h2>Checklist template</h2>
+  <SettingsSection id="checklist" title="Checklist template" summary="{tpl.length} item{tpl.length === 1 ? '' : 's'}" badge={dirtyTpl ? 'Unsaved' : ''} open={openSection === 'checklist'} ontoggle={toggle}>
     <p class="hint">New bids start with these items. Existing bids are not changed.</p>
     <div class="grid2">
       {#each GROUPS as [g, label] (g)}
@@ -180,12 +217,17 @@
       {/if}
       <button class="btn primary" disabled={!dirtyTpl} onclick={saveTpl}>Save template</button>
     </div>
-  </div>
+  </SettingsSection>
 
-  <TeamSettings />
+  <SettingsSection id="pricing" title="Pricing" summary={pricingSummary} open={openSection === 'pricing'} ontoggle={toggle}>
+    <PricingSettings />
+  </SettingsSection>
 
-  <div class="card box">
-    <h2>General</h2>
+  <SettingsSection id="team" title="Team" summary={teamSummary} open={openSection === 'team'} ontoggle={toggle}>
+    <TeamSettings />
+  </SettingsSection>
+
+  <SettingsSection id="general" title="General" summary={version ? `Launch at login, updates · version ${version}` : 'Launch at login, updates'} open={openSection === 'general'} ontoggle={toggle}>
     <label class="check"><input type="checkbox" checked={app.launchAtLogin} onchange={async (e) => { const box = e.currentTarget; if (!(await app.setLaunchAtLogin(box.checked))) box.checked = app.launchAtLogin; }} /> Open TrackMyBids when I log in (needed for morning briefings)</label>
     <p class="hint">Closing the window keeps reminders running in the menu bar / system tray. Quit from the tray icon to stop them.</p>
     <div class="inline">
@@ -199,13 +241,12 @@
       {:else if updater.error}<span class="err">{updater.error}</span>{/if}
     </div>
     <p class="hint">TrackMyBids checks for updates every few hours and asks before installing.</p>
-  </div>
+  </SettingsSection>
 </section>
 
 <style>
   .topbar { display: flex; align-items: center; gap: 12px; }
   .topbar h1 { font-size: 28px; }
-  .head { display: flex; justify-content: space-between; align-items: center; }
   h3 { margin: 8px 0 0; font-size: 15px; }
   fieldset { border: 0; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
   legend { font-size: 12px; font-weight: 600; color: var(--muted); padding: 0; margin-bottom: 4px; }

@@ -1,6 +1,8 @@
 import { describe, it, expect } from 'vitest';
 import { createFakeServer } from './fakeBackend';
-import type { OutgoingChange } from './types';
+import type { ChangeResult, OutgoingChange } from './types';
+
+const rowOf = (r: ChangeResult) => (r.status === 'accepted' ? r.row : undefined);
 
 const bid = (id: string, extra: Record<string, unknown> = {}, t = '2026-11-17T10:00:00.000Z'): OutgoingChange => {
   const values = { title: 'T', owner_id: null, created_at: t, updated_at: t, deleted_at: null, ...extra };
@@ -26,7 +28,7 @@ describe('fake server rules', () => {
 
   it('stamps owner on insert, field-level newest wins, incomplete without created_at', async () => {
     const { a } = await setup();
-    expect(await a.backend.applyChanges([bid('x')])).toEqual([{ tbl: 'bids', id: 'x', status: 'accepted' }]);
+    expect(await a.backend.applyChanges([bid('x')])).toMatchObject([{ tbl: 'bids', id: 'x', status: 'accepted', row: { data: { owner_id: 'u1' } } }]);
     const old = { tbl: 'bids' as const, id: 'x', values: { title: 'old' }, times: { title: '2026-11-17T09:00:00.000Z' } };
     await a.backend.applyChanges([old]);
     expect((await a.backend.pullSince(0, 10))[0].data).toMatchObject({ title: 'T', owner_id: 'u1' });
@@ -42,6 +44,41 @@ describe('fake server rules', () => {
     expect(del).toMatchObject({ status: 'rejected', reason: 'not_owner' });
     const [edit] = await b.backend.applyChanges([{ tbl: 'bids', id: 'x', values: { notes: 'hi' }, times: { notes: t } }]);
     expect(edit.status).toBe('accepted');
+  });
+
+  it('a quote inserted without owner stays unassigned; a formal bid gets the pusher and the row back', async () => {
+    const { server, a, b } = await setup();
+    server.approve('u2');
+    const [q] = await b.backend.applyChanges([bid('q', { kind: 'rfq' })]);
+    expect(q).toEqual({ tbl: 'bids', id: 'q', status: 'accepted' });
+    expect(server.rows.get('bids:q')!.data.owner_id).toBeNull();
+    const pulled = await a.backend.pullSince(0, 10);
+    expect(pulled.find((r) => r.id === 'q')!.data.owner_id).toBeNull();
+    const [f] = await b.backend.applyChanges([bid('f')]);
+    expect(f).toMatchObject({ status: 'accepted', row: { tbl: 'bids', id: 'f', data: { owner_id: 'u2' } } });
+    expect(rowOf(f)!.seq).toBe(server.rows.get('bids:f')!.seq);
+    const [ex] = await b.backend.applyChanges([bid('e', { kind: 'bid' })]);
+    expect(rowOf(ex)!.data.owner_id).toBe('u2');
+  });
+
+  it('any member can claim (or delete) an unowned quote, but not reassign an owned bid', async () => {
+    const { server, a, b } = await setup();
+    server.approve('u2');
+    await a.backend.applyChanges([bid('q', { kind: 'rfq' }), bid('x')]);
+    const t = '2026-11-17T11:00:00.000Z';
+    const [claim] = await b.backend.applyChanges([{ tbl: 'bids', id: 'q', values: { owner_id: 'u2' }, times: { owner_id: t } }]);
+    expect(claim.status).toBe('accepted');
+    expect(server.rows.get('bids:q')!.data.owner_id).toBe('u2');
+    await a.backend.applyChanges([bid('q2', { kind: 'rfq' })]);
+    const [del] = await b.backend.applyChanges([{ tbl: 'bids', id: 'q2', values: { deleted_at: t }, times: { deleted_at: t } }]);
+    expect(del.status).toBe('accepted');
+    const [steal] = await b.backend.applyChanges([{ tbl: 'bids', id: 'x', values: { owner_id: 'u2' }, times: { owner_id: t } }]);
+    expect(steal).toMatchObject({ status: 'rejected', reason: 'not_owner' });
+    // Once claimed, the quote is owned: the other member can no longer reassign it.
+    const [back] = await a.backend.applyChanges([{ tbl: 'bids', id: 'q', values: { owner_id: 'u1' }, times: { owner_id: '2026-11-17T12:00:00.000Z' } }]);
+    expect(back.status).toBe('accepted'); // a is admin
+    const [b2] = await b.backend.applyChanges([{ tbl: 'bids', id: 'q', values: { owner_id: 'u2' }, times: { owner_id: '2026-11-17T13:00:00.000Z' } }]);
+    expect(b2).toMatchObject({ status: 'rejected', reason: 'not_owner' });
   });
 
   it('remaps duplicate contacts (by email) and links (by bid, contact, role)', async () => {

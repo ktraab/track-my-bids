@@ -72,6 +72,7 @@ const tokens = (s: string) => s.split(' ').filter((w) => w && !STOPWORDS.has(w))
 function matchExisting(key: string, bids: BidWithChildren[]): string | null {
   const keyTokens = new Set(tokens(key));
   const matches = bids.filter((d) => {
+    if (d.bid.kind === 'rfq') return false; // quotes have no due date and take no imported milestones
     const a = norm(d.bid.agencyName);
     if (a.length < 4) return false;
     if (a === key) return true;

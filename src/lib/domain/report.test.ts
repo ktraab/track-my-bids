@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import {
-  rangeFor, filterReportRows, summarizeByStage, toCsv, reportFileName, withReportDefaults, describeFilters,
-  DEFAULT_REPORT_FILTERS as D, REPORT_COLUMNS, type ReportRow,
+  rangeFor, filterReportRows, summarizeByStage, stageSummaryLabel, toCsv, reportFileName, withReportDefaults, describeFilters,
+  DEFAULT_REPORT_FILTERS as D, REPORT_COLUMNS, reportValue, withOurPrice, type ReportRow,
 } from './report';
 
 const CHI = 'America/Chicago';
@@ -11,7 +11,7 @@ const row = (over: Partial<ReportRow> = {}): ReportRow => ({
   bidId: 'b1', firstName: 'Jane', lastName: 'Doe', title: 'Purchasing Agent', email: 'jdoe@cvisd.org', phone: '555-0100',
   organization: 'Cedar Valley ISD', role: 'procurement', agencyName: 'Cedar Valley ISD', agencyType: 'k12',
   bidNumber: 'RFP 26-114', bidTitle: 'Chromebooks', estValue: 480000, stage: 'preparing', method: 'online',
-  dueAt: '2026-11-19T14:00:00.000-06:00', bidTimezone: CHI, bidCreatedAt: '2026-11-02T15:00:00.000Z', ...over,
+  dueAt: '2026-11-19T14:00:00.000-06:00', bidTimezone: CHI, bidCreatedAt: '2026-11-02T15:00:00.000Z', kind: 'bid', receivedAt: null, ourPrice: null, ...over,
 });
 
 describe('rangeFor', () => {
@@ -63,8 +63,8 @@ describe('summarizeByStage', () => {
   it('counts unique bids and their value per stage, in pipeline order', () => {
     const rows = [row(), row({ role: 'end_user' }), row({ bidId: 'b2', stage: 'submitted', estValue: 215000 })];
     expect(summarizeByStage(rows)).toEqual([
-      { stage: 'preparing', bids: 1, value: 480000 },
-      { stage: 'submitted', bids: 1, value: 215000 },
+      { kind: 'bid', stage: 'preparing', bids: 1, value: 480000 },
+      { kind: 'bid', stage: 'submitted', bids: 1, value: 215000 },
     ]);
   });
 });
@@ -135,3 +135,63 @@ describe('review fixes', () => {
   });
 });
 
+
+describe('quotes in reports', () => {
+  const quote = row({ bidId: 'q1', kind: 'rfq', stage: 'submitted', dueAt: null, receivedAt: '2026-11-10T15:00:00.000Z', estValue: null });
+  const col = (h: string) => REPORT_COLUMNS.find((c) => c.header === h)!;
+  it('a quote is dated by when it came in (Due date field)', () => {
+    expect(filterReportRows([quote, row({ bidId: 'nodue', dueAt: null })], D, NOW, CHI).map((r) => r.bidId)).toEqual(['q1']);
+  });
+  it('Kind, RFQ stage label and Received columns', () => {
+    expect([col('Kind').value(quote), col('Stage').value(quote), col('Due Date').value(quote), col('Received').value(quote)])
+      .toEqual(['Quote', 'Quoted', '', '2026-11-10 9:00 AM CST']);
+    expect([col('Kind').value(row()), col('Stage').value(row()), col('Received').value(row())]).toEqual(['Bid', 'Preparing', '']);
+  });
+  it('summary groups by kind, bids first, with quote labels', () => {
+    const s = summarizeByStage([quote, row()]);
+    expect(s).toEqual([
+      { kind: 'bid', stage: 'preparing', bids: 1, value: 480000 },
+      { kind: 'rfq', stage: 'submitted', bids: 1, value: 0 },
+    ]);
+    expect(s.map(stageSummaryLabel)).toEqual(['Preparing', 'Quote · Quoted']);
+  });
+});
+
+describe('quote totals in reports', () => {
+  const col = (h: string) => REPORT_COLUMNS.find((c) => c.header === h)!;
+  const quote = row({ bidId: 'q1', kind: 'rfq', stage: 'submitted', dueAt: null, receivedAt: '2026-11-10T15:00:00.000Z', estValue: 900 });
+  const bid = row({ bidId: 'b1', estValue: 480000 });
+  const totals = new Map([['q1', 1250.5], ['b1', 455000]]);
+
+  it('withOurPrice fills the quote total per bid (null when not priced)', () => {
+    const [q, b, other] = withOurPrice([quote, bid, row({ bidId: 'b9' })], totals);
+    expect([q.ourPrice, b.ourPrice, other.ourPrice]).toEqual([1250.5, 455000, null]);
+  });
+
+  it('a quote is valued at its quote total, falling back to est. value; a bid keeps its estimate', () => {
+    const [q, b] = withOurPrice([quote, bid], totals);
+    expect([reportValue(q), reportValue(quote), reportValue(b)]).toEqual([1250.5, 900, 480000]);
+  });
+
+  it('Est. Value uses that value; Our Price sits next to it, for bids only', () => {
+    const [q, b] = withOurPrice([quote, bid], totals);
+    const headers = REPORT_COLUMNS.map((c) => c.header);
+    expect(headers.indexOf('Our Price')).toBe(headers.indexOf('Est. Value') + 1);
+    expect([col('Est. Value').value(q), col('Our Price').value(q)]).toEqual([1250.5, null]);
+    expect([col('Est. Value').value(b), col('Our Price').value(b)]).toEqual([480000, 455000]);
+  });
+
+  it('summary and value bounds use the same value', () => {
+    const rows = withOurPrice([quote, bid], totals);
+    expect(summarizeByStage(rows).map((s) => s.value)).toEqual([480000, 1250.5]);
+    expect(filterReportRows(rows, { ...D, preset: 'all', maxValue: 2000 }, NOW, CHI).map((r) => r.bidId)).toEqual(['q1']);
+  });
+});
+
+describe('toCsv our price', () => {
+  it('writes a cent-rounded Our Price', () => {
+    const csv = toCsv([row({ kind: 'bid', ourPrice: 7.8 })]);
+    expect(csv).toContain(',7.8,');
+    expect(csv).not.toContain('7.7999');
+  });
+});

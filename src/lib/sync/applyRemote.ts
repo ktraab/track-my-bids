@@ -104,6 +104,11 @@ async function mergeContactInto(
       await enqueueFields(sql, 'bid_contacts', l.id, ['contact_id', 'updated_at'], t);
     }
   }
+  const vqs = await sql.select<{ id: string }>('SELECT id FROM vendor_quotes WHERE contact_id = ?', [localId]);
+  for (const v of vqs) {
+    await sql.execute('UPDATE vendor_quotes SET contact_id = ?, updated_at = ? WHERE id = ?', [remote.id, t, v.id]);
+    await enqueueFields(sql, 'vendor_quotes', v.id, ['contact_id', 'updated_at'], t);
+  }
   if (opts.neverSynced) {
     await dropRow(sql, 'contacts', localId);
     await sql.execute('DELETE FROM contacts WHERE id = ?', [localId]);

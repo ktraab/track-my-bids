@@ -4,6 +4,8 @@ import { migrate } from './migrations';
 import { createBidRepo } from './bids';
 import { LINE_COLORS } from '../domain/palette';
 import type { Sql } from './sql';
+import { createChecklistRepo } from './checklist';
+import { DEFAULT_TEMPLATE, templateFor } from '../domain/checklist';
 
 let sql: Sql;
 let repo: ReturnType<typeof createBidRepo>;
@@ -157,5 +159,124 @@ describe('bid ownership + trash', () => {
     expect(d.milestones.length).toBe(1);
     expect(d.checklist.some((c) => c.id === 'old')).toBe(false);
     expect(await repo.listTrash()).toEqual([]);
+  });
+});
+
+describe('bids repo: quotes', () => {
+  async function setup() {
+    const sql = await memorySql();
+    await migrate(sql);
+    return { sql, bids: createBidRepo(sql, fixedClock(), seqIds()) };
+  }
+
+  it('createQuote makes an open RFQ with no due milestone and no checklist', async () => {
+    const { bids } = await setup();
+    const id = await bids.createQuote({ title: 'Toner', agencyName: 'Chesterfield', agencyType: 'county', timezone: 'America/New_York' });
+    const [d] = await bids.listAll();
+    expect(d.bid).toMatchObject({ id, kind: 'rfq', stage: 'reviewing', receivedAt: '2026-11-16T13:42:00.000Z', pricingMode: 'whole', sellRounding: 0.01 });
+    expect(d.milestones).toEqual([]);
+    expect(d.checklist).toEqual([]);
+  });
+
+  it('createQuote keeps an explicit received time and rejects blanks', async () => {
+    const { bids } = await setup();
+    await bids.createQuote({ title: 'T', agencyName: 'A', agencyType: 'city', timezone: 'UTC', receivedAt: '2026-11-10T15:00:00.000Z' });
+    expect((await bids.listAll())[0].bid.receivedAt).toBe('2026-11-10T15:00:00.000Z');
+    await expect(bids.createQuote({ title: ' ', agencyName: 'A', agencyType: 'city', timezone: 'UTC' })).rejects.toThrow('Title');
+  });
+
+  it('listAll returns empty quote children for a plain bid', async () => {
+    const { bids } = await setup();
+    await bids.createQuote({ title: 'T', agencyName: 'A', agencyType: 'city', timezone: 'UTC' });
+    const [d] = await bids.listAll();
+    expect([d.vendorQuotes, d.lines, d.prices]).toEqual([[], [], []]);
+  });
+
+  it('update accepts the new quote columns', async () => {
+    const { bids } = await setup();
+    const id = await bids.createQuote({ title: 'T', agencyName: 'A', agencyType: 'city', timezone: 'UTC' });
+    await bids.update(id, { pricingMode: 'per_line', markupType: 'unit', markupValue: 25, sellRounding: 1, quotedAt: '2026-11-17T00:00:00.000Z', stage: 'submitted' });
+    expect((await bids.listAll())[0].bid).toMatchObject({ pricingMode: 'per_line', markupType: 'unit', markupValue: 25, sellRounding: 1, stage: 'submitted' });
+  });
+
+  it('createQuote owner: current user by default, or an explicit owner / unassigned', async () => {
+    const sql = await memorySql();
+    await migrate(sql);
+    const bids = createBidRepo(sql, fixedClock(), seqIds(), undefined, () => 'me');
+    const a = await bids.createQuote({ title: 'A', agencyName: 'X', agencyType: 'city', timezone: 'UTC' });
+    const b = await bids.createQuote({ title: 'B', agencyName: 'X', agencyType: 'city', timezone: 'UTC', ownerId: null });
+    const c = await bids.createQuote({ title: 'C', agencyName: 'X', agencyType: 'city', timezone: 'UTC', ownerId: 'u2' });
+    const owners = new Map((await bids.listAll()).map((d) => [d.bid.id, d.bid.ownerId]));
+    expect([owners.get(a), owners.get(b), owners.get(c)]).toEqual(['me', null, 'u2']);
+  });
+
+  it('convertToBid adds the due milestone and the checklist template, then makes it a bid', async () => {
+    const { bids } = await setup();
+    const id = await bids.createQuote({ title: 'T', agencyName: 'A', agencyType: 'city', timezone: 'America/New_York' });
+    await bids.convertToBid(id, '2026-12-01T10:00:00.000-05:00');
+    const [d] = await bids.listAll();
+    expect(d.bid.kind).toBe('bid');
+    expect(d.milestones.map((m) => [m.type, m.at])).toEqual([['due', '2026-12-01T10:00:00.000-05:00']]);
+    expect(d.checklist.map((c) => c.text)).toEqual(templateFor('email', DEFAULT_TEMPLATE));
+    await expect(bids.convertToBid(id, '2026-12-01T10:00:00.000-05:00')).rejects.toThrow('Only quotes');
+  });
+
+  it('convertToBid keeps an existing checklist and rejects a bad date', async () => {
+    const { sql, bids } = await setup();
+    const id = await bids.createQuote({ title: 'T', agencyName: 'A', agencyType: 'city', timezone: 'UTC' });
+    await createChecklistRepo(sql).add(id, 'Call the buyer');
+    await expect(bids.convertToBid(id, 'soon')).rejects.toThrow('Due date is invalid');
+    await bids.convertToBid(id, '2026-12-01T15:00:00.000Z');
+    expect((await bids.listAll())[0].checklist.map((c) => c.text)).toEqual(['Call the buyer']);
+  });
+
+  it('convertToBid sets the timezone in the same step, and validates it before any write', async () => {
+    const { bids } = await setup();
+    const id = await bids.createQuote({ title: 'T', agencyName: 'A', agencyType: 'city', timezone: 'UTC' });
+    await expect(bids.convertToBid(id, '2026-12-01T15:00:00.000Z', 'Mars/Olympus')).rejects.toThrow('Time zone is invalid');
+    let [d] = await bids.listAll();
+    expect([d.bid.kind, d.bid.timezone, d.milestones.length, d.checklist.length]).toEqual(['rfq', 'UTC', 0, 0]);
+    await bids.convertToBid(id, '2026-12-01T10:00:00.000-05:00', 'America/New_York');
+    [d] = await bids.listAll();
+    expect([d.bid.kind, d.bid.timezone, d.milestones.length]).toEqual(['bid', 'America/New_York', 1]);
+  });
+});
+
+describe('quote stage and kind', () => {
+  it('pins quotedAt when a quote enters submitted, once', async () => {
+    const id = await repo.createQuote({ title: 'T', agencyName: 'A', agencyType: 'city', timezone: 'UTC' });
+    await repo.update(id, { stage: 'submitted' });
+    const q1 = (await repo.listAll())[0].bid.quotedAt;
+    expect(q1).toBeTruthy();
+    await repo.update(id, { notes: 'x' });
+    expect((await repo.listAll())[0].bid.quotedAt).toBe(q1);
+  });
+  it('does not stamp quotedAt for a formal bid', async () => {
+    const id = await repo.create(input);
+    await repo.update(id, { stage: 'submitted' });
+    expect((await repo.listAll())[0].bid.quotedAt).toBeNull();
+  });
+  it('update ignores kind', async () => {
+    const id = await repo.createQuote({ title: 'T', agencyName: 'A', agencyType: 'city', timezone: 'UTC' });
+    await repo.update(id, { kind: 'bid' } as any);
+    expect((await repo.listAll())[0].bid.kind).toBe('rfq');
+  });
+});
+
+describe('pricing fields', () => {
+  it('update validates mode, markup, rounding and the whole-quote vendor', async () => {
+    const id = await repo.createQuote({ title: 'T', agencyName: 'A', agencyType: 'city', timezone: 'UTC' });
+    const other = await repo.createQuote({ title: 'U', agencyName: 'B', agencyType: 'city', timezone: 'UTC' });
+    await sql.execute(`INSERT INTO vendor_quotes (id, bid_id, vendor_name, asked_at, created_at, updated_at) VALUES ('v1', ?, 'SHI', 't', 't', 't')`, [id]);
+    await sql.execute(`INSERT INTO vendor_quotes (id, bid_id, vendor_name, asked_at, created_at, updated_at) VALUES ('v2', ?, 'CDW', 't', 't', 't')`, [other]);
+    await expect(repo.update(id, { pricingMode: 'split' as any })).rejects.toThrow('Pricing mode');
+    await expect(repo.update(id, { markupType: 'pctx' as any })).rejects.toThrow('Markup type');
+    await expect(repo.update(id, { markupValue: -1 })).rejects.toThrow('Markup must be 0 or more');
+    await expect(repo.update(id, { sellRounding: 2 })).rejects.toThrow('Rounding');
+    await expect(repo.update(id, { wholeVendorId: 'v2' })).rejects.toThrow('Vendor not found on this bid');
+    await repo.update(id, { wholeVendorId: 'v1', markupType: null, markupValue: null, sellRounding: 5 });
+    expect((await repo.listAll()).find((d) => d.bid.id === id)!.bid).toMatchObject({ wholeVendorId: 'v1', markupType: null, sellRounding: 5 });
+    await repo.update(id, { wholeVendorId: null });
+    expect((await repo.listAll()).find((d) => d.bid.id === id)!.bid.wholeVendorId).toBeNull();
   });
 });

@@ -81,6 +81,7 @@
       <div class="chips">{#each stages as s (s)}
         <label class="chip"><input type="checkbox" checked={f.stages.includes(s)} onchange={() => (f.stages = toggle(f.stages, s))} /> {STAGE_LABELS[s]}</label>
       {/each}</div>
+      <p class="hint">Quotes use the same stages: Reviewing = Open, Submitted = Quoted, Awarded = Won, No bid = No reply. With “Due date”, a quote is dated by when it came in.</p>
     </fieldset>
     <fieldset><legend>Agency types</legend>
       <div class="chips">{#each agencyTypes as a (a)}
@@ -93,9 +94,10 @@
       {/each}</div>
     </fieldset>
     <div class="grid2">
-      <label class="field"><span>Min est. value ($)</span><input type="number" min="0" bind:value={f.minValue} /></label>
-      <label class="field"><span>Max est. value ($)</span><input type="number" min="0" bind:value={f.maxValue} /></label>
+      <label class="field"><span>Min value ($)</span><input type="number" min="0" bind:value={f.minValue} /></label>
+      <label class="field"><span>Max value ($)</span><input type="number" min="0" bind:value={f.maxValue} /></label>
     </div>
+    <p class="hint">Bids use their est. value. Quotes use their quote total once they have priced lines.</p>
 
     {#if rangeBad}<p class="warn">From is after To</p>{/if}
     {#if valueBad}<p class="warn">Min is greater than max</p>{/if}

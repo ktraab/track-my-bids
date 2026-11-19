@@ -105,6 +105,8 @@ export function createSyncEngine(d: EngineDeps) {
       await store.set('last_sync_at', t);
       emit({ status: 'synced', lastSyncAt: t, pending: await outboxCount(d.sql), message: null });
     } catch (e) {
+      // Re-check the server schema next cycle: an error may be the first sign of a server upgrade.
+      schemaOk = false;
       const next = errorInfo(e);
       // Waiting for approval is not a failure: keep the normal 60 s interval instead of backing off.
       if (next.status === 'pending') failures = 0;

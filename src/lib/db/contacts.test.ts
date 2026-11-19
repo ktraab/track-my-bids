@@ -84,7 +84,7 @@ describe('contacts repo', () => {
     expect(rows[0]).toMatchObject({
       bidId, lastName: 'Doe', role: 'procurement', agencyName: 'Cedar Valley ISD', agencyType: 'k12',
       bidTitle: 'Chromebooks', estValue: 480000, stage: 'found', method: 'online',
-      dueAt: '2026-11-19T14:00:00.000-06:00', bidTimezone: 'America/Chicago',
+      dueAt: '2026-11-19T14:00:00.000-06:00', bidTimezone: 'America/Chicago', kind: 'bid', receivedAt: null,
     });
   });
 

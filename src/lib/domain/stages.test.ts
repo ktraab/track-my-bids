@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { isOpen, isOnNetwork, routeIndex, ROUTE, OUTCOMES } from './stages';
+import { isOpen, isOnNetwork, routeIndex, ROUTE, OUTCOMES, isClosed, stageLabel, RFQ_STAGES, RFQ_STAGE_LABELS } from './stages';
 
 describe('stages', () => {
   it('open stages are the four pre-submission stages', () => {
@@ -21,5 +21,17 @@ describe('stages', () => {
     expect(routeIndex('submitted')).toBe(4);
     expect(routeIndex('awarded')).toBe(ROUTE.length);
     expect(OUTCOMES).toEqual(['awarded', 'lost', 'no_bid']);
+  });
+});
+describe('RFQ stage labels', () => {
+  it('maps shared stage values to quote wording', () => {
+    expect(RFQ_STAGES.map((s) => RFQ_STAGE_LABELS[s])).toEqual(['Open', 'Quoted', 'Won', 'Lost', 'No reply']);
+    expect(stageLabel('rfq', 'found')).toBe('Open');
+    expect(stageLabel('rfq', 'no_bid')).toBe('No reply');
+    expect(stageLabel('bid', 'no_bid')).toBe('No bid');
+    expect(stageLabel('bid', 'submitted')).toBe('Submitted');
+  });
+  it('closed = the three outcomes', () => {
+    expect(['awarded', 'lost', 'no_bid', 'submitted', 'reviewing'].map((s) => isClosed(s as never))).toEqual([true, true, true, false, false]);
   });
 });

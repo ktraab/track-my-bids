@@ -117,7 +117,7 @@
     <option value="new">New bid</option>
     <option value="skip">Skip</option>
     <optgroup label="Add to existing bid">
-      {#each app.bids as d (d.bid.id)}<option value={d.bid.id}>{d.bid.agencyName} · {d.bid.title}</option>{/each}
+      {#each app.bids.filter((d) => d.bid.kind !== 'rfq') as d (d.bid.id)}<option value={d.bid.id}>{d.bid.agencyName} · {d.bid.title}</option>{/each}
     </optgroup>
   </select>
 {/snippet}

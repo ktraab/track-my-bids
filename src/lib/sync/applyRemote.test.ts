@@ -88,3 +88,47 @@ describe('applyRemoteRows', () => {
     expect((await pendingFields(sql, 'bid_contacts', mine.id)).size).toBe(0);
   });
 });
+
+const vqRow = (id: string, bidId: string, contactId: string | null, seq = 1): RemoteRow => ({
+  tbl: 'vendor_quotes', id, seq,
+  data: { bid_id: bidId, contact_id: contactId, vendor_name: 'CDW', asked_at: T, replied_at: null, nudged_at: null,
+    skipped: 0, skipped_at: null, notes: null, created_at: T, updated_at: T, deleted_at: null },
+});
+const lineRow = (id: string, bidId: string, seq = 1): RemoteRow => ({
+  tbl: 'quote_lines', id, seq,
+  data: { bid_id: bidId, position: 0, qty: 40, description: 'Cart', part_no: null, markup_type: null, markup_value: null,
+    sell_override: null, chosen_vendor_id: null, created_at: T, updated_at: T, deleted_at: null },
+});
+const priceRow = (vqId: string, lineId: string, bidId: string, seq = 1): RemoteRow => ({
+  tbl: 'vendor_line_prices', id: `${vqId}:${lineId}`, seq,
+  data: { bid_id: bidId, vendor_quote_id: vqId, line_id: lineId, unit_cost: 412, created_at: T, updated_at: T, deleted_at: null },
+});
+
+describe('applyRemoteRows: quote tables', () => {
+  it('applies an RFQ with vendors, lines and prices in parent order', async () => {
+    const res = await applyRemoteRows(sql, [
+      priceRow('v1', 'l1', 'b1', 4), lineRow('l1', 'b1', 3), vqRow('v1', 'b1', null, 2),
+      bidRow('b1', { kind: 'rfq', received_at: T, stage: 'reviewing' }, 1),
+    ], now);
+    expect(res).toEqual({ applied: 4, skipped: [] });
+    const [d] = await createBidRepo(sql).listAll();
+    expect(d.bid.kind).toBe('rfq');
+    expect([d.vendorQuotes.length, d.lines.length, d.prices[0]?.unitCost]).toEqual([1, 1, 412]);
+    expect(await outboxCount(sql)).toBe(0);
+  });
+
+  it('a bid row from an older client (no quote fields) keeps the local defaults', async () => {
+    await applyRemoteRows(sql, [bidRow('b1')], now);
+    const [d] = await createBidRepo(sql).listAll();
+    expect(d.bid).toMatchObject({ kind: 'bid', pricingMode: 'whole', sellRounding: 0.01 });
+  });
+
+  it('contact merge on pull repoints vendor quotes at the team contact', async () => {
+    const contacts = createContactRepo(sql);
+    const { id: local } = await contacts.create({ firstName: 'Local', email: 'rep@cdw.com' });
+    await applyRemoteRows(sql, [bidRow('b1'), vqRow('v1', 'b1', local)], now);
+    await applyRemoteRows(sql, [contactRow('team', 'rep@cdw.com', 9)], now);
+    const [v] = await sql.select<{ contact_id: string }>("SELECT contact_id FROM vendor_quotes WHERE id = 'v1'");
+    expect(v.contact_id).toBe('team');
+  });
+});

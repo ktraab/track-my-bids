@@ -64,7 +64,13 @@ export async function runImportPlan(repos: Repos, plan: ImportPlan) {
       r.failed.push(`${nb.agencyName}: ${e instanceof Error ? e.message : String(e)}`);
     }
   }
+  const quoteIds = plan.existing.length
+    ? new Set((await repos.bids.listAll()).filter((d) => d.bid.kind === 'rfq').map((d) => d.bid.id)) : new Set<string>();
   for (const ex of plan.existing) {
+    if (quoteIds.has(ex.bidId)) {
+      if (ex.milestones.length) r.failed.push("Skipped: quotes don't have milestones — convert it to a bid first.");
+      continue;
+    }
     for (const m of ex.milestones) {
       try {
         if (m.type === 'due') {

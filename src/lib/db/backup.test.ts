@@ -3,6 +3,8 @@ import { memorySql, fixedClock, seqIds } from './memorySql';
 import { migrate } from './migrations';
 import { createBidRepo } from './bids';
 import { createContactRepo } from './contacts';
+import { createVendorQuoteRepo } from './vendorQuotes';
+import { createQuoteLineRepo } from './quoteLines';
 import { createBackupRepo } from './backup';
 import { parseBackup } from '../domain/backup';
 
@@ -115,5 +117,37 @@ describe('backup repo', () => {
     expect((await createBackupRepo(sql).importAll(backup)).skipped).toBe(1);
     expect(warn).toHaveBeenCalled();
     warn.mockRestore();
+  });
+});
+
+describe('backup: quote tables', () => {
+  it('round-trips an RFQ with vendors, lines and prices into an empty database', async () => {
+    const a = await memorySql();
+    await migrate(a);
+    const ids = seqIds('a');
+    const bidsA = createBidRepo(a, fixedClock(), ids);
+    const id = await bidsA.createQuote({ title: 'Carts', agencyName: 'Henrico', agencyType: 'k12', timezone: 'UTC' });
+    const v = await createVendorQuoteRepo(a, fixedClock(), ids).add(id, { vendorName: 'CDW' });
+    const lines = createQuoteLineRepo(a, fixedClock(), ids);
+    const l = await lines.add(id, { qty: 40, description: 'Cart' });
+    await lines.setPrice(v, l, 412);
+    await bidsA.update(id, { markupType: 'pct', markupValue: 12 });
+    const backup = await createBackupRepo(a).exportAll('2026-11-18T00:00:00.000Z');
+    expect(backup.version).toBe(2);
+
+    const b = await memorySql();
+    await migrate(b);
+    await createBackupRepo(b).importAll(backup);
+    const [d] = await createBidRepo(b).listAll();
+    expect(d.bid).toMatchObject({ kind: 'rfq', markupType: 'pct', markupValue: 12 });
+    expect([d.vendorQuotes[0]?.vendorName, d.lines[0]?.qty, d.prices[0]?.unitCost]).toEqual(['CDW', 40, 412]);
+  });
+
+  it('accepts a version 1 backup with no quote tables', async () => {
+    const sql = await memorySql();
+    await migrate(sql);
+    const v1 = parseBackup(JSON.stringify({ format: 'trackmybids-backup', version: 1, exportedAt: '', tables: { bids: [] } }));
+    expect(v1.tables.vendor_quotes).toEqual([]);
+    await expect(createBackupRepo(sql).importAll(v1)).resolves.toBeDefined();
   });
 });

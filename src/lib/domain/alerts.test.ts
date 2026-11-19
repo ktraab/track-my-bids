@@ -282,3 +282,73 @@ describe('whole-day offsets use calendar days in the user zone', () => {
     expect(al?.key).toBe(rem('a-due', 10080, at));
   });
 });
+
+describe('Needs-you alerts', () => {
+  const need = (id: string, dueLocal: string) => ({
+    key: `needs:vendor:${id}:${t(dueLocal)}`, title: `Needs you · Nudge ${id.toUpperCase()}`,
+    body: `Agency ${id} · Carts — ${id.toUpperCase()} quiet 2d`, bidId: `q${id}`, dueMs: t(dueLocal),
+  });
+  const runN = (needs: ReturnType<typeof need>[], nowMs: number, log = logOf(DIGEST_MON), settings: NotificationSettings = S) =>
+    computeDueAlerts({ nowMs, zone: CHI, bids: [], settings, log, needs });
+
+  it('fires once per item, keyed by its entry', () => {
+    const n = need('a', '2026-11-16T10:00:00');
+    const [al, ...rest] = runN([n], t('2026-11-16T10:01:00'));
+    expect(rest).toEqual([]);
+    expect(al).toEqual({ key: n.key, kind: 'needs', title: n.title, body: n.body, bidId: 'qa', alsoLog: [] });
+    expect(runN([n], t('2026-11-16T10:02:00'), logOf(DIGEST_MON, n.key))).toEqual([]);
+  });
+  it('waits out quiet hours', () => {
+    const n = need('a', '2026-11-16T19:00:00');
+    expect(runN([n], t('2026-11-16T21:00:00'))).toEqual([]);
+    // Tue: no digest configured → fires when quiet hours end.
+    const noDigest = { ...S, digestTimes: [] };
+    expect(runN([n], t('2026-11-17T07:00:00'), logOf(), noDigest).map((a) => a.key)).toEqual([n.key]);
+  });
+  it('an item that entered during quiet hours waits for the briefing, which lists it and covers it', () => {
+    const n = need('a', '2026-11-17T03:00:00');
+    expect(runN([n], t('2026-11-17T07:05:00'), logOf())).toEqual([]); // quiet ended 07:00, digest at 07:30
+    const [dg, ...rest] = runN([n], t('2026-11-17T07:30:00'), logOf());
+    expect(rest).toEqual([]);
+    expect(dg.kind).toBe('digest');
+    expect(dg.body).toMatch(/Needs you: 1 follow-up$/);
+    expect(dg.alsoLog).toContain(n.key);
+  });
+  it('the briefing counts every current item, even ones already notified', () => {
+    const a = need('a', '2026-11-16T10:00:00');
+    const b = need('b', '2026-11-16T11:00:00');
+    const [dg] = runN([a, b], t('2026-11-17T07:30:00'), logOf(a.key));
+    expect(dg.body).toMatch(/Needs you: 2 follow-ups$/);
+    expect(dg.alsoLog).toContain(b.key);
+    expect(dg.alsoLog).not.toContain(a.key);
+  });
+  it('holds for the briefing only if it entered overnight and the briefing comes right after quiet hours', () => {
+    const two = { ...S, digestTimes: ['08:00', '16:00'] };
+    const n = need('a', '2026-11-17T03:00:00');
+    // 07:05, briefing at 08:00 (≤ quiet end + 60 min): wait for it.
+    expect(runN([n], t('2026-11-17T07:05:00'), logOf(), two)).toEqual([]);
+    // Shows up at 10:30 after the 08:00 briefing went out: next one is 16:00 → deliver now.
+    expect(runN([n], t('2026-11-17T10:30:00'), logOf('digest:2026-11-17:08:00'), two).map((a) => a.key)).toEqual([n.key]);
+  });
+  it('a snooze ending mid-day on an old item delivers now, not at the next briefing', () => {
+    const two = { ...S, digestTimes: ['08:00', '16:00'] };
+    const n = need('a', '2026-11-16T03:00:00'); // entered in Monday's quiet hours
+    const log = logOf('digest:2026-11-18:08:00', [n.key, '2026-11-18T20:00:00.000Z']); // snooze ends 14:00 Wed
+    expect(runN([n], t('2026-11-18T14:00:00'), log, two).map((a) => a.key)).toEqual([n.key]);
+  });
+  it('more than 3 at once become one summary', () => {
+    const ns = ['a', 'b', 'c', 'd'].map((id) => need(id, '2026-11-16T10:00:00'));
+    const [al, ...rest] = runN(ns, t('2026-11-16T10:01:00'));
+    expect(rest).toEqual([]);
+    expect(al).toMatchObject({ kind: 'catchup', title: 'Needs you: 4 items', alsoLog: ns.map((n) => n.key) });
+    expect(al.body.split('\n')).toHaveLength(4);
+  });
+  it('fire alongside reminders; nothing when notifications are off', () => {
+    const b = bidDue('a', '2026-11-23T14:00:00');
+    const n = need('x', '2026-11-16T10:00:00');
+    const now = t('2026-11-16T14:00:00');
+    expect(computeDueAlerts({ nowMs: now, zone: CHI, bids: [b], settings: S, log: logOf(DIGEST_MON), needs: [n] }).map((a) => a.kind))
+      .toEqual(['reminder', 'needs']);
+    expect(runN([n], now, logOf(DIGEST_MON), { ...S, enabled: false })).toEqual([]);
+  });
+});

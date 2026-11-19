@@ -1,6 +1,6 @@
 [package]
 name = "trackmybids"
-version = "0.7.1"
+version = "0.8.0"
 description = "Bid tracker for K-12, higher ed and government sales"
 authors = ["TrackMyBids"]
 edition = "2024"

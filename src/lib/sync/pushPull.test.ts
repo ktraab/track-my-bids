@@ -128,6 +128,28 @@ describe('push + pull', () => {
     expect(await outboxCount(b)).toBe(0);
   });
 
+  it('a quote pushed without owner stays unassigned for everyone', async () => {
+    const id = await createBidRepo(a).createQuote({ title: 'Cables', agencyName: 'Harbor', agencyType: 'county', timezone: 'America/Chicago', ownerId: null });
+    await pushAll(a, ra.backend, run, now);
+    expect(server.rows.get(`bids:${id}`)!.data.owner_id).toBeNull();
+    expect((await createBidRepo(a).listAll())[0].bid.ownerId).toBeNull();
+    await pullAll(b, rb.backend, run, now);
+    expect((await createBidRepo(b).listAll())[0].bid.ownerId).toBeNull();
+    // B (a member) claims it.
+    await createBidRepo(b).setOwner(id, 'u2');
+    expect((await pushAll(b, rb.backend, run, now)).rejected).toEqual([]);
+    expect(server.rows.get(`bids:${id}`)!.data.owner_id).toBe('u2');
+  });
+
+  it('a formal bid pushed without owner gets the pusher, locally too', async () => {
+    const id = await createBidRepo(b).create(input); // no current-user provider: owner_id null
+    expect((await createBidRepo(b).listAll())[0].bid.ownerId).toBeNull();
+    expect((await pushAll(b, rb.backend, run, now)).rejected).toEqual([]);
+    expect(server.rows.get(`bids:${id}`)!.data.owner_id).toBe('u2');
+    expect((await createBidRepo(b).listAll())[0].bid.ownerId).toBe('u2');
+    expect(await outboxCount(b)).toBe(0);
+  });
+
   it('rows whose parent is missing are skipped and remembered', async () => {
     server.rows.set('milestones:orphan', {
       tbl: 'milestones', id: 'orphan', seq: 999, updatedBy: 'u1', times: {},

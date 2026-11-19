@@ -29,8 +29,9 @@ export function createMilestoneRepo(sql: Sql, now: () => string = isoNow, uuid: 
   }
 
   async function add(input: NewMilestoneInput): Promise<string> {
-    const live = await sql.select('SELECT id FROM bids WHERE id = ? AND deleted_at IS NULL', [input.bidId]);
-    if (!live.length) throw new Error('Bid not found');
+    const [live] = await sql.select<{ kind: string }>('SELECT kind FROM bids WHERE id = ? AND deleted_at IS NULL', [input.bidId]);
+    if (!live) throw new Error('Bid not found');
+    if (live.kind === 'rfq') throw new Error('Quotes have no milestones — convert it to a bid first');
     if (input.type === 'due') {
       const existing = await sql.select(
         "SELECT id FROM milestones WHERE bid_id = ? AND type = 'due' AND deleted_at IS NULL", [input.bidId]);

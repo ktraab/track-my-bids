@@ -8,6 +8,13 @@
   --muted: #4d5b6b;
   --past: #9aa6b4;
   --red: #c4321c;
+  --us: #2a3a4c;
+  --vendor: #c98a00;
+  --cust: #2c8a4b; /* lines, dots */
+  --cust-ink: #1f6b38; /* 12–13px text: ≥ 4.5:1 on --cust-soft and white */
+  --us-soft: #e6eaf0;
+  --vendor-soft: #fbf1d9;
+  --cust-soft: #e3f3e8;
   --font: 'Inter', system-ui, sans-serif;
   --display: 'Space Grotesk', 'Inter', sans-serif;
 }
@@ -51,3 +58,22 @@ h2 { font-size: 18px; }
 .add input, .add select { height: 36px; padding: 0 10px; border: 1px solid var(--line); border-radius: 8px; background: #fff; }
 
 :focus-visible { outline: 2px solid #1f5fd1; outline-offset: 2px; }
+
+/* Who has the ball (RFQs): pill, vendor dots, dashed quote badge */
+.ball { display: inline-flex; align-items: center; gap: 6px; max-width: 100%; font-size: 12px; font-weight: 600; padding: 2px 9px 2px 7px; border-radius: 999px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ball::before { content: ''; flex: none; width: 8px; height: 8px; border-radius: 50%; background: currentColor; }
+.ball.us { color: var(--us); background: var(--us-soft); }
+.ball.vendor { color: #7a5200; background: var(--vendor-soft); }
+.ball.vendor::before { background: var(--vendor); }
+.ball.customer { color: var(--cust-ink); background: var(--cust-soft); }
+.ball.customer::before { background: var(--cust); }
+.ball.closed { color: var(--muted); background: var(--line-soft); }
+.ball.late { box-shadow: 0 0 0 1.5px var(--red); }
+.vdots { display: inline-flex; flex-wrap: wrap; gap: 4px; align-items: center; font-size: 12px; color: var(--muted); }
+.vdots i { width: 10px; height: 10px; border-radius: 50%; border: 2px solid var(--vendor); }
+.vdots i.replied { background: var(--vendor); }
+.vdots i.skipped { border-color: var(--past); border-style: dashed; }
+.vdots i.quiet { border-color: var(--red); }
+.vdots span { margin-left: 2px; }
+.badge.qbadge { background: var(--card); color: var(--ink); border: 2px dashed var(--ink-2); border-radius: 9px; }
+.late-text { color: var(--red); font-weight: 600; }

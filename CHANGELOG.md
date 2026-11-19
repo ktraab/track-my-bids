@@ -2,6 +2,23 @@
 
 All notable changes to TrackMyBids.
 
+## v0.8.0 — 2026-11-18 (RFQ Quotes)
+
+Quick RFQs that have no due date now live on the same map as bids.
+
+- **Quotes on the network** — **+ New → Quote** (customer, what they want, when it came in, contact, owner or Unassigned). A quote's line runs from the day it came in up to today, colored by who has the ball: **Us**, a **Vendor**, or the **Customer**. A dotted line shows when the next follow-up is due.
+- **Status column** on every row — quotes show who has the ball and for how long, vendor replies (e.g. 2/3) and the next step; bids show the countdown to their next stop and checklist progress. Overdue follow-ups turn red and sort to the top.
+- **Vendors** — on a quote (and, collapsed, on any bid): add the vendors you asked, mark replied or skipped, and **Nudge** (copies a follow-up message and restarts the clock). Follow-ups are due 1 business day after asking a vendor and 3 business days after sending the quote.
+- **Quote actions** — Mark quote sent, Followed up, Won, Lost, No reply, and **Convert to bid** (asks for a due date; adds the standard checklist).
+- **Filters** — All / Bids / Quotes, who has the ball, Overdue only, search (agency, item, vendor), and saved views (My open work, Stuck on vendors, Due this week). All the old filters stay. Closed quotes leave the map 14 days after their last update.
+- **Map labels** — stop labels now pick the free side of the line, so close-together stops no longer overlap.
+- **Reports** — contacts export gains Kind and Received columns and quote stage names.
+- **Pricing grid** — on a quote (and, collapsed as "Add pricing", on any bid): add lines or paste them from Excel (Qty, Description, Part #, and optionally one price column per vendor), enter each vendor's unit prices, and the lowest complete vendor total is picked. **Whole quote** buys everything from one vendor (click another total to switch); **Per line** picks the cheapest vendor per line (or your choice). Markup as %, $ per unit or $ per line, set per quote or per line, or type a sell price and the markup is worked out backward. Round sell prices to the cent, $1 or $5. The summary shows who you're buying from, cost, markup, margin and the quote total; lines with no price are flagged and left out.
+- **Default markup** — Settings → Pricing (12% to start). A quote or bid takes it when its first line is added, so everyone on a team sees the same total.
+- **Our price** — a bid with priced lines shows its quote total next to the estimate (bid page and hover card). The hover card for a quote lists each vendor's total. Reports value quotes at their quote total (falling back to the estimate) and add an **Our Price** column for bids.
+- **Needs you** — a hand icon next to the bell lists what needs you right now: vendors that went quiet (1 business day after asking or your last nudge), quotes with no customer answer (3 business days after sending or your last follow-up), new quotes nobody has claimed (Team mode, 4 work hours), and a bid's mandatory stop within 24 hours. One click to Nudge, Quote without them, Claim / Assign, Followed up, Open bid / Mark done, or Snooze for a day (snoozes stay on your computer). The count turns red when something is overdue. Each new item sends one desktop notification (held during quiet hours, folded into the morning briefing). The thresholds are in Settings → Notifications. On the map, "Overdue only" and the red Status now include unclaimed quotes and mandatory stops within 24 hours.
+- **Team servers must be updated first**: apply `supabase/migrations/20261119000000_quotes.sql` before installing this version (sync schema 2). Teammates on older versions see "The team server needs an update" and their sync pauses until they update; nothing is lost. See `docs/TEAM-SETUP.md`.
+
 ## v0.7.1 — 2026-11-18
 
 - **Fix: Open at login could stop working.** If TrackMyBids was ever opened straight from Downloads or the .dmg, the login item pointed at a temporary copy that macOS later deletes, so the app didn't start at login (and the morning briefing didn't come). The app now re-points the login item at itself on every launch, and never at a temporary copy. Updating to 0.7.1 and opening it once from Applications fixes it.

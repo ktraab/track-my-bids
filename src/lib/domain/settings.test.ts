@@ -118,3 +118,25 @@ describe('validateSettingsDraft', () => {
     expect(validateSettingsDraft({ ...D, staleDays: 60 })).toEqual({});
   });
 });
+
+describe('Needs-you thresholds', () => {
+  it('defaults match the spec (vendor 1 bd, customer 3 bd, unclaimed 4 work h, stop 24 h)', () => {
+    expect(D).toMatchObject({ vendorQuietBusinessDays: 1, customerBusinessDays: 3, unclaimedWorkHours: 4, stopWithinHours: 24 });
+  });
+  it('older saved settings without the fields get the defaults', () => {
+    expect(withDefaults({ staleDays: 3 })).toMatchObject({ vendorQuietBusinessDays: 1, customerBusinessDays: 3, unclaimedWorkHours: 4, stopWithinHours: 24 });
+  });
+  it('keeps valid whole numbers, replaces anything out of range', () => {
+    expect(withDefaults({ vendorQuietBusinessDays: 2, customerBusinessDays: 5, unclaimedWorkHours: 8, stopWithinHours: 48 }))
+      .toMatchObject({ vendorQuietBusinessDays: 2, customerBusinessDays: 5, unclaimedWorkHours: 8, stopWithinHours: 48 });
+    expect(withDefaults({ vendorQuietBusinessDays: 0, customerBusinessDays: 31, unclaimedWorkHours: 2.5, stopWithinHours: '24' }))
+      .toMatchObject({ vendorQuietBusinessDays: 1, customerBusinessDays: 3, unclaimedWorkHours: 4, stopWithinHours: 24 });
+  });
+  it('validateSettingsDraft flags each bad threshold', () => {
+    const e = validateSettingsDraft({ ...D, vendorQuietBusinessDays: 0, stopWithinHours: null as unknown as number });
+    expect(e.needs?.vendorQuietBusinessDays).toMatch(/1 to 10/);
+    expect(e.needs?.stopWithinHours).toMatch(/1 to 72/);
+    expect(e.needs?.customerBusinessDays).toBeUndefined();
+    expect(validateSettingsDraft({ ...D, unclaimedWorkHours: 40 })).toEqual({});
+  });
+});

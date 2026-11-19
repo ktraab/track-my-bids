@@ -180,7 +180,8 @@ export function createContactRepo(sql: Sql, now: () => string = isoNow, uuid: ()
     const rows = await sql.select<Row>(
       `SELECT c.first_name, c.last_name, c.title AS contact_title, c.email, c.phone, c.organization,
               bc.role, b.id AS bid_id, b.agency_name, b.agency_type, b.bid_number, b.title AS bid_title,
-              b.est_value, b.stage, b.submission_method, b.timezone, b.created_at AS bid_created_at, m.at AS due_at
+              b.est_value, b.stage, b.submission_method, b.timezone, b.created_at AS bid_created_at, m.at AS due_at,
+              b.kind, b.received_at
        FROM bid_contacts bc
        JOIN contacts c ON c.id = bc.contact_id AND c.deleted_at IS NULL
        JOIN bids b ON b.id = bc.bid_id AND b.deleted_at IS NULL
@@ -191,7 +192,8 @@ export function createContactRepo(sql: Sql, now: () => string = isoNow, uuid: ()
       email: r.email ?? null, phone: r.phone ?? null, organization: r.organization ?? null, role: r.role,
       agencyName: r.agency_name, agencyType: r.agency_type, bidNumber: r.bid_number ?? null, bidTitle: r.bid_title,
       estValue: r.est_value ?? null, stage: r.stage, method: r.submission_method, dueAt: r.due_at ?? null,
-      bidTimezone: r.timezone, bidCreatedAt: r.bid_created_at,
+      bidTimezone: r.timezone, bidCreatedAt: r.bid_created_at, kind: r.kind === 'rfq' ? ('rfq' as const) : ('bid' as const), receivedAt: r.received_at ?? null,
+      ourPrice: null,
     }));
   }
 

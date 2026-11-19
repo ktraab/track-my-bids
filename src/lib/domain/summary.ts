@@ -12,7 +12,10 @@ export interface MilestoneRef {
 }
 
 export interface NetworkSummary {
+  /** Open formal bids (quotes excluded). */
   openCount: number;
+  /** Open + Quoted RFQs. */
+  quoteCount: number;
   pipeline: number;
   idleCount: number;
   nextArrival: MilestoneRef | null;
@@ -20,7 +23,7 @@ export interface NetworkSummary {
 }
 
 export function networkSummary(list: BidWithChildren[], nowMs: number, staleDays = 7): NetworkSummary {
-  const open = list.filter((d) => isOpen(d.bid.stage));
+  const open = list.filter((d) => d.bid.kind !== 'rfq' && isOpen(d.bid.stage));
   const upcoming = list
     .filter((d) => isOnNetwork(d.bid.stage))
     .flatMap((d) =>
@@ -42,6 +45,7 @@ export function networkSummary(list: BidWithChildren[], nowMs: number, staleDays
 
   return {
     openCount: open.length,
+    quoteCount: list.filter((d) => d.bid.kind === 'rfq' && isOnNetwork(d.bid.stage)).length,
     pipeline: open.reduce((sum, d) => sum + (d.bid.estValue ?? 0), 0),
     idleCount: open.filter((d) => isStale(d.bid, nowMs, staleDays)).length,
     nextArrival: upcoming[0]?.ref ?? null,
