@@ -18,7 +18,7 @@ Keep a log of what you did on each bid and quote, and when the next thing is due
 
 ## v0.9.0 — 2026-11-20 (Bid document import, E-Rate, partial pricing)
 
-Drop a bid document on the app and get a filled-in New bid form. No AI and nothing leaves your computer: fixed rules read the text, and the app learns from your corrections. Spec: `docs/superpowers/specs/2026-11-19-bid-document-import-design.md`.
+Drop a bid document on the app and get a filled-in New bid form. No AI and nothing leaves your computer: fixed rules read the text, and the app learns from your corrections.
 
 - **Import a bid document** — drag a PDF, Word (.docx) or Excel (.xlsx) file anywhere onto the window, or use **From document…** next to **+ New**. The New bid form opens filled in: bid number, title, agency and type, due date, pre-bid (with the mandatory ring), questions deadline, site walk, submission method, portal, copies, notarization, delivery address and the buyer contact (only when an email is found; matched to an existing contact by email). Each filled field has a dot: hover it to see the sentence and page it came from. When the document has several candidates (e.g. three dates near "due"), the field offers a short list, best guess first. Nothing is saved until you click Save.
 - **Scope** — the Scope field gets a tag line (e.g. Networking · Wi-Fi · Licensing, from 16 product tags) plus a short summary taken from a Form 470's service table or the document's scope section.
@@ -33,7 +33,7 @@ Drop a bid document on the app and get a filled-in New bid form. No AI and nothi
 
 ## v0.8.0 — 2026-11-18 (RFQ Quotes)
 
-Quick RFQs that have no due date now live on the same map as bids. Spec: `docs/superpowers/specs/2026-11-18-rfq-quotes-design.md`.
+Quick RFQs that have no due date now live on the same map as bids.
 
 - **Quotes on the network** — **+ New → Quote** (customer, what they want, when it came in, contact, owner or Unassigned). A quote's line runs from the day it came in up to today, colored by who has the ball: **Us**, a **Vendor**, or the **Customer**. A dotted line shows when the next follow-up is due.
 - **Status column** on every row — quotes show who has the ball and for how long, vendor replies (e.g. 2/3) and the next step; bids show the countdown to their next stop and checklist progress. Overdue follow-ups turn red and sort to the top.
