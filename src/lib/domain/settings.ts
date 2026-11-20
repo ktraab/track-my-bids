@@ -36,6 +36,7 @@ export const DEFAULT_NOTIFICATION_SETTINGS: NotificationSettings = {
     qa_deadline: [2 * DAY, DAY],
     addenda: [DAY],
     award: [DAY],
+    allowable_contract: [DAY],
     custom: [DAY],
   },
   shipByOffsets: [2 * DAY, DAY],

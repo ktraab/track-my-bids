@@ -1,0 +1,22 @@
+{
+  "due": "2027-01-08T14:00",
+  "pre_bid": "2026-11-30T15:00",
+  "pre_bid_mandatory": true,
+  "qa_deadline": "2026-12-04T14:00",
+  "site_walk": null,
+  "bid_number": "2027-03",
+  "agency_name": "Kings County Office of Education",
+  "buyer_email": "rfp@kingscoe.org",
+  "title": "Shelly Baird Cabling Upgrade: Internal Connections",
+  "erate": true,
+  "erate_470_number": "270003800",
+  "erate_funding_year": "2027",
+  "erate_category": "2",
+  "allowable_contract": null,
+  "scope_tags": [
+    "Cabling",
+    "Racks",
+    "Installation"
+  ],
+  "scope_has_summary": true
+}

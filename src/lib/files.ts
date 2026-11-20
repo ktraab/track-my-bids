@@ -1,5 +1,5 @@
 import { open, save, type DialogFilter } from '@tauri-apps/plugin-dialog';
-import { mkdir, readFile, readTextFile, writeFile, writeTextFile } from '@tauri-apps/plugin-fs';
+import { mkdir, readFile, readTextFile, stat, writeFile, writeTextFile } from '@tauri-apps/plugin-fs';
 import { openPath, revealItemInDir } from '@tauri-apps/plugin-opener';
 import { appCacheDir, join } from '@tauri-apps/api/path';
 import { decodeText } from './domain/textDecode';
@@ -48,4 +48,24 @@ export async function openTextFiles(filters: DialogFilter[]): Promise<{ path: st
   if (!picked) return [];
   const paths = Array.isArray(picked) ? picked : [picked];
   return Promise.all(paths.map(async (path) => ({ path, name: baseName(path), text: decodeText(await readFile(path)) })));
+}
+
+export const DOC_FILTERS: DialogFilter[] = [{ name: 'Bid documents (PDF, Word, Excel)', extensions: ['pdf', 'docx', 'xlsx'] }];
+
+/** Pick one bid document; null if cancelled. (The dialog lets the app read the picked file.) */
+export async function pickDocument(): Promise<string | null> {
+  const picked = await open({ multiple: false, directory: false, filters: DOC_FILTERS });
+  return !picked || Array.isArray(picked) ? null : picked;
+}
+
+export async function fileSize(path: string): Promise<number> {
+  return (await stat(path)).size;
+}
+
+export async function readBytes(path: string): Promise<Uint8Array> {
+  return readFile(path);
+}
+
+export async function openFile(path: string): Promise<void> {
+  await openPath(path);
 }

@@ -1,0 +1,6283 @@
+{
+ "id": "pdf-3c59ef5c5d",
+ "kind": "pdf",
+ "today": "2026-11-20",
+ "lines": [
+  {
+   "text": "Kings County Office of Education",
+   "page": 1
+  },
+  {
+   "text": "1144 W. Lacey Blvd, Hanford, CA 93230",
+   "page": 1
+  },
+  {
+   "text": "555-555-0100",
+   "page": 1
+  },
+  {
+   "text": "REQUEST FOR PROPOSAL",
+   "page": 1
+  },
+  {
+   "text": "SHELLY BAIRD CABLING UPGRADE:",
+   "page": 1
+  },
+  {
+   "text": "INTERNAL CONNECTIONS",
+   "page": 1
+  },
+  {
+   "text": "E-RATE FUNDING YEAR 2027-2028",
+   "page": 1
+  },
+  {
+   "text": "(E-rate Year 30)",
+   "page": 1
+  },
+  {
+   "text": "RFP NO. 2027-03",
+   "page": 1
+  },
+  {
+   "text": "470# 270003800",
+   "page": 1
+  },
+  {
+   "text": "Kings County Office of Education | Shelly Baird Cabling Upgrade: Internal Connections",
+   "page": 2
+  },
+  {
+   "text": "E-Rate Year 30 - Request for Proposal No. 2027-03",
+   "page": 2
+  },
+  {
+   "text": "LEGAL NOTICE",
+   "page": 2
+  },
+  {
+   "text": "NOTICE TO VENDOR’S – REQUEST FOR PROPOSALS",
+   "page": 2
+  },
+  {
+   "text": "Notice is hereby given that the Board of Education of the Kings County Office of Education School District",
+   "page": 2
+  },
+  {
+   "text": "(herein after referred to as the “District”) of Kings County, California, will receive proposals for:",
+   "page": 2
+  },
+  {
+   "text": "E-RATE YEAR 30",
+   "page": 2
+  },
+  {
+   "text": "Kings County Office of Education",
+   "page": 2
+  },
+  {
+   "text": "SHELLY BAIRD CABLING UPGRADE:",
+   "page": 2
+  },
+  {
+   "text": "INTERNAL CONNECTIONS, RFP NO. 2027-03",
+   "page": 2
+  },
+  {
+   "text": "Each proposal is to be in accordance with the format specified by the Kings County Office of Education,",
+   "page": 2
+  },
+  {
+   "text": "copies of which may be examined and obtained, by written request, to Business Services, Kings County",
+   "page": 2
+  },
+  {
+   "text": "Office of Education, attention: Pat Morgan, 1144 W. Lacey Blvd, Hanford, CA 93230; or may be viewed on",
+   "page": 2
+  },
+  {
+   "text": "website located at www.kingscoe.org.",
+   "page": 2
+  },
+  {
+   "text": "Each proposal must be filed with the Kings County Office of Education on or before 2:00 p.m., on January",
+   "page": 2
+  },
+  {
+   "text": "8, 2027. All proposals shall be submitted separately and sealed in a package plainly marked with the",
+   "page": 2
+  },
+  {
+   "text": "appropriate title for each proposal. The Board reserves the right to reject any or all proposals and to waive",
+   "page": 2
+  },
+  {
+   "text": "informality in any proposals received. No vendor may withdraw his proposal for a period of Ninety (90)",
+   "page": 2
+  },
+  {
+   "text": "calendar days after the date set for the receipt of proposals.",
+   "page": 2
+  },
+  {
+   "text": "Vendor must participate in the E-Rate Program and must provide a Service Provider Identification",
+   "page": 2
+  },
+  {
+   "text": "Number (SPIN) and Federal Registration Number (FCC-FRN) with the proposal.",
+   "page": 2
+  },
+  {
+   "text": "A Mandatory Pre-Bid Conference/Job Walk, at which time interested vendors may acquaint themselves",
+   "page": 2
+  },
+  {
+   "text": "with the District’s requirements/sites in the RFP’s, is scheduled for 3:00 P.M., on November 30, 2026; at",
+   "page": 2
+  },
+  {
+   "text": "Shelly Baird School, 959 Katie Hammond Lane, Hanford, CA 93230.",
+   "page": 2
+  },
+  {
+   "text": "VENDOR’S WILL BE REQUIRED TO COMPLETE THE MANDATORY PRE-BID CONFERENCE AND JOB WALK",
+   "page": 2
+  },
+  {
+   "text": "IN ITS ENTIRETY.",
+   "page": 2
+  },
+  {
+   "text": "Date:",
+   "page": 2
+  },
+  {
+   "text": "Kings County Office of Education County, California",
+   "page": 2
+  },
+  {
+   "text": "__________________________",
+   "page": 2
+  },
+  {
+   "text": "Published: November 18 & 25, 2026",
+   "page": 2
+  },
+  {
+   "text": "Kings County Office of Education | Shelly Baird Cabling Upgrade: Internal Connections",
+   "page": 3
+  },
+  {
+   "text": "E-Rate Year 30 - Request for Proposal No. 2027-03",
+   "page": 3
+  },
+  {
+   "text": "INDEX OF PROPOSAL DOCUMENTS",
+   "page": 3
+  },
+  {
+   "text": "For",
+   "page": 3
+  },
+  {
+   "text": "SHELLY BAIRD CABLING UPGRADE:",
+   "page": 3
+  },
+  {
+   "text": "INTERNAL CONNECTIONS",
+   "page": 3
+  },
+  {
+   "text": "E-RATE YEAR 30",
+   "page": 3
+  },
+  {
+   "text": "RFP NO. 2027-03",
+   "page": 3
+  },
+  {
+   "text": "REQUEST FOR PROPOSAL _______________________________________________________ 1",
+   "page": 3
+  },
+  {
+   "text": "LEGAL NOTICE ________________________________________________________________ 2",
+   "page": 3
+  },
+  {
+   "text": "NOTICE TO VENDOR’S – REQUEST FOR PROPOSALS __________________________________ 2",
+   "page": 3
+  },
+  {
+   "text": "INDEX OF PROPOSAL DOCUMENTS _______________________________________________ 3",
+   "page": 3
+  },
+  {
+   "text": "A. PURPOSE ______________________________________________________________ 4",
+   "page": 3
+  },
+  {
+   "text": "B. OBJECTIVE _____________________________________________________________ 4",
+   "page": 3
+  },
+  {
+   "text": "C. REQUEST FOR PROPOSAL (RFP) RESPONSE ___________________________________ 4",
+   "page": 3
+  },
+  {
+   "text": "D. RESPONSE TIMELINE _____________________________________________________ 5",
+   "page": 3
+  },
+  {
+   "text": "E. REQUEST FOR INFORMATION (RFI) AND/OR CLARIFICATION _____________________ 6",
+   "page": 3
+  },
+  {
+   "text": "F. PRE-BID CONFERENCE/JOB WALK___________________________________________ 6",
+   "page": 3
+  },
+  {
+   "text": "G. REFERENCES ___________________________________________________________ 6",
+   "page": 3
+  },
+  {
+   "text": "H. EVALUATION PROCESS ___________________________________________________ 7",
+   "page": 3
+  },
+  {
+   "text": "GENERAL TERMS AND CONDITIONS _______________________________________________ 9",
+   "page": 3
+  },
+  {
+   "text": "E-RATE SUPPLEMENTAL TERMS AND CONDITIONS ___________________________________ 9",
+   "page": 3
+  },
+  {
+   "text": "SPECIAL CONDITIONS _________________________________________________________ 15",
+   "page": 3
+  },
+  {
+   "text": "TECHNICAL SPECIFICATIONS ____________________________________________________ 17",
+   "page": 3
+  },
+  {
+   "text": "PROPOSAL FORM ____________________________________________________________ 21",
+   "page": 3
+  },
+  {
+   "text": "COST PROPOSAL AND PRICING MATRIX ___________________________________________ 22",
+   "page": 3
+  },
+  {
+   "text": "BID BOND __________________________________________________________________ 26",
+   "page": 3
+  },
+  {
+   "text": "NON-COLLUSION AFFIDAVIT____________________________________________________ 29",
+   "page": 3
+  },
+  {
+   "text": "VENDOR’S CERTIFICATE _______________________________________________________ 30",
+   "page": 3
+  },
+  {
+   "text": "REGARDING WORKER’S COMPENSATION _________________________________________ 30",
+   "page": 3
+  },
+  {
+   "text": "CONDUCT RULES FOR VENDORS_________________________________________________ 31",
+   "page": 3
+  },
+  {
+   "text": "REFERENCES ________________________________________________________________ 32",
+   "page": 3
+  },
+  {
+   "text": "DEBARMENT AND SUSPENSION CERTIFICATION ____________________________________ 34",
+   "page": 3
+  },
+  {
+   "text": "AGREEMENT & BOND’S _______________________________________________________ 36",
+   "page": 3
+  },
+  {
+   "text": "PAYMENT BOND _____________________________________________________________ 46",
+   "page": 3
+  },
+  {
+   "text": "INSURANCE DOCUMENTS & ENDORSEMENTS ______________________________________ 49",
+   "page": 3
+  },
+  {
+   "text": "VENDOR’S/CONTRACTOR’S CERTIFICATION REGARDING _____________________________ 51",
+   "page": 3
+  },
+  {
+   "text": "BACKGROUND CHECKS ________________________________________________________ 51",
+   "page": 3
+  },
+  {
+   "text": "ATTACHMENT “A”____________________________________________________________ 52",
+   "page": 3
+  },
+  {
+   "text": "CONSTRUCTION CONTRACTOR FORMS AND AGREEMENT ____________________________ 53",
+   "page": 3
+  },
+  {
+   "text": "3",
+   "page": 3
+  },
+  {
+   "text": "Kings County Office of Education | Shelly Baird Cabling Upgrade: Internal Connections",
+   "page": 4
+  },
+  {
+   "text": "E-Rate Year 30 - Request for Proposal No. 2027-03",
+   "page": 4
+  },
+  {
+   "text": "A. PURPOSE",
+   "page": 4
+  },
+  {
+   "text": "The Kings County Office of Education (“District”) purpose for this Request For Proposal (“RFP”) is to",
+   "page": 4
+  },
+  {
+   "text": "solicit proposals from qualified vendors to provide a solution to meet the objective stated in the RFP.",
+   "page": 4
+  },
+  {
+   "text": "The solution is subject to all terms, conditions, and specifications in this RFP. All proposal(s) submitted",
+   "page": 4
+  },
+  {
+   "text": "will be reviewed and chosen based on the matrix included in the proposal documents.",
+   "page": 4
+  },
+  {
+   "text": "The District reserves the right to procure these services based on the District’s ability to fund their",
+   "page": 4
+  },
+  {
+   "text": "portion of the project.",
+   "page": 4
+  },
+  {
+   "text": "B. OBJECTIVE",
+   "page": 4
+  },
+  {
+   "text": "Decommission and replace legacy copper lines with High-Performance Category 6a (Cat6a) wiring",
+   "page": 4
+  },
+  {
+   "text": "matching KCOE color specifications, perform 100% removal and disposal of all old copper wire, replace",
+   "page": 4
+  },
+  {
+   "text": "two (2) existing vertical IDF cabinets with wall-mount enclosures meeting or exceeding Chatsworth",
+   "page": 4
+  },
+  {
+   "text": "Products (CPI) CUBE-iT® specifications, expand internal fiber pathways, and install supporting",
+   "page": 4
+  },
+  {
+   "text": "communication drops (InformaCast emergency speakers, Wireless Access Points, and interactive",
+   "page": 4
+  },
+  {
+   "text": "display boards).",
+   "page": 4
+  },
+  {
+   "text": "C. REQUEST FOR PROPOSAL (RFP) RESPONSE",
+   "page": 4
+  },
+  {
+   "text": "All times listed in this RFP are stated as the time reference that is appropriate as of the date in question",
+   "page": 4
+  },
+  {
+   "text": "for Kings County, CA.",
+   "page": 4
+  },
+  {
+   "text": "To be considered a Vendor, the candidate must submit the complete original proposal, in the format",
+   "page": 4
+  },
+  {
+   "text": "stated below, and provide fully executed copies of any and all addenda[s] required to be returned, in",
+   "page": 4
+  },
+  {
+   "text": "a sealed envelope on or before 2:00 p.m., January 8, 2027, to the following address:",
+   "page": 4
+  },
+  {
+   "text": "Kings County Office of Education",
+   "page": 4
+  },
+  {
+   "text": "Attn: Pat Morgan, Assistant Superintendent, Business Services",
+   "page": 4
+  },
+  {
+   "text": "1144 W. Lacey Blvd, Hanford, CA 93230",
+   "page": 4
+  },
+  {
+   "text": "All proposals shall be sealed in a package plainly marked “KCOE-SHELLY BAIRD CABLING UPGRADE:",
+   "page": 4
+  },
+  {
+   "text": "Internal Connections, RFP NO. 2027-03.”",
+   "page": 4
+  },
+  {
+   "text": "The Vendor is required to submit an Original plus three (3) bound copies of the proposal and any",
+   "page": 4
+  },
+  {
+   "text": "required addenda(s). All proposals shall be prepared by and at the expense of the Vendor.",
+   "page": 4
+  },
+  {
+   "text": "Each proposal submission package should be presented so that it can be readily reviewed and",
+   "page": 4
+  },
+  {
+   "text": "labeled in the following tab order:",
+   "page": 4
+  },
+  {
+   "text": "4",
+   "page": 4
+  },
+  {
+   "text": "Kings County Office of Education | Shelly Baird Cabling Upgrade: Internal Connections",
+   "page": 5
+  },
+  {
+   "text": "E-Rate Year 30 - Request for Proposal No. 2027-03",
+   "page": 5
+  },
+  {
+   "text": "A Proposal Form Cover Sheet, Completed Proposal Form and Vendor Proposal",
+   "page": 5
+  },
+  {
+   "text": "B Required Bid Bond and Bid Security",
+   "page": 5
+  },
+  {
+   "text": "C Required Certifications, Affidavits and Vendor Information",
+   "page": 5
+  },
+  {
+   "text": "D Signed E-Rate Supplemental Terms and Conditions",
+   "page": 5
+  },
+  {
+   "text": "E Addenda, if applicable",
+   "page": 5
+  },
+  {
+   "text": "F Exceptions/Deviations, if applicable",
+   "page": 5
+  },
+  {
+   "text": "G Specifications and Supporting/Miscellaneous Information, if applicable",
+   "page": 5
+  },
+  {
+   "text": "All forms and documents identified in this RFP as required to be returned with this proposal must be completed and",
+   "page": 5
+  },
+  {
+   "text": "included in the proposal submission package",
+   "page": 5
+  },
+  {
+   "text": "PROPOSALS SUBMITTED IN ANY OTHER FORMAT, OR THAT FAIL TO INCLUDE ALL REQUIRED",
+   "page": 5
+  },
+  {
+   "text": "INFORMATION, FORMS, CERTIFICATIONS, AND DOCUMENTATION, MAY BE CONSIDERED",
+   "page": 5
+  },
+  {
+   "text": "NON-RESPONSIVE.",
+   "page": 5
+  },
+  {
+   "text": "It is the sole responsibility of the Vendor to be sure that the proposal is delivered to the Kings County",
+   "page": 5
+  },
+  {
+   "text": "Office of Education. Please be advised that if the submittal of the proposal is received in a department",
+   "page": 5
+  },
+  {
+   "text": "other than the District Office, located at 1144 W. Lacey Blvd, Hanford, CA 93230, it is not the",
+   "page": 5
+  },
+  {
+   "text": "responsibility of that department to make sure that the proposal is received in the District Office",
+   "page": 5
+  },
+  {
+   "text": "before the time indicated in the Notice to Vendor’s.",
+   "page": 5
+  },
+  {
+   "text": "Vendor should not assume that their past and/or current experience with the District demonstrates",
+   "page": 5
+  },
+  {
+   "text": "knowledge of the District’s current needs or that the Kings County Office of Education possesses",
+   "page": 5
+  },
+  {
+   "text": "knowledge of this experience. The evaluation of each proposal will be based upon the criteria",
+   "page": 5
+  },
+  {
+   "text": "outlined in this proposal request.",
+   "page": 5
+  },
+  {
+   "text": "The District reserves the right to reject any or all responses. The District also reserves the right to",
+   "page": 5
+  },
+  {
+   "text": "waive any minor irregularities or defects in any response shall a waiver be in its best interest. No",
+   "page": 5
+  },
+  {
+   "text": "Vendor may withdraw his proposal for a period of Ninety (90) calendar days after the date set for the",
+   "page": 5
+  },
+  {
+   "text": "receipt of proposals.",
+   "page": 5
+  },
+  {
+   "text": "PROPOSALS SUBMITTED BY FAX OR E-MAIL ARE NOT ACCEPTABLE.",
+   "page": 5
+  },
+  {
+   "text": "D. RESPONSE TIMELINE",
+   "page": 5
+  },
+  {
+   "text": "EVENT | DATE",
+   "page": 5
+  },
+  {
+   "text": "RFP and E-rate Form 470 Issued: | November 18, 2026",
+   "page": 5
+  },
+  {
+   "text": "Advertisement #1 | November 18, 2026",
+   "page": 5
+  },
+  {
+   "text": "Advertisement #2 | November 25, 2026",
+   "page": 5
+  },
+  {
+   "text": "Mandatory Pre-Bid Job Walk & Site Survey | November 30, 2026, 3:00 PM",
+   "page": 5
+  },
+  {
+   "text": "PST",
+   "page": 5
+  },
+  {
+   "text": "Deadline for Vendor Requests for Information (RFI) December 4, 2026, 2:00 PM PST",
+   "page": 5
+  },
+  {
+   "text": "5",
+   "page": 5
+  },
+  {
+   "text": "Kings County Office of Education | Shelly Baird Cabling Upgrade: Internal Connections",
+   "page": 6
+  },
+  {
+   "text": "E-Rate Year 30 - Request for Proposal No. 2027-03",
+   "page": 6
+  },
+  {
+   "text": "KCOE RFI Responses & Addenda Posting | December 7, 2026, 2:00 PM PST",
+   "page": 6
+  },
+  {
+   "text": "Sealed Proposal Submission Deadline | January 8, 2027, 2:00 PM PST",
+   "page": 6
+  },
+  {
+   "text": "Summer Installation Execution Window | July 1, 2027 – July 31, 2027",
+   "page": 6
+  },
+  {
+   "text": "(STRICT WINDOW; ZERO DELAY",
+   "page": 6
+  },
+  {
+   "text": "TOLERANCE)",
+   "page": 6
+  },
+  {
+   "text": "E. REQUEST FOR INFORMATION (RFI) AND/OR CLARIFICATION",
+   "page": 6
+  },
+  {
+   "text": "Request for information, regarding this proposal, must be submitted in writing and to the attention",
+   "page": 6
+  },
+  {
+   "text": "of: Pat Morgan, Assistant Superintendent, Business Services via email at rfp@kingscoe.org within",
+   "page": 6
+  },
+  {
+   "text": "the timeframe indicated in the response timeline. Questions received after the deadline will not be",
+   "page": 6
+  },
+  {
+   "text": "responded to. The District will not respond to phone inquiries. Questions and responses will",
+   "page": 6
+  },
+  {
+   "text": "be posted on the district’s website www.kingscoe.org and the EPC portal site",
+   "page": 6
+  },
+  {
+   "text": "https://portal.usac.org/suite/ in the form of an addendum. In the event that there is a",
+   "page": 6
+  },
+  {
+   "text": "discrepancy between documentation posted in multiple locations, the controlling (master)",
+   "page": 6
+  },
+  {
+   "text": "document will always be located in the EPC portal/District website.",
+   "page": 6
+  },
+  {
+   "text": "The Kings County Office of Education Business Department will not be responsible for RFI’s sent to",
+   "page": 6
+  },
+  {
+   "text": "the wrong department, nor will it be the responsibility of the receiving department to forward your",
+   "page": 6
+  },
+  {
+   "text": "request to the District Business Department.",
+   "page": 6
+  },
+  {
+   "text": "F. PRE-BID CONFERENCE/JOB WALK",
+   "page": 6
+  },
+  {
+   "text": "A Mandatory Pre-Bid Conference/Job Walk, at which time interested vendors may acquaint",
+   "page": 6
+  },
+  {
+   "text": "themselves with the District’s requirements/sites in the RFP’s, is scheduled for November 30, 2026",
+   "page": 6
+  },
+  {
+   "text": "at 3:00 PM; at Shelly Baird School, 959 Katie Hammond Lane, Hanford, CA 93230.",
+   "page": 6
+  },
+  {
+   "text": "VENDOR’S WILL BE REQUIRED TO COMPLETE THE MANDATORY PRE-BID CONFERENCE AND JOB",
+   "page": 6
+  },
+  {
+   "text": "WALK IN ITS ENTIRETY.",
+   "page": 6
+  },
+  {
+   "text": "G. REFERENCES",
+   "page": 6
+  },
+  {
+   "text": "Provide at least three (3) references of similar size and scope, preferably school districts, with the",
+   "page": 6
+  },
+  {
+   "text": "following information:",
+   "page": 6
+  },
+  {
+   "text": "➢ Name of Site, address and phone number",
+   "page": 6
+  },
+  {
+   "text": "➢ Director of Information Technology Services Contact",
+   "page": 6
+  },
+  {
+   "text": "➢ Brief description of project, including cost and demonstrate how the project met or exceeded",
+   "page": 6
+  },
+  {
+   "text": "all aspects of the Objective in Section B of this RFP.",
+   "page": 6
+  },
+  {
+   "text": "➢ The ERATE SITE Billed Entity Number (“BEN”) that was approved by USAC",
+   "page": 6
+  },
+  {
+   "text": "6",
+   "page": 6
+  },
+  {
+   "text": "Kings County Office of Education | Shelly Baird Cabling Upgrade: Internal Connections",
+   "page": 7
+  },
+  {
+   "text": "E-Rate Year 30 - Request for Proposal No. 2027-03",
+   "page": 7
+  },
+  {
+   "text": "H. EVALUATION PROCESS",
+   "page": 7
+  },
+  {
+   "text": "The District, in compliance with Federal Communications Commission (FCC) rules, will award to the",
+   "page": 7
+  },
+  {
+   "text": "vendor(s) providing the most cost-effective service offering. Per the Sixth Report and Order, FCC 10-",
+   "page": 7
+  },
+  {
+   "text": "175, FCC rules dictate the following:",
+   "page": 7
+  },
+  {
+   "text": "§ 54.503 (c)(2)(vii) All bids submitted for eligible products and services will be carefully considered,",
+   "page": 7
+  },
+  {
+   "text": "with price being the primary factor, and the bid selected will be for the most cost-effective service",
+   "page": 7
+  },
+  {
+   "text": "offering consistent with § 54.511.",
+   "page": 7
+  },
+  {
+   "text": "§ 54.511 Ordering Services (a) Selecting a provider of eligible services. In selecting a provider of eligible",
+   "page": 7
+  },
+  {
+   "text": "services, schools, libraries, library consortia, and consortia including any of those entities shall",
+   "page": 7
+  },
+  {
+   "text": "carefully consider all bids submitted and must select the most cost-effective service offering. In",
+   "page": 7
+  },
+  {
+   "text": "determining which service offering is the most cost-effective, entities may consider relevant factors",
+   "page": 7
+  },
+  {
+   "text": "other than the pre-discount prices submitted by providers, but price should be the primary factor",
+   "page": 7
+  },
+  {
+   "text": "considered.",
+   "page": 7
+  },
+  {
+   "text": "Therefore, the District may consider factors other than price alone in the consideration of bids; price",
+   "page": 7
+  },
+  {
+   "text": "for E-rate eligible goods and services will be the primary factor considered.",
+   "page": 7
+  },
+  {
+   "text": "No commitment will be made to select a Vendor’s system solely on the basis of price. Selection will",
+   "page": 7
+  },
+  {
+   "text": "be made on a combination of factors that may include: price; the degree to which the proposed",
+   "page": 7
+  },
+  {
+   "text": "services to meet functional and service level requirements; the quality of the service architecture,",
+   "page": 7
+  },
+  {
+   "text": "particularly in regards to business continuity and achievement of service level objectives; support",
+   "page": 7
+  },
+  {
+   "text": "procedures and service levels; our ability to understand and work with service billing; competence",
+   "page": 7
+  },
+  {
+   "text": "and reputation of the vendor; as well as any other factors that the District deems appropriate and in",
+   "page": 7
+  },
+  {
+   "text": "the best interest of the District. Points will be awarded based on certain criteria for a total sum of 100",
+   "page": 7
+  },
+  {
+   "text": "points. Reference the “Basis Selection” item below for the breakdown on the points system.",
+   "page": 7
+  },
+  {
+   "text": "Proposals found to be incomplete may be rejected as non-responsive; and proposal not deemed to",
+   "page": 7
+  },
+  {
+   "text": "be competitive will be rejected.",
+   "page": 7
+  },
+  {
+   "text": "The Kings County Office of Education may choose to ask clarification questions or request",
+   "page": 7
+  },
+  {
+   "text": "additional information. All responses will be required in writing; incomplete or unclear responses will",
+   "page": 7
+  },
+  {
+   "text": "result in rejection of proposal.",
+   "page": 7
+  },
+  {
+   "text": "7",
+   "page": 7
+  },
+  {
+   "text": "Kings County Office of Education | Shelly Baird Cabling Upgrade: Internal Connections",
+   "page": 8
+  },
+  {
+   "text": "E-Rate Year 30 - Request for Proposal No. 2027-03",
+   "page": 8
+  },
+  {
+   "text": "Basis of Selection",
+   "page": 8
+  },
+  {
+   "text": "Factor | Weight",
+   "page": 8
+  },
+  {
+   "text": "Percentage",
+   "page": 8
+  },
+  {
+   "text": "Price of E-Rate ELIGIBLE Goods & Services (Primary Factor) | 35%",
+   "page": 8
+  },
+  {
+   "text": "Previous interactions with educational organizations | 25%",
+   "page": 8
+  },
+  {
+   "text": "Understanding of District needs | 15%",
+   "page": 8
+  },
+  {
+   "text": "Quote that meets specifications | 15%",
+   "page": 8
+  },
+  {
+   "text": "Past e-rate experiences | 10%",
+   "page": 8
+  },
+  {
+   "text": "8",
+   "page": 8
+  },
+  {
+   "text": "Kings County Office of Education | Shelly Baird Cabling Upgrade: Internal Connections",
+   "page": 9
+  },
+  {
+   "text": "E-Rate Year 30 - Request for Proposal No. 2027-03",
+   "page": 9
+  },
+  {
+   "text": "GENERAL TERMS AND CONDITIONS",
+   "page": 9
+  },
+  {
+   "text": "Contracts awarded under this RFP are subject to California Public Contract Code, Education Code, and",
+   "page": 9
+  },
+  {
+   "text": "Labor Code mandates:",
+   "page": 9
+  },
+  {
+   "text": "DOJ Fingerprinting & Background Checks (Ed Code § 45125.1):",
+   "page": 9
+  },
+  {
+   "text": "Contractor certifies that background checks have been conducted for all personnel per California",
+   "page": 9
+  },
+  {
+   "text": "Education Code Section 45125.1. No personnel with serious or violent felony convictions shall set foot",
+   "page": 9
+  },
+  {
+   "text": "on campus.",
+   "page": 9
+  },
+  {
+   "text": "Tuberculosis Risk Assessment & Testing (Ed Code § 49406):",
+   "page": 9
+  },
+  {
+   "text": "All contractor personnel on campus must submit proof of tuberculosis clearance within 60 days prior to",
+   "page": 9
+  },
+  {
+   "text": "initial project placement.",
+   "page": 9
+  },
+  {
+   "text": "Public Works Registration & Prevailing Wage (Labor Code §§ 1725.5 & 1771.1):",
+   "page": 9
+  },
+  {
+   "text": "Contractor and all subcontractors must be actively registered with the DIR and pay general prevailing",
+   "page": 9
+  },
+  {
+   "text": "wages as determined by the DIR Director.",
+   "page": 9
+  },
+  {
+   "text": "Insurance Requirements:",
+   "page": 9
+  },
+  {
+   "text": "Contractor must maintain Commercial General Liability insurance of not less than $1,000,000 per",
+   "page": 9
+  },
+  {
+   "text": "occurrence, naming KCOE as an additional insured.",
+   "page": 9
+  },
+  {
+   "text": "Drug-Free & Tobacco-Free Campus (Gov Code § 8350):",
+   "page": 9
+  },
+  {
+   "text": "Shelly Baird is a drug-free and tobacco-free campus. Use of alcohol, tobacco, e-cigarettes, or illegal",
+   "page": 9
+  },
+  {
+   "text": "substances is strictly prohibited.",
+   "page": 9
+  },
+  {
+   "text": "E-RATE SUPPLEMENTAL TERMS AND CONDITIONS",
+   "page": 9
+  },
+  {
+   "text": "Signed copy to be returned with proposal and/or bid response (“Proposal’) in response to this",
+   "page": 9
+  },
+  {
+   "text": "Solicitation (“RFP/RFB/RFQ”).",
+   "page": 9
+  },
+  {
+   "text": "The Telecommunications Act of 1996 established a fund by which Schools and Libraries (“Applicant” or",
+   "page": 9
+  },
+  {
+   "text": "“Applicants”) across the Country could access discounts on eligible telecommunications products and",
+   "page": 9
+  },
+  {
+   "text": "services. The program is commonly known as the E-Rate Program. The eligibility for discounts on",
+   "page": 9
+  },
+  {
+   "text": "internet access, telecommunications products and services, internal connection products, services and",
+   "page": 9
+  },
+  {
+   "text": "maintenance is determined by the Federal Communications Commission (“FCC”). Funding is made",
+   "page": 9
+  },
+  {
+   "text": "available upon application approval by the Universal Service Administrative Company (“USAC”), which",
+   "page": 9
+  },
+  {
+   "text": "was established by the Act. The amount of the discount is based on the number of students eligible to",
+   "page": 9
+  },
+  {
+   "text": "receive free and reduced-price meals.",
+   "page": 9
+  },
+  {
+   "text": "1) E-RATE CONTINGENCY",
+   "page": 9
+  },
+  {
+   "text": "The project herein is contingent upon the approval of funding from the Universal Service Fund’s Schools",
+   "page": 9
+  },
+  {
+   "text": "and Libraries Program, otherwise known as E-Rate. Even after award of Agreement(s) and/or E-Rate",
+   "page": 9
+  },
+  {
+   "text": "funding approval is approved, the Applicant may or may not proceed with the project, in whole or in",
+   "page": 9
+  },
+  {
+   "text": "part. Execution of the project, in whole or in part, is solely at the discretion of the Applicant.",
+   "page": 9
+  },
+  {
+   "text": "2) SERVICE PROVIDER REQUIREMENTS",
+   "page": 9
+  },
+  {
+   "text": "9",
+   "page": 9
+  },
+  {
+   "text": "Kings County Office of Education | Shelly Baird Cabling Upgrade: Internal Connections",
+   "page": 10
+  },
+  {
+   "text": "E-Rate Year 30 - Request for Proposal No. 2027-03",
+   "page": 10
+  },
+  {
+   "text": "The Applicant expects Service Providers to make themselves thoroughly familiar with any rules or",
+   "page": 10
+  },
+  {
+   "text": "regulations regarding the E-Rate program.",
+   "page": 10
+  },
+  {
+   "text": "(a) Service Providers are required to be in full compliance with all current rules and requirements and",
+   "page": 10
+  },
+  {
+   "text": "future rules and requirements issued by the FCC and USAC throughout the agreement period of any",
+   "page": 10
+  },
+  {
+   "text": "Agreement entered as a result of this RFP/RFB/RFQ.",
+   "page": 10
+  },
+  {
+   "text": "(b) Service Providers are responsible for providing a valid Service Provider Identification Number",
+   "page": 10
+  },
+  {
+   "text": "(“SPIN”). More information about obtaining a SPIN may be found at this website:",
+   "page": 10
+  },
+  {
+   "text": "https://www.usac.org/e-rate/service-providers/step-1-obtain-a-spin/",
+   "page": 10
+  },
+  {
+   "text": "(c) Service Providers are responsible for providing a valid Federal Communications Commission",
+   "page": 10
+  },
+  {
+   "text": "Registration Number (“FRN”) at the time the Proposal is submitted. More information about",
+   "page": 10
+  },
+  {
+   "text": "obtaining an FRN may be found at this website: Providers are responsible for providing a valid",
+   "page": 10
+  },
+  {
+   "text": "Federal Communications Commission Registration Number (“FRN”) at the time the Proposal is",
+   "page": 10
+  },
+  {
+   "text": "submitted. More information about obtaining an FRN may be found at this website:",
+   "page": 10
+  },
+  {
+   "text": "https://www.fcc.gov/licensing-databases/commission-registration-system-fcc?utm_source",
+   "page": 10
+  },
+  {
+   "text": "(d) Service Providers are responsible for providing evidence of FCC Green Light Status at the time the",
+   "page": 10
+  },
+  {
+   "text": "proposal is submitted. Any potential Service Provider found to be in Red Light Status must provide",
+   "page": 10
+  },
+  {
+   "text": "an explanation of the steps it is undertaking to be removed to Red Light Status and the expected",
+   "page": 10
+  },
+  {
+   "text": "timeframe for resolution. A Service Provider's sustained Red Light Status may be grounds for",
+   "page": 10
+  },
+  {
+   "text": "termination of the Agreement as it could prohibit the Service Provider from providing E-Rate",
+   "page": 10
+  },
+  {
+   "text": "discounts in a timely manner which would cause harm to the Applicant. More information about",
+   "page": 10
+  },
+  {
+   "text": "FCC Red and Green Light Status may be found at this website:",
+   "page": 10
+  },
+  {
+   "text": "http://www.fcc.gov/debt_collection/welcome.html",
+   "page": 10
+  },
+  {
+   "text": "(e) Products and services must be delivered before billing and E-Rate discounting can commence. At no",
+   "page": 10
+  },
+  {
+   "text": "time may the Service Provider invoice before July 1, 2027.",
+   "page": 10
+  },
+  {
+   "text": "(f) Prices must be held firm for the duration of the associated E-Rate Funding Year(s) or until all work",
+   "page": 10
+  },
+  {
+   "text": "associated with the project is complete (including any Agreement and USAC-approved extensions).",
+   "page": 10
+  },
+  {
+   "text": "(g) Goods and services provided shall be clearly designated as “E-Rate Eligible.” Non-eligible goods and",
+   "page": 10
+  },
+  {
+   "text": "services shall be clearly called out as 100% non-eligible or shall be “cost allocated” to show the",
+   "page": 10
+  },
+  {
+   "text": "percentage of eligible costs per USAC guidelines.",
+   "page": 10
+  },
+  {
+   "text": "(h) For Category 2 equipment or services, within one (1) week of notification of award, the awarded",
+   "page": 10
+  },
+  {
+   "text": "Service Provider must provide the Applicant a bill of materials using a completed and most current",
+   "page": 10
+  },
+  {
+   "text": "and appropriate version of USACs “Bulk Upload Template” (formerly known as the Item 21",
+   "page": 10
+  },
+  {
+   "text": "attachment) located at https://www.usac.org/e-rate/applicant-process/applying-for-discounts/fcc-",
+   "page": 10
+  },
+  {
+   "text": "form-471-filing/. Subsequent schedules of values and invoices must match the Bulk Upload",
+   "page": 10
+  },
+  {
+   "text": "Template and approved Funding Request Line Items or subsequent approved service substitutions. If",
+   "page": 10
+  },
+  {
+   "text": "the service provider’s proposal consisted of pricing per eligible location, a summary sheet and",
+   "page": 10
+  },
+  {
+   "text": "summary Bulk Upload Template must be provided to describe the cumulative amount for all sites.",
+   "page": 10
+  },
+  {
+   "text": "(i) In the event of questions during an E-Rate pre-commitment review, post-commitment review,",
+   "page": 10
+  },
+  {
+   "text": "and/or audit inquiry, the awarded Service Provider is expected to reply within 3 days to questions",
+   "page": 10
+  },
+  {
+   "text": "associated with its proposal.",
+   "page": 10
+  },
+  {
+   "text": "(j) The awarded Service Provider is required to send copies of all forms and invoices to the Applicant",
+   "page": 10
+  },
+  {
+   "text": "prior to invoicing USAC for pre-approval. Failure to comply with this requirement may result in the",
+   "page": 10
+  },
+  {
+   "text": "10",
+   "page": 10
+  },
+  {
+   "text": "Kings County Office of Education | Shelly Baird Cabling Upgrade: Internal Connections",
+   "page": 11
+  },
+  {
+   "text": "E-Rate Year 30 - Request for Proposal No. 2027-03",
+   "page": 11
+  },
+  {
+   "text": "Applicant placing the vendor on an “Invoice Check” with the USAC: https://www.usac.org/e-",
+   "page": 11
+  },
+  {
+   "text": "rate/applicant-process/invoicing/invoice-check/.",
+   "page": 11
+  },
+  {
+   "text": "(k) Service providers must comply with the FCC rules for Lowest Corresponding Price (\"LCP\"). Further",
+   "page": 11
+  },
+  {
+   "text": "details on LCP may be obtained at USAC's website: https://www.usac.org/e-rate/service-",
+   "page": 11
+  },
+  {
+   "text": "providers/step-2-responding-to-bids/lowest-corresponding-price/.",
+   "page": 11
+  },
+  {
+   "text": "(l) Service providers must not propose any equipment or services produced or provided by companies,",
+   "page": 11
+  },
+  {
+   "text": "their parents, affiliates, and subsidiaries, found to pose a national security threat to the integrity of",
+   "page": 11
+  },
+  {
+   "text": "communications networks or the communications supply chain as required by FCC rules. See",
+   "page": 11
+  },
+  {
+   "text": "https://www.usac.org/about/reports-orders/supply-chain/. Any proposed solution including",
+   "page": 11
+  },
+  {
+   "text": "Covered Equipment or Services as defined by the FCC will be disqualified. If, after award of the",
+   "page": 11
+  },
+  {
+   "text": "project it is found Covered Equipment or Services are included, the award and/or Agreement will be",
+   "page": 11
+  },
+  {
+   "text": "considered to be null and void. See https://www.fcc.gov/supplychain.",
+   "page": 11
+  },
+  {
+   "text": "(m) SPAM and/or robotic responses will not be considered valid Proposals and will be disqualified from",
+   "page": 11
+  },
+  {
+   "text": "consideration.",
+   "page": 11
+  },
+  {
+   "text": "(n) Any Service Provider proposals identifying contingency fees such as allocations for change orders,",
+   "page": 11
+  },
+  {
+   "text": "tariffs, or other speculative fees not specifically called out for in the scope and/or terms of the",
+   "page": 11
+  },
+  {
+   "text": "RFP/RFB/RFQ may be included in the Proposal price and subject to evaluation unless otherwise",
+   "page": 11
+  },
+  {
+   "text": "specified in the RFP/RFB/RFQ. Contingency fees not pre-approved by the Applicant will not be",
+   "page": 11
+  },
+  {
+   "text": "allowed.",
+   "page": 11
+  },
+  {
+   "text": "3) SERVICE PROVIDER ACKNOWLEDGEMENTS",
+   "page": 11
+  },
+  {
+   "text": "(a) The Service Provider acknowledges that no change in the products and/or services specified in its",
+   "page": 11
+  },
+  {
+   "text": "proposal will be allowed without prior written approval from the Applicant and a USAC service",
+   "page": 11
+  },
+  {
+   "text": "substitution approval except for a Global Service Substitutions. See https://www.usac.org/e-",
+   "page": 11
+  },
+  {
+   "text": "rate/applicant-process/before-youre-done/service-substitutions/.",
+   "page": 11
+  },
+  {
+   "text": "(b) The Service Provider acknowledges that all pricing and technology infrastructure information in its",
+   "page": 11
+  },
+  {
+   "text": "Proposal shall be considered as public and non-confidential pursuant to §54.504 (2)(i)(ii).",
+   "page": 11
+  },
+  {
+   "text": "(c) The Service Provider acknowledges that its offer is considered to be the lowest corresponding price",
+   "page": 11
+  },
+  {
+   "text": "pursuant to § 54.511(b). Service Providers found not to be providing Lowest Corresponding Price",
+   "page": 11
+  },
+  {
+   "text": "(LCP) may be required to repay any identified overcharges to USAC. The Service Provider",
+   "page": 11
+  },
+  {
+   "text": "acknowledges that LCP is solely the service provider’s responsibility and it will not hold the Applicant",
+   "page": 11
+  },
+  {
+   "text": "liable, or seek reimbursement from any applicant, for any appeals, commitment adjustments or",
+   "page": 11
+  },
+  {
+   "text": "funding recoveries.",
+   "page": 11
+  },
+  {
+   "text": "(d) The Service Provider attests that its offer does not violate the FCC’s Supply Chain certifications",
+   "page": 11
+  },
+  {
+   "text": "included in the FCC Form 473. Supply Chain requirements and certifications can be viewed at USAC’s",
+   "page": 11
+  },
+  {
+   "text": "Website: https://www.usac.org/about/reports-orders/supply-chain/.",
+   "page": 11
+  },
+  {
+   "text": "(e) This offer is in full compliance with USAC’s Free Services Advisory https://www.usac.org/e-",
+   "page": 11
+  },
+  {
+   "text": "rate/applicant-process/competitive-bidding/free-services-advisory/. There are no free services",
+   "page": 11
+  },
+  {
+   "text": "offered that would predicate an artificial discount and preclude the applicant from paying its",
+   "page": 11
+  },
+  {
+   "text": "proportionate non-discounted share of costs. The Service Provider agrees to provide substantiating",
+   "page": 11
+  },
+  {
+   "text": "documentation to support this assertion should the applicant, USAC, or the FCC request it.",
+   "page": 11
+  },
+  {
+   "text": "4) STARTING SERVICES/ADVANCE INSTALLATION",
+   "page": 11
+  },
+  {
+   "text": "11",
+   "page": 11
+  },
+  {
+   "text": "Kings County Office of Education | Shelly Baird Cabling Upgrade: Internal Connections",
+   "page": 12
+  },
+  {
+   "text": "E-Rate Year 30 - Request for Proposal No. 2027-03",
+   "page": 12
+  },
+  {
+   "text": "Category 1 Services",
+   "page": 12
+  },
+  {
+   "text": "The annual E-Rate Funding Year begins on July 1 and expires on June 30 of each calendar year.",
+   "page": 12
+  },
+  {
+   "text": "Regardless of the Agreement’s “effective date,” E-Rate eligible goods and/or services requested in this",
+   "page": 12
+  },
+  {
+   "text": "RFP/RFB/RFQ shall be delivered no earlier than the start of the 2027 funding year (July 1, 2027). If",
+   "page": 12
+  },
+  {
+   "text": "Category 1 services (Telecommunication Services and Internet access) will begin on or shortly after July",
+   "page": 12
+  },
+  {
+   "text": "1 of a funding year, the service provider, in some cases, may need to undertake some construction and",
+   "page": 12
+  },
+  {
+   "text": "installation work prior to the beginning of that funding year. Within the limitations indicated below, the",
+   "page": 12
+  },
+  {
+   "text": "infrastructure costs of a service provider can be deemed to be delivered at the same time that the",
+   "page": 12
+  },
+  {
+   "text": "associated Category 1 services begin. That is, if services begin on July 1, then the delivery of service",
+   "page": 12
+  },
+  {
+   "text": "provider infrastructure necessary for those services can be considered as also delivered on July 1.",
+   "page": 12
+  },
+  {
+   "text": "However, NO INVOICING can take place prior to July 1 of the associated Funding Year.",
+   "page": 12
+  },
+  {
+   "text": "Early Funding Conditions",
+   "page": 12
+  },
+  {
+   "text": "Category 1",
+   "page": 12
+  },
+  {
+   "text": "There are four conditions that must be met in order for USAC to provide support in a funding year for",
+   "page": 12
+  },
+  {
+   "text": "Category 1 infrastructure costs incurred prior to that funding year.",
+   "page": 12
+  },
+  {
+   "text": "• Initiation of installation cannot take place before selection of the service provider pursuant to a",
+   "page": 12
+  },
+  {
+   "text": "posted Form 470 and in any event no earlier than six months prior to July 1 of the funding year.",
+   "page": 12
+  },
+  {
+   "text": "• The Category 1 service must depend on the installation of the infrastructure.",
+   "page": 12
+  },
+  {
+   "text": "• The underlying Category 1 service cannot have a service start date prior to July 1 of the funding",
+   "page": 12
+  },
+  {
+   "text": "year.",
+   "page": 12
+  },
+  {
+   "text": "• No invoices can be submitted to USAC for reimbursement prior to July 1 of the funding year.",
+   "page": 12
+  },
+  {
+   "text": "For more information, please refer to the FCC Order involving the Nassau County Board of Cooperative",
+   "page": 12
+  },
+  {
+   "text": "Educational Services (DA 02-3365 , released December 6, 2002). This FCC decision only applies to",
+   "page": 12
+  },
+  {
+   "text": "Priority/ Category 1 services (telecommunications services and Internet access).",
+   "page": 12
+  },
+  {
+   "text": "https://docs.fcc.gov/public/attachments/DA-02-3365A1_Rcd.pdf",
+   "page": 12
+  },
+  {
+   "text": "The complete text can be found at the following URL:",
+   "page": 12
+  },
+  {
+   "text": "https://www.usac.org/e-rate/applicant-process/starting-services/advance-installation/",
+   "page": 12
+  },
+  {
+   "text": "Category 2",
+   "page": 12
+  },
+  {
+   "text": "There are two conditions that allow USAC to provide support in a funding year for Category 2 Internal",
+   "page": 12
+  },
+  {
+   "text": "Connections (equipment and services) incurred prior to that funding year.",
+   "page": 12
+  },
+  {
+   "text": "12",
+   "page": 12
+  },
+  {
+   "text": "Kings County Office of Education | Shelly Baird Cabling Upgrade: Internal Connections",
+   "page": 13
+  },
+  {
+   "text": "E-Rate Year 30 - Request for Proposal No. 2027-03",
+   "page": 13
+  },
+  {
+   "text": "• Applicants may seek support for Category 2 eligible services purchased on or after April 1, three",
+   "page": 13
+  },
+  {
+   "text": "months prior to the start of the funding year on July 1. This will provide schools with the",
+   "page": 13
+  },
+  {
+   "text": "flexibility to purchase equipment in preparation for the summer recess and provide the",
+   "page": 13
+  },
+  {
+   "text": "maximum amount of time during the summer to install these critical networks.",
+   "page": 13
+  },
+  {
+   "text": "• No invoices can be submitted to USAC for reimbursement prior to July 1 of the funding year.",
+   "page": 13
+  },
+  {
+   "text": "For more information, please refer to the FCC Report and Order and Further Notice of Proposed",
+   "page": 13
+  },
+  {
+   "text": "Rulemaking (FCC 14-99 , released July 23, 2014). https://www.fcc.gov/document/fcc-releases-e-rate-",
+   "page": 13
+  },
+  {
+   "text": "modernization-order",
+   "page": 13
+  },
+  {
+   "text": "It is important to note NO FCC FORM 474 INVOICING can take place before the Funding Commitment",
+   "page": 13
+  },
+  {
+   "text": "Decision Letter is issued, the FCC Form 486 is approved, and/or prior to July 1 of the funding year.",
+   "page": 13
+  },
+  {
+   "text": "5) INVOICING",
+   "page": 13
+  },
+  {
+   "text": "(a) The Service Provider agrees to bill and receive a portion of the payment for the provisions of goods",
+   "page": 13
+  },
+  {
+   "text": "and services described herein directly from USAC via the FCC Form 474 Service Provider Invoice",
+   "page": 13
+  },
+  {
+   "text": "(SPI). The Applicant will only be responsible for paying its non‐discounted share of costs and does",
+   "page": 13
+  },
+  {
+   "text": "not intend to use the BEAR process (FCC Form 472). The maximum percentage the Applicant will be",
+   "page": 13
+  },
+  {
+   "text": "liable for is the pre-discount amount minus the funded amount as shown on the FCC Form 471",
+   "page": 13
+  },
+  {
+   "text": "Funding Request Number (“FRN”) and associated FRN Line Items and any identified ineligible costs.",
+   "page": 13
+  },
+  {
+   "text": "Upon successful receipt or posting of a Funding Commitment Decision Letter from USAC and",
+   "page": 13
+  },
+  {
+   "text": "submission, certification and USAC approval of FCC Form 486, the Applicant shall pay only the",
+   "page": 13
+  },
+  {
+   "text": "discounted amount beginning with the billing cycle immediately following said approval.",
+   "page": 13
+  },
+  {
+   "text": "Alternatively, should the Applicant decide that it is in the best interest of the Applicant to file an FCC",
+   "page": 13
+  },
+  {
+   "text": "Form 472, the Applicant will inform the Service Provider of its intent.",
+   "page": 13
+  },
+  {
+   "text": "(b) The Service Provider agrees that it will not invoice USAC for equipment or services that have not",
+   "page": 13
+  },
+  {
+   "text": "been delivered to and accepted by the Applicant and installed. If equipment is being drop-shipped",
+   "page": 13
+  },
+  {
+   "text": "to the Applicant and the Applicant is responsible for installing the equipment, the Service Provider",
+   "page": 13
+  },
+  {
+   "text": "may not invoice USAC until equipment is received and accepted by the Applicant.",
+   "page": 13
+  },
+  {
+   "text": "(c) All Service Provider invoicing to USAC must be completed within 120 days from the last day of",
+   "page": 13
+  },
+  {
+   "text": "service. Should the Service Provider fail to invoice USAC in a timely manner, the Applicant will only",
+   "page": 13
+  },
+  {
+   "text": "be responsible for paying its non-discounted share.",
+   "page": 13
+  },
+  {
+   "text": "6) FCC/USAC AUDITS",
+   "page": 13
+  },
+  {
+   "text": "The E-Rate program requires that all records be retained for at least ten (10) years from the last date of",
+   "page": 13
+  },
+  {
+   "text": "service provided on a particular funding request. The Service Provider hereby agrees to retain all books,",
+   "page": 13
+  },
+  {
+   "text": "records, and other documents relative to any Agreement resulting from this RFP/RFB/RFQ for ten (10)",
+   "page": 13
+  },
+  {
+   "text": "years after final payment. The Applicant, its authorized agents, and/or auditors reserves the right to",
+   "page": 13
+  },
+  {
+   "text": "perform or have performed an audit of the records of the Service Provider and therefore shall have full",
+   "page": 13
+  },
+  {
+   "text": "access to and the right to examine any of said materials within a reasonable period of time during said",
+   "page": 13
+  },
+  {
+   "text": "period.",
+   "page": 13
+  },
+  {
+   "text": "13",
+   "page": 13
+  },
+  {
+   "text": "Kings County Office of Education | Shelly Baird Cabling Upgrade: Internal Connections",
+   "page": 14
+  },
+  {
+   "text": "E-Rate Year 30 - Request for Proposal No. 2027-03",
+   "page": 14
+  },
+  {
+   "text": "7) PROCUREMENT OF ADDITIONAL GOODS AND/OR SERVICES AND AGREEMENT TERM",
+   "page": 14
+  },
+  {
+   "text": "During the term of any Agreement resulting from this RFP/RFB/RFQ, the Applicant may elect to procure",
+   "page": 14
+  },
+  {
+   "text": "additional or like goods and/or services offered by the Service Provider. Such services shall be",
+   "page": 14
+  },
+  {
+   "text": "negotiated and obtained via an official amendment to this Agreement and approval by the Applicant's",
+   "page": 14
+  },
+  {
+   "text": "Governing Board. All terms, conditions, warranties, obligations, maintenance and support of said goods",
+   "page": 14
+  },
+  {
+   "text": "or services shall have a coterminous expiration date with the original date of this Agreement. The",
+   "page": 14
+  },
+  {
+   "text": "Applicant shall not enter into a separate Agreement for said goods or services. Service Providers must",
+   "page": 14
+  },
+  {
+   "text": "state in their proposal that they acknowledge, accept and agree with coterminous expiration conditions.",
+   "page": 14
+  },
+  {
+   "text": "8) TARIFFS",
+   "page": 14
+  },
+  {
+   "text": "In anticipation of the possible tariff imposed on imported products, Applicant expects that the Service",
+   "page": 14
+  },
+  {
+   "text": "Provider will familiarize themselves with the impact that any unknown tariff(s) on manufacturer’s",
+   "page": 14
+  },
+  {
+   "text": "products are appropriately accounted for in the respondent's fee proposal. The Applicant presumes a",
+   "page": 14
+  },
+  {
+   "text": "tariff will be imposed on any manufacturer's networking equipment manufactured abroad and will be",
+   "page": 14
+  },
+  {
+   "text": "applicable at the time of purchase throughout the term of any agreement resulting from this solicitation",
+   "page": 14
+  },
+  {
+   "text": "(including and mutually agreed upon extensions).",
+   "page": 14
+  },
+  {
+   "text": "THE SERVICE PROVIDER IS TO IDENTIFY ANY TARIFFS WHEN COMPLETING ANY PRICING ATTACHMENTS",
+   "page": 14
+  },
+  {
+   "text": "AS PART OF THIS SOLICITATION AND IDENTIFY THE PRODUCTS’ COUNTRY(IES) OF ORIGIN.",
+   "page": 14
+  },
+  {
+   "text": "It is also the expectation of the Applicant that the presumed tariff should be LESS than what is identified",
+   "page": 14
+  },
+  {
+   "text": "or if it is not ultimately imposed upon the manufacturer’s product, the cost saving will be passed along",
+   "page": 14
+  },
+  {
+   "text": "to the Applicant and, in turn, the FCC’s E-Rate program. It should also be presumed by respondents that",
+   "page": 14
+  },
+  {
+   "text": "should any tariff imposed upon a particular manufacturer’s product be higher than what was identified",
+   "page": 14
+  },
+  {
+   "text": "in the Service Provider’s proposal at the time of purchase, the Applicant will appropriately compensate",
+   "page": 14
+  },
+  {
+   "text": "the service provider for the full cost incurred at the time of purchase without regard to E-Rate eligible",
+   "page": 14
+  },
+  {
+   "text": "invoices.",
+   "page": 14
+  },
+  {
+   "text": "I, the undersigned, as an authorized agent of _____________________________ (Service Provider",
+   "page": 14
+  },
+  {
+   "text": "Name), hereby certify that I have read the E-Rate Supplemental Terms and Conditions, am fully",
+   "page": 14
+  },
+  {
+   "text": "compliant and intend to cooperate with the E-Rate process as outlined above.",
+   "page": 14
+  },
+  {
+   "text": "Signature: ____________________________Title: __________________________",
+   "page": 14
+  },
+  {
+   "text": "Phone Number: _______________________ Email: __________________________",
+   "page": 14
+  },
+  {
+   "text": "Service Provider Name: _________________________________________________",
+   "page": 14
+  },
+  {
+   "text": "Service Provider FCC Registration Number: _______________________________",
+   "page": 14
+  },
+  {
+   "text": "Service Provider Identification Number: __________________________________",
+   "page": 14
+  },
+  {
+   "text": "14",
+   "page": 14
+  },
+  {
+   "text": "Kings County Office of Education | Shelly Baird Cabling Upgrade: Internal Connections",
+   "page": 15
+  },
+  {
+   "text": "E-Rate Year 30 - Request for Proposal No. 2027-03",
+   "page": 15
+  },
+  {
+   "text": "KINGS COUNTY OFFICE OF EDUCATION",
+   "page": 15
+  },
+  {
+   "text": "SPECIAL CONDITIONS",
+   "page": 15
+  },
+  {
+   "text": "For",
+   "page": 15
+  },
+  {
+   "text": "RFP NO. 2027-03",
+   "page": 15
+  },
+  {
+   "text": "STARTING AND COMPLETION DATES",
+   "page": 15
+  },
+  {
+   "text": "All work to be done as specified in RFP NO. 2027-03, will be specified in the District's \"Notice to Proceed\"",
+   "page": 15
+  },
+  {
+   "text": "letter to the Vendor.",
+   "page": 15
+  },
+  {
+   "text": "SUSPENSION AND DEBARMENT CERTIFICATION",
+   "page": 15
+  },
+  {
+   "text": "The Vendor will be required to complete the Suspension and Debarment Certification U.S. Department of",
+   "page": 15
+  },
+  {
+   "text": "Agriculture form (enclosed) and must be submitted with your proposal. Review the attached Debarment",
+   "page": 15
+  },
+  {
+   "text": "Instruction for Certification and Certification and Disclosure Statement.",
+   "page": 15
+  },
+  {
+   "text": "AND/OR",
+   "page": 15
+  },
+  {
+   "text": "As required by Executive Order 12549, Debarment and Suspension, and implemented at 34 CFR Part 85,",
+   "page": 15
+  },
+  {
+   "text": "for prospective participants in primary covered transactions, as defined at 34 CFR Part, 85, Sections 85,",
+   "page": 15
+  },
+  {
+   "text": "105 and 85.110— The applicant certifies that it and its principles: Are not presently debarred, suspended,",
+   "page": 15
+  },
+  {
+   "text": "proposed for debarment, declared intelligible, or voluntarily excluded from covered transactions by any",
+   "page": 15
+  },
+  {
+   "text": "Federal department or agency; Have not within a three-year period preceding this application been",
+   "page": 15
+  },
+  {
+   "text": "convicted of or had a civil judgment rendered against them for commission of fraud or a criminal offense",
+   "page": 15
+  },
+  {
+   "text": "in connection with obtaining, attempting to obtain, or performing a public (Federal, State, or local)",
+   "page": 15
+  },
+  {
+   "text": "transaction or contract under a public transaction; violation of Federal or State antitrust statutes or",
+   "page": 15
+  },
+  {
+   "text": "commission of embezzlement, theft, forgery bribery, falsification or destruction of records, making false",
+   "page": 15
+  },
+  {
+   "text": "statements or receiving stolen property; Are not presently indicted for or otherwise criminally or civilly",
+   "page": 15
+  },
+  {
+   "text": "charged by a governmental entity (Federal, State, or local) with commission of any of the offenses",
+   "page": 15
+  },
+  {
+   "text": "enumerated in paragraph (1)(b) of the certification; and Have not within a three-year period preceding",
+   "page": 15
+  },
+  {
+   "text": "this application had one or more public transactions (Federal, State, or local) terminated for cause or",
+   "page": 15
+  },
+  {
+   "text": "default; and Where the applicant is unable to certify to any of the statements in this certification, he or",
+   "page": 15
+  },
+  {
+   "text": "she shall attach an explanation to this.",
+   "page": 15
+  },
+  {
+   "text": "PREVAILING WAGES & DAVIS BACON WAGES",
+   "page": 15
+  },
+  {
+   "text": "The District has obtained from the Director of the Department of Industrial Relations the general",
+   "page": 15
+  },
+  {
+   "text": "prevailing rate of per diem wages and the general prevailing rate for holiday and overtime work in the",
+   "page": 15
+  },
+  {
+   "text": "locality in which the work is to be performed for each craft, classification or type of work needed to",
+   "page": 15
+  },
+  {
+   "text": "execute the contract. These per diem rates, including holidays and overtime work, as well as employer",
+   "page": 15
+  },
+  {
+   "text": "payments for health and welfare, pension, vacation, and similar purposes, are on file at the District, and",
+   "page": 15
+  },
+  {
+   "text": "15",
+   "page": 15
+  },
+  {
+   "text": "Kings County Office of Education | Shelly Baird Cabling Upgrade: Internal Connections",
+   "page": 16
+  },
+  {
+   "text": "E-Rate Year 30 - Request for Proposal No. 2027-03",
+   "page": 16
+  },
+  {
+   "text": "are also available from the Director of the Department of Industrial Relations. Pursuant to California Labor",
+   "page": 16
+  },
+  {
+   "text": "Code Sections 1720 et seq., it shall be mandatory upon the Contractor to whom the contract is awarded,",
+   "page": 16
+  },
+  {
+   "text": "and upon any subcontractor under such Contractor, to pay not less than the said specified rates to all",
+   "page": 16
+  },
+  {
+   "text": "workers employed by them in the execution of the contract and to comply with the District’s Labor",
+   "page": 16
+  },
+  {
+   "text": "Compliance Program. In accordance with 1773.2 of the California Labor Code, the Contractor shall post a",
+   "page": 16
+  },
+  {
+   "text": "copy of the determination of prevailing rate of wages at each job site.",
+   "page": 16
+  },
+  {
+   "text": "Davis Bacon Act – The Contractor and/or Subcontractor(s) will be required to pay the higher prevailing",
+   "page": 16
+  },
+  {
+   "text": "wage between the State Prevailing Wage Determination and the Davis Bacon Wage Determination",
+   "page": 16
+  },
+  {
+   "text": "for Federal funded projects. Refer to the SAM.gov Wage Determinations website:",
+   "page": 16
+  },
+  {
+   "text": "https://sam.gov/wage-determinations?utm_source= for more information.",
+   "page": 16
+  },
+  {
+   "text": "CERTIFIED PAYROLL RECORDS REQUIRED",
+   "page": 16
+  },
+  {
+   "text": "(a) The Contractor and each subcontractor shall maintain Certified Payroll and basic records required",
+   "page": 16
+  },
+  {
+   "text": "under the Labor Code and applicable Industrial Welfare Commission and shall preserve them for",
+   "page": 16
+  },
+  {
+   "text": "a period of three (3) years thereafter for all trade workers working on District project for submittal",
+   "page": 16
+  },
+  {
+   "text": "to the District at times designated in the contract or within ten (10) days upon request. The",
+   "page": 16
+  },
+  {
+   "text": "Contractor shall be responsible for all submittal of payroll records of all its subcontractors. All",
+   "page": 16
+  },
+  {
+   "text": "Certified Payroll Records shall be accompanied by a statement of compliance signed by the",
+   "page": 16
+  },
+  {
+   "text": "Contractor or each subcontractor indicating that the payroll records are correct and complete,",
+   "page": 16
+  },
+  {
+   "text": "that the wage rates contained therein are not less than those determined by the Director of the",
+   "page": 16
+  },
+  {
+   "text": "employee conform with the work performed.",
+   "page": 16
+  },
+  {
+   "text": "(b) Certified Payroll Records must be submitted with the pay requests.",
+   "page": 16
+  },
+  {
+   "text": "(c) In accordance with the California Labor Code Section 1776 (g), if the Contractor fails to comply",
+   "page": 16
+  },
+  {
+   "text": "within the ten (10) day period, he or she shall, as a penalty to the State or Political Subdivision on",
+   "page": 16
+  },
+  {
+   "text": "whose behalf the contract is made or awarded, forfeit twenty-five dollars ($25) for each calendar",
+   "page": 16
+  },
+  {
+   "text": "day, or portion thereof, for each worker until strict compliance is effectuated.",
+   "page": 16
+  },
+  {
+   "text": "NOTE: Faxed copies of the Proposal Form or any portion of this bid will not be accepted.",
+   "page": 16
+  },
+  {
+   "text": "16",
+   "page": 16
+  },
+  {
+   "text": "Kings County Office of Education | Shelly Baird Cabling Upgrade: Internal Connections",
+   "page": 17
+  },
+  {
+   "text": "E-Rate Year 30 - Request for Proposal No. 2027-03",
+   "page": 17
+  },
+  {
+   "text": "TECHNICAL SPECIFICATIONS",
+   "page": 17
+  },
+  {
+   "text": "RFP NO. 2027-03",
+   "page": 17
+  },
+  {
+   "text": "Agency Background & Project Purpose",
+   "page": 17
+  },
+  {
+   "text": "The Kings County Office of Education (KCOE) provides instructional support, regional educational leadership, and",
+   "page": 17
+  },
+  {
+   "text": "administrative technology services across Kings County, California. Shelly Baird School serves students requiring",
+   "page": 17
+  },
+  {
+   "text": "specialized educational programs across multiple campus buildings.",
+   "page": 17
+  },
+  {
+   "text": "The primary purpose of this Request for Proposals is to secure a qualified network infrastructure contractor to",
+   "page": 17
+  },
+  {
+   "text": "execute a total copper cabling overhaul across the entire Shelly Baird campus. The objective is to decommission",
+   "page": 17
+  },
+  {
+   "text": "and replace legacy copper lines with High-Performance Category 6a (Cat6a) wiring matching KCOE color",
+   "page": 17
+  },
+  {
+   "text": "specifications, perform 100% removal and disposal of all old copper wire, replace two (2) existing vertical IDF",
+   "page": 17
+  },
+  {
+   "text": "cabinets with wall-mount enclosures meeting or exceeding Chatsworth Products (CPI) CUBE-iT® specifications,",
+   "page": 17
+  },
+  {
+   "text": "expand internal fiber pathways, and install supporting communication drops (InformaCast emergency speakers,",
+   "page": 17
+  },
+  {
+   "text": "Wireless Access Points, and interactive display boards).",
+   "page": 17
+  },
+  {
+   "text": "Detailed Scope of Work & Technical Specifications",
+   "page": 17
+  },
+  {
+   "text": "Campus-Wide Technical Directives",
+   "page": 17
+  },
+  {
+   "text": "The awarded contractor shall furnish all labor, Cat6a cabling, conduit, patch panels, jacks, faceplates, fiber optic",
+   "page": 17
+  },
+  {
+   "text": "lines, wall-mount cabinets, mounting hardware, and testing equipment necessary for a turnkey installation",
+   "page": 17
+  },
+  {
+   "text": "adhering to the following strict campus directives:",
+   "page": 17
+  },
+  {
+   "text": "• Cat6a Cable Standard: All existing copper cabling across all campus facilities shall be fully replaced with",
+   "page": 17
+  },
+  {
+   "text": "High-Performance Category 6a (Cat6a) plenum cabling. Cable installation must adhere strictly to TIA/EIA",
+   "page": 17
+  },
+  {
+   "text": "Category 6A standards.",
+   "page": 17
+  },
+  {
+   "text": "• Complete Removal & Disposal of Old Copper Wire: The contractor shall execute complete removal,",
+   "page": 17
+  },
+  {
+   "text": "extraction, hauling, and e-waste recycling of EVERY piece of old/legacy copper wire (Cat5, Cat5e, inactive",
+   "page": 17
+  },
+  {
+   "text": "Cat6), abandoned raceways, obsolete wall jacks, and faceplates across the entire campus. Only copper",
+   "page": 17
+  },
+  {
+   "text": "cabling currently actively utilized for security camera systems shall remain in place.",
+   "page": 17
+  },
+  {
+   "text": "• Replacement of 2 Vertical Cabinets: The contractor shall replace two (2) existing vertical cabinets (at the",
+   "page": 17
+  },
+  {
+   "text": "DIS Office and Classrooms 13 & 14 / Admin area) with new wall-mount cabinets having equal or superior",
+   "page": 17
+  },
+  {
+   "text": "specifications to the Chatsworth Products (CPI) CUBE-iT® Wall-Mount Cabinet (24\"H x 24\"W x 24\"D, Black",
+   "page": 17
+  },
+  {
+   "text": "Finish, SKU: 99565474). Each replacement enclosure MUST features a solid metal door (keyed lock) and",
+   "page": 17
+  },
+  {
+   "text": "forced ventilation (dual fan and filter assembly).",
+   "page": 17
+  },
+  {
+   "text": "• Aesthetic Integrity & Concealed Routing: Surface-mounted raceway must be avoided at all costs. Cables",
+   "page": 17
+  },
+  {
+   "text": "must be routed internally through wall cavities, existing conduits, or newly installed internal pathways. If",
+   "page": 17
+  },
+  {
+   "text": "surface raceway is evaluated as strictly unavoidable in specific DIS office areas, it must be a 2-channel",
+   "page": 17
+  },
+  {
+   "text": "raceway pre-approved by KCOE IT.",
+   "page": 17
+  },
+  {
+   "text": "• Standard Drop Configuration: All standard workstation, office, and classroom drops shall consist of two",
+   "page": 17
+  },
+  {
+   "text": "(2) Cat6a cables and dual-port faceplates, unless specifically detailed otherwise in the zone schedule.",
+   "page": 17
+  },
+  {
+   "text": "17",
+   "page": 17
+  },
+  {
+   "text": "Kings County Office of Education | Shelly Baird Cabling Upgrade: Internal Connections",
+   "page": 18
+  },
+  {
+   "text": "E-Rate Year 30 - Request for Proposal No. 2027-03",
+   "page": 18
+  },
+  {
+   "text": "• WAP Wire Drop Specifications: Dedicated WAP riser drops must be white in color, terminated into white",
+   "page": 18
+  },
+  {
+   "text": "keystone jacks, and clearly labeled per KCOE naming conventions. (NO WAP will be needed, just the",
+   "page": 18
+  },
+  {
+   "text": "wiring for them)",
+   "page": 18
+  },
+  {
+   "text": "Cat6a Cabling Device Color-Coding Specification",
+   "page": 18
+  },
+  {
+   "text": "All newly installed Cat6a cable runs, patch cords, and jack terminations must strictly match KCOE's standard color-",
+   "page": 18
+  },
+  {
+   "text": "coding matrix detailed below:",
+   "page": 18
+  },
+  {
+   "text": "Cable | Cable | Designated",
+   "page": 18
+  },
+  {
+   "text": "Patch Sizes Deployment Notes",
+   "page": 18
+  },
+  {
+   "text": "Type | Color | Device",
+   "page": 18
+  },
+  {
+   "text": "CAT 6A Black | Cameras | 1ft, 2ft | For UPOE/POE++ Cameras",
+   "page": 18
+  },
+  {
+   "text": "CAT 6A White | Access Points | 1ft, 2ft | For UPOE/POE++ APs",
+   "page": 18
+  },
+  {
+   "text": "For UPS, MasterSwitch, or Managed",
+   "page": 18
+  },
+  {
+   "text": "CAT 6A Yellow NMS | 3ft, 4ft",
+   "page": 18
+  },
+  {
+   "text": "Devices",
+   "page": 18
+  },
+  {
+   "text": "1ft, 2ft, 3ft,",
+   "page": 18
+  },
+  {
+   "text": "CAT 6A Orange DAC | For Door Access Control",
+   "page": 18
+  },
+  {
+   "text": "4ft",
+   "page": 18
+  },
+  {
+   "text": "CAT 6A Blue | DATA | 1ft, 2ft | For Phones, Printers, PCs",
+   "page": 18
+  },
+  {
+   "text": "CAT 6A Red | Firewall | 3ft, 4ft | Reserved for Firewall",
+   "page": 18
+  },
+  {
+   "text": "CAT 6A Purple | Clock & Bell | 1ft, 2ft | For Clock and Bell",
+   "page": 18
+  },
+  {
+   "text": "1ft, 2ft, 3ft,",
+   "page": 18
+  },
+  {
+   "text": "CAT 6A Green | LAB | For Patch to Patch or Lab Connections",
+   "page": 18
+  },
+  {
+   "text": "4ft",
+   "page": 18
+  },
+  {
+   "text": "CAT 6A Grey | Open | 1ft, 2ft | For Future Expansion",
+   "page": 18
+  },
+  {
+   "text": "Table 1: Official KCOE Cat6a Cabling Color-Coding Reference Matrix",
+   "page": 18
+  },
+  {
+   "text": "18",
+   "page": 18
+  },
+  {
+   "text": "Kings County Office of Education | Shelly Baird Cabling Upgrade: Internal Connections",
+   "page": 19
+  },
+  {
+   "text": "E-Rate Year 30 - Request for Proposal No. 2027-03",
+   "page": 19
+  },
+  {
+   "text": "Detailed Campus Zone Scope Requirements",
+   "page": 19
+  },
+  {
+   "text": "The project scope is organized into distinct functional campus zones as detailed below:",
+   "page": 19
+  },
+  {
+   "text": "Campus Zone | Specific Drop & Hardware",
+   "page": 19
+  },
+  {
+   "text": "Required Cabling & Infrastructure Tasks",
+   "page": 19
+  },
+  {
+   "text": "/ Location | Details",
+   "page": 19
+  },
+  {
+   "text": "Add new IDF enclosure above front door using a model | Secretary stations, Camera TV,",
+   "page": 19
+  },
+  {
+   "text": "Front Office Chatsworth CPI CUBE-iT 99565474. Perform standard Cat6a Paz station & Paz TV, WAP drop,",
+   "page": 19
+  },
+  {
+   "text": "(Office 1 & 2) cable replacement.Install new conduit path leaving a pull string InformaCast Speaker and",
+   "page": 19
+  },
+  {
+   "text": "in it, from Office 1 to Nurse Office (New Fiber path). | printer/copier.",
+   "page": 19
+  },
+  {
+   "text": "Office 3 station, Office 3 TV, new",
+   "page": 19
+  },
+  {
+   "text": "Small Offices",
+   "page": 19
+  },
+  {
+   "text": "Standard Cat6a cable replacement throughout office space. | WAP drop, Office 4 stations (4",
+   "page": 19
+  },
+  {
+   "text": "(Office 3 & 4)",
+   "page": 19
+  },
+  {
+   "text": "total; 2 in each corner).",
+   "page": 19
+  },
+  {
+   "text": "Admin",
+   "page": 19
+  },
+  {
+   "text": "Rewire hallway connection runs directly to IDF-Rm14. | Staff administrative stations.",
+   "page": 19
+  },
+  {
+   "text": "Hallway",
+   "page": 19
+  },
+  {
+   "text": "Conference | WAP (drops only), ViewSonic",
+   "page": 19
+  },
+  {
+   "text": "Standard Cat6a cable replacement.",
+   "page": 19
+  },
+  {
+   "text": "Room 1 | Board, 1 extra set on wall.",
+   "page": 19
+  },
+  {
+   "text": "Kitchen phone, WAP (relocation",
+   "page": 19
+  },
+  {
+   "text": "Cafeteria &",
+   "page": 19
+  },
+  {
+   "text": "Remove exposed corner wires. | to room center), InformaCast",
+   "page": 19
+  },
+  {
+   "text": "Kitchen",
+   "page": 19
+  },
+  {
+   "text": "Speaker.",
+   "page": 19
+  },
+  {
+   "text": "Nurse stations, InformaCast",
+   "page": 19
+  },
+  {
+   "text": "Nurses Office Standard Cat6a cable replacement.",
+   "page": 19
+  },
+  {
+   "text": "Speaker.",
+   "page": 19
+  },
+  {
+   "text": "Staff Break | New WAP drop, InformaCast",
+   "page": 19
+  },
+  {
+   "text": "Standard Cat6a cable replacement.",
+   "page": 19
+  },
+  {
+   "text": "Room | Speaker.",
+   "page": 19
+  },
+  {
+   "text": "Conference",
+   "page": 19
+  },
+  {
+   "text": "Standard Cat6a cable replacement. | Wireless phone drop.",
+   "page": 19
+  },
+  {
+   "text": "Room 2",
+   "page": 19
+  },
+  {
+   "text": "MTU Office & | MTU staff stations, WAP (drops",
+   "page": 19
+  },
+  {
+   "text": "Standard Cat6a cable replacement.",
+   "page": 19
+  },
+  {
+   "text": "Space | only).",
+   "page": 19
+  },
+  {
+   "text": "Replace existing vertical IDF Cabinet with Chatsworth CPI",
+   "page": 19
+  },
+  {
+   "text": "Staff stations, new WAP drop,",
+   "page": 19
+  },
+  {
+   "text": "DIS Office | CUBE-iT 99565474 (solid door, ventilated). Evaluate/install 2-",
+   "page": 19
+  },
+  {
+   "text": "InformaCast Speaker.",
+   "page": 19
+  },
+  {
+   "text": "channel raceway if required.",
+   "page": 19
+  },
+  {
+   "text": "Install 2-inch conduit pathways interconnecting rooms. | Room corners, SRO Room, WAPs,",
+   "page": 19
+  },
+  {
+   "text": "Classrooms 1–",
+   "page": 19
+  },
+  {
+   "text": "In Room 2 Remove old vertical IDF enclosure and replace it | Newline Boards/PC, InformaCast",
+   "page": 19
+  },
+  {
+   "text": "3",
+   "page": 19
+  },
+  {
+   "text": "with Chatsworth CPI CUBE-iT 99565474 (solid door, ventilated). Speakers.",
+   "page": 19
+  },
+  {
+   "text": "Available room corners, WAPs,",
+   "page": 19
+  },
+  {
+   "text": "Classrooms 4–",
+   "page": 19
+  },
+  {
+   "text": "Standard Cat6a cable replacement. | Newline Boards/PC, InformaCast",
+   "page": 19
+  },
+  {
+   "text": "6",
+   "page": 19
+  },
+  {
+   "text": "Speakers.",
+   "page": 19
+  },
+  {
+   "text": "All room corners, WAPs, Newline",
+   "page": 19
+  },
+  {
+   "text": "Classrooms 7–",
+   "page": 19
+  },
+  {
+   "text": "Install 2-inch conduit pathways interconnecting rooms. | Boards/PC, InformaCast",
+   "page": 19
+  },
+  {
+   "text": "12",
+   "page": 19
+  },
+  {
+   "text": "Speakers.",
+   "page": 19
+  },
+  {
+   "text": "Classrooms 13 Relocate IDF electrical power. Standard Cat6a cable | Teacher stations, WAPs,",
+   "page": 19
+  },
+  {
+   "text": "& 14 | replacement. | InformaCast Speakers.",
+   "page": 19
+  },
+  {
+   "text": "19",
+   "page": 19
+  },
+  {
+   "text": "Kings County Office of Education | Shelly Baird Cabling Upgrade: Internal Connections",
+   "page": 20
+  },
+  {
+   "text": "E-Rate Year 30 - Request for Proposal No. 2027-03",
+   "page": 20
+  },
+  {
+   "text": "Cable Installation & Workmanship Standards",
+   "page": 20
+  },
+  {
+   "text": "Termination Standard: Pin-out termination for all Cat6a drops shall adhere to T568A standards strictly.",
+   "page": 20
+  },
+  {
+   "text": "Distance Limits: Maximum horizontal cable distance shall not exceed 55 meters (180 feet).",
+   "page": 20
+  },
+  {
+   "text": "Service Loops: A 10-foot service loop must be provided within 10 feet of each termination point.",
+   "page": 20
+  },
+  {
+   "text": "Routing & Bundling: A minimum bend radius of 1 inch must be maintained. Maximum cable bundle size is 24 cables.",
+   "page": 20
+  },
+  {
+   "text": "Bundles must be secured using Velcro ties; nylon zip ties are prohibited.",
+   "page": 20
+  },
+  {
+   "text": "Testing & Certification: 100% of newly installed Cat6a runs must be tested and certified to Category 6A standards.",
+   "page": 20
+  },
+  {
+   "text": "Soft copies and searchable PDF test reports showing 'PASS' status must be delivered within 2 weeks of substantial",
+   "page": 20
+  },
+  {
+   "text": "completion.",
+   "page": 20
+  },
+  {
+   "text": "Workmanship Warranty: The contractor must provide a minimum 10-year workmanship warranty from the date of",
+   "page": 20
+  },
+  {
+   "text": "final KCOE sign-off.",
+   "page": 20
+  },
+  {
+   "text": "FIRM NAME: _______________________________________________________________",
+   "page": 20
+  },
+  {
+   "text": "ADDRESS: _______________________________________________________________",
+   "page": 20
+  },
+  {
+   "text": "_______________________________________________________________",
+   "page": 20
+  },
+  {
+   "text": "TELEPHONE: (_______) ___________________ FAX: (________) ________________",
+   "page": 20
+  },
+  {
+   "text": "E-MAIL ADDRESS: __________________________________________________________",
+   "page": 20
+  },
+  {
+   "text": "20",
+   "page": 20
+  },
+  {
+   "text": "Kings County Office of Education | Shelly Baird Cabling Upgrade: Internal Connections",
+   "page": 21
+  },
+  {
+   "text": "E-Rate Year 30 - Request for Proposal No. 2027-03",
+   "page": 21
+  },
+  {
+   "text": "PROPOSAL FORM",
+   "page": 21
+  },
+  {
+   "text": "FOR",
+   "page": 21
+  },
+  {
+   "text": "SHELLY BAIRD CABLING UPGRADE:",
+   "page": 21
+  },
+  {
+   "text": "INTERNAL CONNECTIONS",
+   "page": 21
+  },
+  {
+   "text": "E-RATE YEAR 30",
+   "page": 21
+  },
+  {
+   "text": "RFP NO. 2027-03",
+   "page": 21
+  },
+  {
+   "text": "PROPOSAL FORM",
+   "page": 21
+  },
+  {
+   "text": "TO: | Kings County Office of Education,",
+   "page": 21
+  },
+  {
+   "text": "Acting by and through its Governing Board, herein call the “District”:",
+   "page": 21
+  },
+  {
+   "text": "1. | Pursuant to and in compliance with your Notice to Vendor’s and the other documents",
+   "page": 21
+  },
+  {
+   "text": "relating thereto, the undersigned bidder, having familiarized himself with the terms of",
+   "page": 21
+  },
+  {
+   "text": "the contract, the local conditions affecting the performance of contract and the cost of",
+   "page": 21
+  },
+  {
+   "text": "the work at the place where the services are to be done and with the specifications and",
+   "page": 21
+  },
+  {
+   "text": "other contract documents, hereby proposes and agrees to perform, within the time",
+   "page": 21
+  },
+  {
+   "text": "stipulated, the contract, including all of its component parts, and everything required to",
+   "page": 21
+  },
+  {
+   "text": "be performed, and to provide and furnish any and all of the labor, materials, tools,",
+   "page": 21
+  },
+  {
+   "text": "expendable equipment, and all applicable taxes, utility and transportation services",
+   "page": 21
+  },
+  {
+   "text": "necessary to perform the contract and complete in a workmanlike manner all of the",
+   "page": 21
+  },
+  {
+   "text": "services required in connection with the following:",
+   "page": 21
+  },
+  {
+   "text": "21",
+   "page": 21
+  },
+  {
+   "text": "Kings County Office of Education | Shelly Baird Cabling Upgrade: Internal Connections",
+   "page": 22
+  },
+  {
+   "text": "E-Rate Year 30 - Request for Proposal No. 2027-03",
+   "page": 22
+  },
+  {
+   "text": "SHELLY BAIRD CABLING UPGRADE:",
+   "page": 22
+  },
+  {
+   "text": "INTERNAL CONNECTION",
+   "page": 22
+  },
+  {
+   "text": "E-RATE YEAR 30",
+   "page": 22
+  },
+  {
+   "text": "RFP NO. 2027-03",
+   "page": 22
+  },
+  {
+   "text": "COST PROPOSAL PRICING MATRIX",
+   "page": 22
+  },
+  {
+   "text": "Proposers must complete and submit this itemized pricing table with their sealed submittal. All",
+   "page": 22
+  },
+  {
+   "text": "pricing must reflect turnkey labor, materials, equipment, and e-waste disposal:",
+   "page": 22
+  },
+  {
+   "text": "E-Rate | E-Rate | Total",
+   "page": 22
+  },
+  {
+   "text": "Estimated | Labor &",
+   "page": 22
+  },
+  {
+   "text": "Item Description | Eligible | Ineligible | Proposed",
+   "page": 22
+  },
+  {
+   "text": "Qty | Installation",
+   "page": 22
+  },
+  {
+   "text": "Price | Price | Price",
+   "page": 22
+  },
+  {
+   "text": "High-Performance Cat6a | Approx. 120",
+   "page": 22
+  },
+  {
+   "text": "$_______ $_______ $_______ $_______",
+   "page": 22
+  },
+  {
+   "text": "Plenum Cable Drops | Drops",
+   "page": 22
+  },
+  {
+   "text": "2-Inch Interconnecting | Lot /",
+   "page": 22
+  },
+  {
+   "text": "$_______ $_______ $_______ $_______",
+   "page": 22
+  },
+  {
+   "text": "Room Conduit Pathways | Classrooms",
+   "page": 22
+  },
+  {
+   "text": "Front Office IDF Enclosure &",
+   "page": 22
+  },
+  {
+   "text": "Vertical Cabinet",
+   "page": 22
+  },
+  {
+   "text": "3 Units | $_______ $_______ $_______ $_______",
+   "page": 22
+  },
+  {
+   "text": "Replacements (CPI CUBE-iT",
+   "page": 22
+  },
+  {
+   "text": "99565474)",
+   "page": 22
+  },
+  {
+   "text": "Office 1-to-Nurse Office",
+   "page": 22
+  },
+  {
+   "text": "1 Run | $_______ $_______ $_______ $_______",
+   "page": 22
+  },
+  {
+   "text": "Conduit for Fiber Cable Path",
+   "page": 22
+  },
+  {
+   "text": "InformaCast Speaker & WAP Lot /",
+   "page": 22
+  },
+  {
+   "text": "$_______ $_______ $_______ $_______",
+   "page": 22
+  },
+  {
+   "text": "Cabling Drops | Campus",
+   "page": 22
+  },
+  {
+   "text": "Legacy Copper Removal & E- Campus-",
+   "page": 22
+  },
+  {
+   "text": "$_______ $_______ $_______ $_______",
+   "page": 22
+  },
+  {
+   "text": "Waste Disposal | Wide",
+   "page": 22
+  },
+  {
+   "text": "*Prices must include applicable taxes, fees and licenses.",
+   "page": 22
+  },
+  {
+   "text": "22",
+   "page": 22
+  },
+  {
+   "text": "Kings County Office of Education | Shelly Baird Cabling Upgrade: Internal Connections",
+   "page": 23
+  },
+  {
+   "text": "E-Rate Year 30 - Request for Proposal No. 2027-03",
+   "page": 23
+  },
+  {
+   "text": "Bidders must include complete bill of materials, including manufacturer make, model, quantity,",
+   "page": 23
+  },
+  {
+   "text": "unit price, extended price, installation and sales tax. Any E-rate ineligible costs must be",
+   "page": 23
+  },
+  {
+   "text": "identified and submitted on a separate bill of materials.",
+   "page": 23
+  },
+  {
+   "text": "1. | Signature of Bidder further confirms that the bidder is binding specified product with no",
+   "page": 23
+  },
+  {
+   "text": "exceptions.",
+   "page": 23
+  },
+  {
+   "text": "2. | It is understood that the District reserves the right to reject this proposal and that this",
+   "page": 23
+  },
+  {
+   "text": "proposal shall remain open and not be withdrawn for the period specified in the Notice",
+   "page": 23
+  },
+  {
+   "text": "to Vendor’s - Request for Proposal.",
+   "page": 23
+  },
+  {
+   "text": "3. | Each individual proposal term shall be determined from the specifications and all other",
+   "page": 23
+  },
+  {
+   "text": "portions of the proposal documents and shall include all items necessary to complete the",
+   "page": 23
+  },
+  {
+   "text": "work. The proposal shall include all labor, materials, equipment, tools, supplies,",
+   "page": 23
+  },
+  {
+   "text": "transportation, supervision, testing, labeling, documentation, permits, fees, bonds,",
+   "page": 23
+  },
+  {
+   "text": "insurance, and other services necessary for the successful completion of the project in",
+   "page": 23
+  },
+  {
+   "text": "accordance with the Contract Documents and Technical Specifications, whether or not",
+   "page": 23
+  },
+  {
+   "text": "every item is expressly listed or designated.",
+   "page": 23
+  },
+  {
+   "text": "4. | In submitting this proposal, the Vendor acknowledges that the General Terms and",
+   "page": 23
+  },
+  {
+   "text": "Conditions for the SHELLY BAIRD CABLING UPGRADE: Internal Connections are an integral",
+   "page": 23
+  },
+  {
+   "text": "part of the contract documents and that the General Terms and Conditions have been",
+   "page": 23
+  },
+  {
+   "text": "read, understood and accepted by bidder. The bidder understands and agrees not to",
+   "page": 23
+  },
+  {
+   "text": "disclaim knowledge of the meaning and effect of any term or provision of the General",
+   "page": 23
+  },
+  {
+   "text": "Conditions and agrees to strictly abide by their meaning and intent.",
+   "page": 23
+  },
+  {
+   "text": "5. | The required Bid Bond is hereto attached.",
+   "page": 23
+  },
+  {
+   "text": "6. | The required Non-Collusion Affidavit is hereto attached",
+   "page": 23
+  },
+  {
+   "text": "7. | The required Vendor’s Certificate Regarding Workers’ Compensation is hereto attached.",
+   "page": 23
+  },
+  {
+   "text": "8. | It is understood and agreed that if written notice of intent to award this proposal is",
+   "page": 23
+  },
+  {
+   "text": "mailed, telegraphed, or delivered to the undersigned after the evaluation of proposals",
+   "page": 23
+  },
+  {
+   "text": "within the time this proposal is required to remain open, or at any time thereafter before",
+   "page": 23
+  },
+  {
+   "text": "the proposal is withdrawn, the undersigned will execute and deliver to the District a",
+   "page": 23
+  },
+  {
+   "text": "contract in accordance with the documents as accepted, and that he will also furnish and",
+   "page": 23
+  },
+  {
+   "text": "deliver to the District the Performance and Payment Bond as specified, all within Five (5)",
+   "page": 23
+  },
+  {
+   "text": "days after receipt of notification of award, and that the work under the contract shall be",
+   "page": 23
+  },
+  {
+   "text": "commenced by the undersigned bidder, if awarded the contract, on the date to be stated",
+   "page": 23
+  },
+  {
+   "text": "in the District’s notice to the Vendor to proceed, and shall be completed by the Vendor in",
+   "page": 23
+  },
+  {
+   "text": "the time specified in the contract documents.",
+   "page": 23
+  },
+  {
+   "text": "23",
+   "page": 23
+  },
+  {
+   "text": "Kings County Office of Education | Shelly Baird Cabling Upgrade: Internal Connections",
+   "page": 24
+  },
+  {
+   "text": "E-Rate Year 30 - Request for Proposal No. 2027-03",
+   "page": 24
+  },
+  {
+   "text": "9. | All notices or other correspondence should be addressed to the undersigned at the",
+   "page": 24
+  },
+  {
+   "text": "address stated below.",
+   "page": 24
+  },
+  {
+   "text": "________________________________________________________________________",
+   "page": 24
+  },
+  {
+   "text": "________________________________________________________________________",
+   "page": 24
+  },
+  {
+   "text": "10. The names of all persons interested in the foregoing proposal as principals are as follows:",
+   "page": 24
+  },
+  {
+   "text": "________________________________________________________________________",
+   "page": 24
+  },
+  {
+   "text": "________________________________________________________________________",
+   "page": 24
+  },
+  {
+   "text": "________________________________________________________________________",
+   "page": 24
+  },
+  {
+   "text": "(IMPORTANT NOTICE: If Vendor or other interested person is a corporation, state legal",
+   "page": 24
+  },
+  {
+   "text": "name of corporation, also names of the president, secretary treasurer, and manager",
+   "page": 24
+  },
+  {
+   "text": "thereof; if a co-partnership, state true name of firm, also names of all individual co-",
+   "page": 24
+  },
+  {
+   "text": "partners composing firm; if Vendor or other interested person is an individual, state first",
+   "page": 24
+  },
+  {
+   "text": "and last names in full).",
+   "page": 24
+  },
+  {
+   "text": "11. If the Vendor is a corporation, the undersigned hereby represents and warrants that the",
+   "page": 24
+  },
+  {
+   "text": "corporation is duly incorporated and is in good standing in the State of",
+   "page": 24
+  },
+  {
+   "text": "________________ and that whose title is ___________________________ and",
+   "page": 24
+  },
+  {
+   "text": "_______________________ whose title is _________________________ is/are",
+   "page": 24
+  },
+  {
+   "text": "authorized to act for and bind the corporation.",
+   "page": 24
+  },
+  {
+   "text": "12. The undersigned bidder shall be licensed and shall provide the following information:",
+   "page": 24
+  },
+  {
+   "text": "Bidder’s California Contractor’s",
+   "page": 24
+  },
+  {
+   "text": "License Number: | ____________________________________",
+   "page": 24
+  },
+  {
+   "text": "License Expiration date: | ____________________________________",
+   "page": 24
+  },
+  {
+   "text": "Name on License: | ____________________________________",
+   "page": 24
+  },
+  {
+   "text": "Type of License: | ____________________________________",
+   "page": 24
+  },
+  {
+   "text": "13. It is understood and agreed that if requested by the District, the Vendor shall furnish a",
+   "page": 24
+  },
+  {
+   "text": "notarized financial statement, references, and other information sufficiently",
+   "page": 24
+  },
+  {
+   "text": "comprehensive to permit an appraisal of its current financial condition.",
+   "page": 24
+  },
+  {
+   "text": "14. Service Provider Identification Number (SPIN) ________________________________",
+   "page": 24
+  },
+  {
+   "text": "Federal Registration Number (FCC-FRN) _____________________________________",
+   "page": 24
+  },
+  {
+   "text": "24",
+   "page": 24
+  },
+  {
+   "text": "Kings County Office of Education | Shelly Baird Cabling Upgrade: Internal Connections",
+   "page": 25
+  },
+  {
+   "text": "E-Rate Year 30 - Request for Proposal No. 2027-03",
+   "page": 25
+  },
+  {
+   "text": "I, the below-indicated bidder, declare under penalty of perjury under the laws of the State of",
+   "page": 25
+  },
+  {
+   "text": "California, that the information provided and representations made in the proposal are true and",
+   "page": 25
+  },
+  {
+   "text": "correct.",
+   "page": 25
+  },
+  {
+   "text": "______________________________________________________________________________",
+   "page": 25
+  },
+  {
+   "text": "Name of Bidder Firm– please print",
+   "page": 25
+  },
+  {
+   "text": "______________________________________________________________________________",
+   "page": 25
+  },
+  {
+   "text": "Proper Name of Bidder – please print",
+   "page": 25
+  },
+  {
+   "text": "______________________________________________________________________________",
+   "page": 25
+  },
+  {
+   "text": "Address",
+   "page": 25
+  },
+  {
+   "text": "By: _______________________________________ | Date: ________________________",
+   "page": 25
+  },
+  {
+   "text": "Signature of Bidder",
+   "page": 25
+  },
+  {
+   "text": "(Corporate Seal)",
+   "page": 25
+  },
+  {
+   "text": "25",
+   "page": 25
+  },
+  {
+   "text": "Kings County Office of Education | Shelly Baird Cabling Upgrade: Internal Connections",
+   "page": 26
+  },
+  {
+   "text": "E-Rate Year 30 - Request for Proposal No. 2027-03",
+   "page": 26
+  },
+  {
+   "text": "BID BOND",
+   "page": 26
+  },
+  {
+   "text": "KNOW ALL MEN BY THESE PRESENT that we, the undersigned, (hereafter called",
+   "page": 26
+  },
+  {
+   "text": "“Principal”), and _______________________________________________________________",
+   "page": 26
+  },
+  {
+   "text": "(hereinafter called “Surety”), are hereby held and firmly bound unto the Kings County Office of",
+   "page": 26
+  },
+  {
+   "text": "Education District (hereafter called “Owner”), in the sum of",
+   "page": 26
+  },
+  {
+   "text": "_______________________________ ($______________________) which will and truly to be",
+   "page": 26
+  },
+  {
+   "text": "made, we hereby jointly and severally bind ourselves, successors, and assigns.",
+   "page": 26
+  },
+  {
+   "text": "SIGNED this ________ day of ____________________________, 20___.",
+   "page": 26
+  },
+  {
+   "text": "The condition of the above obligation is such that whereas the Principle has submitted to",
+   "page": 26
+  },
+  {
+   "text": "the Owner a certain Bid, attached hereto and herby made a part hereof, to enter into a contract",
+   "page": 26
+  },
+  {
+   "text": "in writing for the construction of SHELLY BAIRD CABLING UPGRADE: Internal Connections, RFP",
+   "page": 26
+  },
+  {
+   "text": "NO. 2027-03.",
+   "page": 26
+  },
+  {
+   "text": "NOW, THEREFORE,",
+   "page": 26
+  },
+  {
+   "text": "a. | If said Bid is rejected, or",
+   "page": 26
+  },
+  {
+   "text": "b. | If said Bid is accepted and the Principal executes and delivers a contract or the",
+   "page": 26
+  },
+  {
+   "text": "attached Agreement form within five (5) days after acceptance (properly",
+   "page": 26
+  },
+  {
+   "text": "completed in accordance with said Bid), and furnished bonds for his faithful",
+   "page": 26
+  },
+  {
+   "text": "performance of said Contract and for payment of all persons performing labor or",
+   "page": 26
+  },
+  {
+   "text": "furnished materials in connection therewith,",
+   "page": 26
+  },
+  {
+   "text": "Then this obligation shall be void; otherwise, the same shall remain in force and effect.",
+   "page": 26
+  },
+  {
+   "text": "Surety, for value received, hereby stipulates and agrees that no change, extension of time,",
+   "page": 26
+  },
+  {
+   "text": "alteration, or addition to the terms of the contract, or the call for bids, or the work to be",
+   "page": 26
+  },
+  {
+   "text": "performed hereunder, or the specifications accompanying the same, shall in anyway affect its",
+   "page": 26
+  },
+  {
+   "text": "obligation under this bond, and it does hereby waive notice of any such change, extension of",
+   "page": 26
+  },
+  {
+   "text": "time, alternation, or addition to the terms of said contract, or the call for bids, or the work, or to",
+   "page": 26
+  },
+  {
+   "text": "the specifications.",
+   "page": 26
+  },
+  {
+   "text": "In the event suit is brought upon this bond by the OWNER and judgment is recovered, the",
+   "page": 26
+  },
+  {
+   "text": "Surety shall pay all costs incurred by the OWNER in such suit, including without limitation,",
+   "page": 26
+  },
+  {
+   "text": "attorney’s fees to be fixed by the court.",
+   "page": 26
+  },
+  {
+   "text": "26",
+   "page": 26
+  },
+  {
+   "text": "Kings County Office of Education | Shelly Baird Cabling Upgrade: Internal Connections",
+   "page": 27
+  },
+  {
+   "text": "E-Rate Year 30 - Request for Proposal No. 2027-03",
+   "page": 27
+  },
+  {
+   "text": "IN WITNESS WHEREOF, Principal and Surety have hereunto set their hands and seals, and",
+   "page": 27
+  },
+  {
+   "text": "such of them as are corporations have caused their corporate seals to be hereto affixed and these",
+   "page": 27
+  },
+  {
+   "text": "presents to be signed by their proper officers, on the day and year first set forth above.",
+   "page": 27
+  },
+  {
+   "text": "PRINCIPAL: ___________________________________",
+   "page": 27
+  },
+  {
+   "text": "___________________________________",
+   "page": 27
+  },
+  {
+   "text": "ATTEST: (if individual, two witnesses are required)",
+   "page": 27
+  },
+  {
+   "text": "By: | By: | _______",
+   "page": 27
+  },
+  {
+   "text": "Title: | Title:",
+   "page": 27
+  },
+  {
+   "text": "ATTEST: (if corporation)",
+   "page": 27
+  },
+  {
+   "text": "By: ______________________________",
+   "page": 27
+  },
+  {
+   "text": "Title: ______________________________",
+   "page": 27
+  },
+  {
+   "text": "(Corporate Seal)",
+   "page": 27
+  },
+  {
+   "text": "SURETY: | ____________________________________",
+   "page": 27
+  },
+  {
+   "text": "ATTEST: (if individual, two witnesses are required)",
+   "page": 27
+  },
+  {
+   "text": "By: ______________________________ By: ___________________________________",
+   "page": 27
+  },
+  {
+   "text": "Title: ____________________________ Title: ___________________________________",
+   "page": 27
+  },
+  {
+   "text": "(Corporate Seal)",
+   "page": 27
+  },
+  {
+   "text": "27",
+   "page": 27
+  },
+  {
+   "text": "Kings County Office of Education | Shelly Baird Cabling Upgrade: Internal Connections",
+   "page": 28
+  },
+  {
+   "text": "E-Rate Year 30 - Request for Proposal No. 2027-03",
+   "page": 28
+  },
+  {
+   "text": "IMPORTANT: THIS IS A REQUIRED FORM.",
+   "page": 28
+  },
+  {
+   "text": "Surety companies executing bonds must possess a certificate of authority from the",
+   "page": 28
+  },
+  {
+   "text": "California Insurance Commissioner authorizing them to write surety insurance defined in",
+   "page": 28
+  },
+  {
+   "text": "California Insurance Code Section 105, and if the work or project is financed, in whole or in part,",
+   "page": 28
+  },
+  {
+   "text": "with federal, grant, or loan funds, it must also appear on the Treasury Department’s most current",
+   "page": 28
+  },
+  {
+   "text": "list (Circular 570 as amended).",
+   "page": 28
+  },
+  {
+   "text": "Any claims under this bond may be addressed to:",
+   "page": 28
+  },
+  {
+   "text": "(Name and Address of Surety)",
+   "page": 28
+  },
+  {
+   "text": "________________________________________________________________________",
+   "page": 28
+  },
+  {
+   "text": "________________________________________________________________________",
+   "page": 28
+  },
+  {
+   "text": "________________________________________________________________________",
+   "page": 28
+  },
+  {
+   "text": "(Name and Address of agent or representative for service of process in California if different from",
+   "page": 28
+  },
+  {
+   "text": "above)",
+   "page": 28
+  },
+  {
+   "text": "________________________________________________________________________",
+   "page": 28
+  },
+  {
+   "text": "________________________________________________________________________",
+   "page": 28
+  },
+  {
+   "text": "________________________________________________________________________",
+   "page": 28
+  },
+  {
+   "text": "(Telephone Number of Surety and agent/representative for service of process in California).",
+   "page": 28
+  },
+  {
+   "text": "________________________________________________________________________",
+   "page": 28
+  },
+  {
+   "text": "________________________________________________________________________",
+   "page": 28
+  },
+  {
+   "text": "28",
+   "page": 28
+  },
+  {
+   "text": "Kings County Office of Education | Shelly Baird Cabling Upgrade: Internal Connections",
+   "page": 29
+  },
+  {
+   "text": "E-Rate Year 30 - Request for Proposal No. 2027-03",
+   "page": 29
+  },
+  {
+   "text": "NON-COLLUSION AFFIDAVIT",
+   "page": 29
+  },
+  {
+   "text": "STATE OF CALIFORNIA",
+   "page": 29
+  },
+  {
+   "text": "County of ______________________________, ________________________________, being first duly",
+   "page": 29
+  },
+  {
+   "text": "(Print Name)",
+   "page": 29
+  },
+  {
+   "text": "sworn, depose and says that he or she is ___________________________________________ of the party",
+   "page": 29
+  },
+  {
+   "text": "(Title)",
+   "page": 29
+  },
+  {
+   "text": "making the foregoing bid that the bid is not made in the interest of, or on behalf of, any undisclosed",
+   "page": 29
+  },
+  {
+   "text": "person, partnership, company, association, organization, or corporation; that the bid is genuine and not",
+   "page": 29
+  },
+  {
+   "text": "collusive or sham; that the bidder has not directly or indirectly induced or solicited any other bidder to",
+   "page": 29
+  },
+  {
+   "text": "put in a false or sham bid, and has not directly or indirectly colluded, conspired, connived, or agreed with",
+   "page": 29
+  },
+  {
+   "text": "any bidder or anyone else to put in a sham bid, or that anyone shall refrain from bidding; that the bidder",
+   "page": 29
+  },
+  {
+   "text": "has not in any manner, directly or indirectly, sought by agreement, communication, or conference with",
+   "page": 29
+  },
+  {
+   "text": "anyone to fix the bid price of the bidder or any other overhead, profit, or cost element of the bid price, or",
+   "page": 29
+  },
+  {
+   "text": "of that any other bidder, or to secure any advantage against the public body awarding the contract of",
+   "page": 29
+  },
+  {
+   "text": "anyone interested in the proposed contract; that all statements contained in the bid are true; and further,",
+   "page": 29
+  },
+  {
+   "text": "that the bidder has not, directly or indirectly, submitted his or her bid price or any breakdown thereof, or",
+   "page": 29
+  },
+  {
+   "text": "the contents thereof, of divulged information or data relative thereto, or paid, and will not pay, any fee",
+   "page": 29
+  },
+  {
+   "text": "to any corporation, partnership, company association, organization, bid depository, or to any member or",
+   "page": 29
+  },
+  {
+   "text": "agent thereof to effectuate a collusive or sham bid.",
+   "page": 29
+  },
+  {
+   "text": "I certify (or declare) under penalty or perjury under the laws of the State of California that the foregoing",
+   "page": 29
+  },
+  {
+   "text": "is true and correct.",
+   "page": 29
+  },
+  {
+   "text": "Dated: _____________________ | ___________________________________",
+   "page": 29
+  },
+  {
+   "text": "Print name",
+   "page": 29
+  },
+  {
+   "text": "__________________________________",
+   "page": 29
+  },
+  {
+   "text": "Signature",
+   "page": 29
+  },
+  {
+   "text": "State of California",
+   "page": 29
+  },
+  {
+   "text": "County of ______________________",
+   "page": 29
+  },
+  {
+   "text": "On ________________________________, before me, _________________________(Notary Public),",
+   "page": 29
+  },
+  {
+   "text": "personally appeared __________________________________, who proved to me on the basis of",
+   "page": 29
+  },
+  {
+   "text": "satisfactory evidence) to be the person(s) whose name(s) is/are subscribed to the within instrument and",
+   "page": 29
+  },
+  {
+   "text": "acknowledged to me that he/she/they executed the same in his/her/their authorized capacity(ies), and",
+   "page": 29
+  },
+  {
+   "text": "that by his/her/their signature(s) on the instrument the person(s), or the entity upon behalf of which the",
+   "page": 29
+  },
+  {
+   "text": "person(s) acted, executed the instrument.",
+   "page": 29
+  },
+  {
+   "text": "I certify under PENALTY OF PERJURY under the laws of the State of California that the foregoing paragraph",
+   "page": 29
+  },
+  {
+   "text": "is true and correct.",
+   "page": 29
+  },
+  {
+   "text": "WITNESS my hand and official seal,",
+   "page": 29
+  },
+  {
+   "text": "________________________________",
+   "page": 29
+  },
+  {
+   "text": "(Signature of Notary) | (Seal of Notary)",
+   "page": 29
+  },
+  {
+   "text": "29",
+   "page": 29
+  },
+  {
+   "text": "Kings County Office of Education | Shelly Baird Cabling Upgrade: Internal Connections",
+   "page": 30
+  },
+  {
+   "text": "E-Rate Year 30 - Request for Proposal No. 2027-03",
+   "page": 30
+  },
+  {
+   "text": "VENDOR’S CERTIFICATE",
+   "page": 30
+  },
+  {
+   "text": "REGARDING WORKER’S COMPENSATION",
+   "page": 30
+  },
+  {
+   "text": "Labor Code Section 3700 in relevant part provides:",
+   "page": 30
+  },
+  {
+   "text": "“Every employer except the State shall secure the payment of compensation in one or",
+   "page": 30
+  },
+  {
+   "text": "more of the following ways:",
+   "page": 30
+  },
+  {
+   "text": "(a) By being insured against liability to pay compensation in one or more insurers duly",
+   "page": 30
+  },
+  {
+   "text": "authorized to write compensation insurance in this State.",
+   "page": 30
+  },
+  {
+   "text": "(b) By securing from the Director of Industrial Relations a certificate, consent to self-",
+   "page": 30
+  },
+  {
+   "text": "insure, which may be given upon furnishing proof satisfactory to the Director of",
+   "page": 30
+  },
+  {
+   "text": "Industrial Relations of ability to self-insure and to pay any compensation that may",
+   "page": 30
+  },
+  {
+   "text": "become due to his employees.",
+   "page": 30
+  },
+  {
+   "text": "I am aware of the provisions of Labor Code Section 3700 which require every employer to be",
+   "page": 30
+  },
+  {
+   "text": "insured against liability for workers’ compensation or to undertake self-insurance in",
+   "page": 30
+  },
+  {
+   "text": "accordance with the provisions of that code, and I will comply with such provisions before",
+   "page": 30
+  },
+  {
+   "text": "commencing the performance of this contract.",
+   "page": 30
+  },
+  {
+   "text": "____________________________________",
+   "page": 30
+  },
+  {
+   "text": "Proper Firm Name of Bidder",
+   "page": 30
+  },
+  {
+   "text": "____________________________________",
+   "page": 30
+  },
+  {
+   "text": "Proper Name of Bidder – print name",
+   "page": 30
+  },
+  {
+   "text": "By: ____________________________________",
+   "page": 30
+  },
+  {
+   "text": "Signature of Bidder",
+   "page": 30
+  },
+  {
+   "text": "In accordance with Article 5 (commencing at Section 1860), Chapter 1, Part 7, Division 2 of the",
+   "page": 30
+  },
+  {
+   "text": "Labor Code, the above certificate must be signed and filed with the awarding body prior to",
+   "page": 30
+  },
+  {
+   "text": "performing any work under this contract.",
+   "page": 30
+  },
+  {
+   "text": "30",
+   "page": 30
+  },
+  {
+   "text": "Kings County Office of Education | Shelly Baird Cabling Upgrade: Internal Connections",
+   "page": 31
+  },
+  {
+   "text": "E-Rate Year 30 - Request for Proposal No. 2027-03",
+   "page": 31
+  },
+  {
+   "text": "CONDUCT RULES FOR VENDORS",
+   "page": 31
+  },
+  {
+   "text": "Each Vendor/subcontractors, when performing work on Shelly Baird School Site properties shall adhere",
+   "page": 31
+  },
+  {
+   "text": "to the following rules of conduct:",
+   "page": 31
+  },
+  {
+   "text": "1. Professional and courteous conduct is expected and will be displayed at all times.",
+   "page": 31
+  },
+  {
+   "text": "2. Interaction with students, staff, and/or other visitors is prohibited with the exception of",
+   "page": 31
+  },
+  {
+   "text": "designated administrators.",
+   "page": 31
+  },
+  {
+   "text": "3. The use of profanity and/or disparaging language will not be tolerated.",
+   "page": 31
+  },
+  {
+   "text": "4. All vendors/subcontractors shall wear a means of identification on site when school is in session",
+   "page": 31
+  },
+  {
+   "text": "which must be approved by the District prior to commencement.",
+   "page": 31
+  },
+  {
+   "text": "5. All vendors/subcontractors shall remain in the vicinity of his/her work and will not stray to other",
+   "page": 31
+  },
+  {
+   "text": "areas of the property not involved in the proposal, including student and staff toilet facilities.",
+   "page": 31
+  },
+  {
+   "text": "6. Pursuant to Government Code Section 8350 etc. seq., the Kings County Office of Education is a",
+   "page": 31
+  },
+  {
+   "text": "drug free workplace. This policy shall be strictly enforced.",
+   "page": 31
+  },
+  {
+   "text": "7. Alcoholic beverages are prohibited from being consumed or brought on any District property.",
+   "page": 31
+  },
+  {
+   "text": "8. The use of any tobacco products on District property is strictly prohibited.",
+   "page": 31
+  },
+  {
+   "text": "9. Any lewd, obscene or otherwise indecent acts, words, or behavior by any",
+   "page": 31
+  },
+  {
+   "text": "vendor/subcontractors shall not be tolerated.",
+   "page": 31
+  },
+  {
+   "text": "10. All vendors/subcontractors shall conform to a dress code whereby:",
+   "page": 31
+  },
+  {
+   "text": "(a) No clothing that contains violent, suggestive, derogatory, obscene or racially biased",
+   "page": 31
+  },
+  {
+   "text": "material may be worn.",
+   "page": 31
+  },
+  {
+   "text": "(b) Garments, accessories or personal grooming artifacts with slogans, graphics, or pictures",
+   "page": 31
+  },
+  {
+   "text": "promoting drugs, alcohol, tobacco, or any other substances which are prohibited to",
+   "page": 31
+  },
+  {
+   "text": "minors will not be allowed.",
+   "page": 31
+  },
+  {
+   "text": "11. No firearms are allowed on campuses/District property.",
+   "page": 31
+  },
+  {
+   "text": "Non-compliance with any of the above-stated rules of conduct by any vendor/subcontractors may be",
+   "page": 31
+  },
+  {
+   "text": "sufficient grounds for immediate removal from the job-site and termination of the contract.",
+   "page": 31
+  },
+  {
+   "text": "I acknowledge that I am aware of the above-stated rules of conduct and hereby certify that all of my",
+   "page": 31
+  },
+  {
+   "text": "Company’s employees, consultants, suppliers, and/or any subcontractors will adhere to these",
+   "page": 31
+  },
+  {
+   "text": "provisions.",
+   "page": 31
+  },
+  {
+   "text": "_________________________ | __________________________________________",
+   "page": 31
+  },
+  {
+   "text": "Date | Print Firm Name",
+   "page": 31
+  },
+  {
+   "text": "__________________________________________",
+   "page": 31
+  },
+  {
+   "text": "Signature",
+   "page": 31
+  },
+  {
+   "text": "__________________________________________",
+   "page": 31
+  },
+  {
+   "text": "Print Name | Title",
+   "page": 31
+  },
+  {
+   "text": "31",
+   "page": 31
+  },
+  {
+   "text": "Kings County Office of Education | Shelly Baird Cabling Upgrade: Internal Connections",
+   "page": 32
+  },
+  {
+   "text": "E-Rate Year 30 - Request for Proposal No. 2027-03",
+   "page": 32
+  },
+  {
+   "text": "REFERENCES",
+   "page": 32
+  },
+  {
+   "text": "Provide at least five (5) current references, which include comparable work that has been performed as specified",
+   "page": 32
+  },
+  {
+   "text": "in RFP NO. 2027-03, preferably school districts utilizing the proposed SHELLY BAIRD CABLING UPGRADE:",
+   "page": 32
+  },
+  {
+   "text": "Internal Connections, include the following information:",
+   "page": 32
+  },
+  {
+   "text": "1. Name of Site:",
+   "page": 32
+  },
+  {
+   "text": "Name of Director of I.T.S. Contract:",
+   "page": 32
+  },
+  {
+   "text": "Business Address:",
+   "page": 32
+  },
+  {
+   "text": "Telephone Number:",
+   "page": 32
+  },
+  {
+   "text": "Brief description of project including cost and demonstrate how the project met or exceeded all",
+   "page": 32
+  },
+  {
+   "text": "aspects of the Objective in Section B of this RFP:",
+   "page": 32
+  },
+  {
+   "text": "2. Name of Site:",
+   "page": 32
+  },
+  {
+   "text": "Name of Director of I.T.S. Contract:",
+   "page": 32
+  },
+  {
+   "text": "Business Address:",
+   "page": 32
+  },
+  {
+   "text": "Telephone Number:",
+   "page": 32
+  },
+  {
+   "text": "Brief description of project including cost and demonstrate how the project met or exceeded all",
+   "page": 32
+  },
+  {
+   "text": "aspects of the Objective in Section B of this RFP:",
+   "page": 32
+  },
+  {
+   "text": "32",
+   "page": 32
+  },
+  {
+   "text": "Kings County Office of Education | Shelly Baird Cabling Upgrade: Internal Connections",
+   "page": 33
+  },
+  {
+   "text": "E-Rate Year 30 - Request for Proposal No. 2027-03",
+   "page": 33
+  },
+  {
+   "text": "3. Name of Site:",
+   "page": 33
+  },
+  {
+   "text": "Name of Director of I.T.S. Contract:",
+   "page": 33
+  },
+  {
+   "text": "Business Address:",
+   "page": 33
+  },
+  {
+   "text": "Telephone Number:",
+   "page": 33
+  },
+  {
+   "text": "Brief description of project including cost and demonstrate how the project met or exceeded all",
+   "page": 33
+  },
+  {
+   "text": "aspects of the Objective in Section B of this RFP:",
+   "page": 33
+  },
+  {
+   "text": "4. Name of Site:",
+   "page": 33
+  },
+  {
+   "text": "Name of Director of I.T.S. Contract:",
+   "page": 33
+  },
+  {
+   "text": "Business Address:",
+   "page": 33
+  },
+  {
+   "text": "Telephone Number:",
+   "page": 33
+  },
+  {
+   "text": "Brief description of project including cost and demonstrate how the project met or exceeded all",
+   "page": 33
+  },
+  {
+   "text": "aspects of the Objective in Section B of this RFP:",
+   "page": 33
+  },
+  {
+   "text": "5. Name of Site:",
+   "page": 33
+  },
+  {
+   "text": "Name of Director of I.T.S. Contract:",
+   "page": 33
+  },
+  {
+   "text": "Business Address:",
+   "page": 33
+  },
+  {
+   "text": "Telephone Number:",
+   "page": 33
+  },
+  {
+   "text": "Brief description of project including cost and demonstrate how the project met or exceeded all",
+   "page": 33
+  },
+  {
+   "text": "aspects of the Objective in Section B of this RFP:",
+   "page": 33
+  },
+  {
+   "text": "33",
+   "page": 33
+  },
+  {
+   "text": "Kings County Office of Education | Shelly Baird Cabling Upgrade: Internal Connections",
+   "page": 34
+  },
+  {
+   "text": "E-Rate Year 30 - Request for Proposal No. 2027-03",
+   "page": 34
+  },
+  {
+   "text": "DEBARMENT AND SUSPENSION CERTIFICATION",
+   "page": 34
+  },
+  {
+   "text": "Certification Regarding Debarment, Suspension, Ineligibility and Voluntary",
+   "page": 34
+  },
+  {
+   "text": "Exclusion Lower Tier Covered Transactions",
+   "page": 34
+  },
+  {
+   "text": "This certification is required by the U.S. Department of Education regulations implementing Executive",
+   "page": 34
+  },
+  {
+   "text": "Order 12549, Debarment and Suspension, 34 Code of Federal Regulations Part 85, for all lower tier",
+   "page": 34
+  },
+  {
+   "text": "transactions meeting the threshold and tier requirements stated at Section 85.110.",
+   "page": 34
+  },
+  {
+   "text": "(BEFORE COMPLETING CERTIFICATION, READ INSTRUCTION ON REVERSE)",
+   "page": 34
+  },
+  {
+   "text": "1. The prospective lower tier participant certifies, by submission of this proposal, that neither it",
+   "page": 34
+  },
+  {
+   "text": "nor its principals is presently debarred, suspended, proposed for debarment, declared",
+   "page": 34
+  },
+  {
+   "text": "ineligible, or voluntarily excluded from participation in this transaction by any Federal",
+   "page": 34
+  },
+  {
+   "text": "Department Agency.",
+   "page": 34
+  },
+  {
+   "text": "2. Where the prospective lower tier participant is unable to certify to any of the statements in this",
+   "page": 34
+  },
+  {
+   "text": "certification, such prospective participant shall attach an explanation to this proposal.",
+   "page": 34
+  },
+  {
+   "text": "Kings County Office of Education",
+   "page": 34
+  },
+  {
+   "text": "______________________________________",
+   "page": 34
+  },
+  {
+   "text": "Name of School District",
+   "page": 34
+  },
+  {
+   "text": "Potential Vendor or Existing Contractor (Lower Tier Participant):",
+   "page": 34
+  },
+  {
+   "text": "______________________________________ | ________________________",
+   "page": 34
+  },
+  {
+   "text": "Printed Name | Title | Signature",
+   "page": 34
+  },
+  {
+   "text": "______________________________________ | ________________________",
+   "page": 34
+  },
+  {
+   "text": "Name of Company | Date",
+   "page": 34
+  },
+  {
+   "text": "RETAIN WITH THE APPLICABLE CONTRACT OR PROPOSAL RESPONSES",
+   "page": 34
+  },
+  {
+   "text": "34",
+   "page": 34
+  },
+  {
+   "text": "Kings County Office of Education | Shelly Baird Cabling Upgrade: Internal Connections",
+   "page": 35
+  },
+  {
+   "text": "E-Rate Year 30 - Request for Proposal No. 2027-03",
+   "page": 35
+  },
+  {
+   "text": "DEBARMENT INSTRUCTION FOR CERTIFICATION",
+   "page": 35
+  },
+  {
+   "text": "1. By signing and submitting this form/proposal, the prospective lower tier participant is providing the",
+   "page": 35
+  },
+  {
+   "text": "certification set out on the reverse side in accordance with these instructions.",
+   "page": 35
+  },
+  {
+   "text": "2. The certification in this clause is a material representation of fact upon which reliance was placed when",
+   "page": 35
+  },
+  {
+   "text": "this transaction was entered into. If it is later determined that the prospective lower tier participant",
+   "page": 35
+  },
+  {
+   "text": "knowingly rendered an erroneous certification, in addition to other remedies available to the Federal",
+   "page": 35
+  },
+  {
+   "text": "Government, the department or agency with which this transaction originated may pursue available",
+   "page": 35
+  },
+  {
+   "text": "remedies, including suspension and/or debarment.",
+   "page": 35
+  },
+  {
+   "text": "3. The prospective lower tier participant shall provide immediate written notice to the person to which",
+   "page": 35
+  },
+  {
+   "text": "this proposal is submitted if at any time the prospective lower tier participant learns that it’s certification",
+   "page": 35
+  },
+  {
+   "text": "was erroneous when submitted or has become erroneous by reason of changed circumstances.",
+   "page": 35
+  },
+  {
+   "text": "4. The terms “covered transaction,” “debarred,” “suspended,” “ineligible,” “lower tier covered",
+   "page": 35
+  },
+  {
+   "text": "transaction,” “participant,” “person,” “primary covered transaction,” “principal,” “proposed,” and",
+   "page": 35
+  },
+  {
+   "text": "“voluntarily excluded,” as used in this clause, have the meanings set out in the Definitions and Coverage",
+   "page": 35
+  },
+  {
+   "text": "sections of rules implementing Executive Order 12549. You may contact the person to which this",
+   "page": 35
+  },
+  {
+   "text": "proposal is submitted for assistance in obtaining a copy of those regulations.",
+   "page": 35
+  },
+  {
+   "text": "5. The prospective lower tier participant agrees by submitting this form that, should the proposed covered",
+   "page": 35
+  },
+  {
+   "text": "transaction be entered into, it shall not knowingly enter into any lower tier covered transaction with a",
+   "page": 35
+  },
+  {
+   "text": "person who is debarred, suspended, declared ineligible, or voluntarily excluded from participation in",
+   "page": 35
+  },
+  {
+   "text": "this covered transaction, unless authorized by the department or agency with which this transaction",
+   "page": 35
+  },
+  {
+   "text": "originated.",
+   "page": 35
+  },
+  {
+   "text": "6. The prospective lower tier participant further agrees by submitting this form/proposal that it will include",
+   "page": 35
+  },
+  {
+   "text": "this clause titled “Certification Regarding Debarment, Suspension, Ineligibility and Voluntary Exclusion",
+   "page": 35
+  },
+  {
+   "text": "Lower Tier Covered Transactions,” without modification, in all lower tier covered transactions and in all",
+   "page": 35
+  },
+  {
+   "text": "solicitations for lower tier transactions.",
+   "page": 35
+  },
+  {
+   "text": "7. A participant in a covered transaction may rely upon a certification of a prospective participant in a lower",
+   "page": 35
+  },
+  {
+   "text": "tier covered transaction that is not debarred, suspended, ineligible, or voluntarily excluded from the",
+   "page": 35
+  },
+  {
+   "text": "covered transaction, unless it knows that the certification is erroneous. A participant may decide the",
+   "page": 35
+  },
+  {
+   "text": "method and frequency by which it determines the eligibility of its principals. Each participant may, but",
+   "page": 35
+  },
+  {
+   "text": "is not required to, check the Non-Procurement List.",
+   "page": 35
+  },
+  {
+   "text": "8. Nothing contained in the foregoing shall be construed to require establishment of a system of records",
+   "page": 35
+  },
+  {
+   "text": "in order to render in good faith the certification required by this clause. The knowledge and information",
+   "page": 35
+  },
+  {
+   "text": "of a participant is not required to exceed that which is normally possessed by a prudent person in the",
+   "page": 35
+  },
+  {
+   "text": "ordinary course of business dealings.",
+   "page": 35
+  },
+  {
+   "text": "9. Except for transactions authorized under paragraph 5 of these instructions, if a participant in a covered",
+   "page": 35
+  },
+  {
+   "text": "transaction knowingly enters into a lower tier covered transaction with a person who is suspended,",
+   "page": 35
+  },
+  {
+   "text": "debarred, ineligible, or voluntarily excluded from participation in this transaction, in addition to other",
+   "page": 35
+  },
+  {
+   "text": "remedies available to the Federal Government, the department or agency with which this transaction",
+   "page": 35
+  },
+  {
+   "text": "originated may pursue available remedies, including suspension and/or debarment.",
+   "page": 35
+  },
+  {
+   "text": "35",
+   "page": 35
+  },
+  {
+   "text": "Kings County Office of Education | Shelly Baird Cabling Upgrade: Internal Connections",
+   "page": 36
+  },
+  {
+   "text": "E-Rate Year 30 - Request for Proposal No. 2027-03",
+   "page": 36
+  },
+  {
+   "text": "AFTER AWARD:",
+   "page": 36
+  },
+  {
+   "text": "AGREEMENT & BOND’S",
+   "page": 36
+  },
+  {
+   "text": "36",
+   "page": 36
+  },
+  {
+   "text": "Kings County Office of Education | Shelly Baird Cabling Upgrade: Internal Connections",
+   "page": 37
+  },
+  {
+   "text": "E-Rate Year 30 - Request for Proposal No. 2027-03",
+   "page": 37
+  },
+  {
+   "text": "AGREEMENT",
+   "page": 37
+  },
+  {
+   "text": "THIS AGREEMENT, made the | day of | 2027, in the County of Kings, State of",
+   "page": 37
+  },
+  {
+   "text": "California, by and between Kings County Office of Education; hereinafter called the District, and",
+   "page": 37
+  },
+  {
+   "text": "herein after call the Contractor,",
+   "page": 37
+  },
+  {
+   "text": "WITNESSETH that the District and the Contractor for the considerations stated herein agree as follows:",
+   "page": 37
+  },
+  {
+   "text": "ARTICLE 1 – SCOPE OF WORK.",
+   "page": 37
+  },
+  {
+   "text": "The Contractor shall perform within the time stipulated the contract as herein defined, and shall",
+   "page": 37
+  },
+  {
+   "text": "provide all labor, materials, tools, utility services, and transportation to complete in a workmanlike",
+   "page": 37
+  },
+  {
+   "text": "manner all of the work required in connection with the following titled project:",
+   "page": 37
+  },
+  {
+   "text": "SHELLY BAIRD CABLING UPGRADE:",
+   "page": 37
+  },
+  {
+   "text": "INTERNAL CONNECTIONS",
+   "page": 37
+  },
+  {
+   "text": "ERATE YEAR 30",
+   "page": 37
+  },
+  {
+   "text": "(E-Rate Funding Year of July 1, 2027 through September 30, 2028)",
+   "page": 37
+  },
+  {
+   "text": "RFP NO. 2027-03",
+   "page": 37
+  },
+  {
+   "text": "IT IS THE DUTY OF THE Contractor to complete the work covered by this contract in exact accordance",
+   "page": 37
+  },
+  {
+   "text": "with the approved plans, specifications and other contract documents as specified in Article 6 below.",
+   "page": 37
+  },
+  {
+   "text": "The Contractor shall be liable to the District for any damages arising as a result of a failure to fully",
+   "page": 37
+  },
+  {
+   "text": "comply with that obligation, and the Contractor shall not be excused with respect to any failure to so",
+   "page": 37
+  },
+  {
+   "text": "comply by any act or omission of the District, Architect, Inspector, the State of California and their",
+   "page": 37
+  },
+  {
+   "text": "officers, employees, agents, and Independent Contractor of any of them, unless such act or omission",
+   "page": 37
+  },
+  {
+   "text": "actually prevents the Contractor from fully complying with the requirements of the documents, and",
+   "page": 37
+  },
+  {
+   "text": "unless the Contractor protests at the time of such alleged prevention that the act or omission is",
+   "page": 37
+  },
+  {
+   "text": "preventing the Contractor from fully complying with the contract documents. Such protest shall not",
+   "page": 37
+  },
+  {
+   "text": "be effective unless reduced to writing and filed with the District office within three (3) working days of",
+   "page": 37
+  },
+  {
+   "text": "the date of occurrence of the act or omission preventing the Contractor from fully complying with the",
+   "page": 37
+  },
+  {
+   "text": "contract documents.",
+   "page": 37
+  },
+  {
+   "text": "ARTICLE 2 – ORDER TERM AND CONTRACT TERM",
+   "page": 37
+  },
+  {
+   "text": "District reserves the right to order quantities in any size lot or lots of quantities. Pricing must remain",
+   "page": 37
+  },
+  {
+   "text": "firm for the period of April 1, 2027, through September 30, 2028. The District reserves the right to",
+   "page": 37
+  },
+  {
+   "text": "extend the intent to purchase for four additional annual terms through September 30, 2032",
+   "page": 37
+  },
+  {
+   "text": "Work performed will be for the term of 18 months from April 1, 2027, or from the start date of the",
+   "page": 37
+  },
+  {
+   "text": "project, whatever is later. The start date of the project is predicated upon the receipt of the Funding",
+   "page": 37
+  },
+  {
+   "text": "Commitment Decision Letter (FCDL) from the Universal Service Administrative Company. The District",
+   "page": 37
+  },
+  {
+   "text": "has the option to extend the term annually for an additional 48-month period total, if required.",
+   "page": 37
+  },
+  {
+   "text": "37",
+   "page": 37
+  },
+  {
+   "text": "Kings County Office of Education | Shelly Baird Cabling Upgrade: Internal Connections",
+   "page": 38
+  },
+  {
+   "text": "E-Rate Year 30 - Request for Proposal No. 2027-03",
+   "page": 38
+  },
+  {
+   "text": "ARTICLE 3 - TIME FOR COMPLETION.",
+   "page": 38
+  },
+  {
+   "text": "The work shall be commenced on the date stated in the District’s Notice to Proceed, as specified",
+   "page": 38
+  },
+  {
+   "text": "therein, shall be completed within 120 calendar days from and after the date in such notice.",
+   "page": 38
+  },
+  {
+   "text": "ARTICLE 4 – CONTRACT PRICE.",
+   "page": 38
+  },
+  {
+   "text": "The District shall pay to the Contractor as full consideration for the faithful performance of the contract,",
+   "page": 38
+  },
+  {
+   "text": "subject to any additions or deductions as provided in the contract documents, the sum of",
+   "page": 38
+  },
+  {
+   "text": "Dollars ($__________), said sum being the total amount of the following amounts stipulated in the",
+   "page": 38
+  },
+  {
+   "text": "proposal:",
+   "page": 38
+  },
+  {
+   "text": "ARTICLE 5 – HOLD HARMLESS AGREEMENT.",
+   "page": 38
+  },
+  {
+   "text": "Contractor shall defend, indemnify and hold harmless District, Architect, Inspector, the State of",
+   "page": 38
+  },
+  {
+   "text": "California and their officers, employees, agents and independent contractors from all liabilities, claims,",
+   "page": 38
+  },
+  {
+   "text": "actions, liens, judgments, demands, damages, losses, costs or expenses of any kind arising from death,",
+   "page": 38
+  },
+  {
+   "text": "personal injury, property damage or other cause based or asserted upon any act, omission, or breach",
+   "page": 38
+  },
+  {
+   "text": "connected with or arising from the progress of Work or performance of service under this Agreement",
+   "page": 38
+  },
+  {
+   "text": "or the Contract Documents. As part of this indemnity, Contractor shall protect and defend, at its own",
+   "page": 38
+  },
+  {
+   "text": "expense, District, Architect, Inspector, the State of California and their officers, employees, agents and",
+   "page": 38
+  },
+  {
+   "text": "independent contractors from any legal action including attorneys fees or other proceeding based",
+   "page": 38
+  },
+  {
+   "text": "upon such act, omission, or breach.",
+   "page": 38
+  },
+  {
+   "text": "Furthermore, Contractor agrees to and does hereby defend, indemnify and hold harmless District,",
+   "page": 38
+  },
+  {
+   "text": "Architect, Inspector, the State of California and their officers, employees, agents and independent",
+   "page": 38
+  },
+  {
+   "text": "contractors from every claim or demand made, and every liability, loss, damage, expense or",
+   "page": 38
+  },
+  {
+   "text": "attorneys fees of any nature whatsoever, which may be incurred by reason of:",
+   "page": 38
+  },
+  {
+   "text": "(a) Liability for (1) death or bodily injury to persons; (2) damage or injury to, loss (including",
+   "page": 38
+  },
+  {
+   "text": "theft), or loss of use of, any property; (3) any failure or alleged failure to comply with",
+   "page": 38
+  },
+  {
+   "text": "any provision of law or the Contract Documents; or (4) any other loss, damage or",
+   "page": 38
+  },
+  {
+   "text": "expense, sustained by any person, firm or corporation or in connection with the Work",
+   "page": 38
+  },
+  {
+   "text": "38",
+   "page": 38
+  },
+  {
+   "text": "Kings County Office of Education | Shelly Baird Cabling Upgrade: Internal Connections",
+   "page": 39
+  },
+  {
+   "text": "E-Rate Year 30 - Request for Proposal No. 2027-03",
+   "page": 39
+  },
+  {
+   "text": "called for in this Agreement or the Contract Documents, except for liability resulting",
+   "page": 39
+  },
+  {
+   "text": "from the sole or active negligence, or the willful misconduct of the District.",
+   "page": 39
+  },
+  {
+   "text": "(b) Any bodily injury to or death of persons or damage to property caused by any act,",
+   "page": 39
+  },
+  {
+   "text": "omission or breach of Contractor or any person, firm or corporation employed by",
+   "page": 39
+  },
+  {
+   "text": "Contractor, either directly or by independent contract, including all damages or injury",
+   "page": 39
+  },
+  {
+   "text": "to, loss (including theft), or loss of use of, any property, sustained by any person, firm or",
+   "page": 39
+  },
+  {
+   "text": "corporation, including the District, arising out of or in any way connected with Work",
+   "page": 39
+  },
+  {
+   "text": "covered by this Agreement or the Contract Documents, whether said injury or damage",
+   "page": 39
+  },
+  {
+   "text": "occurs either on or off District property, but not for any loss, injury, death or damages",
+   "page": 39
+  },
+  {
+   "text": "caused by the sole or active negligence or willful misconduct of the District.",
+   "page": 39
+  },
+  {
+   "text": "(c) Any dispute between Contractor and Contractor’s subcontractors/supplies/sureties,",
+   "page": 39
+  },
+  {
+   "text": "including, but not limited to, any failure or alleged failure of the Contractor (or any",
+   "page": 39
+  },
+  {
+   "text": "person hired or employed directly or indirectly by the Contractor) to pay any",
+   "page": 39
+  },
+  {
+   "text": "Subcontractor or Materialman of any tier or any other person employed in connection",
+   "page": 39
+  },
+  {
+   "text": "with the Work and/or filing of any stop notice or mechanic’s lien claims.",
+   "page": 39
+  },
+  {
+   "text": "Contractor, at its own expense, cost, and risk, shall defend any and all claims, actions, suits, or other",
+   "page": 39
+  },
+  {
+   "text": "proceedings that may be brought or instituted against the District, its officers, agents or employees, on",
+   "page": 39
+  },
+  {
+   "text": "any such claim or liability, and shall pay or satisfy any judgment that may be rendered against the",
+   "page": 39
+  },
+  {
+   "text": "District, its officers, agents or employees in any action, suit or other proceedings as a result thereof.",
+   "page": 39
+  },
+  {
+   "text": "ARTICLE 6 – PROVISIONS REQUIRED BY LAW.",
+   "page": 39
+  },
+  {
+   "text": "Each and every provision of law and clause required to be inserted in this Contract shall be deemed to",
+   "page": 39
+  },
+  {
+   "text": "be inserted herein and this Contract shall be read and enforced as though it were included herein, and",
+   "page": 39
+  },
+  {
+   "text": "if through mistake or otherwise any such provision is not inserted or is not correctly, then upon",
+   "page": 39
+  },
+  {
+   "text": "application of either party the Contract shall forthwith be physically amended to make such insertion",
+   "page": 39
+  },
+  {
+   "text": "or correction.",
+   "page": 39
+  },
+  {
+   "text": "ARTICLE 7 – COMPONENT PARTS OF THE CONTRACT.",
+   "page": 39
+  },
+  {
+   "text": "The contract entered into by this Agreement consists of the following contract documents, all of which",
+   "page": 39
+  },
+  {
+   "text": "are component parts of the contract as if herein set out in full or attached hereto:",
+   "page": 39
+  },
+  {
+   "text": "Notice to Vendor’s – Request for Proposals;",
+   "page": 39
+  },
+  {
+   "text": "General Terms and Conditions;",
+   "page": 39
+  },
+  {
+   "text": "Special Conditions;",
+   "page": 39
+  },
+  {
+   "text": "Proposal Form and Contractor’s accepted Proposal;",
+   "page": 39
+  },
+  {
+   "text": "Bid Bond ;",
+   "page": 39
+  },
+  {
+   "text": "Non-collusion Affidavit;",
+   "page": 39
+  },
+  {
+   "text": "Vendor’s Certificate Regarding Workers’ Compensation;",
+   "page": 39
+  },
+  {
+   "text": "Conduct Rules for Vendor’s",
+   "page": 39
+  },
+  {
+   "text": "References and Required certifications;",
+   "page": 39
+  },
+  {
+   "text": "Debarment and Suspension Certification;",
+   "page": 39
+  },
+  {
+   "text": "39",
+   "page": 39
+  },
+  {
+   "text": "Kings County Office of Education | Shelly Baird Cabling Upgrade: Internal Connections",
+   "page": 40
+  },
+  {
+   "text": "E-Rate Year 30 - Request for Proposal No. 2027-03",
+   "page": 40
+  },
+  {
+   "text": "E-Rate Supplemental Terms and Conditions;",
+   "page": 40
+  },
+  {
+   "text": "Agreement;",
+   "page": 40
+  },
+  {
+   "text": "Performance Bond;",
+   "page": 40
+  },
+  {
+   "text": "Payment Bond;",
+   "page": 40
+  },
+  {
+   "text": "Insurance Documents and Endorsements;",
+   "page": 40
+  },
+  {
+   "text": "Contractor Certification Regarding Background Check",
+   "page": 40
+  },
+  {
+   "text": "Addenda, if any;",
+   "page": 40
+  },
+  {
+   "text": "Specifications;",
+   "page": 40
+  },
+  {
+   "text": "Drawings and/or school site maps, if applicable",
+   "page": 40
+  },
+  {
+   "text": "All of the above-named contract documents are intended to be complementary. Work required by one",
+   "page": 40
+  },
+  {
+   "text": "of the above-named contract documents and not by others shall be done as if required by all.",
+   "page": 40
+  },
+  {
+   "text": "IN WITNESS WHEREOF, this Agreement has been dully executed by the above-named parties, on the",
+   "page": 40
+  },
+  {
+   "text": "day and year first above written.",
+   "page": 40
+  },
+  {
+   "text": "DISTRICT: | CONTRACTOR:",
+   "page": 40
+  },
+  {
+   "text": "Kings County Office of Education | ____________________________________",
+   "page": 40
+  },
+  {
+   "text": "By __________________________________ | By _________________________________",
+   "page": 40
+  },
+  {
+   "text": "Todd Barlow, Superintendent",
+   "page": 40
+  },
+  {
+   "text": "Title: ________________________________",
+   "page": 40
+  },
+  {
+   "text": "Authorized Officers",
+   "page": 40
+  },
+  {
+   "text": "or Agents",
+   "page": 40
+  },
+  {
+   "text": "(CORPORATE SEAL)",
+   "page": 40
+  },
+  {
+   "text": "40",
+   "page": 40
+  },
+  {
+   "text": "Kings County Office of Education | Shelly Baird Cabling Upgrade: Internal Connections",
+   "page": 41
+  },
+  {
+   "text": "E-Rate Year 30 - Request for Proposal No. 2027-03",
+   "page": 41
+  },
+  {
+   "text": "CONTRACT PERFORMANCE BOND",
+   "page": 41
+  },
+  {
+   "text": "KNOW ALL MEN BY THESE PRESENT:",
+   "page": 41
+  },
+  {
+   "text": "THAT WHEREAS, Kings County Office of Education (referred to hereinafter as “Obligee”) has",
+   "page": 41
+  },
+  {
+   "text": "awarded to ___________________________. (hereinafter designated as the “PRINCIPAL”), an",
+   "page": 41
+  },
+  {
+   "text": "agreement for the work described as follows: SHELLY BAIRD CABLING UPGRADE: Internal",
+   "page": 41
+  },
+  {
+   "text": "Connections, RFP NO. 2027-03; and",
+   "page": 41
+  },
+  {
+   "text": "WHEREAS, the work to be performed by the PRINCIPAL is more particularly set forth in that",
+   "page": 41
+  },
+  {
+   "text": "certain contract dated ____________________, (hereinafter referred to as the “Contract”), which",
+   "page": 41
+  },
+  {
+   "text": "Contract is incorporated herein by this reference; and",
+   "page": 41
+  },
+  {
+   "text": "WHEREAS, the CONTRACTOR is required by said PRINCIPAL to perform the terms thereof and",
+   "page": 41
+  },
+  {
+   "text": "to provide a bond both for the faithful performance and guaranty thereof.",
+   "page": 41
+  },
+  {
+   "text": "NOW, THEREFORE, we, ______________________________________, the undersigned, as",
+   "page": 41
+  },
+  {
+   "text": "PRINCIPAL, and ___________________________________________________________________,",
+   "page": 41
+  },
+  {
+   "text": "a corporation organized and existing under the laws of the State of ________________, and duly",
+   "page": 41
+  },
+  {
+   "text": "authorized to transact business under the laws of the State of California, as Surety, are held and firmly",
+   "page": 41
+  },
+  {
+   "text": "bound unto the Kings County Office of Education in the sum of",
+   "page": 41
+  },
+  {
+   "text": "_______________________________________________________Dollars ($_______________), said",
+   "page": 41
+  },
+  {
+   "text": "sum being not less than one hundred percent (100%) of the total amount payable by said Obligee under",
+   "page": 41
+  },
+  {
+   "text": "the terms of said Contract, for which amount well and truly to be made, we bind ourselves, our heirs,",
+   "page": 41
+  },
+  {
+   "text": "executors, administrators, successors, and assigns, jointly and severally, firmly by these presents.",
+   "page": 41
+  },
+  {
+   "text": "THE CONDITION OF THIS OBLIGATION IS SUCH THAT, if the hereby bounded PRINCIPAL, his or",
+   "page": 41
+  },
+  {
+   "text": "her heirs, executors, administrators, successors or assigns, shall in all things stand to and abide by, and",
+   "page": 41
+  },
+  {
+   "text": "well and truly keep and perform the covenants, conditions, and agreements in said Contract and any",
+   "page": 41
+  },
+  {
+   "text": "alteration thereof made as therein provided, on his or her part, to be kept and performed at the time",
+   "page": 41
+  },
+  {
+   "text": "and in the manner therein specified, and in all respects according to their intent and meaning; and shall",
+   "page": 41
+  },
+  {
+   "text": "faithfully fulfill guarantees of all materials and workmanship; and indemnify, defend and save harmless",
+   "page": 41
+  },
+  {
+   "text": "the Obligee, its officers and agents, as stipulated in said Contract, then this obligation shall become null",
+   "page": 41
+  },
+  {
+   "text": "and void; otherwise it shall be and remain in full force and effect.",
+   "page": 41
+  },
+  {
+   "text": "For value received, the Surety hereby stipulates and agrees that no change, extension of time,",
+   "page": 41
+  },
+  {
+   "text": "alteration, or addition to the terms of the Contract, or to the work to be performed there under, or the",
+   "page": 41
+  },
+  {
+   "text": "Specifications accompanying the same shall in any way affect its obligations on this bond, and it does",
+   "page": 41
+  },
+  {
+   "text": "hereby waive notice of any such change, extension of time, alteration, or addition to the terms of the",
+   "page": 41
+  },
+  {
+   "text": "Contract, or to the work, or to the Specifications.",
+   "page": 41
+  },
+  {
+   "text": "No final settlement between the Obligee and the PRINCIPAL shall abridge the right of any",
+   "page": 41
+  },
+  {
+   "text": "beneficiary hereunder, whose claim may be unsatisfied.",
+   "page": 41
+  },
+  {
+   "text": "41",
+   "page": 41
+  },
+  {
+   "text": "Kings County Office of Education | Shelly Baird Cabling Upgrade: Internal Connections",
+   "page": 42
+  },
+  {
+   "text": "E-Rate Year 30 - Request for Proposal No. 2027-03",
+   "page": 42
+  },
+  {
+   "text": "PRINCIPAL and Surety agree that if the Obligee is required to engage the services of an attorney",
+   "page": 42
+  },
+  {
+   "text": "in connection with enforcement of the bond, PRINCIPAL and Surety shall pay Obligee’s reasonable",
+   "page": 42
+  },
+  {
+   "text": "attorneys’ fees incurred, with or without suit, in addition to the above sum.",
+   "page": 42
+  },
+  {
+   "text": "In the event suit is brought upon this bond by the DISTRICT and judgment is recovered, the",
+   "page": 42
+  },
+  {
+   "text": "Surety shall pay all costs incurred by the DISTRICT in such suit, including reasonable attorneys’ fees to",
+   "page": 42
+  },
+  {
+   "text": "be fixed by the Court.",
+   "page": 42
+  },
+  {
+   "text": "IN WITNESS WHEREOF, we have hereunto set our hands and seals this _____ day of",
+   "page": 42
+  },
+  {
+   "text": "____________________, 20___.",
+   "page": 42
+  },
+  {
+   "text": "PRINCIPAL:",
+   "page": 42
+  },
+  {
+   "text": "___________________________________",
+   "page": 42
+  },
+  {
+   "text": "Signature",
+   "page": 42
+  },
+  {
+   "text": "(Corporate Seal) | By: ________________________________",
+   "page": 42
+  },
+  {
+   "text": "Print Name | Title",
+   "page": 42
+  },
+  {
+   "text": "SURETY:",
+   "page": 42
+  },
+  {
+   "text": "___________________________________",
+   "page": 42
+  },
+  {
+   "text": "(Corporate Seal)",
+   "page": 42
+  },
+  {
+   "text": "By: ________________________________",
+   "page": 42
+  },
+  {
+   "text": "Attorney-in-Fact",
+   "page": 42
+  },
+  {
+   "text": "The rate of premium on this bond is ______________________________ per thousand.",
+   "page": 42
+  },
+  {
+   "text": "The total amount of premium charged: $__________________________",
+   "page": 42
+  },
+  {
+   "text": "(This must be filled in by a corporate surety).",
+   "page": 42
+  },
+  {
+   "text": "42",
+   "page": 42
+  },
+  {
+   "text": "Kings County Office of Education | Shelly Baird Cabling Upgrade: Internal Connections",
+   "page": 43
+  },
+  {
+   "text": "E-Rate Year 30 - Request for Proposal No. 2027-03",
+   "page": 43
+  },
+  {
+   "text": "IMPORTANT: THIS IS A REQUIRED FORM.",
+   "page": 43
+  },
+  {
+   "text": "Surety companies executing bonds must possess a certificate of authority from the California Insurance",
+   "page": 43
+  },
+  {
+   "text": "Commissioner authorizing them to write surety insurance defined in California Insurance Code Section",
+   "page": 43
+  },
+  {
+   "text": "105, and if the work or project is financed, in whole or in part, with federal, grant or loan funds, Surety’s",
+   "page": 43
+  },
+  {
+   "text": "name must also appear on the Treasury Department’s most current list (Circular 570 as amended).",
+   "page": 43
+  },
+  {
+   "text": "Any claims under this bond may be addressed to:",
+   "page": 43
+  },
+  {
+   "text": "(Name and Address of Surety)",
+   "page": 43
+  },
+  {
+   "text": "___________________________________________________________________________________",
+   "page": 43
+  },
+  {
+   "text": "___________________________________________________________________________________",
+   "page": 43
+  },
+  {
+   "text": "Contact Name (please print) ___________________________________________________________",
+   "page": 43
+  },
+  {
+   "text": "Telephone Number (______) _____________________________",
+   "page": 43
+  },
+  {
+   "text": "Fax Number (______) _____________________________",
+   "page": 43
+  },
+  {
+   "text": "(Name and Address of agent or representative",
+   "page": 43
+  },
+  {
+   "text": "for service of process in California)",
+   "page": 43
+  },
+  {
+   "text": "___________________________________________________________________________________",
+   "page": 43
+  },
+  {
+   "text": "___________________________________________________________________________________",
+   "page": 43
+  },
+  {
+   "text": "Contact Name (please print) ___________________________________________________________",
+   "page": 43
+  },
+  {
+   "text": "Telephone Number (______) _____________________________",
+   "page": 43
+  },
+  {
+   "text": "Fax Number (______) _____________________________",
+   "page": 43
+  },
+  {
+   "text": "43",
+   "page": 43
+  },
+  {
+   "text": "Kings County Office of Education | Shelly Baird Cabling Upgrade: Internal Connections",
+   "page": 44
+  },
+  {
+   "text": "E-Rate Year 30 - Request for Proposal No. 2027-03",
+   "page": 44
+  },
+  {
+   "text": "STATE OF CALIFORNIA____________________________________) ss.",
+   "page": 44
+  },
+  {
+   "text": "COUNTY OF __________________ )",
+   "page": 44
+  },
+  {
+   "text": "On this _______________day of _______________, in the year _______, before me,",
+   "page": 44
+  },
+  {
+   "text": "________________________________, a Notary Public in and for said State, personally appeared",
+   "page": 44
+  },
+  {
+   "text": "________________________________, known to me to be the person whose name is subscribed",
+   "page": 44
+  },
+  {
+   "text": "within the instrument as the Attorney-in-Fact of the | (Surety) and",
+   "page": 44
+  },
+  {
+   "text": "acknowledged to me that he subscribed the name of the | (Surety)",
+   "page": 44
+  },
+  {
+   "text": "thereto and his own name as Attorney-in-Fact.",
+   "page": 44
+  },
+  {
+   "text": "________________________________",
+   "page": 44
+  },
+  {
+   "text": "Notary Public in and for said State | (Seal of Notary)",
+   "page": 44
+  },
+  {
+   "text": "Commission expires: ________________________",
+   "page": 44
+  },
+  {
+   "text": "NOTE: | A copy of the power-of-attorney to local representatives of the bonding company",
+   "page": 44
+  },
+  {
+   "text": "must be attached hereto",
+   "page": 44
+  },
+  {
+   "text": "45",
+   "page": 44
+  },
+  {
+   "text": "Kings County Office of Education | Shelly Baird Cabling Upgrade: Internal Connections",
+   "page": 45
+  },
+  {
+   "text": "E-Rate Year 30 - Request for Proposal No. 2027-03",
+   "page": 45
+  },
+  {
+   "text": "PAYMENT BOND",
+   "page": 45
+  },
+  {
+   "text": "(CALIFORNIA PUBLIC WORK – LABOR & MATERIAL)",
+   "page": 45
+  },
+  {
+   "text": "KNOW ALL MEN BY THESE PRESENT:",
+   "page": 45
+  },
+  {
+   "text": "THAT WHEREAS, Kings County Office of Education School District (sometimes referred to",
+   "page": 45
+  },
+  {
+   "text": "hereinafter as “Obligee”) has awarded to ____________________________. (hereinafter designated",
+   "page": 45
+  },
+  {
+   "text": "as the “CONTRACTOR”), an agreement for the work described as follows SHELLY BAIRD CABLING",
+   "page": 45
+  },
+  {
+   "text": "UPGRADE: Internal Connections, RFP NO. 2027-03 (hereinafter referred to as the “Public Work”);",
+   "page": 45
+  },
+  {
+   "text": "and",
+   "page": 45
+  },
+  {
+   "text": "WHEREAS, said CONTRACTOR is required to furnish a bond in connection with said Contract,",
+   "page": 45
+  },
+  {
+   "text": "and pursuant to California Civil Code Section 3247;",
+   "page": 45
+  },
+  {
+   "text": "NOW, THEREFORE, We, _____________________________________________________, the",
+   "page": 45
+  },
+  {
+   "text": "undersigned CONTRACTOR, as Principal; and ________________________________________, a",
+   "page": 45
+  },
+  {
+   "text": "corporation organized and existing under the laws of the State of ________________, and duly",
+   "page": 45
+  },
+  {
+   "text": "authorized to transact business under the laws of the State of California, as Surety, are held and firmly",
+   "page": 45
+  },
+  {
+   "text": "bound unto the Kings County Office of Education School District and to any and all persons, companies,",
+   "page": 45
+  },
+  {
+   "text": "or corporations entitled by law to file stop notices under California Civil Code Section 3181, or any",
+   "page": 45
+  },
+  {
+   "text": "person, company, or corporation entitled to make a claim on this bond, in the sum of",
+   "page": 45
+  },
+  {
+   "text": "__________________________________________________________ Dollars ($_____________),",
+   "page": 45
+  },
+  {
+   "text": "said sum being not less than one hundred percent (100%) of the total amount payable by said Obligee",
+   "page": 45
+  },
+  {
+   "text": "under the terms of said Contract, for which payment will and truly to be made, we bind ourselves, our",
+   "page": 45
+  },
+  {
+   "text": "heirs, executors and administrators, successors and assigns, jointly and severally, firmly by these",
+   "page": 45
+  },
+  {
+   "text": "presents.",
+   "page": 45
+  },
+  {
+   "text": "THE CONDITION OF THIS OBLIGATION IS SUCH that if said Principal, its heirs, executors,",
+   "page": 45
+  },
+  {
+   "text": "administrators, successors, or assigns, or subcontractor, shall fail to pay any person or persons named",
+   "page": 45
+  },
+  {
+   "text": "in Civil Code Section 3181; or fail to pay for any materials, provisions, or other supplies, used in, upon,",
+   "page": 45
+  },
+  {
+   "text": "for, or about the performance of the work contracted to be done, or for any work or labor thereon of",
+   "page": 45
+  },
+  {
+   "text": "any kind, or for amounts due under the Unemployment Insurance Code, with respect to work or labor",
+   "page": 45
+  },
+  {
+   "text": "thereon of any kind; or shall fail to deduct, withhold, and pay over to the Employment Development",
+   "page": 45
+  },
+  {
+   "text": "Department, any amounts required to be deducted, withheld, and paid over by Unemployment",
+   "page": 45
+  },
+  {
+   "text": "Insurance Code Section 13020 with respect to work and labor thereon of any kind, then said Surety will",
+   "page": 45
+  },
+  {
+   "text": "pay for the same, in an amount not exceeding the amount herein above set forth, and in the event suit",
+   "page": 45
+  },
+  {
+   "text": "is brought upon this bond, also will pay such reasonable attorneys’ fees as shall be fixed by the court,",
+   "page": 45
+  },
+  {
+   "text": "awarded and taxed as provided in California Civil Code Sections 3247 et. seq.",
+   "page": 45
+  },
+  {
+   "text": "This bond shall inure to the benefit of any person named in Civil Code Section 3181 giving such person",
+   "page": 45
+  },
+  {
+   "text": "or his/her assigns a right of action in any suit brought upon this bond.",
+   "page": 45
+  },
+  {
+   "text": "46",
+   "page": 45
+  },
+  {
+   "text": "Kings County Office of Education | Shelly Baird Cabling Upgrade: Internal Connections",
+   "page": 46
+  },
+  {
+   "text": "E-Rate Year 30 - Request for Proposal No. 2027-03",
+   "page": 46
+  },
+  {
+   "text": "It is further stipulated and agreed that the Surety of this bond shall not be exonerated or released from",
+   "page": 46
+  },
+  {
+   "text": "the obligation of the bond by any change, extension of time for performance, addition, alteration or",
+   "page": 46
+  },
+  {
+   "text": "modification in, to, or of any contract, plans, or specifications, or agreement pertaining or relating to",
+   "page": 46
+  },
+  {
+   "text": "any scheme or work of improvement herein above described; or pertaining or relating to the furnishing",
+   "page": 46
+  },
+  {
+   "text": "of labor, materials, or equipment therefore; nor by any change or modification of any terms of payment",
+   "page": 46
+  },
+  {
+   "text": "or extension of time for payment pertaining or relating to any scheme or work of improvement herein",
+   "page": 46
+  },
+  {
+   "text": "above described; nor by any rescission or attempted rescission of the contract, agreement or bond;",
+   "page": 46
+  },
+  {
+   "text": "nor by any conditions precedent or subsequent in the bond attempting to limit the right of recovery of",
+   "page": 46
+  },
+  {
+   "text": "claimants otherwise entitled to recover under any such contract or agreement or under the bond; nor",
+   "page": 46
+  },
+  {
+   "text": "by any fraud practiced by any person other than the claimant seeking to recover on the bond; and that",
+   "page": 46
+  },
+  {
+   "text": "this bond be construed most strongly against the Surety and in favor of all persons for whose benefit",
+   "page": 46
+  },
+  {
+   "text": "such bond is given; and under no circumstances shall the Surety be released from liability to those for",
+   "page": 46
+  },
+  {
+   "text": "whose benefit such bond has been given, by reason of any breach of contract between the DISTRICT",
+   "page": 46
+  },
+  {
+   "text": "and the CONTRACTOR or on the part of any obligee named in such bond; that the sole condition of",
+   "page": 46
+  },
+  {
+   "text": "recovery shall be that the claimant is a person described in California Civil Code Sections 3110 and",
+   "page": 46
+  },
+  {
+   "text": "3112, and who has not been paid the full amount of his or her claim; and that the Surety does hereby",
+   "page": 46
+  },
+  {
+   "text": "waive notice of any such change, extension of time, addition, alteration or modification herein",
+   "page": 46
+  },
+  {
+   "text": "mentioned.",
+   "page": 46
+  },
+  {
+   "text": "IN WITNESS WHEREOF, we have hereunto set our hands and seals this _____________ day of",
+   "page": 46
+  },
+  {
+   "text": "_____________, 20___.",
+   "page": 46
+  },
+  {
+   "text": "PRINCIPAL/CONTRACTOR:",
+   "page": 46
+  },
+  {
+   "text": "___________________________________",
+   "page": 46
+  },
+  {
+   "text": "(Corporate Seal) | By: ________________________________",
+   "page": 46
+  },
+  {
+   "text": "SURETY:",
+   "page": 46
+  },
+  {
+   "text": "___________________________________",
+   "page": 46
+  },
+  {
+   "text": "(Corporate Seal)",
+   "page": 46
+  },
+  {
+   "text": "By: ________________________________",
+   "page": 46
+  },
+  {
+   "text": "Attorney-in-Fact",
+   "page": 46
+  },
+  {
+   "text": "47",
+   "page": 46
+  },
+  {
+   "text": "Kings County Office of Education | Shelly Baird Cabling Upgrade: Internal Connections",
+   "page": 47
+  },
+  {
+   "text": "E-Rate Year 30 - Request for Proposal No. 2027-03",
+   "page": 47
+  },
+  {
+   "text": "IMPORTANT: THIS IS A REQUIRED FORM.",
+   "page": 47
+  },
+  {
+   "text": "Surety companies executing bonds must possess a certificate of authority from the California Insurance",
+   "page": 47
+  },
+  {
+   "text": "Commissioner authorizing them to write surety insurance defined in California Insurance Code Section",
+   "page": 47
+  },
+  {
+   "text": "105, and if the work or project is financed, in whole or in part, with federal, grant or loan funds, Surety’s",
+   "page": 47
+  },
+  {
+   "text": "name must also appear on the Treasury Department’s most current list (Circular 570 as amended).",
+   "page": 47
+  },
+  {
+   "text": "Any claims under this bond may be addressed to:",
+   "page": 47
+  },
+  {
+   "text": "(Name and Address of Surety)",
+   "page": 47
+  },
+  {
+   "text": "____________________________________",
+   "page": 47
+  },
+  {
+   "text": "____________________________________",
+   "page": 47
+  },
+  {
+   "text": "____________________________________",
+   "page": 47
+  },
+  {
+   "text": "Contact Name (please print)",
+   "page": 47
+  },
+  {
+   "text": "(______)_____________________________",
+   "page": 47
+  },
+  {
+   "text": "Telephone Number",
+   "page": 47
+  },
+  {
+   "text": "(______)_____________________________",
+   "page": 47
+  },
+  {
+   "text": "Fax Number",
+   "page": 47
+  },
+  {
+   "text": "(Name and Address of agent or representative",
+   "page": 47
+  },
+  {
+   "text": "for service of process in California)",
+   "page": 47
+  },
+  {
+   "text": "____________________________________",
+   "page": 47
+  },
+  {
+   "text": "____________________________________",
+   "page": 47
+  },
+  {
+   "text": "____________________________________",
+   "page": 47
+  },
+  {
+   "text": "Contact Name (please print)",
+   "page": 47
+  },
+  {
+   "text": "(______)_____________________________",
+   "page": 47
+  },
+  {
+   "text": "Telephone Number",
+   "page": 47
+  },
+  {
+   "text": "(______)_____________________________",
+   "page": 47
+  },
+  {
+   "text": "Fax Number",
+   "page": 47
+  },
+  {
+   "text": "48",
+   "page": 47
+  },
+  {
+   "text": "Kings County Office of Education | Shelly Baird Cabling Upgrade: Internal Connections",
+   "page": 48
+  },
+  {
+   "text": "E-Rate Year 30 - Request for Proposal No. 2027-03",
+   "page": 48
+  },
+  {
+   "text": "INSURANCE DOCUMENTS & ENDORSEMENTS",
+   "page": 48
+  },
+  {
+   "text": "The following insurance endorsements and documents must be provided to the District within",
+   "page": 48
+  },
+  {
+   "text": "five (5) calendar days after receipt of notification of award. If the awarded Vendor fails to provide",
+   "page": 48
+  },
+  {
+   "text": "the documents required bellow, the District may award the contract to the next responsible and",
+   "page": 48
+  },
+  {
+   "text": "responsive Vendor. All insurance provided by the bidder shall fully comply with the requirements",
+   "page": 48
+  },
+  {
+   "text": "set forth in Item No. 28 of the General Terms and Conditions of the contract documents.",
+   "page": 48
+  },
+  {
+   "text": "1. | General Liability Insurance: Certificate of Insurance with all specific insurance coverage’s",
+   "page": 48
+  },
+  {
+   "text": "set forth in Item No. 28 of the General Terms and Conditions, proper Proposal description,",
+   "page": 48
+  },
+  {
+   "text": "designation of the Kings County Office of Education as the Certificate Holder, a statement",
+   "page": 48
+  },
+  {
+   "text": "that the insurance provided is primary to any insurance obtained by the District and",
+   "page": 48
+  },
+  {
+   "text": "minimum of 30 days’ cancellation notice. Bidder shall also provide required additional",
+   "page": 48
+  },
+  {
+   "text": "insured endorsement(s) designating all parties required in the General Terms and",
+   "page": 48
+  },
+  {
+   "text": "Conditions. The additional insured endorsement shall be an ISO CG20 10 (11/85) or ISO",
+   "page": 48
+  },
+  {
+   "text": "CG 20 10 (10/93) or their equivalent as determined by the District.",
+   "page": 48
+  },
+  {
+   "text": "Incidents and claims are to be reported to the insurer at:",
+   "page": 48
+  },
+  {
+   "text": "Attn: _____________________________ | _______________________",
+   "page": 48
+  },
+  {
+   "text": "(Contact Name) | (Title)",
+   "page": 48
+  },
+  {
+   "text": "___________________________________________________________",
+   "page": 48
+  },
+  {
+   "text": "(Company)",
+   "page": 48
+  },
+  {
+   "text": "___________________________________________________________",
+   "page": 48
+  },
+  {
+   "text": "(Street Address)",
+   "page": 48
+  },
+  {
+   "text": "______________________ _________ | __________________",
+   "page": 48
+  },
+  {
+   "text": "(City) | (State) | (Zip Code)",
+   "page": 48
+  },
+  {
+   "text": "(______) ____________________ | (______) __________________",
+   "page": 48
+  },
+  {
+   "text": "(Telephone Number) | (Fax Number)",
+   "page": 48
+  },
+  {
+   "text": "49",
+   "page": 48
+  },
+  {
+   "text": "Kings County Office of Education | Shelly Baird Cabling Upgrade: Internal Connections",
+   "page": 49
+  },
+  {
+   "text": "E-Rate Year 30 - Request for Proposal No. 2027-03",
+   "page": 49
+  },
+  {
+   "text": "2. | Workers’ Compensation / Employer’s Liability Insurance: Certificate of Workers’",
+   "page": 49
+  },
+  {
+   "text": "Compensation Insurance meeting the coverage’s and requirements set for in the General",
+   "page": 49
+  },
+  {
+   "text": "Terms and Conditions, minimum of 30 days’ cancellation notice, proper Proposal",
+   "page": 49
+  },
+  {
+   "text": "description, waiver of subrogation and any applicable endorsements.",
+   "page": 49
+  },
+  {
+   "text": "3. | Automobile Liability Insurance: Certificate of Automobile Insurance meeting the",
+   "page": 49
+  },
+  {
+   "text": "coverage’s and requirements set forth in the General Terms and Conditions, minimum 30",
+   "page": 49
+  },
+  {
+   "text": "days’ cancellation notice, any applicable endorsements and a statement that the",
+   "page": 49
+  },
+  {
+   "text": "insurance provided is primary to any insurance obtained by the District.",
+   "page": 49
+  },
+  {
+   "text": "Incidents and claims are to be reported to the insurer at:",
+   "page": 49
+  },
+  {
+   "text": "Attn: _____________________________ | _______________________",
+   "page": 49
+  },
+  {
+   "text": "(Contact Name) | (Title)",
+   "page": 49
+  },
+  {
+   "text": "___________________________________________________________",
+   "page": 49
+  },
+  {
+   "text": "(Company)",
+   "page": 49
+  },
+  {
+   "text": "___________________________________________________________",
+   "page": 49
+  },
+  {
+   "text": "(Street Address)",
+   "page": 49
+  },
+  {
+   "text": "______________________ _________ | __________________",
+   "page": 49
+  },
+  {
+   "text": "(City) | (State) | (Zip Code)",
+   "page": 49
+  },
+  {
+   "text": "(______) ____________________ | (______) __________________",
+   "page": 49
+  },
+  {
+   "text": "(Telephone Number) | (Fax Number)",
+   "page": 49
+  },
+  {
+   "text": "___________________________ | ____________________________________",
+   "page": 49
+  },
+  {
+   "text": "Date | Vendor’s Firm Name",
+   "page": 49
+  },
+  {
+   "text": "By: ____________________________________",
+   "page": 49
+  },
+  {
+   "text": "Signature",
+   "page": 49
+  },
+  {
+   "text": "____________________________________",
+   "page": 49
+  },
+  {
+   "text": "Title",
+   "page": 49
+  },
+  {
+   "text": "50",
+   "page": 49
+  },
+  {
+   "text": "Kings County Office of Education | Shelly Baird Cabling Upgrade: Internal Connections",
+   "page": 50
+  },
+  {
+   "text": "E-Rate Year 30 - Request for Proposal No. 2027-03",
+   "page": 50
+  },
+  {
+   "text": "VENDOR’S/CONTRACTOR’S CERTIFICATION REGARDING",
+   "page": 50
+  },
+  {
+   "text": "BACKGROUND CHECKS",
+   "page": 50
+  },
+  {
+   "text": "____________________________________ certifies that it has performed one of the following:",
+   "page": 50
+  },
+  {
+   "text": "[Name of Vendor]",
+   "page": 50
+  },
+  {
+   "text": "Pursuant to Education Code Section 45125.1, Contractor has conducted criminal background",
+   "page": 50
+  },
+  {
+   "text": "checks, through the California Department of Justice, of all employees providing services to the",
+   "page": 50
+  },
+  {
+   "text": "Kings County Office of Education, pursuant to the contract/purchase order dated",
+   "page": 50
+  },
+  {
+   "text": "_________________________, and that none have been convicted of serious or violent felonies,",
+   "page": 50
+  },
+  {
+   "text": "as specified in Penal Code Sections 1192.7(c) and 667.5(c), respectively.",
+   "page": 50
+  },
+  {
+   "text": "As further required by Education Code Section 45125.1, attached hereto as Attachment “A” is a",
+   "page": 50
+  },
+  {
+   "text": "list of the names of the employees of the undersigned who may come in contact with pupils.",
+   "page": 50
+  },
+  {
+   "text": "OR",
+   "page": 50
+  },
+  {
+   "text": "Pursuant to Education Code Section 45125.2, Vendor will ensure the safety of pupils by one or",
+   "page": 50
+  },
+  {
+   "text": "more of the following methods:",
+   "page": 50
+  },
+  {
+   "text": "1) The installation of a physical barrier at the worksite to limit contact with",
+   "page": 50
+  },
+  {
+   "text": "pupils.",
+   "page": 50
+  },
+  {
+   "text": "2) Continual supervision and monitoring of all employees of the entity by an",
+   "page": 50
+  },
+  {
+   "text": "employee of the entity whom the Department of Justice has ascertained has",
+   "page": 50
+  },
+  {
+   "text": "not been convicted of a violent or serious felony.",
+   "page": 50
+  },
+  {
+   "text": "I declare under penalty of perjury under the laws of the United States that the foregoing is true",
+   "page": 50
+  },
+  {
+   "text": "and correct.",
+   "page": 50
+  },
+  {
+   "text": "Date: __________________, 20 ___ | __________________________________________",
+   "page": 50
+  },
+  {
+   "text": "[Name of Vendor]",
+   "page": 50
+  },
+  {
+   "text": "__________________________________________",
+   "page": 50
+  },
+  {
+   "text": "Signature",
+   "page": 50
+  },
+  {
+   "text": "By its: ___________________________________",
+   "page": 50
+  },
+  {
+   "text": "Print Name | Title",
+   "page": 50
+  },
+  {
+   "text": "51",
+   "page": 50
+  },
+  {
+   "text": "Kings County Office of Education | Shelly Baird Cabling Upgrade: Internal Connections",
+   "page": 51
+  },
+  {
+   "text": "E-Rate Year 30 - Request for Proposal No. 2027-03",
+   "page": 51
+  },
+  {
+   "text": "ATTACHMENT “A”",
+   "page": 51
+  },
+  {
+   "text": "(INSERT NAMES OF EMPLOYEES WHO MAY COME IN CONTACT WITH",
+   "page": 51
+  },
+  {
+   "text": "PUPILS)",
+   "page": 51
+  },
+  {
+   "text": "52",
+   "page": 51
+  },
+  {
+   "text": "Kings County Office of Education | Shelly Baird Cabling Upgrade: Internal Connections",
+   "page": 52
+  },
+  {
+   "text": "E-Rate Year 30 - Request for Proposal No. 2027-03",
+   "page": 52
+  },
+  {
+   "text": "Kings County Office of Education",
+   "page": 52
+  },
+  {
+   "text": "CONSTRUCTION CONTRACTOR",
+   "page": 52
+  },
+  {
+   "text": "FORMS AND AGREEMENT",
+   "page": 52
+  },
+  {
+   "text": "STEP 1 – Employee Verification",
+   "page": 52
+  },
+  {
+   "text": "Are you a part-time or full-time employee of the:",
+   "page": 52
+  },
+  {
+   "text": "Kings County Office of Education School District? | Yes | No",
+   "page": 52
+  },
+  {
+   "text": "• If you responded affirmatively, STOP, you cannot be hired as a Contractor. Contact the Kings",
+   "page": 52
+  },
+  {
+   "text": "County Office of Education School District Office immediately for further assistance.",
+   "page": 52
+  },
+  {
+   "text": "• If you responded negatively, please continue to Step II.",
+   "page": 52
+  },
+  {
+   "text": "STEP II – Form W-9",
+   "page": 52
+  },
+  {
+   "text": "As instructed by the Internal Revenue Service and the California Franchise Tax Board, the Kings County",
+   "page": 52
+  },
+  {
+   "text": "Office of Education School District must obtain Taxpayer Identification Numbers for every person or entity",
+   "page": 52
+  },
+  {
+   "text": "(other than Corporations) that performs services for the District.",
+   "page": 52
+  },
+  {
+   "text": "Are you incorporated? | Yes | No",
+   "page": 52
+  },
+  {
+   "text": "• If you responded affirmatively, please continue to Step III and disregard Form W-9 (attached).",
+   "page": 52
+  },
+  {
+   "text": "• If you responded negatively, please complete Form W-9 and continue to Step III.",
+   "page": 52
+  },
+  {
+   "text": "STEP III – Form 590",
+   "page": 52
+  },
+  {
+   "text": "As directed by California Revenue and Taxation Code, Section 18662, the Kings County Office of Education",
+   "page": 52
+  },
+  {
+   "text": "School District is required to withhold income or franchise tax on payment of California source income",
+   "page": 52
+  },
+  {
+   "text": "made to nonresidents of California.",
+   "page": 52
+  },
+  {
+   "text": "Are you a resident of California, or",
+   "page": 52
+  },
+  {
+   "text": "Do you have a permanent place of business",
+   "page": 52
+  },
+  {
+   "text": "in California? | Yes | No",
+   "page": 52
+  },
+  {
+   "text": "All nonresidents who respond negatively and who do not complete and return Form 590 will be subject",
+   "page": 52
+  },
+  {
+   "text": "to the seven percent (7%) tax withholding.",
+   "page": 52
+  },
+  {
+   "text": "• If you responded affirmatively, please disregard Form 590 (attached).",
+   "page": 52
+  },
+  {
+   "text": "• If you responded negatively, please complete Form 590.",
+   "page": 52
+  },
+  {
+   "text": "________________________________________ | ______________________________",
+   "page": 52
+  },
+  {
+   "text": "Signature | Date",
+   "page": 52
+  },
+  {
+   "text": "________________________________________ | _____________________________",
+   "page": 52
+  },
+  {
+   "text": "Print Name | Title | Phone Number",
+   "page": 52
+  },
+  {
+   "text": "___________________________________________",
+   "page": 52
+  },
+  {
+   "text": "Name of Company",
+   "page": 52
+  },
+  {
+   "text": "53",
+   "page": 52
+  },
+  {
+   "text": "Kings County Office of Education | Shelly Baird Cabling Upgrade: Internal Connections",
+   "page": 53
+  },
+  {
+   "text": "E-Rate Year 30 - Request for Proposal No. 2027-03",
+   "page": 53
+  },
+  {
+   "text": "THIS PAGE LEFT BLANK INTENTIONALLY",
+   "page": 53
+  },
+  {
+   "text": "54",
+   "page": 53
+  }
+ ]
+}

@@ -10,6 +10,7 @@ const RULES: [MilestoneType, RegExp][] = [
   ['qa_deadline', /\bq\s*&\s*a\b|\bquestions?\b|\binquir(y|ies)\b|\bclarification/i],
   ['site_walk', /\bsite\s*(walk|visit|tour)\b|\bwalk[\s-]?through\b/i],
   ['pre_bid', /\bpre[\s-]?(bid|proposal|submission)\b|\b(bidders?|vendor)\s*conference\b/i],
+  ['allowable_contract', /\ballowable\s+contract\s+date\b|\bacd\b/i],
   ['addenda', /\baddend(a|um)\b/i],
   ['award', /\baward\b|\bboard\s*(meeting|approval|vote)\b|\bintent to award\b/i],
   ['due', /\bdue\b|\bdeadline\b|\bsubmi(t|ssion)\b|\bclos(e|es|ing)\b|\bbid opening\b|\bopening\b/i],

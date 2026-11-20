@@ -1,0 +1,1027 @@
+{
+ "id": "pdf-d4c633c7fc",
+ "kind": "pdf",
+ "today": "2026-11-20",
+ "lines": [
+  {
+   "text": "#2027-001-006",
+   "page": 1
+  },
+  {
+   "text": "Request for Bid",
+   "page": 1
+  },
+  {
+   "text": "60 Desktops and 25 Laptops for HACN",
+   "page": 1
+  },
+  {
+   "text": "Bid Solicitation: # 2027-001-006",
+   "page": 1
+  },
+  {
+   "text": "Due Date: November 18th, 2026, AT 5:00 PM",
+   "page": 1
+  },
+  {
+   "text": "Housing Authority of the Cherokee Nation",
+   "page": 1
+  },
+  {
+   "text": "PO Box 1007",
+   "page": 1
+  },
+  {
+   "text": "Tahlequah, Oklahoma 74465",
+   "page": 1
+  },
+  {
+   "text": "555-555-0100",
+   "page": 1
+  },
+  {
+   "text": "#2027-001-006",
+   "page": 2
+  },
+  {
+   "text": "General Provisions",
+   "page": 2
+  },
+  {
+   "text": "1. Purpose",
+   "page": 2
+  },
+  {
+   "text": "The purpose of this Request for Bids (RFB) is to solicit competitive bids from qualified vendors for the",
+   "page": 2
+  },
+  {
+   "text": "purchase of new desktop and laptop computers. The intent is to acquire enterprise-class equipment that is",
+   "page": 2
+  },
+  {
+   "text": "compatible with the organization’s existing Windows-based environment and management tooling. The",
+   "page": 2
+  },
+  {
+   "text": "specifications listed below are intended to establish a minimum standard. All bids may offer solutions that",
+   "page": 2
+  },
+  {
+   "text": "are equal to or superior to these requirements.",
+   "page": 2
+  },
+  {
+   "text": "2. Scope of Purchase",
+   "page": 2
+  },
+  {
+   "text": "The successful vendor will provide, deliver, and warranty the following:",
+   "page": 2
+  },
+  {
+   "text": "• Thirty (60) Small Form Factor / Micro Desktop Computers",
+   "page": 2
+  },
+  {
+   "text": "• Ten (25) Laptop Computers",
+   "page": 2
+  },
+  {
+   "text": "All equipment must be new, unused, and current‑generation models at the time of delivery.",
+   "page": 2
+  },
+  {
+   "text": "3. Technical Requirements",
+   "page": 2
+  },
+  {
+   "text": "3.1 Desktop Computer Minimum Specifications (Qty: 60)",
+   "page": 2
+  },
+  {
+   "text": "Bidders must provide a new business-class micro or ultra‑small form factor business desktop meeting or",
+   "page": 2
+  },
+  {
+   "text": "exceeding the following minimum requirements:",
+   "page": 2
+  },
+  {
+   "text": "• Form Factor",
+   "page": 2
+  },
+  {
+   "text": "o Mico Desktop, Mini Desktop, or Small Form Factor (SFF) chassis",
+   "page": 2
+  },
+  {
+   "text": "o Designed for commercial/business use",
+   "page": 2
+  },
+  {
+   "text": "o Current production Model",
+   "page": 2
+  },
+  {
+   "text": "• Processor:",
+   "page": 2
+  },
+  {
+   "text": "o Minimum Intel® Core™ i5 processor (12th Generation or Newer) or equivalent",
+   "page": 2
+  },
+  {
+   "text": "o Minimum six (6) physical processing cores",
+   "page": 2
+  },
+  {
+   "text": "• Operating System:",
+   "page": 2
+  },
+  {
+   "text": "o Windows 11 Pro (64‑bit)",
+   "page": 2
+  },
+  {
+   "text": "• Memory:",
+   "page": 2
+  },
+  {
+   "text": "o 16 GB DDR5 RAM (single module acceptable)",
+   "page": 2
+  },
+  {
+   "text": "o Upgradeable memory",
+   "page": 2
+  },
+  {
+   "text": "• Storage:",
+   "page": 2
+  },
+  {
+   "text": "o 256 GB solid‑state drive (SSD), TLC or better",
+   "page": 2
+  },
+  {
+   "text": "o NVMe or equivalent performance",
+   "page": 2
+  },
+  {
+   "text": "o Upgradeable storage",
+   "page": 2
+  },
+  {
+   "text": "• Graphics:",
+   "page": 2
+  },
+  {
+   "text": "o Integrated graphics supporting dual monitors",
+   "page": 2
+  },
+  {
+   "text": "• Networking:",
+   "page": 2
+  },
+  {
+   "text": "o Integrated Gigabit Ethernet (10/100/1000 Mbps)",
+   "page": 2
+  },
+  {
+   "text": "o Wi‑Fi 6E (802.11ax) or better",
+   "page": 2
+  },
+  {
+   "text": "o Integrated Bluetooth 5.0 or better",
+   "page": 2
+  },
+  {
+   "text": "• Security:",
+   "page": 2
+  },
+  {
+   "text": "o Discrete Trusted Platform Module (TPM 2.0) enabled",
+   "page": 2
+  },
+  {
+   "text": "o Secure Boot Capable",
+   "page": 2
+  },
+  {
+   "text": "#2027-001-006",
+   "page": 3
+  },
+  {
+   "text": "• Ports",
+   "page": 3
+  },
+  {
+   "text": "o Minimum six (6) USB ports",
+   "page": 3
+  },
+  {
+   "text": "o Minimum two (2) display outputs (HDMI, DisplayPort, or Equivalent)",
+   "page": 3
+  },
+  {
+   "text": "o One (1) RJ-45 Ethernet Port",
+   "page": 3
+  },
+  {
+   "text": "o Audio input/output capability",
+   "page": 3
+  },
+  {
+   "text": "• Peripherals and Accessories:",
+   "page": 3
+  },
+  {
+   "text": "o Keyboard, mouse, and monitor are not required and shall not be included unless specifically",
+   "page": 3
+  },
+  {
+   "text": "requested.",
+   "page": 3
+  },
+  {
+   "text": "• Management and Compliance:",
+   "page": 3
+  },
+  {
+   "text": "o Energy Star certified or equivalent",
+   "page": 3
+  },
+  {
+   "text": "• Support and Warranty:",
+   "page": 3
+  },
+  {
+   "text": "o Four (4) year manufacturer warranty",
+   "page": 3
+  },
+  {
+   "text": "o Four (4) year Next Business Day Onsite Support",
+   "page": 3
+  },
+  {
+   "text": "o Part, Labor. And Travel Included",
+   "page": 3
+  },
+  {
+   "text": "3.2 Laptop Computer Minimum Specifications (Qty: 25)",
+   "page": 3
+  },
+  {
+   "text": "Bidders must provide a new business‑class laptop computer meeting or exceeding the following minimum",
+   "page": 3
+  },
+  {
+   "text": "requirements:",
+   "page": 3
+  },
+  {
+   "text": "• Form Factor",
+   "page": 3
+  },
+  {
+   "text": "o Business-class notebook computer",
+   "page": 3
+  },
+  {
+   "text": "o Approximately 16-inch display",
+   "page": 3
+  },
+  {
+   "text": "o Current Production model",
+   "page": 3
+  },
+  {
+   "text": "• Processor:",
+   "page": 3
+  },
+  {
+   "text": "o Minimum Intel® Core™ i5 processor (12th Generation or newer) or equivalent",
+   "page": 3
+  },
+  {
+   "text": "o Minimum six (6) physical processing cores",
+   "page": 3
+  },
+  {
+   "text": "• Operating System:",
+   "page": 3
+  },
+  {
+   "text": "o Windows 11 Pro (64‑bit)",
+   "page": 3
+  },
+  {
+   "text": "• Memory:",
+   "page": 3
+  },
+  {
+   "text": "o Minimum 16 GB DDR5 RAM",
+   "page": 3
+  },
+  {
+   "text": "o Upgradeable where supported by manufacturers",
+   "page": 3
+  },
+  {
+   "text": "• Storage:",
+   "page": 3
+  },
+  {
+   "text": "o 256 GB SSD, TLC or better",
+   "page": 3
+  },
+  {
+   "text": "o NVMe or equivalent performance",
+   "page": 3
+  },
+  {
+   "text": "o Upgradeable where supported by manufacturers",
+   "page": 3
+  },
+  {
+   "text": "• Display:",
+   "page": 3
+  },
+  {
+   "text": "o Minimum 16‑inch display",
+   "page": 3
+  },
+  {
+   "text": "o Full HD+ (1920×1200) or better resolution",
+   "page": 3
+  },
+  {
+   "text": "o Antiglare",
+   "page": 3
+  },
+  {
+   "text": "o Minimum 300 nits brightness",
+   "page": 3
+  },
+  {
+   "text": "• Graphics:",
+   "page": 3
+  },
+  {
+   "text": "o Integrated graphics",
+   "page": 3
+  },
+  {
+   "text": "• Camera and Audio:",
+   "page": 3
+  },
+  {
+   "text": "o Integrated web camera with privacy shutter (720p Minimum)",
+   "page": 3
+  },
+  {
+   "text": "o Integrated microphone and speakers",
+   "page": 3
+  },
+  {
+   "text": "#2027-001-006",
+   "page": 4
+  },
+  {
+   "text": "• Keyboard and Input:",
+   "page": 4
+  },
+  {
+   "text": "o Backlit US English keyboard with numeric keypad",
+   "page": 4
+  },
+  {
+   "text": "• Networking:",
+   "page": 4
+  },
+  {
+   "text": "o Wi‑Fi 6E (802.11ax) or better",
+   "page": 4
+  },
+  {
+   "text": "o Bluetooth 5.3 or better",
+   "page": 4
+  },
+  {
+   "text": "• Battery and Power:",
+   "page": 4
+  },
+  {
+   "text": "o ENERGY STAR certified or equivalent",
+   "page": 4
+  },
+  {
+   "text": "o AC power adapter and charging cable included",
+   "page": 4
+  },
+  {
+   "text": "• Security and Management:",
+   "page": 4
+  },
+  {
+   "text": "o TPM 2.0",
+   "page": 4
+  },
+  {
+   "text": "o Secure Boot compatibility",
+   "page": 4
+  },
+  {
+   "text": "• Ports:",
+   "page": 4
+  },
+  {
+   "text": "o Minimum three (3) USB ports",
+   "page": 4
+  },
+  {
+   "text": "o Minimum one (1) USB-C port",
+   "page": 4
+  },
+  {
+   "text": "o HDMI or equivalent display output",
+   "page": 4
+  },
+  {
+   "text": "o Audio input/output jack",
+   "page": 4
+  },
+  {
+   "text": "• Support and Warranty:",
+   "page": 4
+  },
+  {
+   "text": "o Minimum four (4) year comprehensive hardware support with next business day on‑site",
+   "page": 4
+  },
+  {
+   "text": "service",
+   "page": 4
+  },
+  {
+   "text": "o Four (4) year manufacturer warranty",
+   "page": 4
+  },
+  {
+   "text": "4. Software and Licensing",
+   "page": 4
+  },
+  {
+   "text": "• Microsoft Office licensing is not to be included, except where a trial is bundled by the manufacturer.",
+   "page": 4
+  },
+  {
+   "text": "• No third‑party anti‑virus or security software is required.",
+   "page": 4
+  },
+  {
+   "text": "• Operating system recovery media is not required.",
+   "page": 4
+  },
+  {
+   "text": "• Windows Autopilot provisioning is not required but must not prevent future enablement.",
+   "page": 4
+  },
+  {
+   "text": "5. Delivery and Packaging",
+   "page": 4
+  },
+  {
+   "text": "• All systems must be delivered fully assembled and ready for deployment.",
+   "page": 4
+  },
+  {
+   "text": "• Standard manufacturer packaging is acceptable.",
+   "page": 4
+  },
+  {
+   "text": "• Delivery must be completed within the vendor’s standard lead time after receipt of purchase order.",
+   "page": 4
+  },
+  {
+   "text": "6. Vendor Qualifications",
+   "page": 4
+  },
+  {
+   "text": "Vendors must:",
+   "page": 4
+  },
+  {
+   "text": "• Be an authorized reseller or manufacturer of the proposed equipment",
+   "page": 4
+  },
+  {
+   "text": "• Demonstrate experience supplying enterprise or public‑sector IT hardware",
+   "page": 4
+  },
+  {
+   "text": "• Provide manufacturer‑backed warranty and support",
+   "page": 4
+  },
+  {
+   "text": "7. Bid Submission Requirements",
+   "page": 4
+  },
+  {
+   "text": "Bids must include:",
+   "page": 4
+  },
+  {
+   "text": "1. Completed pricing for all requested quantities",
+   "page": 4
+  },
+  {
+   "text": "2. Manufacturer and model numbers proposed",
+   "page": 4
+  },
+  {
+   "text": "3. Detailed specification sheets demonstrating compliance",
+   "page": 4
+  },
+  {
+   "text": "4. Warranty and support details",
+   "page": 4
+  },
+  {
+   "text": "5. Estimated delivery timeline",
+   "page": 4
+  },
+  {
+   "text": "#2027-001-006",
+   "page": 5
+  },
+  {
+   "text": "6. Any exceptions or deviations from the stated requirements",
+   "page": 5
+  },
+  {
+   "text": "8. Award and Evaluation Criteria",
+   "page": 5
+  },
+  {
+   "text": "Bids will be evaluated and awarded based on cost and the criteria below.",
+   "page": 5
+  },
+  {
+   "text": "• Compliance with technical requirements",
+   "page": 5
+  },
+  {
+   "text": "• Total cost of ownership",
+   "page": 5
+  },
+  {
+   "text": "• Warranty and support offerings",
+   "page": 5
+  },
+  {
+   "text": "• Vendor qualifications and past performance",
+   "page": 5
+  },
+  {
+   "text": "• Delivery timelines",
+   "page": 5
+  },
+  {
+   "text": "9. Terms and Conditions",
+   "page": 5
+  },
+  {
+   "text": "• The organization reserves the right to reject any or all bids.",
+   "page": 5
+  },
+  {
+   "text": "• Equivalent or better configurations may be accepted at the organization’s discretion.",
+   "page": 5
+  },
+  {
+   "text": "• Award does not obligate the organization to purchase quantities beyond those specified.",
+   "page": 5
+  },
+  {
+   "text": "10. Questions/Communications",
+   "page": 5
+  },
+  {
+   "text": "All questions/communication regarding this REQUEST FOR BIDS, including questions, additional",
+   "page": 5
+  },
+  {
+   "text": "information, notifications, document attachments, etc., must be submitted by specified",
+   "page": 5
+  },
+  {
+   "text": "deadlines outlined below:",
+   "page": 5
+  },
+  {
+   "text": "Email: bids@hacn.org All questions and inquiries must be made via email and be received no later",
+   "page": 5
+  },
+  {
+   "text": "than Monday, November 9 ,2026 at 2:00 P.M. responses will be sent no later than noon on,",
+   "page": 5
+  },
+  {
+   "text": "Thursday, November 12th, 2026, at 5:00 p.m.",
+   "page": 5
+  },
+  {
+   "text": "Other Licenses and Registrations Requirement: All consultants are required to hold any and all necessary",
+   "page": 5
+  },
+  {
+   "text": "applicable professional licenses and registrations required by law. Proof of professional licenses is",
+   "page": 5
+  },
+  {
+   "text": "required with the proposal. Obtaining and ensuring compliance with all licensing and registering",
+   "page": 5
+  },
+  {
+   "text": "requirements is the complete responsibility of the contractor.",
+   "page": 5
+  },
+  {
+   "text": "Cherokee and Indian Preference: HACN will be accepting bids from Indian and Non-Indian parties.",
+   "page": 5
+  },
+  {
+   "text": "Indian preference will be given only to Vendors who provide proof of current certification from the",
+   "page": 5
+  },
+  {
+   "text": "Cherokee Nation Tribal Employment Rights Office (TERO) located in Tahlequah, OK. Proof of TERO",
+   "page": 5
+  },
+  {
+   "text": "certification must be included with the submission. The awarded contract is subject to Section 7(b)",
+   "page": 5
+  },
+  {
+   "text": "of the Indian Self-Determination and Education Assistance Act, which requires in part that to the",
+   "page": 5
+  },
+  {
+   "text": "greatest extent feasible, preference in the award of contracts and subcontracts shall be given to",
+   "page": 5
+  },
+  {
+   "text": "Indian Organizations and Indian Owned Economic Enterprises.",
+   "page": 5
+  },
+  {
+   "text": "Conflict of Interest and Restrictions: If any contractor, contractor's employee, subcontractor, or any",
+   "page": 5
+  },
+  {
+   "text": "individual working on the proposed contract may have a possible conflict of interest that may affect the",
+   "page": 5
+  },
+  {
+   "text": "objectivity, analysis, and/or performance of the contract, it shall be declared in writing upon discovery,",
+   "page": 5
+  },
+  {
+   "text": "via contact information posted in this REQUEST FOR BIDS. HACN will determine in writing if the conflict is",
+   "page": 5
+  },
+  {
+   "text": "significant and material and if so, may eliminate the contractor from submitting a proposal.",
+   "page": 5
+  },
+  {
+   "text": "Verbal Instructions: Interested parties shall not initiate or execute any negotiation, decision, or action",
+   "page": 5
+  },
+  {
+   "text": "arising from any verbal discussion with any HACN employee. Only written communications from the",
+   "page": 5
+  },
+  {
+   "text": "designated Contact Person at HACN may be considered duly authorized expressions on behalf of HACN",
+   "page": 5
+  },
+  {
+   "text": "regarding this REQUEST FOR BIDS. Additionally, only written communications from interested parties are",
+   "page": 5
+  },
+  {
+   "text": "#2027-001-006",
+   "page": 6
+  },
+  {
+   "text": "recognized as duly authorized expressions on behalf of the vendor. The same instructions shall apply to",
+   "page": 6
+  },
+  {
+   "text": "any subsequent award and agreement communications.",
+   "page": 6
+  },
+  {
+   "text": "Binding Contract: This REQUEST FOR BIDS does not obligate HACN or the selected contractor until a",
+   "page": 6
+  },
+  {
+   "text": "contract is signed and approved by both parties. If approved, it is effective from the date of final",
+   "page": 6
+  },
+  {
+   "text": "approval. HACN shall not be responsible for work done, even in good faith, prior to final approval of the",
+   "page": 6
+  },
+  {
+   "text": "proposed contract. Any and all costs incurred by contractor's preparing and submitting a proposal are",
+   "page": 6
+  },
+  {
+   "text": "the contractor's responsibility and shall not be charged to HACN or reflected as an expense of a",
+   "page": 6
+  },
+  {
+   "text": "resulting contract.",
+   "page": 6
+  },
+  {
+   "text": "Cancellation of the REQUEST FOR BIDS: HACN retains the right to cancel, modify, amend, or withdraw,",
+   "page": 6
+  },
+  {
+   "text": "the REQUEST FOR BIDS process at any time, at HACN’s sole discretion. HACN shall not be responsible for",
+   "page": 6
+  },
+  {
+   "text": "costs incurred by contractors for proposal preparation.",
+   "page": 6
+  },
+  {
+   "text": "Disclosure of RFB Contents: HACN will not disclose the list of vendors that have responded to the",
+   "page": 6
+  },
+  {
+   "text": "posted REQUEST FOR BIDS, or any content from a submission, throughout the review process. Once a",
+   "page": 6
+  },
+  {
+   "text": "contract has been awarded, the winning vendor will be listed with the original post online",
+   "page": 6
+  },
+  {
+   "text": "(cherokeebids.org).",
+   "page": 6
+  },
+  {
+   "text": "Acceptance",
+   "page": 6
+  },
+  {
+   "text": "Submissions will be accepted from Indian and Non-Indian Vendors. HACN reserves the right to",
+   "page": 6
+  },
+  {
+   "text": "determine if the submission meets stated requirements, in the best interest of HACN, to further the",
+   "page": 6
+  },
+  {
+   "text": "discussion with scheduled demonstrations and interviews. To be considered, submissions must be",
+   "page": 6
+  },
+  {
+   "text": "received by the specified date and time. HACN reserves the right to reject any and all submissions.",
+   "page": 6
+  },
+  {
+   "text": "Method of Award: After reviewing all submissions received and HACN has determined the ability to",
+   "page": 6
+  },
+  {
+   "text": "move forward, a purchase order will be awarded to the responsible Vendor whose submission is",
+   "page": 6
+  },
+  {
+   "text": "determined to be in the best interest, and most responsive in accordance with the HACN",
+   "page": 6
+  },
+  {
+   "text": "Procurement Policy.",
+   "page": 6
+  },
+  {
+   "text": "Deadline Submission Details:",
+   "page": 6
+  },
+  {
+   "text": "MANDATORY SUBMITTAL INFORMATION: The deadline for bids is Wednesday, November 18th, 2026, at",
+   "page": 6
+  },
+  {
+   "text": "5:00 P.M. Bids may be e-mailed to bids@hacn.org or hand delivered to Pat Morgan at 1200 W.",
+   "page": 6
+  },
+  {
+   "text": "4th Street, Tahlequah, OK 74464. It is the bidder’s responsibility to ensure delivery of bids. Bids received",
+   "page": 6
+  },
+  {
+   "text": "after the deadline will not be considered.",
+   "page": 6
+  },
+  {
+   "text": "#2027-001-006",
+   "page": 7
+  },
+  {
+   "text": "Additional submission information",
+   "page": 7
+  },
+  {
+   "text": "Acceptance of Conditions Governing the Procurement: Vendors must indicate their",
+   "page": 7
+  },
+  {
+   "text": "acceptance of conditions governing this procurement.",
+   "page": 7
+  },
+  {
+   "text": "HACN is Tax exempt. Please include acknowledgement of Tax exemption status.",
+   "page": 7
+  },
+  {
+   "text": "Incurring Cost: Any costs incurred by the vendor in preparation, transmittal, or presentation of any",
+   "page": 7
+  },
+  {
+   "text": "proposal, or material submitted in response to this REQUEST FOR BIDS shall be the responsibility of",
+   "page": 7
+  },
+  {
+   "text": "the vendor. The vendor is responsible for all costs associated with travel for on-site demonstrations",
+   "page": 7
+  },
+  {
+   "text": "upon the request of HACN.",
+   "page": 7
+  },
+  {
+   "text": "Responsiveness: Prior to evaluation, each submission shall be reviewed to determine whether it is",
+   "page": 7
+  },
+  {
+   "text": "responsive. Nonresponsive submissions shall be eliminated and will not be evaluated. Factors that",
+   "page": 7
+  },
+  {
+   "text": "may result in a submission being declared nonresponsive are:",
+   "page": 7
+  },
+  {
+   "text": "1. Not providing evidence of meeting the Minimum Requirements.",
+   "page": 7
+  },
+  {
+   "text": "2. When applicable, not attending mandatory meetings or site visit.",
+   "page": 7
+  },
+  {
+   "text": "3. Substantive and material conflicts of interest which were not declared and/or were",
+   "page": 7
+  },
+  {
+   "text": "declared and determined to be significant enough that HACN requested the potential",
+   "page": 7
+  },
+  {
+   "text": "contractor not submit a REQUEST FOR BIDS.",
+   "page": 7
+  },
+  {
+   "text": "4. Substantive and material noncompliance to requirements listed or adherence to",
+   "page": 7
+  },
+  {
+   "text": "submission guidelines.",
+   "page": 7
+  },
+  {
+   "text": "5. Not providing a price or timeline, if applicable.",
+   "page": 7
+  },
+  {
+   "text": "6. Not meeting established deadlines",
+   "page": 7
+  },
+  {
+   "text": "Evaluation Process: Including cost, an evaluation committee consisting of HACN employees shall",
+   "page": 7
+  },
+  {
+   "text": "evaluate responsive submissions. Each member of the evaluation committee shall independently",
+   "page": 7
+  },
+  {
+   "text": "evaluate each submission. The evaluation will be based on the evaluation factors and values stated in",
+   "page": 7
+  },
+  {
+   "text": "this REQUEST FOR BIDS. Discussions, presentations, and/or site visits, if held, may result in individual",
+   "page": 7
+  },
+  {
+   "text": "evaluation committee members changing their scores.",
+   "page": 7
+  },
+  {
+   "text": "#2027-001-006",
+   "page": 8
+  },
+  {
+   "text": "MANDATORY RESPONSE SHEET",
+   "page": 8
+  },
+  {
+   "text": "BASE REQUEST FOR BIDS Includes: (Check List)",
+   "page": 8
+  },
+  {
+   "text": "Proposed Solution(s)",
+   "page": 8
+  },
+  {
+   "text": "Company & Project Team Information (Experience & Qualifications)",
+   "page": 8
+  },
+  {
+   "text": "Pre-Interview Estimated Costs",
+   "page": 8
+  },
+  {
+   "text": "Contracts/Agreements/Support Assurances",
+   "page": 8
+  },
+  {
+   "text": "References (with valid email/phone contacts)",
+   "page": 8
+  },
+  {
+   "text": "Acceptance of Conditions Governing the Procurement",
+   "page": 8
+  },
+  {
+   "text": "Acceptance of HACN is Tax exemption status",
+   "page": 8
+  },
+  {
+   "text": "(CHEROKEE) TRIBAL OR INDIAN PREFERENCE:",
+   "page": 8
+  },
+  {
+   "text": "TERO Certified Contractor: ________YES _________NO (check one)",
+   "page": 8
+  },
+  {
+   "text": "(Proof of Certification must accompany all bids)",
+   "page": 8
+  },
+  {
+   "text": "SUBMITTED BY:",
+   "page": 8
+  },
+  {
+   "text": "__________________________________ _________________________________",
+   "page": 8
+  },
+  {
+   "text": "COMPANY NAME /COMPANY ADDRESS",
+   "page": 8
+  },
+  {
+   "text": "__________________________________ _________________________________",
+   "page": 8
+  },
+  {
+   "text": "PRINT NAME & TITLE AUTHORIZED SIGNATURE",
+   "page": 8
+  },
+  {
+   "text": "__________________________________ _________________________________",
+   "page": 8
+  },
+  {
+   "text": "EMAIL ADDRESS PHONE NUMBER",
+   "page": 8
+  },
+  {
+   "text": "__________________________________",
+   "page": 8
+  },
+  {
+   "text": "DATE",
+   "page": 8
+  }
+ ]
+}

@@ -97,6 +97,16 @@ describe('reminders', () => {
   });
 });
 
+describe('unknown milestone types', () => {
+  it('a type missing from this version\'s reminder defaults does not crash', () => {
+    const reminderDefaults = { ...S.reminderDefaults } as Record<string, number[]>;
+    delete reminderDefaults.allowable_contract;
+    const settings = { ...S, reminderDefaults } as unknown as NotificationSettings;
+    const b = bidDue('a', '2026-11-23T14:00:00', {}, [makeMilestone('a-acd', 'allowable_contract', '2026-11-18T17:00:00.000-06:00', { bidId: 'a' })]);
+    expect(() => run([b], t('2026-11-16T14:00:00'), logOf(DIGEST_MON), settings)).not.toThrow();
+  });
+});
+
 describe('digest', () => {
   it('does not swallow a reminder for a stop the digest does not list (> 7 days out)', () => {
     const b = bidDue('a', '2026-11-30T07:00:00');

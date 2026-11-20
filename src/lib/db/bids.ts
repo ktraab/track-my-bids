@@ -18,6 +18,7 @@ const BID_COLUMNS = {
   receivedAt: 'received_at', quotedAt: 'quoted_at', followedUpAt: 'followed_up_at',
   pricingMode: 'pricing_mode', markupType: 'markup_type', markupValue: 'markup_value',
   sellRounding: 'sell_rounding', wholeVendorId: 'whole_vendor_id',
+  erate: 'erate', erate470Number: 'erate_470_number', erateFundingYear: 'erate_funding_year', erateCategory: 'erate_category',
 } as const;
 
 export type EditableBidKey = keyof typeof BID_COLUMNS;
@@ -184,6 +185,9 @@ export function createBidRepo(
     }
     if (patch.sellRounding !== undefined && ![0.01, 1, 5].includes(patch.sellRounding)) {
       throw new Error('Rounding must be to the cent, $1 or $5');
+    }
+    if (patch.erateCategory !== undefined && patch.erateCategory !== null && patch.erateCategory !== 1 && patch.erateCategory !== 2) {
+      throw new Error('E-Rate category must be 1 or 2');
     }
     if (patch.wholeVendorId) {
       const v = await sql.select('SELECT id FROM vendor_quotes WHERE id = ? AND bid_id = ? AND deleted_at IS NULL', [patch.wholeVendorId, id]);

@@ -1,0 +1,539 @@
+{
+ "id": "pdf-3a97b98e25",
+ "kind": "pdf",
+ "today": "2026-11-20",
+ "lines": [
+  {
+   "text": "WI-FI",
+   "page": 1
+  },
+  {
+   "text": "CATEGORY 2 WI-FI EQUIPMENT REQUEST FOR BIDS | WIFI EQUIPMENT GUIDELINES",
+   "page": 1
+  },
+  {
+   "text": "BILLED ENTITY NUMBER | BEN36659",
+   "page": 1
+  },
+  {
+   "text": "SCHOOL NAME | St. Hugh Catholic School",
+   "page": 1
+  },
+  {
+   "text": "Related Components on this Form 470 are filed to support any eligible Internal Connections devices that may be required for any wiring projects, switching hardware",
+   "page": 1
+  },
+  {
+   "text": "ADDRESS | 3460 Royal Rd. | and/or network devices.",
+   "page": 1
+  },
+  {
+   "text": "CITY | Miami",
+   "page": 1
+  },
+  {
+   "text": "STATE | Florida",
+   "page": 1
+  },
+  {
+   "text": "ZIPCODE | 33133",
+   "page": 1
+  },
+  {
+   "text": "ERATE FUNDING YEAR | 2027",
+   "page": 1
+  },
+  {
+   "text": "BID RECIPIENT NAME | Pat Morgan",
+   "page": 1
+  },
+  {
+   "text": "BID RECIPIENT EMAIL | person1@st-hugh.org | New Wi-Fi equipment requested on this tab are deemed to include the phrase “or equivalent.\"",
+   "page": 1
+  },
+  {
+   "text": "NEW EQUIPMENT LICENSE | INSTALLATION",
+   "page": 1
+  },
+  {
+   "text": "MANUFACTURER PART | LICENSE TERM",
+   "page": 1
+  },
+  {
+   "text": "EQUIPMENT | MAKE | MODEL | QUANTITY | REQUEST | REQUEST | NOTES",
+   "page": 1
+  },
+  {
+   "text": "NUMBER (SKU) | 1YR | 3YR | 5YR",
+   "page": 1
+  },
+  {
+   "text": "Y/N | Y/N",
+   "page": 1
+  },
+  {
+   "text": "ACCESS POINTS",
+   "page": 1
+  },
+  {
+   "text": "Ruckus One Cloud | Ruckus | Ruckus-One | 1 | YES | 3YR | YES",
+   "page": 1
+  },
+  {
+   "text": "RUCKUS ONE PROFESSIONALS | Ruckus | Ruckus-One professional | CLD-PROF-APSW-MSP1 | 17 | YES | 3YR | YES",
+   "page": 1
+  },
+  {
+   "text": "ACCESS POINTS ACCESSORIES : AP MOUNTS | BRACKETS | ETC",
+   "page": 1
+  },
+  {
+   "text": "SWITCHES",
+   "page": 1
+  },
+  {
+   "text": "SWITCHES | Datto | Datto/Unifi | E48 | 5 | YES | 3YR | YES",
+   "page": 1
+  },
+  {
+   "text": "E24v3 | 2 | YES | 3YR | YES",
+   "page": 1
+  },
+  {
+   "text": "E8 | 3 | YES | 3YR | YES",
+   "page": 1
+  },
+  {
+   "text": "SWITCH ACCESSORIES: DAC CABLES|POWER SUPPLY|CORD|ETC",
+   "page": 1
+  },
+  {
+   "text": "TRANCEIVERS | MODULES | ANTENNAS",
+   "page": 1
+  },
+  {
+   "text": "WIRELESS CONTROLLER",
+   "page": 1
+  },
+  {
+   "text": "ROUTER",
+   "page": 1
+  },
+  {
+   "text": "FIREWALL",
+   "page": 1
+  },
+  {
+   "text": "CACHING SERVER",
+   "page": 1
+  },
+  {
+   "text": "UPS | BATTERY BACKUP",
+   "page": 1
+  },
+  {
+   "text": "APC Smart-UPS C 1500VA LCD",
+   "page": 1
+  },
+  {
+   "text": "APC | Smart-UPS C 1500VA LCD SMC1500C | 2 | YES | NO",
+   "page": 1
+  },
+  {
+   "text": "120V with SmartConnect",
+   "page": 1
+  },
+  {
+   "text": "RACKS AND CABINETS",
+   "page": 1
+  },
+  {
+   "text": "WI-FI",
+   "page": 1
+  },
+  {
+   "text": "RENEWAL LICENSES",
+   "page": 2
+  },
+  {
+   "text": "CATEGORY 2 WI-FI EQUIPMENT RENEWAL LICENCES REQUEST FOR BIDS | RENEWAL LICENSES GUIDELINES",
+   "page": 2
+  },
+  {
+   "text": "BILLED ENTITY NUMBER | BEN36659",
+   "page": 2
+  },
+  {
+   "text": "SCHOOL NAME | St. Hugh Catholic School",
+   "page": 2
+  },
+  {
+   "text": "ADDRESS | 3460 Royal Rd.",
+   "page": 2
+  },
+  {
+   "text": "CITY | Miami",
+   "page": 2
+  },
+  {
+   "text": "STATE | Florida",
+   "page": 2
+  },
+  {
+   "text": "ZIPCODE | 33133",
+   "page": 2
+  },
+  {
+   "text": "ERATE FUNDING YEAR | 2027",
+   "page": 2
+  },
+  {
+   "text": "BID RECIPIENT NAME | Pat Morgan",
+   "page": 2
+  },
+  {
+   "text": "BID RECIPIENT EMAIL | person1@st-hugh.org",
+   "page": 2
+  },
+  {
+   "text": "RENEWAL LICENSE TERM",
+   "page": 2
+  },
+  {
+   "text": "EQUIPMENT | MAKE | MODEL | MANUFACTURER PART NUMBER / SKU | QUANTITY | NOTES",
+   "page": 2
+  },
+  {
+   "text": "1YR | 3YR | 5YR",
+   "page": 2
+  },
+  {
+   "text": "PowerEdge R360 Server | Dell | 210-BJTR | 210-BJTR | 1 | 3YR",
+   "page": 2
+  },
+  {
+   "text": "SonicWall NSa 2700 APSS | Sonic Wall | Nsa 2700 APSS | 02-SSC-6905 | 1 | 1YR",
+   "page": 2
+  },
+  {
+   "text": "RENEWAL LICENSES",
+   "page": 2
+  },
+  {
+   "text": "MANAGED SERVICES",
+   "page": 3
+  },
+  {
+   "text": "CATEGORY 2 MANAGED SERVICES REQUEST FOR BIDS | MANAGED SERVICES GUIDELINES",
+   "page": 3
+  },
+  {
+   "text": "BILLED ENTITY NUMBER | BEN36659",
+   "page": 3
+  },
+  {
+   "text": "MIBS and BMIC requested on this Form 470 are intended to cover any Managed Services/Basic Maintenance that are requested for our existing equipment listed",
+   "page": 3
+  },
+  {
+   "text": "SCHOOL NAME | St. Hugh Catholic School",
+   "page": 3
+  },
+  {
+   "text": "on this or Form 470 and RFP. It is intended to request bids for generalized Managed services and Maintenance contracts for all eligible Wi-Fi equipment and",
+   "page": 3
+  },
+  {
+   "text": "ADDRESS | 3460 Royal Rd. | network devices.",
+   "page": 3
+  },
+  {
+   "text": "CITY | Miami",
+   "page": 3
+  },
+  {
+   "text": "Quotes should clearly delineate and list a monthly recurring cost for all network equipment types for Managed Services and/or Basic Maintenance Support, if",
+   "page": 3
+  },
+  {
+   "text": "STATE | Florida | applicable.",
+   "page": 3
+  },
+  {
+   "text": "ZIPCODE | 33133",
+   "page": 3
+  },
+  {
+   "text": "ERATE FUNDING YEAR | 2027",
+   "page": 3
+  },
+  {
+   "text": "BID RECIPIENT NAME | Pat Morgan",
+   "page": 3
+  },
+  {
+   "text": "BID RECIPIENT EMAIL | person1@st-hugh.org",
+   "page": 3
+  },
+  {
+   "text": "MANUFACTURER PART NUMBER | MANAGED EQUIPMENT:",
+   "page": 3
+  },
+  {
+   "text": "INDIVIDUAL SCHOOL NAME/LOCATION | PRODUCT TYPE | MAKE | MODEL | QTY | NOTES",
+   "page": 3
+  },
+  {
+   "text": "/ SKU | TO BE PURCHASED, EXISTING, OR LEASED",
+   "page": 3
+  },
+  {
+   "text": "St. Hugh Catholic School | Network | Nsa 2700 APSS | Firewall | 1 | EXISTING | Managing network configurations and WIFI equipment",
+   "page": 3
+  },
+  {
+   "text": "Datto/Unifi | Switches | 10 | NEW",
+   "page": 3
+  },
+  {
+   "text": "Ruckus | Access Points | 18 | EXISTING",
+   "page": 3
+  },
+  {
+   "text": "MANAGED SERVICES",
+   "page": 3
+  },
+  {
+   "text": "BASIC MAINTENANCE",
+   "page": 4
+  },
+  {
+   "text": "CATEGORY 2 BASIC MAINTENANCE REQUEST FOR BIDS | BASIC MAINTENANCE GUIDELINES",
+   "page": 4
+  },
+  {
+   "text": "BILLED ENTITY NUMBER | BEN36659",
+   "page": 4
+  },
+  {
+   "text": "St. Hugh Catholic School | MIBS and BMIC requested on this Form 470 are intended to cover any Managed Services/Basic Maintenance that are requested for our existing",
+   "page": 4
+  },
+  {
+   "text": "SCHOOL NAME",
+   "page": 4
+  },
+  {
+   "text": "equipment listed on this or Form 470 and RFP. It is intended to request bids for generalized Managed services and Maintenance contracts for all",
+   "page": 4
+  },
+  {
+   "text": "ADDRESS | 3460 Royal Rd. | eligible Wi-Fi equipment and network devices.",
+   "page": 4
+  },
+  {
+   "text": "CITY | Miami",
+   "page": 4
+  },
+  {
+   "text": "Quotes should clearly delineate and list a monthly recurring cost for all network equipment types for Managed Services and/or Basic Maintenance",
+   "page": 4
+  },
+  {
+   "text": "STATE | Florida | Support, if applicable.",
+   "page": 4
+  },
+  {
+   "text": "ZIPCODE | 33133",
+   "page": 4
+  },
+  {
+   "text": "ERATE FUNDING YEAR | 2027",
+   "page": 4
+  },
+  {
+   "text": "BID RECIPIENT NAME | Pat Morgan",
+   "page": 4
+  },
+  {
+   "text": "BID RECIPIENT EMAIL | person1@st-hugh.org",
+   "page": 4
+  },
+  {
+   "text": "MANUFACTURER PART | REQUESTED MAINTENANCE FOR",
+   "page": 4
+  },
+  {
+   "text": "INDIVIDUAL SCHOOL NAME/LOCATION | PRODUCT TYPE | MAKE | MODEL | QTY | NOTES",
+   "page": 4
+  },
+  {
+   "text": "NUMBER / SKU | EQUIPMENT NEW OR EXISTING",
+   "page": 4
+  },
+  {
+   "text": "St Hugh Catholic School | Basic Maintenance | Nsa 2700 APSS | Firewall | 1 | EXISTING | Troubleshooting a firewall replacing failed hardware components firmware updates when needed",
+   "page": 4
+  },
+  {
+   "text": "Datto/Unifi | Switches | 10 | NEW",
+   "page": 4
+  },
+  {
+   "text": "Ruckus | Access Points | 18 | EXISTING",
+   "page": 4
+  },
+  {
+   "text": "BASIC MAINTENANCE",
+   "page": 4
+  },
+  {
+   "text": "FCC Form 470 Vendor Bidding Instructions: Category 2",
+   "page": 5
+  },
+  {
+   "text": "1. Include the FCC Form 470 application number and School Name in the subject line of all Vendor",
+   "page": 5
+  },
+  {
+   "text": "email submissions.",
+   "page": 5
+  },
+  {
+   "text": "2. The fair and open competitive bidding period will conclude at 12:00am EST of the Allowable",
+   "page": 5
+  },
+  {
+   "text": "Contract Date.",
+   "page": 5
+  },
+  {
+   "text": " Bids received by email by 11:59pm EST prior to the Allowable Contract Date will be",
+   "page": 5
+  },
+  {
+   "text": "evaluated.",
+   "page": 5
+  },
+  {
+   "text": " Bids received on or after 12:00am EST of the Allowable Contract Date may be disqualified.",
+   "page": 5
+  },
+  {
+   "text": "3. Respond by email ONLY to the Technical Contact provided on the FCC Form 470; DO NOT contact",
+   "page": 5
+  },
+  {
+   "text": "the applicant by phone.",
+   "page": 5
+  },
+  {
+   "text": "4. DO NOT contact the Consultant, either by phone or email, except to report that the applicant did",
+   "page": 5
+  },
+  {
+   "text": "not respond to your inquiries.",
+   "page": 5
+  },
+  {
+   "text": "5. Respond to only the equipment/services requested on this FCC Form 470. Only custom bids in",
+   "page": 5
+  },
+  {
+   "text": "response to the applicant’s specific request(s) will be evaluated. “Robo Bids” may be disqualified.",
+   "page": 5
+  },
+  {
+   "text": "6. Quotes that include purchase of equipment should clearly specify the signature date and an",
+   "page": 5
+  },
+  {
+   "text": "expiration date of 9/30/2028.",
+   "page": 5
+  },
+  {
+   "text": "7. Quotes that include Managed Services and/or Basic Maintenance should clearly specify the start",
+   "page": 5
+  },
+  {
+   "text": "date of 7/1/2027 and end date of 6/30/20XX.",
+   "page": 5
+  },
+  {
+   "text": "8. Applicant will evaluate complete bids. Incomplete bids may be disqualified.",
+   "page": 5
+  },
+  {
+   "text": "9. Complete bids include the following:",
+   "page": 5
+  },
+  {
+   "text": " The FCC Form 470 application number.",
+   "page": 5
+  },
+  {
+   "text": " A valid SPIN.",
+   "page": 5
+  },
+  {
+   "text": " E-Rate eligible items for Category 2 must be listed and priced individually, including delivery,",
+   "page": 5
+  },
+  {
+   "text": "installation, and configuration (if requested).",
+   "page": 5
+  },
+  {
+   "text": " Provide E-Rate eligibility percentages for all proposed equipment/services.",
+   "page": 5
+  },
+  {
+   "text": " Vendor’s confirmation that their equipment/services included in the bid will provide a",
+   "page": 5
+  },
+  {
+   "text": "complete and seamless operating system when installed.",
+   "page": 5
+  },
+  {
+   "text": " A valid Manufacturer SKU for all E-Rate eligible equipment.",
+   "page": 5
+  },
+  {
+   "text": " ALL requested Products and Services on the FCC Form 470.",
+   "page": 5
+  },
+  {
+   "text": "10. Vendor must certify and validate that they are an authorized reseller of the manufacturer of the",
+   "page": 5
+  },
+  {
+   "text": "E-Rate eligible equipment. Applicant will not accept bids that include grey market products or",
+   "page": 5
+  },
+  {
+   "text": "equipment. Bids that include grey market equipment or do not contain the proper certifications will",
+   "page": 5
+  },
+  {
+   "text": "be disqualified.",
+   "page": 5
+  },
+  {
+   "text": "11. Description of services and/or equipment requested on this FCC Form 470 are deemed to include",
+   "page": 5
+  },
+  {
+   "text": "the phrase “or equivalent”. This applicant will accept and consider bids for equivalent",
+   "page": 5
+  },
+  {
+   "text": "equipment/services, as per USAC rules & regulations.",
+   "page": 5
+  },
+  {
+   "text": "12. Vendor must comply with Applicant’s preference of SPI or BEAR invoicing.",
+   "page": 5
+  }
+ ]
+}

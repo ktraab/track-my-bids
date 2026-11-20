@@ -1,0 +1,23 @@
+{
+  "due": null,
+  "pre_bid": null,
+  "pre_bid_mandatory": null,
+  "qa_deadline": null,
+  "site_walk": null,
+  "bid_number": null,
+  "agency_name": "St. Hugh Catholic School",
+  "buyer_email": "person1@st-hugh.org",
+  "title": "Category 2 Wi-Fi Equipment",
+  "erate": true,
+  "erate_470_number": null,
+  "erate_funding_year": "2027",
+  "erate_category": "2",
+  "allowable_contract": null,
+  "scope_tags": [
+    "Wi-Fi",
+    "Networking",
+    "Power / UPS",
+    "Licensing"
+  ],
+  "scope_has_summary": false
+}

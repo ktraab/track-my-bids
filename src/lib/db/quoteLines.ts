@@ -7,6 +7,7 @@ export interface NewQuoteLine {
   qty: number;
   description: string;
   partNo?: string | null;
+  unitCost?: number | null; // own cost
 }
 
 export interface QuoteLinePatch {
@@ -17,11 +18,12 @@ export interface QuoteLinePatch {
   markupValue?: number | null;
   sellOverride?: number | null;
   chosenVendorId?: string | null;
+  unitCost?: number | null;
 }
 
 const PATCH_COLUMNS: Record<keyof QuoteLinePatch, string> = {
   qty: 'qty', description: 'description', partNo: 'part_no', markupType: 'markup_type',
-  markupValue: 'markup_value', sellOverride: 'sell_override', chosenVendorId: 'chosen_vendor_id',
+  markupValue: 'markup_value', sellOverride: 'sell_override', chosenVendorId: 'chosen_vendor_id', unitCost: 'unit_cost',
 };
 
 export const priceId = (vendorQuoteId: string, lineId: string) => `${vendorQuoteId}:${lineId}`;
@@ -41,6 +43,7 @@ const nonNeg = (v: unknown, msg: string): number | null => {
   if (typeof v !== 'number' || !Number.isFinite(v) || v < 0) throw new Error(msg);
   return v;
 };
+const COST_ERR = 'Cost must be 0 or more';
 function checkMarkupType(v: unknown): MarkupType | null {
   if (v === null) return null;
   if (v !== 'pct' && v !== 'unit' && v !== 'line') throw new Error('Markup type is invalid');
@@ -69,14 +72,16 @@ export function createQuoteLineRepo(sql: Sql, now: () => string = isoNow, uuid: 
   async function insert(bidId: string, input: NewQuoteLine, position: number, t: string): Promise<string> {
     const id = uuid();
     await sql.execute(
-      'INSERT INTO quote_lines (id, bid_id, position, qty, description, part_no, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
-      [id, bidId, position, checkQty(input.qty), checkDesc(input.description), input.partNo?.trim() || null, t, t]);
+      'INSERT INTO quote_lines (id, bid_id, position, qty, description, part_no, unit_cost, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',
+      [id, bidId, position, checkQty(input.qty), checkDesc(input.description), input.partNo?.trim() || null,
+        nonNeg(input.unitCost ?? null, COST_ERR), t, t]);
     return id;
   }
 
   async function add(bidId: string, input: NewQuoteLine): Promise<string> {
     checkQty(input.qty);
     checkDesc(input.description);
+    nonNeg(input.unitCost ?? null, COST_ERR);
     await requireBid(bidId);
     const t = now();
     const id = await insert(bidId, input, await nextPosition(bidId), t);
@@ -84,7 +89,7 @@ export function createQuoteLineRepo(sql: Sql, now: () => string = isoNow, uuid: 
     return id;
   }
 
-  /** Paste from Excel: rows with a blank description are skipped; bad quantities become 1. */
+  /** Paste from Excel: rows with a blank description are skipped; bad quantities become 1, bad own costs none. */
   async function addMany(bidId: string, rows: NewQuoteLine[]): Promise<string[]> {
     await requireBid(bidId);
     const t = now();
@@ -93,7 +98,8 @@ export function createQuoteLineRepo(sql: Sql, now: () => string = isoNow, uuid: 
     for (const r of rows) {
       if (!r.description.trim()) continue;
       const qty = Number.isFinite(r.qty) && r.qty > 0 ? r.qty : 1;
-      ids.push(await insert(bidId, { ...r, qty }, pos++, t));
+      const unitCost = typeof r.unitCost === 'number' && Number.isFinite(r.unitCost) && r.unitCost >= 0 ? r.unitCost : null;
+      ids.push(await insert(bidId, { ...r, qty, unitCost }, pos++, t));
     }
     if (ids.length) await touchBid(sql, bidId, t);
     return ids;
@@ -114,6 +120,7 @@ export function createQuoteLineRepo(sql: Sql, now: () => string = isoNow, uuid: 
       if (k === 'markupType') return checkMarkupType(patch.markupType);
       if (k === 'markupValue') return nonNeg(patch.markupValue, 'Markup must be 0 or more');
       if (k === 'sellOverride') return nonNeg(patch.sellOverride, 'Sell price must be 0 or more');
+      if (k === 'unitCost') return nonNeg(patch.unitCost, COST_ERR);
       return patch[k] ?? null;
     });
     const t = now();

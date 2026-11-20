@@ -3,7 +3,7 @@ export type Method = 'online' | 'sealed' | 'email';
 export type Stage =
   | 'found' | 'reviewing' | 'go_no_go' | 'preparing'
   | 'submitted' | 'awarded' | 'lost' | 'no_bid';
-export type MilestoneType = 'due' | 'pre_bid' | 'site_walk' | 'qa_deadline' | 'addenda' | 'award' | 'custom';
+export type MilestoneType = 'due' | 'pre_bid' | 'site_walk' | 'qa_deadline' | 'addenda' | 'award' | 'allowable_contract' | 'custom';
 export type ShipMethod = 'fedex' | 'ups' | 'usps' | 'courier' | 'hand_delivery';
 export type BidKind = 'bid' | 'rfq';
 export type PricingMode = 'whole' | 'per_line';
@@ -41,6 +41,10 @@ export interface Bid {
   markupValue: number | null;
   sellRounding: number; // 0.01 | 1 | 5
   wholeVendorId: string | null; // vendor_quotes.id override in whole mode
+  erate: boolean; // E-Rate (USAC / FCC Form 470) procurement
+  erate470Number: string | null; // Form 470 application number
+  erateFundingYear: number | null;
+  erateCategory: 1 | 2 | null; // null = both / unknown
   createdAt: string;
   updatedAt: string;
   deletedAt: string | null;
@@ -101,6 +105,7 @@ export interface QuoteLine {
   markupValue: number | null;
   sellOverride: number | null; // fixed unit sell price
   chosenVendorId: string | null; // per-line mode pick; null = cheapest
+  unitCost: number | null; // our own cost, used when the chosen vendor didn't price the line
   createdAt: string;
   updatedAt: string;
   deletedAt: string | null;

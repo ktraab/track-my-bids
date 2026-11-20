@@ -1,0 +1,20 @@
+{
+  "due": "2026-10-27T16:30",
+  "pre_bid": null,
+  "pre_bid_mandatory": null,
+  "qa_deadline": null,
+  "site_walk": null,
+  "bid_number": "101526",
+  "agency_name": null,
+  "buyer_email": null,
+  "title": "BenQ Interactive Display Units",
+  "erate": false,
+  "erate_470_number": null,
+  "erate_funding_year": null,
+  "erate_category": null,
+  "allowable_contract": null,
+  "scope_tags": [
+    "Displays"
+  ],
+  "scope_has_summary": false
+}

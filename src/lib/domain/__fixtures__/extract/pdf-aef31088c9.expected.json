@@ -1,0 +1,20 @@
+{
+  "due": "2026-12-03T14:00",
+  "pre_bid": null,
+  "pre_bid_mandatory": null,
+  "qa_deadline": "2026-11-23T12:00",
+  "site_walk": null,
+  "bid_number": "UE27-11-53",
+  "agency_name": "City of Springfield",
+  "buyer_email": "purchasing@springfield.il.us",
+  "title": "Uninterrupted Power Supply (UPS) Replacement",
+  "erate": false,
+  "erate_470_number": null,
+  "erate_funding_year": null,
+  "erate_category": null,
+  "allowable_contract": null,
+  "scope_tags": [
+    "Power / UPS"
+  ],
+  "scope_has_summary": true
+}

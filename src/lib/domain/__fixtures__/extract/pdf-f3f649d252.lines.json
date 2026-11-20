@@ -1,0 +1,723 @@
+{
+ "id": "pdf-f3f649d252",
+ "kind": "pdf",
+ "today": "2026-11-20",
+ "lines": [
+  {
+   "text": "FCC Form 470 – Funding Year 2027",
+   "page": 1
+  },
+  {
+   "text": "Form 470 Application Number: 270003800",
+   "page": 1
+  },
+  {
+   "text": "KingsCOE470FY2027-C2",
+   "page": 1
+  },
+  {
+   "text": "Billed Entity | Contact Information",
+   "page": 1
+  },
+  {
+   "text": "KINGS CO OFFICE OF EDUCATION | Pat Morgan",
+   "page": 1
+  },
+  {
+   "text": "1144 W LACEY BLVD HANFORD, CA 93230-4334 | person1@kingscoe.org",
+   "page": 1
+  },
+  {
+   "text": "KINGS | 555-555-0100",
+   "page": 1
+  },
+  {
+   "text": "555-555-0101",
+   "page": 1
+  },
+  {
+   "text": "person1@kingscoe.org",
+   "page": 1
+  },
+  {
+   "text": "Billed Entity Number: 143859",
+   "page": 1
+  },
+  {
+   "text": "FCC Registration Number: 0013357512",
+   "page": 1
+  },
+  {
+   "text": "Number of Eligible Entities: 7",
+   "page": 1
+  },
+  {
+   "text": "Application Type",
+   "page": 1
+  },
+  {
+   "text": "Applicant Type: School District",
+   "page": 1
+  },
+  {
+   "text": "Recipients of Services: Juvenile Justice; Pre-K; Public",
+   "page": 1
+  },
+  {
+   "text": "School; Public School District",
+   "page": 1
+  },
+  {
+   "text": "Consulting Firms",
+   "page": 1
+  },
+  {
+   "text": "Name | Consultant | Phone Number | Email",
+   "page": 1
+  },
+  {
+   "text": "Registration",
+   "page": 1
+  },
+  {
+   "text": "Number",
+   "page": 1
+  },
+  {
+   "text": "CSM Consulting Inc. | 16043564 | 555-555-0102 | person2@csmcentral.com",
+   "page": 1
+  },
+  {
+   "text": "Consultants",
+   "page": 1
+  },
+  {
+   "text": "Name | Phone Number | Email",
+   "page": 1
+  },
+  {
+   "text": "Sam Rivera | 555-555-0102 | person3@csmcentral.com",
+   "page": 1
+  },
+  {
+   "text": "Alex Chen | 555-555-0103 | person4@csmcentral.com",
+   "page": 1
+  },
+  {
+   "text": "Jordan Lee | 555-555-0102 | person5@csmcentral.com",
+   "page": 1
+  },
+  {
+   "text": "Casey Brooks | 555-555-0102 | person6@csmcentral.com",
+   "page": 1
+  },
+  {
+   "text": "Riley Shaw | 555-555-0102 | person7@csmcentral.com",
+   "page": 1
+  },
+  {
+   "text": "Drew Patel | 555-555-0103 | person8@csmcentral.com",
+   "page": 1
+  },
+  {
+   "text": "Morgan Diaz | 555-555-0102 | person9@csmcentral.com",
+   "page": 1
+  },
+  {
+   "text": "1",
+   "page": 1
+  },
+  {
+   "text": "RFPS",
+   "page": 2
+  },
+  {
+   "text": "ID | Name",
+   "page": 2
+  },
+  {
+   "text": "238023 | Shelly Baird RFP 2027_03_Final",
+   "page": 2
+  },
+  {
+   "text": "Category One Service Requests",
+   "page": 2
+  },
+  {
+   "text": "Service Type | Function | Function | Minimum | Maximum | Entities | Quantity Unit | Installation | Associated",
+   "page": 2
+  },
+  {
+   "text": "Other | Capacity | Capacity | and Initial | RFPs",
+   "page": 2
+  },
+  {
+   "text": "Description | Configuration?",
+   "page": 2
+  },
+  {
+   "text": "Description of Other Functions",
+   "page": 2
+  },
+  {
+   "text": "ID | Name",
+   "page": 2
+  },
+  {
+   "text": "Narrative",
+   "page": 2
+  },
+  {
+   "text": "Category Two Service Requests",
+   "page": 2
+  },
+  {
+   "text": "Service Type | Function | Manufacturer | Manufacturer Entities | Quantity | Unit | Installation | Associated",
+   "page": 2
+  },
+  {
+   "text": "Other | and Initial | RFPs",
+   "page": 2
+  },
+  {
+   "text": "Description | Configuration?",
+   "page": 2
+  },
+  {
+   "text": "Internal Connections | Cabling | No Preference | 1 | 10000 | Feet | Yes | 238023",
+   "page": 2
+  },
+  {
+   "text": "Basic Maintenance of Internal | Cabling | No Preference | 1 | 10000 | Feet | 238023",
+   "page": 2
+  },
+  {
+   "text": "Connections",
+   "page": 2
+  },
+  {
+   "text": "Internal Connections | Racks | No Preference | 3 | Each | Yes | 238023",
+   "page": 2
+  },
+  {
+   "text": "Basic Maintenance of Internal | Racks | No Preference | 1 | 3 | Each | 238023",
+   "page": 2
+  },
+  {
+   "text": "Connections",
+   "page": 2
+  },
+  {
+   "text": "Internal Connections | Antennas, Connectors, and | No Preference | 1 | 10000 | Each | Yes | 238023",
+   "page": 2
+  },
+  {
+   "text": "Related Components",
+   "page": 2
+  },
+  {
+   "text": "Basic Maintenance of Internal | Antennas, Connectors, and | No Preference | 1 | 10000 | Each | 238023",
+   "page": 2
+  },
+  {
+   "text": "Connections | Related Components",
+   "page": 2
+  },
+  {
+   "text": "Managed Internal Broadband | Leased Equipment | 1 | 238023",
+   "page": 2
+  },
+  {
+   "text": "Services",
+   "page": 2
+  },
+  {
+   "text": "Description of Other Manufacturers",
+   "page": 2
+  },
+  {
+   "text": "ID | Name",
+   "page": 2
+  },
+  {
+   "text": "Narrative",
+   "page": 2
+  },
+  {
+   "text": "2",
+   "page": 2
+  },
+  {
+   "text": "Kings County Office of Education is seeking pricing for Category Two Equipment, including Cabling and other necessary",
+   "page": 3
+  },
+  {
+   "text": "components. Please refer to the District-issued RFP associated with this Form 470 for complete specifications and requirements.",
+   "page": 3
+  },
+  {
+   "text": "***As specified for the Wireless Access Points Wire Drops, please take into consideration the District is not seeking to request new",
+   "page": 3
+  },
+  {
+   "text": "Wireless Access Points. Rather, the District is requesting cabling for its existing Wireless Access Points.***",
+   "page": 3
+  },
+  {
+   "text": "Important Information: Due to the way EPC has been created with the service category questions, please consider information",
+   "page": 3
+  },
+  {
+   "text": "drafted into quantities, fields, and units as an educated guess at a minimum for the issuance of this Form 470. All quantities",
+   "page": 3
+  },
+  {
+   "text": "are estimates as solutions proposed by service providers to meet the minimum specifications required may necessitate differing",
+   "page": 3
+  },
+  {
+   "text": "quantities. Please refer to the RFP for full specifications and requirements.",
+   "page": 3
+  },
+  {
+   "text": "Note that the service type Basic Maintenance of Internal Connections (BMIC) and Managed Internal Broadband Services (MIBS)",
+   "page": 3
+  },
+  {
+   "text": "are only as applicable with the Internal Connections solution proposed in the RFP. The District is not soliciting separate bids for",
+   "page": 3
+  },
+  {
+   "text": "BMIC or MIBS.",
+   "page": 3
+  },
+  {
+   "text": "SPAM and/or robotic responses will not be considered valid Proposals and will be disqualified from consideration.",
+   "page": 3
+  },
+  {
+   "text": "Technical Contact",
+   "page": 3
+  },
+  {
+   "text": "State and Local Procurement Restrictions",
+   "page": 3
+  },
+  {
+   "text": "Please refer to the District-issued RFP associated with this Form 470 for information on the scope the district seeks and associated",
+   "page": 3
+  },
+  {
+   "text": "deadlines. You are asked to follow this Form 470 in the EPC Portal for any and all updates related to this posted Form 470. For",
+   "page": 3
+  },
+  {
+   "text": "questions regarding the services Kings County Office of Education is seeking under this Form 470, please email rfp@kingscoe.org.",
+   "page": 3
+  },
+  {
+   "text": "It is up to the vendor to confirm receipt. All questions must be submitted in writing and to the attention of Pat Morgan, Assistant",
+   "page": 3
+  },
+  {
+   "text": "Superintendent, Business Services. The last day for questions is December 4, 2026, at 2:00 p.m. PST. Questions received after",
+   "page": 3
+  },
+  {
+   "text": "the deadline will not be responded to. All addendum(s), questions and answers will be posted to USAC's EPC Portal at https://",
+   "page": 3
+  },
+  {
+   "text": "portal.usac.org/suite/ and on the District's website at www.kingscoe.org. All bid proposals are due no later than January 8, 2027,",
+   "page": 3
+  },
+  {
+   "text": "at 2:00 p.m. PST. All proposals submitted after the deadline will not be considered. Applicant may consider multi-year and/or",
+   "page": 3
+  },
+  {
+   "text": "contracts with voluntary extensions. Any voluntary contract extensions must be identified within the awarded contract and must",
+   "page": 3
+  },
+  {
+   "text": "be of a specified number and duration. Contracts with automatic or evergreen contract extension terms will not be considered.",
+   "page": 3
+  },
+  {
+   "text": "Applicant may consider contracts with flexible terms to allow for growth/reduction in services to accommodate an increase/decrease",
+   "page": 3
+  },
+  {
+   "text": "in the number of sites, users, and/or bandwidth. Service Providers submitting proposals in response to this FCC Form 470 must be",
+   "page": 3
+  },
+  {
+   "text": "in compliance with the rules and orders governed by the Federal Communications Commission. Failure to be in compliance and",
+   "page": 3
+  },
+  {
+   "text": "remain in compliance may result in the denial of discount funding, and/or cancellation of funding commitments and/or contracts,",
+   "page": 3
+  },
+  {
+   "text": "and/or could result in civil or criminal prosecution by law enforcement authorities. Service Providers submitting proposals must do",
+   "page": 3
+  },
+  {
+   "text": "so in good faith of compliance with the Lowest Corresponding Price (LCP) Rule (see 47 CFR Part 54 Section 54.500(f)). Service",
+   "page": 3
+  },
+  {
+   "text": "Providers submitting proposals must be in full compliance with USACs Free Services Advisory https://www.usac.org/e-rate/",
+   "page": 3
+  },
+  {
+   "text": "applicant-process/competitive-bidding/free-services-advisory/. Any offering of free services must be clearly identified in service",
+   "page": 3
+  },
+  {
+   "text": "providers bids. Service Provider invoicing to USAC must be completed within 120 days from the last day of service. Should the",
+   "page": 3
+  },
+  {
+   "text": "Service Provider fail to invoice USAC timely, Applicant will only be responsible for paying its non-discounted share. The Service",
+   "page": 3
+  },
+  {
+   "text": "Provider acknowledges that all pricing and technology infrastructure information in its contract shall be considered as public and",
+   "page": 3
+  },
+  {
+   "text": "non-confidential pursuant to CFR Part 54 Section 504 (2)(i)(ii).",
+   "page": 3
+  },
+  {
+   "text": "Billed Entities",
+   "page": 3
+  },
+  {
+   "text": "3",
+   "page": 3
+  },
+  {
+   "text": "Billed Entity | Billed Entity Name",
+   "page": 4
+  },
+  {
+   "text": "Number",
+   "page": 4
+  },
+  {
+   "text": "143859 | KINGS CO OFFICE OF EDUCATION",
+   "page": 4
+  },
+  {
+   "text": "Certifications",
+   "page": 4
+  },
+  {
+   "text": "I certify that the applicant includes:",
+   "page": 4
+  },
+  {
+   "text": "I certify that the applicant includes schools under the statutory definitions of elementary and secondary schools found in the No Child",
+   "page": 4
+  },
+  {
+   "text": "Left Behind Act of 2001, 20 U.S.C. §§ 7801 (18) and (38), that do not operate as for-profit businesses, and do not have endowments",
+   "page": 4
+  },
+  {
+   "text": "exceeding $50 million.",
+   "page": 4
+  },
+  {
+   "text": "Other Certifications",
+   "page": 4
+  },
+  {
+   "text": "I certify that this FCC Form 470 and any applicable RFP will be available for review by potential bidders for at least 28 days before",
+   "page": 4
+  },
+  {
+   "text": "considering all bids received and selecting a service provider. I certify that all bids submitted will be carefully considered and the bid",
+   "page": 4
+  },
+  {
+   "text": "selected will be for the most cost-effective service or equipment offering, with price being the primary factor, and will be the most",
+   "page": 4
+  },
+  {
+   "text": "cost-effective means of meeting educational needs and technology goals.",
+   "page": 4
+  },
+  {
+   "text": "I certify that I will retain required documents for a period of at least 10 years (or whatever retention period is required by the rules",
+   "page": 4
+  },
+  {
+   "text": "in effect at the time of this certification) after the later of the last day of the applicable funding year or the service delivery deadline",
+   "page": 4
+  },
+  {
+   "text": "for the associated funding request. I certify that I will retain all documents necessary to demonstrate compliance with the statute and",
+   "page": 4
+  },
+  {
+   "text": "Commission rules regarding the form for, receipt of, and delivery of services receiving schools and libraries discounts. I acknowledge",
+   "page": 4
+  },
+  {
+   "text": "that I may be audited pursuant to participation in the schools and libraries program.",
+   "page": 4
+  },
+  {
+   "text": "I certify that I have reviewed all applicable FCC, state, and local procurement/competitive bidding requirements and that I have",
+   "page": 4
+  },
+  {
+   "text": "complied with them. I acknowledge that persons willfully making false statements on this form may be punished by fine or forfeiture,",
+   "page": 4
+  },
+  {
+   "text": "under the Communications Act, 47 U.S.C. §§ 502, 503(b), or fine or imprisonment under Title 18 of the United States Code, 18",
+   "page": 4
+  },
+  {
+   "text": "U.S.C. § 1001.",
+   "page": 4
+  },
+  {
+   "text": "I acknowledge that FCC rules provide that persons who have been convicted of criminal violations or held civilly liable for certain",
+   "page": 4
+  },
+  {
+   "text": "acts arising from their participation in the schools and libraries support mechanism are subject to suspension and debarment from the",
+   "page": 4
+  },
+  {
+   "text": "program.",
+   "page": 4
+  },
+  {
+   "text": "I certify that the services the applicant purchases at discounts provided by 47 U.S.C. § 254 will be used primarily for educational",
+   "page": 4
+  },
+  {
+   "text": "purposes, see 47 C.F.R. § 54.500, and will not be sold, resold or transferred in consideration for money or any other thing of value,",
+   "page": 4
+  },
+  {
+   "text": "except as permitted by the Commission’s rules at 47 C.F.R. § 54.513. Additionally, I certify that the entity or entities listed on this",
+   "page": 4
+  },
+  {
+   "text": "form have not received anything of value or a promise of anything of value, other than services and equipment sought by means",
+   "page": 4
+  },
+  {
+   "text": "of this form, from the service provider, or any representative or agent thereof or any consultant in connection with this request for",
+   "page": 4
+  },
+  {
+   "text": "services.",
+   "page": 4
+  },
+  {
+   "text": "I acknowledge that support under this support mechanism is conditional upon the school(s) and/or library(ies) I represent securing",
+   "page": 4
+  },
+  {
+   "text": "access, separately or through this program, to all of the resources, including computers, training, software, internal connections,",
+   "page": 4
+  },
+  {
+   "text": "maintenance, and electrical capacity necessary to use the services purchased effectively. I recognize that some of the aforementioned",
+   "page": 4
+  },
+  {
+   "text": "resources are not eligible for support. I certify that I have considered what financial resources should be available to cover these",
+   "page": 4
+  },
+  {
+   "text": "costs. I certify that I am authorized to procure eligible services for the eligible entity(ies). I certify that I am authorized to submit this",
+   "page": 4
+  },
+  {
+   "text": "4",
+   "page": 4
+  },
+  {
+   "text": "request on behalf of the eligible entity(ies) listed on this form, that I have examined this request, and to the best of my knowledge,",
+   "page": 5
+  },
+  {
+   "text": "information, and belief, all statements of fact contained herein are true.",
+   "page": 5
+  },
+  {
+   "text": "NOTICE:",
+   "page": 5
+  },
+  {
+   "text": "In accordance with Section 54.503 of the Federal Communications Commission’s (“Commission”) rules, certain schools and libraries",
+   "page": 5
+  },
+  {
+   "text": "ordering services that are eligible for and seeking universal service discounts must file this Description of Services Requested and",
+   "page": 5
+  },
+  {
+   "text": "Certification Form (FCC Form 470) with the Universal Service Administrator. 47 C.F.R. § 54.503. The collection of information",
+   "page": 5
+  },
+  {
+   "text": "stems from the Commission’s authority under Section 254 of the Communications Act of 1934, as amended. 47 U.S.C. § 254. The",
+   "page": 5
+  },
+  {
+   "text": "data in the report will be used to ensure that schools and libraries comply with the competitive bidding requirement contained in 47",
+   "page": 5
+  },
+  {
+   "text": "C.F.R. § 54.503. Schools and libraries must file this form themselves or as part of a consortium.",
+   "page": 5
+  },
+  {
+   "text": "An agency may not conduct or sponsor, and a person is not required to respond to, a collection of information unless it displays a",
+   "page": 5
+  },
+  {
+   "text": "currently valid OMB control number.",
+   "page": 5
+  },
+  {
+   "text": "The FCC is authorized under the Communications Act of 1934, as amended, to collect the information requested in this form. We",
+   "page": 5
+  },
+  {
+   "text": "will use the information you provide to determine whether you have complied with the competitive bidding requirements applicable",
+   "page": 5
+  },
+  {
+   "text": "to requests for universal service discounts. If we believe there may be a violation or a potential violation of any applicable statute,",
+   "page": 5
+  },
+  {
+   "text": "regulation, rule or order, the information you provide in this form may be referred to the Federal, state, or local agency responsible",
+   "page": 5
+  },
+  {
+   "text": "for investigating, prosecuting, enforcing, or implementing the statute, rule, regulation or order. In certain cases, the information",
+   "page": 5
+  },
+  {
+   "text": "you provide in this form may be disclosed to the Department of Justice or a court or adjudicative body when (a) the FCC; or (b)",
+   "page": 5
+  },
+  {
+   "text": "any employee of the FCC; or (c) the United States Government is a party of a proceeding before the body or has an interest in the",
+   "page": 5
+  },
+  {
+   "text": "proceeding. In addition, information provided in or submitted with this form, or in response to subsequent inquiries, may also be",
+   "page": 5
+  },
+  {
+   "text": "subject to disclosure consistent with the Communications Act of 1934, FCC regulations, the Freedom of Information Act, 5 U.S.C. §",
+   "page": 5
+  },
+  {
+   "text": "552, or other applicable law.",
+   "page": 5
+  },
+  {
+   "text": "If you owe a past due debt to the federal government, the information you provide in this form may also be disclosed to the",
+   "page": 5
+  },
+  {
+   "text": "Department of the Treasury Financial Management Service, other Federal agencies and/or your employer to offset your salary, IRS",
+   "page": 5
+  },
+  {
+   "text": "tax refund or other payments to collect that debt. The FCC may also provide the information to these agencies through the matching",
+   "page": 5
+  },
+  {
+   "text": "of computer records when authorized.",
+   "page": 5
+  },
+  {
+   "text": "If you do not provide the information we request on the form, the FCC or Universal Service Administrator may return your form",
+   "page": 5
+  },
+  {
+   "text": "without action or deny a related request for universal service discounts.",
+   "page": 5
+  },
+  {
+   "text": "The foregoing Notice is required by the Paperwork Reduction Act of 1995, Pub. L. No. 104-13, 44 U.S.C. § 3501, et seq.",
+   "page": 5
+  },
+  {
+   "text": "Public reporting burden for this collection of information is estimated to average 3.5 hours per response, including the time for",
+   "page": 5
+  },
+  {
+   "text": "reviewing instructions, searching existing data sources, gathering and maintaining the data needed, completing, and reviewing",
+   "page": 5
+  },
+  {
+   "text": "the collection of information. Send comments regarding this burden estimate or any other aspect of this collection of information,",
+   "page": 5
+  },
+  {
+   "text": "including suggestions for reducing the reporting burden to the Federal Communications Commission, Performance Evaluation",
+   "page": 5
+  },
+  {
+   "text": "and Records Management, Washington, DC 20554. We also will accept your comments via the email if you send them to",
+   "page": 5
+  },
+  {
+   "text": "PRA@FCC.gov. DO NOT SEND COMPLETED WORKSHEETS TO THESE ADDRESSES.",
+   "page": 5
+  },
+  {
+   "text": "Authorized Person",
+   "page": 5
+  },
+  {
+   "text": "Pat Morgan",
+   "page": 5
+  },
+  {
+   "text": "KINGS CO OFFICE OF EDUCATION",
+   "page": 5
+  },
+  {
+   "text": "1144 W LACEY BLVD HANFORD, CA 93230-4334 KINGS",
+   "page": 5
+  },
+  {
+   "text": "5",
+   "page": 5
+  },
+  {
+   "text": "555-555-0100",
+   "page": 6
+  },
+  {
+   "text": "Certified Timestamp",
+   "page": 6
+  },
+  {
+   "text": "11/18/2026 11:06 AM EST",
+   "page": 6
+  },
+  {
+   "text": "6",
+   "page": 6
+  }
+ ]
+}

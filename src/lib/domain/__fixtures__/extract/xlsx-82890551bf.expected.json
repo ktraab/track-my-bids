@@ -1,0 +1,26 @@
+{
+  "due": null,
+  "pre_bid": null,
+  "pre_bid_mandatory": null,
+  "qa_deadline": null,
+  "site_walk": null,
+  "bid_number": null,
+  "agency_name": null,
+  "buyer_email": null,
+  "title": null,
+  "erate": false,
+  "erate_470_number": null,
+  "erate_funding_year": null,
+  "erate_category": null,
+  "allowable_contract": null,
+  "scope_tags": [
+    "Networking",
+    "Wi-Fi",
+    "Licensing",
+    "Cabling",
+    "Racks",
+    "Power / UPS",
+    "Installation"
+  ],
+  "scope_has_summary": false
+}

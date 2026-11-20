@@ -3,6 +3,7 @@ import { memorySql } from '../db/memorySql';
 import { migrate } from '../db/migrations';
 import { createBidRepo } from '../db/bids';
 import { createContactRepo } from '../db/contacts';
+import { createExtractLabelRepo } from '../db/extractLabels';
 import type { Sql } from '../db/sql';
 import { createSyncStore } from './syncState';
 import { applyRemoteRows, applyRemap } from './applyRemote';
@@ -130,5 +131,51 @@ describe('applyRemoteRows: quote tables', () => {
     await applyRemoteRows(sql, [contactRow('team', 'rep@cdw.com', 9)], now);
     const [v] = await sql.select<{ contact_id: string }>("SELECT contact_id FROM vendor_quotes WHERE id = 'v1'");
     expect(v.contact_id).toBe('team');
+  });
+});
+
+describe('extract_labels', () => {
+  const labelRow = (id: string, phrase: string, hits = 1, seq = 1): RemoteRow => ({
+    tbl: 'extract_labels', id, seq, data: { field: 'due', phrase, hits, created_at: T, updated_at: T, deleted_at: null },
+  });
+
+  it('a pulled label whose phrase we also learned replaces ours (and our queued changes)', async () => {
+    await createExtractLabelRepo(sql, now, () => 'mine').recordLabel('due', 'envelope opening');
+    expect(await outboxCount(sql)).toBe(1);
+    const res = await applyRemoteRows(sql, [labelRow('theirs', 'envelope opening', 4)], now);
+    expect(res).toEqual({ applied: 1, skipped: [] });
+    expect((await createExtractLabelRepo(sql).listLearned()).map((l) => [l.id, l.hits])).toEqual([['theirs', 4]]);
+    expect(await outboxCount(sql)).toBe(0);
+  });
+
+  it('push remap: the server already has the phrase → switch to the server row', async () => {
+    await createExtractLabelRepo(sql, now, () => 'mine').recordLabel('due', 'envelope opening');
+    await applyRemap(sql, 'extract_labels', 'mine', labelRow('theirs', 'envelope opening', 2), now);
+    expect((await createExtractLabelRepo(sql).listLearned()).map((l) => [l.id, l.hits])).toEqual([['theirs', 2]]);
+    expect(await outboxCount(sql)).toBe(0);
+  });
+
+  describe('server copy was deleted while we learned the phrase anew', () => {
+    const deletedRow = (id: string): RemoteRow => ({
+      tbl: 'extract_labels', id, seq: 3,
+      data: { field: 'due', phrase: 'envelope opening', hits: 5, created_at: T, updated_at: T, deleted_at: T },
+    });
+    const expectRevived = async () => {
+      const live = await createExtractLabelRepo(sql).listLearned();
+      expect(live.map((l) => [l.id, l.hits])).toEqual([['theirs', 1]]);
+      expect((await pendingFields(sql, 'extract_labels', 'theirs')).has('deleted_at')).toBe(true);
+    };
+
+    it('pull clash: our live label revives the deleted server row and queues it', async () => {
+      await createExtractLabelRepo(sql, now, () => 'mine').recordLabel('due', 'envelope opening');
+      await applyRemoteRows(sql, [deletedRow('theirs')], now);
+      await expectRevived();
+    });
+
+    it('push remap: our live label revives the deleted server row and queues it', async () => {
+      await createExtractLabelRepo(sql, now, () => 'mine').recordLabel('due', 'envelope opening');
+      await applyRemap(sql, 'extract_labels', 'mine', deletedRow('theirs'), now);
+      await expectRevived();
+    });
   });
 });

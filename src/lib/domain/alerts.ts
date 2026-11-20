@@ -108,7 +108,7 @@ function pendingReminders({ nowMs, zone, bids, settings, log }: AlertInput): Pen
       if (s.done || s.ms <= nowMs) continue;
       const offsets = s.derived
         ? settings.shipByOffsets
-        : (d.milestones.find((m) => m.id === s.id)?.reminderOffsets ?? settings.reminderDefaults[s.milestoneType!]);
+        : (d.milestones.find((m) => m.id === s.id)?.reminderOffsets ?? settings.reminderDefaults[s.milestoneType!] ?? []);
       const due = offsets
         .map((off) => ({ key: `rem:${s.id}:${off}:${s.ms}`, fireMs: reminderFireMs(s.ms, off, zone) }))
         .filter((c) => c.fireMs <= nowMs && isPending(c.key, log, nowMs))

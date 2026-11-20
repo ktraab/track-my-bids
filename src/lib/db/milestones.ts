@@ -12,6 +12,8 @@ export interface NewMilestoneInput {
   location?: string | null;
   mandatory?: boolean;
   externalUid?: string | null;
+  /** Explicit reminder offsets (minutes); null/absent = the settings default. */
+  reminderOffsets?: number[] | null;
 }
 
 export type MilestonePatch = Partial<Pick<Milestone, 'label' | 'at' | 'location' | 'mandatory' | 'done' | 'reminderOffsets'>>;
@@ -19,6 +21,8 @@ export type MilestonePatch = Partial<Pick<Milestone, 'label' | 'at' | 'location'
 const COLS: Record<keyof MilestonePatch, string> = {
   label: 'label', at: 'at', location: 'location', mandatory: 'mandatory', done: 'done', reminderOffsets: 'reminder_offsets',
 };
+
+const offsetsToDb = (o: number[] | null | undefined) => (o ? JSON.stringify(o) : null);
 
 export function createMilestoneRepo(sql: Sql, now: () => string = isoNow, uuid: () => string = newId) {
   async function find(id: string) {
@@ -41,10 +45,10 @@ export function createMilestoneRepo(sql: Sql, now: () => string = isoNow, uuid: 
     const id = uuid();
     const t = now();
     await sql.execute(
-      `INSERT INTO milestones (id, bid_id, type, label, at, location, mandatory, external_uid, created_at, updated_at)
-       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+      `INSERT INTO milestones (id, bid_id, type, label, at, location, mandatory, external_uid, reminder_offsets, created_at, updated_at)
+       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
       [id, input.bidId, input.type, input.label?.trim() || null, input.at, input.location ?? null,
-        input.mandatory ? 1 : 0, input.externalUid ?? null, t, t],
+        input.mandatory ? 1 : 0, input.externalUid ?? null, offsetsToDb(input.reminderOffsets), t, t],
     );
     await touchBid(sql, input.bidId, t);
     return id;
@@ -57,8 +61,7 @@ export function createMilestoneRepo(sql: Sql, now: () => string = isoNow, uuid: 
     const { bid_id, type } = await find(id);
     if (type === 'custom' && 'label' in patch && !patch.label?.trim()) throw new Error('Custom milestones need a label');
     const t = now();
-    const vals = keys.map((k) =>
-      k === 'reminderOffsets' ? (patch.reminderOffsets ? JSON.stringify(patch.reminderOffsets) : null) : toDb(patch[k]));
+    const vals = keys.map((k) => (k === 'reminderOffsets' ? offsetsToDb(patch.reminderOffsets) : toDb(patch[k])));
     await sql.execute(
       `UPDATE milestones SET ${keys.map((k) => `${COLS[k]} = ?`).join(', ')}, updated_at = ? WHERE id = ?`,
       [...vals, t, id]);

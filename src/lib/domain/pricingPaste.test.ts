@@ -14,10 +14,10 @@ describe('parsePaste', () => {
     const r = parsePaste('10\tWall-mount bracket kit\tWMB-200\n1\tFreight to 3 schools\t\n5\t\tNO-DESC\n', 0);
     expect(r).toEqual({
       rows: [
-        { qty: 10, description: 'Wall-mount bracket kit', partNo: 'WMB-200', prices: [] },
-        { qty: 1, description: 'Freight to 3 schools', partNo: null, prices: [] },
+        { qty: 10, description: 'Wall-mount bracket kit', partNo: 'WMB-200', prices: [], ownCost: null },
+        { qty: 1, description: 'Freight to 3 schools', partNo: null, prices: [], ownCost: null },
       ],
-      skipped: 1, header: false, extraColumns: 0, qtyDefaulted: 0,
+      skipped: 1, header: false, extraColumns: 0, qtyDefaulted: 0, ownCost: true,
     });
   });
 
@@ -31,6 +31,15 @@ describe('parsePaste', () => {
     expect(parsePaste('1\tA\t\t1\t\t', 2).extraColumns).toBe(0);
   });
 
+  it('with no vendors, the first price column is the line own cost', () => {
+    const r = parsePaste('40\tCart\tLCS-36\t$398.00\n3\tInstall\t\tn/a\n1\tFreight\t\t\t9\t8', 0);
+    expect(r.ownCost).toBe(true);
+    expect(r.rows.map((x) => [x.ownCost, x.prices])).toEqual([[398, []], [null, []], [null, []]]);
+    expect(r.extraColumns).toBe(2); // cost column blank on that row, then 9 and 8
+    expect(parsePaste('1\tA\t\t5', 1).rows[0]).toMatchObject({ ownCost: null, prices: [5] });
+    expect(parsePaste('1\tA\t\t5', 1).ownCost).toBe(false);
+  });
+
   it('drops a header row, makes bad quantities 1, and squashes whitespace in descriptions', () => {
     const r = parsePaste('Qty\tDescription\tPart #\n\tCart\n0\t  Two\nlines \nabc\tThree', 0);
     expect(r.header).toBe(true);
@@ -39,17 +48,23 @@ describe('parsePaste', () => {
   });
 
   it('a quoted multi-line description stays one line item', () => {
-    expect(parsePaste('2\t"Dock,\nUSB-C"\tD-1', 0).rows).toEqual([{ qty: 2, description: 'Dock, USB-C', partNo: 'D-1', prices: [] }]);
+    expect(parsePaste('2\t"Dock,\nUSB-C"\tD-1', 0).rows).toEqual([{ qty: 2, description: 'Dock, USB-C', partNo: 'D-1', prices: [], ownCost: null }]);
   });
 });
 
 describe('pasteNotice', () => {
   it('says what was added, skipped and ignored', () => {
-    expect(pasteNotice({ rows: [{ qty: 1, description: 'A', partNo: null, prices: [] }], skipped: 0, header: false, extraColumns: 0, qtyDefaulted: 0 }, 0))
+    expect(pasteNotice({ rows: [{ qty: 1, description: 'A', partNo: null, prices: [], ownCost: null }], skipped: 0, header: false, extraColumns: 0, qtyDefaulted: 0, ownCost: false }, 0))
       .toBe('Added 1 line.');
-    const two = [1, 2].map((q) => ({ qty: q, description: 'A', partNo: null, prices: [] }));
-    expect(pasteNotice({ rows: two, skipped: 1, header: true, extraColumns: 2, qtyDefaulted: 0 }, 3))
+    const two = [1, 2].map((q) => ({ qty: q, description: 'A', partNo: null, prices: [], ownCost: null }));
+    expect(pasteNotice({ rows: two, skipped: 1, header: true, extraColumns: 2, qtyDefaulted: 0, ownCost: false }, 3))
       .toBe('Added 2 lines and 3 prices. 1 row without a description skipped. 2 price columns ignored (more columns than vendors).');
+  });
+
+  it('with no vendors, counts own costs and explains ignored columns', () => {
+    const two = [1, 2].map((q) => ({ qty: q, description: 'A', partNo: null, prices: [], ownCost: 3 }));
+    expect(pasteNotice({ rows: two, skipped: 0, header: false, extraColumns: 1, qtyDefaulted: 0, ownCost: true }, 2))
+      .toBe('Added 2 lines and 2 own costs. 1 price column ignored (with no vendors, only the first cost column is used).');
   });
 });
 

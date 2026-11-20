@@ -1,0 +1,55 @@
+{
+ "id": "xlsx-82890551bf",
+ "kind": "xlsx",
+ "today": "2026-11-20",
+ "lines": [
+  {
+   "text": "Equipment Type | Example Make/Model | Quantity | Additional Notes",
+   "page": 1
+  },
+  {
+   "text": "Switches | Cisco Meraki MS150-48MP-4X Ethernet Switch or equivalent. | 1 | NOTE: we already have a Meraki MX85 device that we would like to use if possible. Will just need installation and license for that.",
+   "page": 1
+  },
+  {
+   "text": "Access Points | Cisco Meraki Meraki CW9176I or equivalent. | 5 | Would like Wi-Fi 7 to future-proof and provide coverage.",
+   "page": 1
+  },
+  {
+   "text": "Licensing | LIC-MX85-ENT-5Y or equivalent | 1 | A 5-yr enterprise license for our provided MX85.",
+   "page": 1
+  },
+  {
+   "text": "Licensing | MS150-48MP 5Y or equivalent | 1 | A 5-yr license for the MS150-48MP switch or the equivalent.",
+   "page": 1
+  },
+  {
+   "text": "Licensing | MR Enterprise 5Y or equivalent | 5 | 5-yr licenses for the access points.",
+   "page": 1
+  },
+  {
+   "text": "Rack | 19-inch equipment rack 24U wall-mount | 1 | Rack to store/mount MX devices, switch, UPS, related components.",
+   "page": 1
+  },
+  {
+   "text": "Related Components | Cat6A patch panels to cleanly terminate all the structured cabling coming from classrooms and AP drops | 50000 | Whatever is needed for the rack.",
+   "page": 1
+  },
+  {
+   "text": "Related Components | Vertical/Horizontal Cable Management | 50000 | Whatever is needed for the rack.",
+   "page": 1
+  },
+  {
+   "text": "UPS | Battery backup to power MX devices, switch, fiber modem | 1 | Open to recommendation based on specific equipment we end up with.",
+   "page": 1
+  },
+  {
+   "text": "Installation | Professional low-voltage installation, termination, rack assembly, and device provisioning for new construction | 1 | Including installation of our supplied MX-85",
+   "page": 1
+  },
+  {
+   "text": "Transceivers | 10G SFP+ Direct Attach Copper (DAC) cables or optics | 2 | Connecting the MX85 firewall to the switch",
+   "page": 1
+  }
+ ]
+}

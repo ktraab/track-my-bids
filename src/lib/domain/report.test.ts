@@ -11,7 +11,7 @@ const row = (over: Partial<ReportRow> = {}): ReportRow => ({
   bidId: 'b1', firstName: 'Jane', lastName: 'Doe', title: 'Purchasing Agent', email: 'jdoe@cvisd.org', phone: '555-0100',
   organization: 'Cedar Valley ISD', role: 'procurement', agencyName: 'Cedar Valley ISD', agencyType: 'k12',
   bidNumber: 'RFP 26-114', bidTitle: 'Chromebooks', estValue: 480000, stage: 'preparing', method: 'online',
-  dueAt: '2026-11-19T14:00:00.000-06:00', bidTimezone: CHI, bidCreatedAt: '2026-11-02T15:00:00.000Z', kind: 'bid', receivedAt: null, ourPrice: null, ...over,
+  dueAt: '2026-11-19T14:00:00.000-06:00', bidTimezone: CHI, bidCreatedAt: '2026-11-02T15:00:00.000Z', kind: 'bid', receivedAt: null, ourPrice: null, erate: false, erate470Number: null, ...over,
 });
 
 describe('rangeFor', () => {
@@ -193,5 +193,15 @@ describe('toCsv our price', () => {
     const csv = toCsv([row({ kind: 'bid', ourPrice: 7.8 })]);
     expect(csv).toContain(',7.8,');
     expect(csv).not.toContain('7.7999');
+  });
+});
+
+describe('E-Rate in reports', () => {
+  const col = (h: string) => REPORT_COLUMNS.find((c) => c.header === h)!;
+  it('E-Rate (Yes / blank) and Form 470 # columns, last', () => {
+    const e = row({ erate: true, erate470Number: '270012345' });
+    expect([col('E-Rate').value(e), col('Form 470 #').value(e)]).toEqual(['Yes', '270012345']);
+    expect([col('E-Rate').value(row()), col('Form 470 #').value(row({ erate470Number: '270012345' }))]).toEqual(['', null]);
+    expect(REPORT_COLUMNS.slice(-2).map((c) => c.header)).toEqual(['E-Rate', 'Form 470 #']);
   });
 });

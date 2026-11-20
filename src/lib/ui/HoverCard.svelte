@@ -10,6 +10,7 @@
   import { METHOD_LABELS } from '$lib/domain/labels';
   import { CONTACT_ROLE_LABELS, contactName } from '$lib/domain/contacts';
   import { initials } from '$lib/domain/ownership';
+  import { erateSummary } from '$lib/domain/erate';
   import { ballOf, ballText, liveVendors, nextStepText, receivedIso, vendorStatusText } from '$lib/domain/rfq';
 
   let {
@@ -34,13 +35,12 @@
   const vendors = $derived(liveVendors(data.vendorQuotes));
   const pricing = $derived(data.lines.length ? pricingOf(data, app.pricingDefaults) : null);
   const ourPrice = $derived(pricing && pricing.summary.priced ? pricing.summary.total : null);
-  const unpricedText = $derived(pricing && pricing.summary.flagged > 0 ? ` · ${pricing.summary.flagged} unpriced` : '');
-  /** A vendor's total ("$19,550.00"), or how many lines it priced so far ("2/3 lines priced"). */
+  const unpricedText = $derived(pricing && pricing.summary.flagged > 0 ? ` partial · ${pricing.summary.flagged} unpriced` : '');
+  /** A vendor's total ("$19,550.00"), or its partial total with coverage ("$4,210.00 · 3 of 5"). */
   function vendorPrice(id: string): string {
     const t = pricing?.totals.find((x) => x.vendorId === id);
-    if (!t || !pricing) return '';
-    if (t.total !== null) return formatMoney(t.total);
-    return t.priced ? `${t.priced}/${pricing.lines.length} lines priced` : '';
+    if (!t || !pricing || t.total === null) return '';
+    return t.complete ? formatMoney(t.total) : `${formatMoney(t.total)} · ${t.priced} of ${pricing.lines.length}`;
   }
 </script>
 
@@ -59,6 +59,7 @@
   {:else}
     <div class="meta">{STAGE_LABELS[b.stage]} · {formatMoneyShort(b.estValue)} · {METHOD_LABELS[b.submissionMethod]}</div>
   {/if}
+  {#if b.erate}<div class="line"><span class="k">E-Rate</span>{erateSummary(b)}</div>{/if}
   {#if app.team.mode === 'team'}<div class="line"><span class="k">Owner</span>{b.ownerId ? app.memberName(b.ownerId) : 'Unassigned'}</div>{/if}
   {#if isQuote}
     {#if ball}<div class="line"><span class="k">Ball</span>{ballText(ball, app.nowMs, ball.holder === 'us' ? usWho : ball.who)}</div>{/if}

@@ -26,6 +26,7 @@ export const STOP_LABELS: Record<MilestoneType, string> = {
   qa_deadline: 'Q&A',
   addenda: 'ADDENDA',
   award: 'AWARD',
+  allowable_contract: 'ACD',
   custom: 'CUSTOM',
 };
 

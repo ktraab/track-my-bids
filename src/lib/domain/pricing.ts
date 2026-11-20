@@ -97,11 +97,12 @@ export function seedMarkup(
 
 export type PricingData = Pick<BidWithChildren, 'bid' | 'vendorQuotes' | 'lines' | 'prices'>;
 
-/** One vendor column's total. `total` null = "Missing lines" (or no lines yet). */
+/** One vendor column's total over the lines it priced (own costs never count). */
 export interface VendorTotal {
   vendorId: string;
-  total: number | null;
+  total: number | null; // null = priced no line yet
   priced: number; // lines this vendor priced
+  complete: boolean; // priced every line
 }
 
 export interface LinePricing {
@@ -109,13 +110,14 @@ export interface LinePricing {
   costs: (number | null)[]; // unit cost per grid vendor, in grid order
   lowestCost: number | null;
   chosenVendorId: string | null;
-  unitCost: number | null; // the chosen vendor's cost
+  unitCost: number | null; // the chosen vendor's cost, else the line's own cost
+  ownCost: boolean; // unitCost is the line's own cost (the chosen vendor, if any, didn't price it)
   markup: Markup;
   markupSource: MarkupSource;
   unitSell: number | null;
   lineTotal: number | null;
   derivedPct: number | null; // markup implied by a sell override
-  flagged: boolean; // no chosen price → left out of the totals
+  flagged: boolean; // no cost at all → left out of the totals
 }
 
 export interface PricingSummary {
@@ -123,16 +125,18 @@ export interface PricingSummary {
   cost: number;
   markup: number; // sell − cost, dollars
   marginPct: number | null; // (sell − cost) / sell × 100
-  total: number; // the quote total
+  total: number; // the quote total (of the priced lines)
+  lines: number;
   priced: number;
-  flagged: number;
+  flagged: number; // unpriced lines, left out
+  ownCost: number; // priced lines that use their own cost
 }
 
 export interface Pricing {
   vendors: VendorQuote[]; // grid columns = live vendors (skipped ones too), in the order asked
   totals: VendorTotal[];
   wholeVendorId: string | null; // whole mode: the vendor every line uses
-  autoWhole: boolean; // true when that is the lowest complete total (no override)
+  autoWhole: boolean; // true when picked automatically (no override)
   lines: LinePricing[];
   summary: PricingSummary;
 }
@@ -143,6 +147,24 @@ export const gridVendors = (vqs: VendorQuote[]): VendorQuote[] => liveVendors(vq
 function lowestIndex(xs: (number | null)[]): number {
   let best = -1;
   xs.forEach((x, i) => { if (x !== null && (best < 0 || x < xs[best]!)) best = i; });
+  return best;
+}
+
+/**
+ * Whole-mode auto-pick: the lowest complete total; if no vendor priced every line, the vendor with the most
+ * priced lines (tie → lowest partial total). Vendors marked skipped rank after all the others. A complete vendor always has the most lines, so one rule covers both.
+ */
+function autoWholeIndex(totals: VendorTotal[], vendors: VendorQuote[]): number {
+  let best = -1;
+  totals.forEach((t, i) => {
+    if (t.total === null) return;
+    const b = best >= 0 ? totals[best] : null;
+    if (b && vendors[i].skipped !== vendors[best].skipped) {
+      if (!vendors[i].skipped) best = i; // a skipped vendor ranks after every non-skipped one
+      return;
+    }
+    if (!b || t.priced > b.priced || (t.priced === b.priced && t.total < b.total!)) best = i;
+  });
   return best;
 }
 
@@ -162,14 +184,14 @@ export function pricingOf(d: PricingData, defaults: PricingDefaults): Pricing {
       priced++;
       total += l.qty * c;
     }
-    return { vendorId: v.id, total: lines.length && priced === lines.length ? total : null, priced };
+    return { vendorId: v.id, total: priced ? total : null, priced, complete: lines.length > 0 && priced === lines.length };
   });
 
   const live = new Set(vendors.map((v) => v.id));
   const whole = d.bid.pricingMode === 'whole';
   const override = whole && d.bid.wholeVendorId && live.has(d.bid.wholeVendorId) ? d.bid.wholeVendorId : null;
-  const lowestTotal = lowestIndex(totals.map((t) => t.total));
-  const wholeVendorId = whole ? override ?? (lowestTotal >= 0 ? vendors[lowestTotal].id : null) : null;
+  const auto = autoWholeIndex(totals, vendors);
+  const wholeVendorId = whole ? override ?? (auto >= 0 ? vendors[auto].id : null) : null;
 
   const out: LinePricing[] = lines.map((line) => {
     const costs = costsOf(line);
@@ -177,11 +199,13 @@ export function pricingOf(d: PricingData, defaults: PricingDefaults): Pricing {
     const chosenVendorId = whole
       ? wholeVendorId
       : line.chosenVendorId && live.has(line.chosenVendorId) ? line.chosenVendorId : lo >= 0 ? vendors[lo].id : null;
-    const unitCost = chosenVendorId ? costs[vendors.findIndex((v) => v.id === chosenVendorId)] : null;
+    const vendorCost = chosenVendorId ? costs[vendors.findIndex((v) => v.id === chosenVendorId)] : null;
+    const ownCost = vendorCost === null && line.unitCost !== null;
+    const unitCost = vendorCost ?? line.unitCost;
     const { markup, source } = effectiveMarkup(line, d.bid, defaults);
     const sell = unitCost === null ? null : unitSell(unitCost, line.qty, markup, d.bid.sellRounding, line.sellOverride);
     return {
-      line, costs, lowestCost: lo >= 0 ? costs[lo] : null, chosenVendorId, unitCost, markup, markupSource: source,
+      line, costs, lowestCost: lo >= 0 ? costs[lo] : null, chosenVendorId, unitCost, ownCost, markup, markupSource: source,
       unitSell: sell, lineTotal: sell === null ? null : sell * line.qty,
       derivedPct: unitCost !== null && line.sellOverride !== null ? derivedMarkupPct(unitCost, line.sellOverride) : null,
       flagged: sell === null,
@@ -191,7 +215,7 @@ export function pricingOf(d: PricingData, defaults: PricingDefaults): Pricing {
   const counted = out.filter((l) => !l.flagged);
   const totalCost = counted.reduce((s, l) => s + l.unitCost! * l.line.qty, 0);
   const total = counted.reduce((s, l) => s + l.lineTotal!, 0);
-  const used = new Set(counted.map((l) => l.chosenVendorId));
+  const used = new Set(counted.filter((l) => !l.ownCost).map((l) => l.chosenVendorId));
   return {
     vendors, totals, wholeVendorId, autoWhole: whole && override === null, lines: out,
     summary: {
@@ -200,19 +224,29 @@ export function pricingOf(d: PricingData, defaults: PricingDefaults): Pricing {
       markup: cents(total - totalCost),
       marginPct: total > 0 ? ((total - totalCost) / total) * 100 : null,
       total: cents(total),
+      lines: out.length,
       priced: counted.length,
       flagged: out.length - counted.length,
+      ownCost: counted.filter((l) => l.ownCost).length,
     },
   };
 }
 
 const cents = (n: number) => Math.round((n + Number.EPSILON) * 100) / 100;
 
-/** "Our price": the quote total, or null when no line has a chosen price yet. */
-export function quoteTotal(d: PricingData, defaults: PricingDefaults): number | null {
+/**
+ * "Our price": the total of the priced lines, `partial` when some lines have no cost yet. Null when no line
+ * is priced.
+ */
+export function quotePrice(d: PricingData, defaults: PricingDefaults): { total: number; partial: boolean; unpriced: number } | null {
   if (!d.lines.some((l) => !l.deletedAt)) return null;
   const s = pricingOf(d, defaults).summary;
-  return s.priced ? cents(s.total) : null;
+  return s.priced ? { total: cents(s.total), partial: s.flagged > 0, unpriced: s.flagged } : null;
+}
+
+/** The number alone (report and export columns). */
+export function quoteTotal(d: PricingData, defaults: PricingDefaults): number | null {
+  return quotePrice(d, defaults)?.total ?? null;
 }
 
 // ── Paste from Excel ──────────────────────────────────────────────────────────────────────
@@ -222,6 +256,7 @@ export interface PastedRow {
   description: string;
   partNo: string | null;
   prices: (number | null)[]; // one per grid vendor, in grid order
+  ownCost: number | null; // with no vendors, the first price column is the line's own cost
 }
 
 export interface PasteResult {
@@ -230,6 +265,7 @@ export interface PasteResult {
   header: boolean; // first row looked like column titles and was dropped
   extraColumns: number; // price columns beyond the vendors in the grid (ignored)
   qtyDefaulted: number; // rows whose qty was blank, zero or unreadable and became 1
+  ownCost: boolean; // pasted with no vendors: the price column is own cost
 }
 
 /** Excel copies cells tab-separated and rows newline-separated, quoting a cell that holds a tab, newline or quote. */
@@ -281,13 +317,19 @@ export function parseQty(cell: string): number | null | undefined {
 }
 
 /**
- * Rows of `Qty, Description, Part #[, one price column per grid vendor…]`. Rows without a description are
+ * Rows of `Qty, Description, Part #[, one price column per grid vendor…]`; with no vendors, one cost column that
+ * fills each line's own cost. Rows without a description are
  * skipped; a missing or bad quantity becomes 1; a blank or bad price is no price. A first row whose Qty cell
  * is text (e.g. "Qty", "#"), or is blank above a "Description"/"Item" title, is taken as a header. A qty may carry
  * a unit suffix ("2 EA").
  */
 export function parsePaste(text: string, vendorCount: number): PasteResult {
-  const out: PasteResult = { rows: [], skipped: 0, header: false, extraColumns: 0, qtyDefaulted: 0 };
+  const own = vendorCount === 0;
+  const out: PasteResult = { rows: [], skipped: 0, header: false, extraColumns: 0, qtyDefaulted: 0, ownCost: own };
+  const amount = (cell: string | undefined) => {
+    const a = parseAmount(cell ?? '');
+    return typeof a === 'number' ? a : null;
+  };
   splitTsv(text).forEach((cells, i) => {
     const qtyCell = (cells[0] ?? '').trim();
     const descCell = (cells[1] ?? '').replace(/\s+/g, ' ').trim();
@@ -299,15 +341,13 @@ export function parsePaste(text: string, vendorCount: number): PasteResult {
     if (!(typeof q === 'number' && q > 0)) out.qtyDefaulted++;
     let last = cells.length - 1;
     while (last > 2 && !cells[last].trim()) last--;
-    out.extraColumns = Math.max(out.extraColumns, last + 1 - 3 - vendorCount);
+    out.extraColumns = Math.max(out.extraColumns, last + 1 - 3 - (own ? 1 : vendorCount));
     out.rows.push({
       qty: typeof q === 'number' && q > 0 ? q : 1,
       description,
       partNo: (cells[2] ?? '').trim() || null,
-      prices: Array.from({ length: vendorCount }, (_, k) => {
-        const a = parseAmount(cells[3 + k] ?? '');
-        return typeof a === 'number' ? a : null;
-      }),
+      prices: Array.from({ length: vendorCount }, (_, k) => amount(cells[3 + k])),
+      ownCost: own ? amount(cells[3]) : null,
     });
   });
   return out;
@@ -316,9 +356,11 @@ export function parsePaste(text: string, vendorCount: number): PasteResult {
 /** The toast after a paste: "Added 2 lines and 3 prices. 1 row without a description skipped." */
 export function pasteNotice(r: PasteResult, priced: number): string {
   const s = (n: number, word: string) => `${n} ${word}${n === 1 ? '' : 's'}`;
-  const parts = [`Added ${s(r.rows.length, 'line')}${priced ? ` and ${s(priced, 'price')}` : ''}.`];
+  const parts = [`Added ${s(r.rows.length, 'line')}${priced ? ` and ${s(priced, r.ownCost ? 'own cost' : 'price')}` : ''}.`];
   if (r.skipped) parts.push(`${s(r.skipped, 'row')} without a description skipped.`);
-  if (r.extraColumns) parts.push(`${s(r.extraColumns, 'price column')} ignored (more columns than vendors).`);
+  if (r.extraColumns) {
+    parts.push(`${s(r.extraColumns, 'price column')} ignored (${r.ownCost ? 'with no vendors, only the first cost column is used' : 'more columns than vendors'}).`);
+  }
   if (r.qtyDefaulted) parts.push(`${s(r.qtyDefaulted, 'line')} had no qty, set to 1.`);
   return parts.join(' ');
 }

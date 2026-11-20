@@ -31,6 +31,7 @@ export const MILESTONE_TYPE_LABELS: Record<MilestoneType, string> = {
   qa_deadline: 'Q&A deadline',
   addenda: 'Addenda expected',
   award: 'Award',
+  allowable_contract: 'Allowable contract date',
   custom: 'Custom',
 };
 

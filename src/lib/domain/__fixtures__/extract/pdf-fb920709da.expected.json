@@ -1,0 +1,23 @@
+{
+  "due": "2026-12-08T17:00",
+  "pre_bid": null,
+  "pre_bid_mandatory": null,
+  "qa_deadline": null,
+  "site_walk": null,
+  "bid_number": null,
+  "agency_name": "ST HUGH CATHOLIC SCHOOL",
+  "buyer_email": "person1@erateprogram.com",
+  "title": "36659 - ST HUGH CATHOLIC SCHOOL - C2 470",
+  "erate": true,
+  "erate_470_number": "270004253",
+  "erate_funding_year": "2027",
+  "erate_category": "2",
+  "allowable_contract": "2026-12-08T17:00",
+  "scope_tags": [
+    "Networking",
+    "Wi-Fi",
+    "Power / UPS",
+    "Licensing"
+  ],
+  "scope_has_summary": true
+}

@@ -12,6 +12,7 @@ export function makeBid(over: Partial<Bid> = {}): Bid {
     lineColor: '#b0540a', ownerId: null,
     kind: 'bid', receivedAt: null, quotedAt: null, followedUpAt: null, pricingMode: 'whole',
     markupType: null, markupValue: null, sellRounding: 0.01, wholeVendorId: null,
+    erate: false, erate470Number: null, erateFundingYear: null, erateCategory: null,
     createdAt: T, updatedAt: T, deletedAt: null,
     ...over,
   };
@@ -51,7 +52,7 @@ export function withVendors(bid: Bid, vendorQuotes: VendorQuote[]): BidWithChild
 export function makeLine(id: string, over: Partial<QuoteLine> = {}): QuoteLine {
   return {
     id, bidId: 'b1', position: 0, qty: 1, description: id, partNo: null, markupType: null, markupValue: null,
-    sellOverride: null, chosenVendorId: null, createdAt: T, updatedAt: T, deletedAt: null,
+    sellOverride: null, chosenVendorId: null, unitCost: null, createdAt: T, updatedAt: T, deletedAt: null,
     ...over,
   };
 }

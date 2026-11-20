@@ -18,6 +18,7 @@ async function seeded() {
     submissionMethod: 'online', dueAtLocal: '2026-11-19T14:00', timezone: 'America/Chicago' });
   const { id } = await contacts.create({ firstName: 'Jane', email: 'jdoe@cvisd.org' });
   await contacts.linkToBid(bidId, id, 'procurement');
+  await bids.update(bidId, { erate: true, erate470Number: '270012345', erateFundingYear: 2027, erateCategory: 1 });
   return { sql, bids };
 }
 
@@ -36,6 +37,7 @@ describe('backup repo', () => {
     const restored = await createBidRepo(sqlB).listAll();
     const original = await a.bids.listAll();
     expect(restored).toEqual(original);
+    expect(restored[0].bid).toMatchObject({ erate: true, erate470Number: '270012345', erateFundingYear: 2027, erateCategory: 1 });
 
     const again = await createBackupRepo(sqlB).importAll(backup);
     expect(again.inserted).toBe(0);
@@ -141,6 +143,29 @@ describe('backup: quote tables', () => {
     const [d] = await createBidRepo(b).listAll();
     expect(d.bid).toMatchObject({ kind: 'rfq', markupType: 'pct', markupValue: 12 });
     expect([d.vendorQuotes[0]?.vendorName, d.lines[0]?.qty, d.prices[0]?.unitCost]).toEqual(['CDW', 40, 412]);
+  });
+
+  it('round-trips a line own cost; an older backup without unit_cost restores it as null', async () => {
+    const a = await memorySql();
+    await migrate(a);
+    const ids = seqIds('a');
+    const id = await createBidRepo(a, fixedClock(), ids).createQuote({ title: 'Carts', agencyName: 'Henrico', agencyType: 'k12', timezone: 'UTC' });
+    const lines = createQuoteLineRepo(a, fixedClock(), ids);
+    await lines.add(id, { qty: 2, description: 'Cable', unitCost: 7.25 });
+    const backup = parseBackup(JSON.stringify(await createBackupRepo(a).exportAll('2026-11-20T00:00:00.000Z')));
+    expect(backup.tables.quote_lines[0]).toMatchObject({ unit_cost: 7.25 });
+
+    const b = await memorySql();
+    await migrate(b);
+    await createBackupRepo(b).importAll(backup);
+    expect((await createBidRepo(b).listAll())[0].lines[0].unitCost).toBe(7.25);
+
+    const c = await memorySql();
+    await migrate(c);
+    const old = structuredClone(backup);
+    delete old.tables.quote_lines[0].unit_cost;
+    await createBackupRepo(c).importAll(old);
+    expect((await createBidRepo(c).listAll())[0].lines[0]).toMatchObject({ description: 'Cable', unitCost: null });
   });
 
   it('accepts a version 1 backup with no quote tables', async () => {

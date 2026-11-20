@@ -15,6 +15,7 @@
   import { HOLDERS, receivedIso, type Holder } from '$lib/domain/rfq';
   import type { AgencyType, Method, Stage } from '$lib/domain/types';
   import { initials } from '$lib/domain/ownership';
+  import { erateSummary } from '$lib/domain/erate';
   import { syncLabel, syncTone } from '$lib/sync/statusText';
   import TransitLine from './TransitLine.svelte';
   import HoverCard from './HoverCard.svelte';
@@ -147,6 +148,7 @@
       <button class="btn bell" aria-label="Settings" onclick={() => app.showSettings()}>
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
       </button>
+      <button class="btn" onclick={() => app.importDocumentFromPicker()} title="New bid from an RFP (PDF, Word or Excel) — or drop the file on the window">From document…</button>
       <button class="btn primary" onclick={() => (app.quickAddOpen = true)} title="New bid or quote (Ctrl/⌘ + N)">+ New</button>
     </div>
   </header>
@@ -181,6 +183,7 @@
     <button class="fchip" class:on={f.overdueOnly} aria-pressed={f.overdueOnly} onclick={() => setFilters({ overdueOnly: !f.overdueOnly })}>
       <i class="dot" style:background="var(--red)"></i>Overdue only
     </button>
+    <button class="fchip" class:on={f.erateOnly} aria-pressed={f.erateOnly} title="E-Rate (Form 470) bids only" onclick={() => setFilters({ erateOnly: !f.erateOnly })}>E-Rate</button>
     <input class="search" type="search" placeholder="Search agency, item, vendor" aria-label="Search the network"
       value={f.search} oninput={(e) => app.setNetworkSearch(e.currentTarget.value)} />
     <span class="sep" aria-hidden="true"></span>
@@ -248,7 +251,7 @@
           >
             <span class="badge" class:qbadge={b.kind === 'rfq'} style:background={b.kind === 'rfq' ? null : b.lineColor}>{r.line.letter}</span>
             <span class="text">
-              <strong>{b.agencyName}{#if teamOn && b.ownerId}<em class="owner" title="Owner: {app.memberName(b.ownerId)}">{initials(app.memberName(b.ownerId))}</em>{/if}</strong>
+              <strong>{b.agencyName}{#if b.erate}<em class="erate" title={erateSummary(b)}>E-Rate</em>{/if}{#if teamOn && b.ownerId}<em class="owner" title="Owner: {app.memberName(b.ownerId)}">{initials(app.memberName(b.ownerId))}</em>{/if}</strong>
               <span>{b.title}</span>
               <small>
                 {#if b.kind === 'rfq'}
@@ -372,6 +375,7 @@
   .cards-hint { margin-top: -8px; }
   .owner { display: inline-block; margin-left: 8px; padding: 1px 6px; border-radius: 9px; background: var(--line-soft, #eef1f5); color: var(--ink-2); font-size: 11px; font-style: normal; font-weight: 600; vertical-align: 2px; }
   .owner-filter { height: 30px; font-size: 13px; }
+  .erate { display: inline-block; margin-left: 8px; padding: 1px 6px; border-radius: 9px; background: #e3eefc; color: #1d4f99; font-size: 11px; font-style: normal; font-weight: 600; vertical-align: 2px; }
   .btn.sync { width: 36px; padding: 0; display: inline-flex; align-items: center; justify-content: center; }
   .dot { width: 10px; height: 10px; border-radius: 50%; background: #9aa5b1; }
   .dot.ok { background: #2f9e57; }

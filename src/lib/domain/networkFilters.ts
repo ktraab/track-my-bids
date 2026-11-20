@@ -29,6 +29,8 @@ export interface NetworkFilters {
   /** Who-has-the-ball chips; quotes only. */
   balls: Holder[];
   overdueOnly: boolean;
+  /** E-Rate bids only. */
+  erateOnly: boolean;
   /** Agency / title / bid # / vendor names. Session-only: never saved. */
   search: string;
   /** Active saved view (cleared by any manual filter change). */
@@ -37,7 +39,7 @@ export interface NetworkFilters {
 
 export const EMPTY_NETWORK_FILTERS: NetworkFilters = {
   stages: [], agencyTypes: [], methods: [], owner: 'mine',
-  kind: 'all', balls: [], overdueOnly: false, search: '', view: null,
+  kind: 'all', balls: [], overdueOnly: false, erateOnly: false, search: '', view: null,
 };
 
 export interface FilterCtx {
@@ -97,6 +99,7 @@ export function applyNetworkFilters(
     && (f.kind === 'all' || d.bid.kind === f.kind)
     && ballMatches(d, f.balls)
     && (!f.overdueOnly || isRowOverdue(d, c))
+    && (!f.erateOnly || d.bid.erate)
     && searchMatches(d, f.search)
     && (f.view !== 'week' || dueThisWeek(d, c))
     && (f.view !== 'mine' || !isClosed(d.bid.stage)));
@@ -124,7 +127,7 @@ export function applySavedView(cur: NetworkFilters, view: SavedView): NetworkFil
 
 export function activeFilterCount(f: NetworkFilters): number {
   return f.stages.length + f.agencyTypes.length + f.methods.length + (f.owner !== 'mine' ? 1 : 0)
-    + (f.kind !== 'all' ? 1 : 0) + f.balls.length + (f.overdueOnly ? 1 : 0) + (f.search.trim() ? 1 : 0)
+    + (f.kind !== 'all' ? 1 : 0) + f.balls.length + (f.overdueOnly ? 1 : 0) + (f.erateOnly ? 1 : 0) + (f.search.trim() ? 1 : 0)
     + (f.view === 'week' || f.view === 'mine' ? 1 : 0);
 }
 
@@ -145,6 +148,7 @@ export function withNetworkDefaults(raw: unknown): NetworkFilters {
     kind: r.kind === 'bid' || r.kind === 'rfq' ? r.kind : 'all',
     balls: list(r.balls, HOLDERS),
     overdueOnly: r.overdueOnly === true,
+    erateOnly: r.erateOnly === true,
     search: '',
     view: typeof r.view === 'string' && (SAVED_VIEWS as string[]).includes(r.view) ? (r.view as SavedView) : null,
   };

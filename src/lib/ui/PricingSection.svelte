@@ -64,6 +64,19 @@
     if (!(await app.setLinePrice(v.id, l.line.id, a))) el.value = was;
   }
 
+  /** The line's own cost (used when no chosen vendor priced it). */
+  async function setOwnCost(el: HTMLInputElement, l: LinePricing) {
+    const was = shown(l.line.unitCost);
+    const a = amountOf(el, was);
+    if (a === undefined) return;
+    if (a === l.line.unitCost) { el.value = was; return; }
+    if (!(await app.updateLine(l.line.id, { unitCost: a }))) el.value = was;
+  }
+
+  /** "$4,210.00 · 3 of 5" for a vendor that priced only some lines. */
+  const vendorTotalText = (t: { total: number | null; priced: number; complete: boolean }) =>
+    t.complete ? formatMoney(t.total) : `${formatMoney(t.total)} · ${t.priced} of ${p.lines.length}`;
+
   async function setQty(el: HTMLInputElement, l: LinePricing) {
     const n = parseQty(el.value);
     if (n === null || n === undefined || n <= 0) {
@@ -225,7 +238,7 @@
         </select>
       </div>
       {#if whole && !p.autoWhole}
-        <button class="mini" onclick={() => app.setWholeVendor(b.id, null)}>Use lowest total</button>
+        <button class="mini" onclick={() => app.setWholeVendor(b.id, null)}>Pick vendor automatically</button>
       {/if}
       <span class="spacer"></span>
       <button class="mini" aria-expanded={pasting} onclick={() => (pasting = !pasting)}>Paste lines from Excel</button>
@@ -237,11 +250,11 @@
         <div class="paste-example" role="table" aria-label="Example sheet layout">
           <div class="pe-row pe-head" role="row">
             <span role="columnheader">Qty</span><span role="columnheader">Description</span><span role="columnheader">Part #</span>
-            {#each p.vendors as v (v.id)}<span role="columnheader" class="pe-price">{v.vendorName} cost</span>{/each}
+            {#each p.vendors as v (v.id)}<span role="columnheader" class="pe-price">{v.vendorName} cost</span>{:else}<span role="columnheader" class="pe-price">Cost</span>{/each}
           </div>
           <div class="pe-row" role="row">
             <span role="cell">10</span><span role="cell">Laptop 14"</span><span role="cell">LT-14</span>
-            {#each p.vendors as v, k (v.id)}<span role="cell" class="pe-price">{(899 + k * 12).toFixed(2)}</span>{/each}
+            {#each p.vendors as v, k (v.id)}<span role="cell" class="pe-price">{(899 + k * 12).toFixed(2)}</span>{:else}<span role="cell" class="pe-price">899.00</span>{/each}
           </div>
         </div>
         <ul class="hint paste-notes">
@@ -250,7 +263,7 @@
           {#if p.vendors.length}
             <li>Price columns are optional: one <b>unit cost</b> per vendor, in the order shown above. Leave a cell blank if that vendor didn't price the line.</li>
           {:else}
-            <li>Add vendors first if you also want to paste their prices (one unit-cost column per vendor).</li>
+            <li>The Cost column is optional: your own <b>unit cost</b> per line. To paste vendor prices instead, add the vendors first (one unit-cost column per vendor).</li>
           {/if}
           <li>Qty like "2 EA" or "1,200" works. Prices can include $ and commas.</li>
         </ul>
@@ -271,6 +284,11 @@
               <th>Qty</th>
               <th>Item</th>
               {#each p.vendors as v (v.id)}<th class="v">{v.vendorName}<small>{vendorNote(v)}</small></th>{/each}
+              {#if p.vendors.length}
+                <th class="v own" title="Vendor prices win. A line's own cost is used only when no vendor priced it.">Own cost<small>if no vendor price</small></th>
+              {:else}
+                <th class="num">Cost</th>
+              {/if}
               <th>Markup</th>
               <th class="num">Sell / unit</th>
               <th class="num">Line total</th>
@@ -279,7 +297,7 @@
           </thead>
           <tbody>
             {#each p.lines as l (l.line.id)}
-              <tr>
+              <tr class:unpriced={l.flagged}>
                 <td class="qty">
                   <input class="num-in sm" inputmode="decimal" data-qty={l.line.id} value={String(l.line.qty)} onchange={(e) => setQty(e.currentTarget, l)} aria-label="Quantity for {l.line.description}" />
                 </td>
@@ -302,6 +320,10 @@
                     </span>
                   </td>
                 {/each}
+                <td class="cell" class:own={p.vendors.length > 0} class:chosen={p.vendors.length > 0 && l.ownCost}>
+                  <input class="num-in sm" inputmode="decimal" value={shown(l.line.unitCost)} placeholder={p.vendors.length ? '—' : 'No cost'} onchange={(e) => setOwnCost(e.currentTarget, l)} aria-label="Own unit cost for {l.line.description}" />
+                  {#if p.vendors.length > 0 && l.line.unitCost !== null && !l.ownCost}<small class="derived">used only when no vendor priced this line</small>{/if}
+                </td>
                 <td>
                   <span class="mk" class:inherit={l.markupSource !== 'line'}>
                     <select value={l.markupSource === 'line' ? l.markup.type : 'default'} onchange={(e) => setLineMarkupType(e.currentTarget, l)} aria-label="Markup type for {l.line.description}">
@@ -315,9 +337,11 @@
                   {/if}
                 </td>
                 <td class="num">
-                  <input class="num-in" class:override={l.line.sellOverride !== null} inputmode="decimal" value={sellShown(l)} placeholder="—" disabled={l.unitCost === null} title={l.unitCost === null ? 'Needs a vendor cost first' : undefined} onchange={(e) => setSell(e.currentTarget, l)} aria-label="Sell price for {l.line.description}" />
+                  <input class="num-in" class:override={l.line.sellOverride !== null} inputmode="decimal" value={sellShown(l)} placeholder="—" disabled={l.unitCost === null} title={l.unitCost === null ? 'Needs a cost first' : undefined} onchange={(e) => setSell(e.currentTarget, l)} aria-label="Sell price for {l.line.description}" />
                 </td>
-                <td class="sell">{#if l.flagged}<span class="late-text">No price</span>{:else}{formatMoney(l.lineTotal)}{/if}</td>
+                <td class="sell">
+                  {#if l.flagged}<span class="late-text">No price</span>{:else}{formatMoney(l.lineTotal)}{#if l.ownCost && p.vendors.length}<small class="derived">own cost</small>{/if}{/if}
+                </td>
                 <td class="rm">
                   {#if confirmRemove === l.line.id}
                     <!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
@@ -339,24 +363,24 @@
                 <td>Vendor total</td>
                 {#each p.vendors as v, k (v.id)}
                   {@const t = p.totals[k]}
-                  <td class="cell" class:chosen={whole && p.wholeVendorId === v.id} class:missing={t.total === null}>
+                  <td class="cell" class:chosen={whole && p.wholeVendorId === v.id} class:missing={t.total === null} class:partial={t.total !== null && !t.complete}>
                     {#if t.total === null}
-                      Missing lines
+                      No prices
                     {:else if whole}
-                      <button class="pick" aria-pressed={p.wholeVendorId === v.id} onclick={() => app.setWholeVendor(b.id, v.id)} aria-label="Buy the whole quote from {v.vendorName}">{formatMoney(t.total)}</button>
+                      <button class="pick" aria-pressed={p.wholeVendorId === v.id} onclick={() => app.setWholeVendor(b.id, v.id)} aria-label="Buy the whole quote from {v.vendorName}">{vendorTotalText(t)}</button>
                     {:else}
-                      {formatMoney(t.total)}
+                      {vendorTotalText(t)}
                     {/if}
                   </td>
                 {/each}
-                <td></td><td></td><td></td><td></td>
+                <td></td><td></td><td></td><td></td><td></td>
               </tr>
             </tfoot>
           {/if}
         </table>
       </div>
       {#if !p.vendors.length}
-        <p class="hint pad">Add vendors in the Vendors section to enter their prices.</p>
+        <p class="hint pad">Enter your own cost per line, or add vendors in the Vendors section to compare their prices.</p>
       {/if}
     {:else}
       <p class="hint pad">No lines yet. Add one below, or paste rows from Excel.</p>
@@ -371,12 +395,12 @@
 
     {#if p.lines.length}
       <div class="summary">
-        <div><span>Buying from</span><b>{p.summary.vendorsUsed.join(' + ') || '—'}</b></div>
+        <div><span>Buying from</span><b>{[...p.summary.vendorsUsed, ...(p.summary.ownCost ? ['own cost'] : [])].join(' + ') || '—'}</b></div>
         <div><span>Cost</span><b>{formatMoney(p.summary.cost)}</b></div>
         <div><span>Markup</span><b>{formatMoney(p.summary.markup)}</b></div>
         <div><span>Margin</span><b>{p.summary.marginPct === null ? '—' : `${p.summary.marginPct.toFixed(1)}%`}</b></div>
         <div>
-          <span>{totalLabel}{#if p.summary.flagged} <em class="late-text">({p.summary.flagged} line{p.summary.flagged === 1 ? '' : 's'} not priced, left out)</em>{/if}</span>
+          <span>{totalLabel}{#if p.summary.flagged} <em class="late-text">({p.summary.priced} of {p.summary.lines} lines priced)</em>{/if}</span>
           <b class="big">{formatMoney(p.summary.total)}</b>
         </div>
       </div>
@@ -426,6 +450,7 @@
   .desc { min-width: 200px; }
   .txt { display: block; width: 100%; border: 1px solid transparent; border-radius: 6px; padding: 2px 6px; background: none; font-weight: 600; }
   .txt.part { font-weight: 400; font-size: 11px; color: var(--muted); }
+  tr.unpriced .txt { color: var(--muted); }
   .txt:hover, .txt:focus { border-color: var(--line); background: #fff; }
   .linkish.small { font-size: 11px; margin-left: 6px; }
   .cell { text-align: right; border-left: 1px solid var(--line-soft); white-space: nowrap; }
@@ -440,6 +465,9 @@
   .rm { white-space: nowrap; text-align: right; }
   .tot td { border-top: 2px solid var(--line); font-weight: 700; background: var(--line-soft); }
   .tot td.cell.missing { color: var(--red); font-size: 12px; }
+  .tot td.cell.partial { font-size: 12px; }
+  .cell.own .num-in.sm { width: 64px; }
+  .grid th.own small { font-size: 10px; }
   .tot td.cell.chosen { background: var(--cust-soft); }
   .pick { border: 0; background: none; padding: 2px 4px; border-radius: 6px; font-weight: 700; text-decoration: underline dotted; }
   .pick[aria-pressed='true'] { text-decoration: none; }

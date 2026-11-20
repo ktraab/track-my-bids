@@ -38,6 +38,7 @@ export function createFakeServer(schemaVersion = SCHEMA_VERSION) {
         && r.data.deleted_at == null && lower(r.data.email) === lower(data.email)) return r;
       if (tbl === 'bid_contacts' && r.data.bid_id === data.bid_id && r.data.contact_id === data.contact_id
         && r.data.role === data.role) return r;
+      if (tbl === 'extract_labels' && r.data.field === data.field && r.data.phrase === data.phrase) return r;
     }
     return undefined;
   }

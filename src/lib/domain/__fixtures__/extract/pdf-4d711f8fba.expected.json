@@ -1,0 +1,21 @@
+{
+  "due": "2026-10-22T14:00",
+  "pre_bid": null,
+  "pre_bid_mandatory": null,
+  "qa_deadline": null,
+  "site_walk": null,
+  "bid_number": "IT27225EQP",
+  "agency_name": "MBTA",
+  "buyer_email": "person1@mbta.com",
+  "title": "UPS, headsets, conference microphones",
+  "erate": false,
+  "erate_470_number": null,
+  "erate_funding_year": null,
+  "erate_category": null,
+  "allowable_contract": null,
+  "scope_tags": [
+    "Power / UPS",
+    "Audio / Video"
+  ],
+  "scope_has_summary": false
+}

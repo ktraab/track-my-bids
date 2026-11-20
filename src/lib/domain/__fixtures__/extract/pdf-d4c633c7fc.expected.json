@@ -1,0 +1,20 @@
+{
+  "due": "2026-11-18T17:00",
+  "pre_bid": null,
+  "pre_bid_mandatory": null,
+  "qa_deadline": "2026-11-09T14:00",
+  "site_walk": null,
+  "bid_number": "2027-001-006",
+  "agency_name": "Housing Authority of the Cherokee Nation",
+  "buyer_email": "bids@hacn.org",
+  "title": "60 Desktops and 25 Laptops for HACN",
+  "erate": false,
+  "erate_470_number": null,
+  "erate_funding_year": null,
+  "erate_category": null,
+  "allowable_contract": null,
+  "scope_tags": [
+    "Computers"
+  ],
+  "scope_has_summary": true
+}

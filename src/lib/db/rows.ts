@@ -17,6 +17,8 @@ export function rowToBid(r: Row): Bid {
     followedUpAt: r.followed_up_at ?? null, pricingMode: r.pricing_mode === 'per_line' ? 'per_line' : 'whole',
     markupType: r.markup_type ?? null, markupValue: numOrNull(r.markup_value),
     sellRounding: Number(r.sell_rounding ?? 0.01) || 0.01, wholeVendorId: r.whole_vendor_id ?? null,
+    erate: !!r.erate, erate470Number: r.erate_470_number ?? null, erateFundingYear: numOrNull(r.erate_funding_year),
+    erateCategory: Number(r.erate_category) === 1 ? 1 : Number(r.erate_category) === 2 ? 2 : null,
     createdAt: r.created_at, updatedAt: r.updated_at, deletedAt: r.deleted_at,
   };
 }
@@ -74,7 +76,7 @@ export function rowToQuoteLine(r: Row): QuoteLine {
   return {
     id: r.id, bidId: r.bid_id, position: Number(r.position), qty: Number(r.qty), description: r.description,
     partNo: r.part_no ?? null, markupType: r.markup_type ?? null, markupValue: numOrNull(r.markup_value),
-    sellOverride: numOrNull(r.sell_override), chosenVendorId: r.chosen_vendor_id ?? null,
+    sellOverride: numOrNull(r.sell_override), chosenVendorId: r.chosen_vendor_id ?? null, unitCost: numOrNull(r.unit_cost),
     createdAt: r.created_at, updatedAt: r.updated_at, deletedAt: r.deleted_at ?? null,
   };
 }

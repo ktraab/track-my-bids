@@ -134,3 +134,14 @@ describe('RFQ filters', () => {
     expect(activeFilterCount(applySavedView(E, 'stuck'))).toBe(2);
   });
 });
+
+describe('E-Rate filter', () => {
+  const e = withChildren(makeBid({ id: 'e', erate: true }), []);
+  it('E-Rate only keeps E-Rate bids, counts as a filter and is saved', () => {
+    expect(applyNetworkFilters([a, e], { ...E, erateOnly: true }).map((d) => d.bid.id)).toEqual(['e']);
+    expect(activeFilterCount({ ...E, erateOnly: true })).toBe(1);
+    expect(storedFilters({ ...E, erateOnly: true, search: 'x' })).toEqual({ ...E, erateOnly: true });
+    expect(withNetworkDefaults({ erateOnly: true })).toEqual({ ...E, erateOnly: true });
+    expect(withNetworkDefaults({ erateOnly: 'yes' })).toEqual(E);
+  });
+});

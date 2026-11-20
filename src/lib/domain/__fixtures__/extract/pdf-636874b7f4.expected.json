@@ -1,0 +1,20 @@
+{
+  "due": "2026-11-11T17:00",
+  "pre_bid": null,
+  "pre_bid_mandatory": null,
+  "qa_deadline": null,
+  "site_walk": null,
+  "bid_number": null,
+  "agency_name": "IDAHO FALLS SCHOOL DISTRICT 91",
+  "buyer_email": "person1@sd91.org",
+  "title": "FY 26-27 IFSD91 Category 2 Lithium-Ion Uninterruptable Battery Backups",
+  "erate": true,
+  "erate_470_number": "270001370",
+  "erate_funding_year": "2027",
+  "erate_category": "2",
+  "allowable_contract": "2026-11-11T17:00",
+  "scope_tags": [
+    "Power / UPS"
+  ],
+  "scope_has_summary": true
+}

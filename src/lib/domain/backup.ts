@@ -1,7 +1,11 @@
 export const BACKUP_FORMAT = 'trackmybids-backup';
 export const BACKUP_VERSION = 2;
 
-/** Parent tables first so foreign keys resolve on restore. notification_log is intentionally excluded. */
+/**
+ * Parent tables first so foreign keys resolve on restore. notification_log is intentionally excluded, and so is
+ * extract_labels: learned phrases are only ranking hints (the app relearns them, and Team mode syncs them), and
+ * restoring them would add a (field, phrase) collision path for no real gain.
+ */
 export const BACKUP_TABLES = [
   'bids', 'contacts', 'milestones', 'checklist_items', 'bid_contacts',
   'vendor_quotes', 'quote_lines', 'vendor_line_prices', 'checklist_template', 'settings',

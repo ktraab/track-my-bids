@@ -1,0 +1,20 @@
+{
+  "due": "2026-12-03T14:00",
+  "pre_bid": null,
+  "pre_bid_mandatory": null,
+  "qa_deadline": null,
+  "site_walk": null,
+  "bid_number": "27-131",
+  "agency_name": "King County Directors' Association",
+  "buyer_email": "person2@kcda.org",
+  "title": "Whiteboards, Tackboards, Digital Interactive Boards, and Display Cases",
+  "erate": false,
+  "erate_470_number": null,
+  "erate_funding_year": null,
+  "erate_category": null,
+  "allowable_contract": null,
+  "scope_tags": [
+    "Displays"
+  ],
+  "scope_has_summary": false
+}

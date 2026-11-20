@@ -1,0 +1,999 @@
+{
+ "id": "pdf-151c0180af",
+ "kind": "pdf",
+ "today": "2026-11-20",
+ "lines": [
+  {
+   "text": "FCC Form 470 – Funding Year 2027",
+   "page": 1
+  },
+  {
+   "text": "Form 470 Application Number: 270002937",
+   "page": 1
+  },
+  {
+   "text": "2027_17008293_Grace Community Church of Naples",
+   "page": 1
+  },
+  {
+   "text": "Billed Entity | Contact Information",
+   "page": 1
+  },
+  {
+   "text": "Grace Community Church of Naples | Pat Morgan",
+   "page": 1
+  },
+  {
+   "text": "5524 19th Ct SW Naples, FL 34116 Florida | erate@erateexchange.com",
+   "page": 1
+  },
+  {
+   "text": "555-555-0100 | 555-555-0101",
+   "page": 1
+  },
+  {
+   "text": "person1@gracecommunityschools.com",
+   "page": 1
+  },
+  {
+   "text": "Billed Entity Number: 17008293",
+   "page": 1
+  },
+  {
+   "text": "FCC Registration Number: 0025450289",
+   "page": 1
+  },
+  {
+   "text": "Number of Eligible Entities: 7",
+   "page": 1
+  },
+  {
+   "text": "Application Type",
+   "page": 1
+  },
+  {
+   "text": "Applicant Type: Consortium",
+   "page": 1
+  },
+  {
+   "text": "Recipients of Services: Private School",
+   "page": 1
+  },
+  {
+   "text": "Consulting Firms",
+   "page": 1
+  },
+  {
+   "text": "Name | Consultant | Phone Number | Email",
+   "page": 1
+  },
+  {
+   "text": "Registration",
+   "page": 1
+  },
+  {
+   "text": "Number",
+   "page": 1
+  },
+  {
+   "text": "e2e Exchange, LLC | 16043595 | 555-555-0101 | erate@erateexchange.com",
+   "page": 1
+  },
+  {
+   "text": "Consultants",
+   "page": 1
+  },
+  {
+   "text": "Name | Phone Number | Email",
+   "page": 1
+  },
+  {
+   "text": "Sam Rivera | 555-555-0101 | person2@e2eexchange.com",
+   "page": 1
+  },
+  {
+   "text": "Alex Chen | 555-555-0101 | person3@e2eexchange.com",
+   "page": 1
+  },
+  {
+   "text": "Jordan Lee | 555-555-0101 | person4@e2eexchange.com",
+   "page": 1
+  },
+  {
+   "text": "Casey Brooks | 555-555-0101 | person5@e2eexchange.com",
+   "page": 1
+  },
+  {
+   "text": "Casey Brooks | 555-555-0101 | erate@e2eexchange.com",
+   "page": 1
+  },
+  {
+   "text": "Pat Morgan | 555-555-0101 | person6@e2eexchange.com",
+   "page": 1
+  },
+  {
+   "text": "Pat Morgan | 555-555-0101 | erate@erateexchange.com",
+   "page": 1
+  },
+  {
+   "text": "RFPS",
+   "page": 1
+  },
+  {
+   "text": "1",
+   "page": 1
+  },
+  {
+   "text": "ID | Name",
+   "page": 2
+  },
+  {
+   "text": "236961 | 2027_Grace Community Church of Naples_BOM",
+   "page": 2
+  },
+  {
+   "text": "Category One Service Requests",
+   "page": 2
+  },
+  {
+   "text": "Service Type | Function | Function | Minimum | Maximum | Entities | Quantity Unit | Installation | Associated",
+   "page": 2
+  },
+  {
+   "text": "Other | Capacity | Capacity | and Initial | RFPs",
+   "page": 2
+  },
+  {
+   "text": "Description | Configuration?",
+   "page": 2
+  },
+  {
+   "text": "Data Transmission and/or | Internet Access and | 100 Mbps | 25 Gbps | 8 | 8 | Each | Yes",
+   "page": 2
+  },
+  {
+   "text": "Internet Access | Data Transmission",
+   "page": 2
+  },
+  {
+   "text": "Service",
+   "page": 2
+  },
+  {
+   "text": "Description of Other Functions",
+   "page": 2
+  },
+  {
+   "text": "ID | Name",
+   "page": 2
+  },
+  {
+   "text": "Narrative",
+   "page": 2
+  },
+  {
+   "text": "BID SUBMISSION REQUIREMENTS",
+   "page": 2
+  },
+  {
+   "text": "Please submit all bids to the designated Technical Contact listed on the FCC Form 470. Include the Applicant/School or Library",
+   "page": 2
+  },
+  {
+   "text": "name AND FCC Form 470 number in the subject line of the bid submission.",
+   "page": 2
+  },
+  {
+   "text": "The Technical Contact listed on this FCC Form 470 is responsible for responding to vendor questions, collecting vendor bids, and",
+   "page": 2
+  },
+  {
+   "text": "coordinating the distribution of bids to the Applicant. All vendor questions, responses, and bid submissions must be communicated",
+   "page": 2
+  },
+  {
+   "text": "in writing via the Technical Contact email address listed on the FCC Form 470.",
+   "page": 2
+  },
+  {
+   "text": "If a Consultant is listed, the Consultant does not evaluate bids, select vendors, or make decisions regarding the services or equipment",
+   "page": 2
+  },
+  {
+   "text": "sought. The Applicant makes all bid evaluations, vendor selections, and procurement decisions.",
+   "page": 2
+  },
+  {
+   "text": "The deadline for bid submission is 28 days after the FCC Form 470 certification date, unless a different deadline is specified in an",
+   "page": 2
+  },
+  {
+   "text": "accompanying RFP or the deadline is extended through an amendment made available to all prospective bidders.",
+   "page": 2
+  },
+  {
+   "text": "Category Two Service Requests",
+   "page": 2
+  },
+  {
+   "text": "Service Type | Function | Manufacturer | Manufacturer Entities | Quantity | Unit | Installation | Associated",
+   "page": 2
+  },
+  {
+   "text": "Other | and Initial | RFPs",
+   "page": 2
+  },
+  {
+   "text": "Description | Configuration?",
+   "page": 2
+  },
+  {
+   "text": "Internal Connections | Switches and Necessary | Other or equivalent | 1 | 4 | Each | Yes | 236961",
+   "page": 2
+  },
+  {
+   "text": "Software and Licenses",
+   "page": 2
+  },
+  {
+   "text": "Basic Maintenance of Internal | Switches | Other or equivalent | 1 | 8 | 4 | Each | 236961",
+   "page": 2
+  },
+  {
+   "text": "Connections",
+   "page": 2
+  },
+  {
+   "text": "Internal Connections | Wireless Access Points and | Other or equivalent | 1 | 5 | Each | Yes | 236961",
+   "page": 2
+  },
+  {
+   "text": "Necessary Software and",
+   "page": 2
+  },
+  {
+   "text": "Licenses",
+   "page": 2
+  },
+  {
+   "text": "Basic Maintenance of Internal | Wireless Access Points | Other or equivalent | 1 | 8 | 5 | Each | 236961",
+   "page": 2
+  },
+  {
+   "text": "Connections",
+   "page": 2
+  },
+  {
+   "text": "Internal Connections | Firewall Service, Components, | Other or equivalent | 1 | 1 | Each | Yes | 236961",
+   "page": 2
+  },
+  {
+   "text": "and Necessary Software and",
+   "page": 2
+  },
+  {
+   "text": "Licenses",
+   "page": 2
+  },
+  {
+   "text": "2",
+   "page": 2
+  },
+  {
+   "text": "Service Type | Function | Manufacturer | Manufacturer Entities | Quantity | Unit | Installation | Associated",
+   "page": 3
+  },
+  {
+   "text": "Other | and Initial | RFPs",
+   "page": 3
+  },
+  {
+   "text": "Description | Configuration?",
+   "page": 3
+  },
+  {
+   "text": "Basic Maintenance of Internal | Firewall Service and | Other or equivalent | 1 | 8 | 1 | Each | 236961",
+   "page": 3
+  },
+  {
+   "text": "Connections | Components",
+   "page": 3
+  },
+  {
+   "text": "Internal Connections | Racks | Other or equivalent | 1 | 1 | Each | Yes | 236961",
+   "page": 3
+  },
+  {
+   "text": "Basic Maintenance of Internal | Racks | Other or equivalent | 1 | 8 | 1 | Each | 236961",
+   "page": 3
+  },
+  {
+   "text": "Connections",
+   "page": 3
+  },
+  {
+   "text": "Internal Connections | Cabling | Other or equivalent | 1 | 8 | 100000 | Feet | Yes | 236961",
+   "page": 3
+  },
+  {
+   "text": "Basic Maintenance of Internal | Cabling | Other or equivalent | 1 | 8 | 100000 | Feet | 236961",
+   "page": 3
+  },
+  {
+   "text": "Connections",
+   "page": 3
+  },
+  {
+   "text": "Internal Connections | Uninterruptable Power Supply/ | Other or equivalent | 1 | 1 | Each | Yes | 236961",
+   "page": 3
+  },
+  {
+   "text": "Battery Backup and Necessary",
+   "page": 3
+  },
+  {
+   "text": "Software and Licenses",
+   "page": 3
+  },
+  {
+   "text": "Basic Maintenance of Internal | Uninterruptable Power Supply/ | Other or equivalent | 1 | 8 | 1 | Each | 236961",
+   "page": 3
+  },
+  {
+   "text": "Connections | Battery Backup",
+   "page": 3
+  },
+  {
+   "text": "Description of Other Manufacturers",
+   "page": 3
+  },
+  {
+   "text": "ID | Name",
+   "page": 3
+  },
+  {
+   "text": "1 | See BOM",
+   "page": 3
+  },
+  {
+   "text": "2 | See BOM",
+   "page": 3
+  },
+  {
+   "text": "3 | See BOM",
+   "page": 3
+  },
+  {
+   "text": "4 | See BOM",
+   "page": 3
+  },
+  {
+   "text": "5 | See BOM",
+   "page": 3
+  },
+  {
+   "text": "6 | See BOM",
+   "page": 3
+  },
+  {
+   "text": "7 | See BOM",
+   "page": 3
+  },
+  {
+   "text": "8 | See BOM",
+   "page": 3
+  },
+  {
+   "text": "9 | See BOM",
+   "page": 3
+  },
+  {
+   "text": "10 | See BOM",
+   "page": 3
+  },
+  {
+   "text": "11 | See BOM",
+   "page": 3
+  },
+  {
+   "text": "12 | See BOM",
+   "page": 3
+  },
+  {
+   "text": "Narrative",
+   "page": 3
+  },
+  {
+   "text": "Please see attached BOM.",
+   "page": 3
+  },
+  {
+   "text": "BID SUBMISSION REQUIREMENTS",
+   "page": 3
+  },
+  {
+   "text": "Please submit all bids to the designated Technical Contact listed on the FCC Form 470. Include the Applicant/School or Library",
+   "page": 3
+  },
+  {
+   "text": "name AND FCC Form 470 number in the subject line of the bid submission.",
+   "page": 3
+  },
+  {
+   "text": "3",
+   "page": 3
+  },
+  {
+   "text": "The Technical Contact listed on this FCC Form 470 is responsible for responding to vendor questions, collecting vendor bids, and",
+   "page": 4
+  },
+  {
+   "text": "coordinating the distribution of bids to the Applicant. All vendor questions, responses, and bid submissions must be communicated",
+   "page": 4
+  },
+  {
+   "text": "in writing via the Technical Contact email address listed on the FCC Form 470.",
+   "page": 4
+  },
+  {
+   "text": "If a Consultant is listed, the Consultant does not evaluate bids, select vendors, or make decisions regarding the services or equipment",
+   "page": 4
+  },
+  {
+   "text": "sought. The Applicant makes all bid evaluations, vendor selections, and procurement decisions.",
+   "page": 4
+  },
+  {
+   "text": "The deadline for bid submission is 28 days after the FCC Form 470 certification date, unless a different deadline is specified in an",
+   "page": 4
+  },
+  {
+   "text": "accompanying RFP or the deadline is extended through an amendment made available to all prospective bidders.",
+   "page": 4
+  },
+  {
+   "text": "Technical Contact",
+   "page": 4
+  },
+  {
+   "text": "Pat Morgan",
+   "page": 4
+  },
+  {
+   "text": "EMAIL ONLY",
+   "page": 4
+  },
+  {
+   "text": "555-555-0101",
+   "page": 4
+  },
+  {
+   "text": "person7@e2eexchange.com",
+   "page": 4
+  },
+  {
+   "text": "State and Local Procurement Restrictions",
+   "page": 4
+  },
+  {
+   "text": "STATE AND LOCAL PROCUREMENT RESTRICTIONS / BID REQUIREMENTS",
+   "page": 4
+  },
+  {
+   "text": "Bids and requests for information should reference this FCC Form 470 number and should be submitted by email to the Technical",
+   "page": 4
+  },
+  {
+   "text": "Contact identified on this form. All bids and resulting contracts must comply with applicable federal, state, and local procurement",
+   "page": 4
+  },
+  {
+   "text": "requirements, in addition to applicable E-Rate Program rules.",
+   "page": 4
+  },
+  {
+   "text": "Contract Terms",
+   "page": 4
+  },
+  {
+   "text": "The Applicant may consider month-to-month, single-year, multi-year, and/or contracts containing voluntary extension options and",
+   "page": 4
+  },
+  {
+   "text": "may consider proposals offering varying contract terms.",
+   "page": 4
+  },
+  {
+   "text": "Any voluntary contract extension options must be specifically identified in the awarded contract and must state the number and",
+   "page": 4
+  },
+  {
+   "text": "duration of the available extensions.",
+   "page": 4
+  },
+  {
+   "text": "Contracts containing automatic or evergreen renewal provisions will not be considered.",
+   "page": 4
+  },
+  {
+   "text": "The Applicant may consider contracts containing flexible terms that permit services, quantities, locations, bandwidth, and/or service",
+   "page": 4
+  },
+  {
+   "text": "levels to be added, removed, increased, decreased, or otherwise modified as the Applicant's needs change, subject to applicable E-",
+   "page": 4
+  },
+  {
+   "text": "Rate rules and state and local procurement requirements.",
+   "page": 4
+  },
+  {
+   "text": "E-Rate Requirements",
+   "page": 4
+  },
+  {
+   "text": "Service Providers submitting proposals in response to this FCC Form 470 must comply with all applicable FCC and E-Rate Program",
+   "page": 4
+  },
+  {
+   "text": "rules and requirements.",
+   "page": 4
+  },
+  {
+   "text": "Service Providers must comply with the E-Rate Lowest Corresponding Price (LCP) requirements.",
+   "page": 4
+  },
+  {
+   "text": "Any promotional pricing, discounts, credits, free products, free services, or other incentives included with a proposal must be clearly",
+   "page": 4
+  },
+  {
+   "text": "identified and must comply with applicable E-Rate rules.",
+   "page": 4
+  },
+  {
+   "text": "Proposals should clearly identify and separately price any E-Rate ineligible or partially eligible products, services, components, or",
+   "page": 4
+  },
+  {
+   "text": "charges.",
+   "page": 4
+  },
+  {
+   "text": "Service Providers should include their E-Rate Service Provider Identification Number (SPIN) in their proposal.",
+   "page": 4
+  },
+  {
+   "text": "Additional Procurement Requirements",
+   "page": 4
+  },
+  {
+   "text": "Additional state or local procurement requirements applicable to the Applicant may apply and, when applicable, will be identified in",
+   "page": 4
+  },
+  {
+   "text": "an attachment to this FCC Form 470 or associated procurement document.",
+   "page": 4
+  },
+  {
+   "text": "4",
+   "page": 4
+  },
+  {
+   "text": "CATEGORY ONE BID REQUIREMENTS",
+   "page": 5
+  },
+  {
+   "text": "Proposals should clearly identify the proposed service, bandwidth/speed, recurring charges, non-recurring charges, installation or",
+   "page": 5
+  },
+  {
+   "text": "construction charges, and any other applicable fees or charges.",
+   "page": 5
+  },
+  {
+   "text": "Any applicable installation, construction, equipment, maintenance, taxes, fees, or other charges should be separately identified.",
+   "page": 5
+  },
+  {
+   "text": "If multiple service options, bandwidths, or contract terms are proposed, pricing for each option should be clearly identified.",
+   "page": 5
+  },
+  {
+   "text": "The Applicant may consider proposals for higher or lower bandwidths and/or alternative service configurations when such options",
+   "page": 5
+  },
+  {
+   "text": "are within the scope of this FCC Form 470 and meet the Applicant's needs.",
+   "page": 5
+  },
+  {
+   "text": "Any E-Rate ineligible or partially eligible products, services, components, or charges associated with the proposed solution should",
+   "page": 5
+  },
+  {
+   "text": "be clearly identified and separately priced or cost allocated.",
+   "page": 5
+  },
+  {
+   "text": "The Applicant reserves the right to consider and accept proposals in whole or in part and may award individual products, services,",
+   "page": 5
+  },
+  {
+   "text": "line items, or portions of the requested solution separately, as permitted under E-Rate and applicable procurement requirements",
+   "page": 5
+  },
+  {
+   "text": "CATEGORY TWO BID REQUIREMENTS",
+   "page": 5
+  },
+  {
+   "text": "Proposals should identify the manufacturer, make/model, SKU or part number, quantity, unit price, and extended price for each",
+   "page": 5
+  },
+  {
+   "text": "proposed product or service.",
+   "page": 5
+  },
+  {
+   "text": "Installation, configuration, licenses, support, maintenance, shipping, taxes, fees, and other charges, when applicable, should be",
+   "page": 5
+  },
+  {
+   "text": "separately itemized.",
+   "page": 5
+  },
+  {
+   "text": "Where a specific manufacturer, make, model, SKU, or part number is identified on this FCC Form 470 or an associated procurement",
+   "page": 5
+  },
+  {
+   "text": "document, equivalent products will be considered in accordance with E-Rate requirements.",
+   "page": 5
+  },
+  {
+   "text": "Vendors proposing equivalent products should clearly identify the proposed equivalent manufacturer and model and provide",
+   "page": 5
+  },
+  {
+   "text": "sufficient information for the Applicant to evaluate functional equivalency and compatibility with the Applicant's existing",
+   "page": 5
+  },
+  {
+   "text": "environment.",
+   "page": 5
+  },
+  {
+   "text": "Any E-Rate ineligible or partially eligible components associated with the proposed solution should be clearly identified and",
+   "page": 5
+  },
+  {
+   "text": "separately priced or cost allocated.",
+   "page": 5
+  },
+  {
+   "text": "If licenses, subscriptions, support, maintenance, or other associated services are required for the proposed equipment to function as",
+   "page": 5
+  },
+  {
+   "text": "intended, the proposal should identify the applicable term and separately itemize the associated costs.",
+   "page": 5
+  },
+  {
+   "text": "The Applicant reserves the right to consider and accept proposals in whole or in part and may award individual products, services,",
+   "page": 5
+  },
+  {
+   "text": "line items, or portions of the requested solution separately, as permitted under E-Rate and applicable procurement requirements",
+   "page": 5
+  },
+  {
+   "text": "Billed Entities",
+   "page": 5
+  },
+  {
+   "text": "Billed Entity | Billed Entity Name",
+   "page": 5
+  },
+  {
+   "text": "Number",
+   "page": 5
+  },
+  {
+   "text": "17008303 | Bonita Springs School",
+   "page": 5
+  },
+  {
+   "text": "17008312 | Golden Gate School",
+   "page": 5
+  },
+  {
+   "text": "17008313 | Fort Myers School",
+   "page": 5
+  },
+  {
+   "text": "17008316 | Cape Coral Skyline School",
+   "page": 5
+  },
+  {
+   "text": "17008318 | North Fort Myers School",
+   "page": 5
+  },
+  {
+   "text": "17008319 | Lehigh Acres School",
+   "page": 5
+  },
+  {
+   "text": "17052132 | Grace Community School of Gateway, Inc",
+   "page": 5
+  },
+  {
+   "text": "Certifications",
+   "page": 5
+  },
+  {
+   "text": "5",
+   "page": 5
+  },
+  {
+   "text": "I certify that the applicant includes:",
+   "page": 6
+  },
+  {
+   "text": "I certify that the applicant includes schools under the statutory definitions of elementary and secondary schools found in the No Child",
+   "page": 6
+  },
+  {
+   "text": "Left Behind Act of 2001, 20 U.S.C. §§ 7801 (18) and (38), that do not operate as for-profit businesses, and do not have endowments",
+   "page": 6
+  },
+  {
+   "text": "exceeding $50 million.",
+   "page": 6
+  },
+  {
+   "text": "Other Certifications",
+   "page": 6
+  },
+  {
+   "text": "I certify that this FCC Form 470 and any applicable RFP will be available for review by potential bidders for at least 28 days before",
+   "page": 6
+  },
+  {
+   "text": "considering all bids received and selecting a service provider. I certify that all bids submitted will be carefully considered and the bid",
+   "page": 6
+  },
+  {
+   "text": "selected will be for the most cost-effective service or equipment offering, with price being the primary factor, and will be the most",
+   "page": 6
+  },
+  {
+   "text": "cost-effective means of meeting educational needs and technology goals.",
+   "page": 6
+  },
+  {
+   "text": "I certify that I will retain required documents for a period of at least 10 years (or whatever retention period is required by the rules",
+   "page": 6
+  },
+  {
+   "text": "in effect at the time of this certification) after the later of the last day of the applicable funding year or the service delivery deadline",
+   "page": 6
+  },
+  {
+   "text": "for the associated funding request. I certify that I will retain all documents necessary to demonstrate compliance with the statute and",
+   "page": 6
+  },
+  {
+   "text": "Commission rules regarding the form for, receipt of, and delivery of services receiving schools and libraries discounts. I acknowledge",
+   "page": 6
+  },
+  {
+   "text": "that I may be audited pursuant to participation in the schools and libraries program.",
+   "page": 6
+  },
+  {
+   "text": "I acknowledge that support under this support mechanism is conditional upon the school(s) and/or library(ies) I represent securing",
+   "page": 6
+  },
+  {
+   "text": "access, separately or through this program, to all of the resources, including computers, training, software, internal connections,",
+   "page": 6
+  },
+  {
+   "text": "maintenance, and electrical capacity necessary to use the services purchased effectively.",
+   "page": 6
+  },
+  {
+   "text": "I certify that I have reviewed all applicable FCC, state, and local procurement/competitive bidding requirements and that I have",
+   "page": 6
+  },
+  {
+   "text": "complied with them. I acknowledge that persons willfully making false statements on this form may be punished by fine or forfeiture,",
+   "page": 6
+  },
+  {
+   "text": "under the Communications Act, 47 U.S.C. §§ 502, 503(b), or fine or imprisonment under Title 18 of the United States Code, 18",
+   "page": 6
+  },
+  {
+   "text": "U.S.C. § 1001.",
+   "page": 6
+  },
+  {
+   "text": "I acknowledge that FCC rules provide that persons who have been convicted of criminal violations or held civilly liable for certain",
+   "page": 6
+  },
+  {
+   "text": "acts arising from their participation in the schools and libraries support mechanism are subject to suspension and debarment from the",
+   "page": 6
+  },
+  {
+   "text": "program.",
+   "page": 6
+  },
+  {
+   "text": "NOTICE:",
+   "page": 6
+  },
+  {
+   "text": "In accordance with Section 54.503 of the Federal Communications Commission’s (“Commission”) rules, certain schools and libraries",
+   "page": 6
+  },
+  {
+   "text": "ordering services that are eligible for and seeking universal service discounts must file this Description of Services Requested and",
+   "page": 6
+  },
+  {
+   "text": "Certification Form (FCC Form 470) with the Universal Service Administrator. 47 C.F.R. § 54.503. The collection of information",
+   "page": 6
+  },
+  {
+   "text": "stems from the Commission’s authority under Section 254 of the Communications Act of 1934, as amended. 47 U.S.C. § 254. The",
+   "page": 6
+  },
+  {
+   "text": "data in the report will be used to ensure that schools and libraries comply with the competitive bidding requirement contained in 47",
+   "page": 6
+  },
+  {
+   "text": "C.F.R. § 54.503. Schools and libraries must file this form themselves or as part of a consortium.",
+   "page": 6
+  },
+  {
+   "text": "An agency may not conduct or sponsor, and a person is not required to respond to, a collection of information unless it displays a",
+   "page": 6
+  },
+  {
+   "text": "currently valid OMB control number.",
+   "page": 6
+  },
+  {
+   "text": "The FCC is authorized under the Communications Act of 1934, as amended, to collect the information requested in this form. We",
+   "page": 6
+  },
+  {
+   "text": "will use the information you provide to determine whether you have complied with the competitive bidding requirements applicable",
+   "page": 6
+  },
+  {
+   "text": "to requests for universal service discounts. If we believe there may be a violation or a potential violation of any applicable statute,",
+   "page": 6
+  },
+  {
+   "text": "6",
+   "page": 6
+  },
+  {
+   "text": "regulation, rule or order, the information you provide in this form may be referred to the Federal, state, or local agency responsible",
+   "page": 7
+  },
+  {
+   "text": "for investigating, prosecuting, enforcing, or implementing the statute, rule, regulation or order. In certain cases, the information",
+   "page": 7
+  },
+  {
+   "text": "you provide in this form may be disclosed to the Department of Justice or a court or adjudicative body when (a) the FCC; or (b)",
+   "page": 7
+  },
+  {
+   "text": "any employee of the FCC; or (c) the United States Government is a party of a proceeding before the body or has an interest in the",
+   "page": 7
+  },
+  {
+   "text": "proceeding. In addition, information provided in or submitted with this form, or in response to subsequent inquiries, may also be",
+   "page": 7
+  },
+  {
+   "text": "subject to disclosure consistent with the Communications Act of 1934, FCC regulations, the Freedom of Information Act, 5 U.S.C. §",
+   "page": 7
+  },
+  {
+   "text": "552, or other applicable law.",
+   "page": 7
+  },
+  {
+   "text": "If you owe a past due debt to the federal government, the information you provide in this form may also be disclosed to the",
+   "page": 7
+  },
+  {
+   "text": "Department of the Treasury Financial Management Service, other Federal agencies and/or your employer to offset your salary, IRS",
+   "page": 7
+  },
+  {
+   "text": "tax refund or other payments to collect that debt. The FCC may also provide the information to these agencies through the matching",
+   "page": 7
+  },
+  {
+   "text": "of computer records when authorized.",
+   "page": 7
+  },
+  {
+   "text": "If you do not provide the information we request on the form, the FCC or Universal Service Administrator may return your form",
+   "page": 7
+  },
+  {
+   "text": "without action or deny a related request for universal service discounts.",
+   "page": 7
+  },
+  {
+   "text": "The foregoing Notice is required by the Paperwork Reduction Act of 1995, Pub. L. No. 104-13, 44 U.S.C. § 3501, et seq.",
+   "page": 7
+  },
+  {
+   "text": "Public reporting burden for this collection of information is estimated to average 3.5 hours per response, including the time for",
+   "page": 7
+  },
+  {
+   "text": "reviewing instructions, searching existing data sources, gathering and maintaining the data needed, completing, and reviewing",
+   "page": 7
+  },
+  {
+   "text": "the collection of information. Send comments regarding this burden estimate or any other aspect of this collection of information,",
+   "page": 7
+  },
+  {
+   "text": "including suggestions for reducing the reporting burden to the Federal Communications Commission, Performance Evaluation",
+   "page": 7
+  },
+  {
+   "text": "and Records Management, Washington, DC 20554. We also will accept your comments via the email if you send them to",
+   "page": 7
+  },
+  {
+   "text": "PRA@FCC.gov. DO NOT SEND COMPLETED WORKSHEETS TO THESE ADDRESSES.",
+   "page": 7
+  },
+  {
+   "text": "Authorized Person",
+   "page": 7
+  },
+  {
+   "text": "Pat Morgan",
+   "page": 7
+  },
+  {
+   "text": "e2e Exchange, LLC",
+   "page": 7
+  },
+  {
+   "text": "2600 E Southlake Blvd., Suite 120-219 Southlake, TX 76092",
+   "page": 7
+  },
+  {
+   "text": "555-555-0101",
+   "page": 7
+  },
+  {
+   "text": "Certified Timestamp",
+   "page": 7
+  },
+  {
+   "text": "11/09/2026 11:32 AM EST",
+   "page": 7
+  },
+  {
+   "text": "7",
+   "page": 7
+  }
+ ]
+}

@@ -7,6 +7,7 @@ import { createSyncStore } from './syncState';
 import { createFakeServer } from './fakeBackend';
 import { createSyncEngine, type SyncInfo, type Timers } from './engine';
 import { syncLabel } from './statusText';
+import { SCHEMA_VERSION } from './types';
 
 const input = {
   title: 'Network Switching', agencyName: 'Harbor County', agencyType: 'county' as const,
@@ -94,7 +95,7 @@ describe('sync engine', () => {
   });
 
   it('re-checks the server schema after a failed cycle', async () => {
-    let ver = 2;
+    let ver = SCHEMA_VERSION;
     const backend = { ...remote.backend, schemaVersion: async () => ver };
     const e = engine(undefined, backend);
     await e.syncNow();

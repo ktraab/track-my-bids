@@ -10,7 +10,7 @@ describe('migrate', () => {
     const tables = (await sql.select<{ name: string }>("SELECT name FROM sqlite_master WHERE type='table' ORDER BY name")).map((r) => r.name);
     expect(tables).toEqual([
       'bid_contacts', 'bids', 'checklist_items', 'checklist_template',
-      'contacts', 'milestones', 'notification_log', 'quote_lines', 'settings',
+      'contacts', 'extract_labels', 'milestones', 'notification_log', 'quote_lines', 'settings',
       'sync_flags', 'sync_outbox', 'sync_state', 'team_members', 'vendor_line_prices', 'vendor_quotes',
     ]);
   });
@@ -93,5 +93,53 @@ describe('migrate', () => {
     expect(tbls).toEqual(['bids', 'quote_lines', 'vendor_line_prices', 'vendor_quotes']);
     const kindField = await sql.select("SELECT 1 FROM sync_outbox WHERE tbl = 'bids' AND field = 'kind'");
     expect(kindField.length).toBe(1);
+  });
+});
+
+describe('migration v8', () => {
+  it('adds E-Rate columns with defaults to existing bids', async () => {
+    const sql = await memorySql();
+    for (let v = 0; v < 7; v++) await sql.execute(MIGRATIONS[v].join(';\n') + ';');
+    await sql.execute('PRAGMA user_version = 7');
+    await sql.execute(`INSERT INTO bids (id, title, agency_name, agency_type, submission_method, stage, timezone, last_touched_at, line_color, created_at, updated_at)
+      VALUES ('b1', 'T', 'A', 'k12', 'online', 'found', 'UTC', 't', '#000', 't', 't')`);
+    await migrate(sql);
+    const [b] = await sql.select<Record<string, unknown>>('SELECT erate, erate_470_number, erate_funding_year, erate_category FROM bids');
+    expect(b).toEqual({ erate: 0, erate_470_number: null, erate_funding_year: null, erate_category: null });
+  });
+
+  it('extract_labels is unique per (field, phrase) and records outbox rows; bids.erate syncs', async () => {
+    const sql = await memorySql();
+    await migrate(sql);
+    await sql.execute('UPDATE sync_flags SET recording = 1 WHERE id = 1');
+    await sql.execute(`INSERT INTO extract_labels (id, field, phrase, created_at, updated_at) VALUES ('x1', 'due', 'envelope opening', 't', 't')`);
+    await expect(sql.execute(`INSERT INTO extract_labels (id, field, phrase, created_at, updated_at) VALUES ('x2', 'due', 'envelope opening', 't', 't')`))
+      .rejects.toThrow(/UNIQUE/);
+    const fields = (await sql.select<{ field: string }>("SELECT field FROM sync_outbox WHERE tbl = 'extract_labels' ORDER BY field")).map((r) => r.field);
+    expect(fields).toEqual(['created_at', 'deleted_at', 'field', 'hits', 'phrase', 'updated_at']);
+    await sql.execute(`INSERT INTO bids (id, title, agency_name, agency_type, submission_method, stage, timezone, last_touched_at, line_color, created_at, updated_at, erate)
+      VALUES ('b1', 'T', 'A', 'k12', 'online', 'found', 'UTC', 't', '#000', 't', 't', 1)`);
+    expect((await sql.select("SELECT 1 FROM sync_outbox WHERE tbl = 'bids' AND field = 'erate'")).length).toBe(1);
+  });
+
+  it('adds quote_lines.unit_cost to a populated v7 database and syncs it', async () => {
+    const sql = await memorySql();
+    for (let v = 0; v < 7; v++) await sql.execute(MIGRATIONS[v].join(';\n') + ';');
+    await sql.execute('PRAGMA user_version = 7');
+    await sql.execute(`INSERT INTO bids (id, title, agency_name, agency_type, submission_method, stage, timezone, last_touched_at, line_color, created_at, updated_at)
+      VALUES ('b1', 'T', 'A', 'k12', 'online', 'found', 'UTC', 't', '#000', 't', 't')`);
+    await sql.execute(`INSERT INTO quote_lines (id, bid_id, position, qty, description, sell_override, created_at, updated_at)
+      VALUES ('l1', 'b1', 0, 2, 'Cart', 99, 't', 't')`);
+    expect(await migrate(sql)).toBe(MIGRATIONS.length);
+    const [l] = await sql.select<Record<string, unknown>>('SELECT qty, description, sell_override, unit_cost FROM quote_lines');
+    expect(l).toEqual({ qty: 2, description: 'Cart', sell_override: 99, unit_cost: null });
+
+    await sql.execute('UPDATE sync_flags SET recording = 1 WHERE id = 1');
+    await sql.execute("UPDATE quote_lines SET unit_cost = 12.5 WHERE id = 'l1'");
+    const fields = (await sql.select<{ field: string }>("SELECT field FROM sync_outbox WHERE tbl = 'quote_lines' AND row_id = 'l1'")).map((r) => r.field);
+    expect(fields).toEqual(['unit_cost']);
+    await sql.execute(`INSERT INTO quote_lines (id, bid_id, position, qty, description, unit_cost, created_at, updated_at)
+      VALUES ('l2', 'b1', 1, 1, 'Dock', 4, 't', 't')`);
+    expect((await sql.select("SELECT 1 FROM sync_outbox WHERE tbl = 'quote_lines' AND row_id = 'l2' AND field = 'unit_cost'")).length).toBe(1);
   });
 });

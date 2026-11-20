@@ -13,6 +13,9 @@
   import ImportScreen from './ImportScreen.svelte';
   import UpdateBanner from './UpdateBanner.svelte';
   import { startRuntime } from '$lib/notify/runtime';
+  import { getCurrentWebview } from '@tauri-apps/api/webview';
+  import { baseName } from '$lib/files';
+  import { docKind } from '$lib/extract/readText';
 
   const bidId = $derived(app.view.name === 'bid' ? app.view.id : null);
   /** Quotes open the quote panel; Convert to bid flips this live to BidDetail. */
@@ -20,6 +23,16 @@
 
   onMount(() => {
     void app.init(openTauriSql);
+    // A bid document dropped anywhere on the window opens the New bid form pre-filled.
+    let stop: (() => void) | null = null;
+    let gone = false;
+    getCurrentWebview().onDragDropEvent((e) => {
+      if (e.payload.type !== 'drop' || !app.ready || !e.payload.paths.length) return;
+      // Several files: the first bid document among them (the same one the app shell lets us read).
+      const paths = e.payload.paths;
+      void app.importDocument(paths.find((p) => docKind(baseName(p))) ?? paths[0]);
+    }).then((un) => { if (gone) un(); else stop = un; }).catch((e) => console.warn('[drop]', e));
+    return () => { gone = true; stop?.(); };
   });
 
   // Start the runtime whenever the store becomes ready (including after Retry). startRuntime is idempotent.
@@ -45,7 +58,8 @@
 
 <svelte:window onkeydown={onKey} />
 
-{#if app.error}
+<!-- While the New bid form (a modal, in the top layer) is open, it shows the error itself. -->
+{#if app.error && !app.quickAddOpen}
   <div class="toast" role="alert">
     <span>{app.error}</span>
     {#if app.needsRetry}<button class="btn" onclick={() => app.retryInit()}>Retry</button>{/if}

@@ -1,0 +1,20 @@
+{
+  "due": "2026-10-16T14:00",
+  "pre_bid": null,
+  "pre_bid_mandatory": null,
+  "qa_deadline": null,
+  "site_walk": null,
+  "bid_number": null,
+  "agency_name": null,
+  "buyer_email": "person2@nassaucountyny.gov",
+  "title": "SAN DISK OPTIMUS GX 7100M - DA/103",
+  "erate": false,
+  "erate_470_number": null,
+  "erate_funding_year": null,
+  "erate_category": null,
+  "allowable_contract": null,
+  "scope_tags": [
+    "Storage"
+  ],
+  "scope_has_summary": false
+}

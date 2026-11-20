@@ -50,6 +50,16 @@ describe('milestone repo', () => {
     expect(qa.at).toBe('2026-11-24T17:00:00.000-06:00');
   });
 
+  it('saves reminder offsets given on add (ACD from a document)', async () => {
+    const acd = await repo.add({ bidId, type: 'allowable_contract', at: '2026-12-31T17:00:00.000-06:00', reminderOffsets: [1440] });
+    const plain = await repo.add({ bidId, type: 'qa_deadline', at: '2026-11-23T17:00:00.000-06:00', reminderOffsets: null });
+    const [d] = await bids.listAll();
+    expect(d.milestones.find((m) => m.id === acd)!.reminderOffsets).toEqual([1440]);
+    expect(d.milestones.find((m) => m.id === plain)!.reminderOffsets).toBeNull();
+    const [row] = await sql.select<{ reminder_offsets: string }>('SELECT reminder_offsets FROM milestones WHERE id = ?', [acd]);
+    expect(row.reminder_offsets).toBe('[1440]');
+  });
+
   it('cannot delete the due date; can delete others', async () => {
     const [d0] = await bids.listAll();
     const dueId = d0.milestones[0].id;

@@ -50,7 +50,9 @@ export interface ReportRow {
   bidCreatedAt: string;
   kind: BidKind;
   receivedAt: string | null; // quotes: when the request came in
-  ourPrice: number | null; // quote total when the bid has priced lines (filled by withOurPrice)
+  ourPrice: number | null; // quote total of the priced lines, partial or not (filled by withOurPrice)
+  erate: boolean;
+  erate470Number: string | null;
 }
 
 /** Attach each bid's quote total ("Our price"); bids without priced lines get null. */
@@ -179,6 +181,8 @@ export const REPORT_COLUMNS: { header: string; width: number; value: (r: ReportR
   { header: 'Method', width: 10, value: (r) => METHOD_LABELS[r.method] },
   { header: 'Due Date', width: 20, value: fmtDue },
   { header: 'Received', width: 20, value: fmtReceived },
+  { header: 'E-Rate', width: 8, value: (r) => (r.erate ? 'Yes' : '') },
+  { header: 'Form 470 #', width: 14, value: (r) => (r.erate ? r.erate470Number : null) },
 ];
 
 function csvCell(v: string | number | null): string {

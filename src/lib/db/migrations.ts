@@ -1,4 +1,4 @@
-import { SYNC_COLUMNS_V6, SYNC_COLUMNS_V7, SYNC_TABLES_V6 } from '../sync/tables';
+import { SYNC_COLUMNS_V6, SYNC_COLUMNS_V7, SYNC_COLUMNS_V8, SYNC_TABLES_V6 } from '../sync/tables';
 import { syncTriggerSql } from '../sync/triggers';
 import type { Sql } from './sql';
 
@@ -143,6 +143,21 @@ export const MIGRATIONS: string[][] = [
     `CREATE INDEX IF NOT EXISTS idx_vendor_line_prices_bid ON vendor_line_prices(bid_id)`,
     ...(['bids', 'vendor_quotes', 'quote_lines', 'vendor_line_prices'] as const)
       .flatMap((t) => syncTriggerSql(t, SYNC_COLUMNS_V7[t])),
+  ],
+  [
+    // v8: E-Rate tag on bids, label phrases learned from imported documents (synced to the team), and a
+    // quote line's own cost.
+    `ALTER TABLE bids ADD COLUMN erate INTEGER NOT NULL DEFAULT 0`,
+    `ALTER TABLE bids ADD COLUMN erate_470_number TEXT`,
+    `ALTER TABLE bids ADD COLUMN erate_funding_year INTEGER`,
+    `ALTER TABLE bids ADD COLUMN erate_category INTEGER`,
+    // UNIQUE covers deleted rows too: re-learning a deleted phrase revives its row (see db/extractLabels).
+    `CREATE TABLE IF NOT EXISTS extract_labels (
+      id TEXT PRIMARY KEY, field TEXT NOT NULL, phrase TEXT NOT NULL, hits INTEGER NOT NULL DEFAULT 1, ${STAMPS},
+      UNIQUE (field, phrase))`,
+    // A line's own cost, used when no chosen vendor priced it (pricing works without vendors).
+    `ALTER TABLE quote_lines ADD COLUMN unit_cost REAL`,
+    ...(['bids', 'extract_labels', 'quote_lines'] as const).flatMap((t) => syncTriggerSql(t, SYNC_COLUMNS_V8[t])),
   ],
 ];
 

@@ -1,11 +1,52 @@
+use std::path::{Path, PathBuf};
+use std::sync::Mutex;
 use std::time::Duration;
 use tauri::{
     menu::{Menu, MenuItem},
     tray::{MouseButton, MouseButtonState, TrayIconBuilder, TrayIconEvent},
-    AppHandle, Emitter, Manager, WindowEvent,
+    AppHandle, Emitter, Manager, State, WindowEvent,
 };
+use tauri_plugin_fs::FsExt;
+use tauri_plugin_opener::OpenerExt;
 
 const TICK_EVERY: Duration = Duration::from_secs(60);
+const DOC_EXTENSIONS: [&str; 3] = ["pdf", "docx", "xlsx"];
+
+/// The bid document most recently dropped on the window or picked in the dialog: the only file
+/// "Open file" may hand to the default app (dropped files often live in temp folders, e.g. Mail's).
+#[derive(Default)]
+struct LastDocument(Mutex<Option<PathBuf>>);
+
+/// A regular file with a bid-document extension (.pdf / .docx / .xlsx, any case).
+fn is_document(p: &Path) -> bool {
+    p.is_file()
+        && p.extension()
+            .and_then(|e| e.to_str())
+            .is_some_and(|e| DOC_EXTENSIONS.iter().any(|d| e.eq_ignore_ascii_case(d)))
+}
+
+/// A document picked in the dialog (which already let the app read it) becomes the one "Open file" opens.
+#[tauri::command]
+fn register_document(app: AppHandle, last: State<'_, LastDocument>, path: PathBuf) -> Result<(), String> {
+    if !is_document(&path) || !app.fs_scope().is_allowed(&path) {
+        return Err("That file can't be opened from here.".into());
+    }
+    *last.0.lock().map_err(|e| e.to_string())? = Some(path);
+    Ok(())
+}
+
+/// Open the last dropped/picked document with its default app — only when it is the one asked for.
+#[tauri::command]
+fn open_document(app: AppHandle, last: State<'_, LastDocument>, path: PathBuf) -> Result<(), String> {
+    let current = last.0.lock().map_err(|e| e.to_string())?.clone();
+    match current {
+        Some(p) if p == path && is_document(&p) => app
+            .opener()
+            .open_path(p.to_string_lossy(), None::<&str>)
+            .map_err(|e| e.to_string()),
+        _ => Err("That file can't be opened from here.".into()),
+    }
+}
 
 fn show_main(app: &AppHandle) {
     if let Some(w) = app.get_webview_window("main") {
@@ -84,6 +125,8 @@ pub fn run() {
             tauri_plugin_autostart::MacosLauncher::LaunchAgent,
             Some(vec!["--minimized"]),
         ))
+        .manage(LastDocument::default())
+        .invoke_handler(tauri::generate_handler![register_document, open_document])
         .setup(|app| {
             build_tray(app)?;
             // The window is created hidden (no flash at login); show it unless launched at login.
@@ -100,12 +143,24 @@ pub fn run() {
             });
             Ok(())
         })
-        .on_window_event(|window, event| {
+        .on_window_event(|window, event| match event {
             // Closing the window keeps the app (and its reminders) running in the tray.
-            if let WindowEvent::CloseRequested { api, .. } = event {
+            WindowEvent::CloseRequested { api, .. } => {
                 api.prevent_close();
                 let _ = window.hide();
             }
+            // A bid document dropped on the window: let the frontend read exactly that file — the first
+            // regular .pdf/.docx/.xlsx among those dropped, the same one the frontend imports (the fs scope is
+            // otherwise only the app cache; picked files are allowed by the dialog).
+            WindowEvent::DragDrop(tauri::DragDropEvent::Drop { paths, .. }) => {
+                if let Some(p) = paths.iter().find(|p| is_document(p)) {
+                    let _ = window.fs_scope().allow_file(p);
+                    if let Ok(mut last) = window.state::<LastDocument>().0.lock() {
+                        *last = Some(p.clone());
+                    }
+                }
+            }
+            _ => {}
         })
         .build(tauri::generate_context!())
         .expect("error while building tauri application")

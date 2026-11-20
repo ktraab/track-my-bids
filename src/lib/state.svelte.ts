@@ -1,3 +1,4 @@
+import { DateTime } from 'luxon';
 import type { Sql } from './db/sql';
 import { migrate } from './db/migrations';
 import { createBidRepo, type BidPatch } from './db/bids';
@@ -9,6 +10,15 @@ import { createSettingsRepo } from './db/settings';
 import { createNotificationLogRepo, type FiredNotification } from './db/notificationLog';
 import { createContactRepo, type ContactWithBids } from './db/contacts';
 import { createBackupRepo } from './db/backup';
+import { createExtractLabelRepo, type ExtractLabel } from './db/extractLabels';
+import type { NewMilestoneInput as MilestoneInput } from './db/milestones';
+import { extract, isEmptySuggestions, type Line, type Suggestions } from './domain/extract';
+import { knownLabels, learnLabel } from './domain/extractLearn';
+import { learnScopeHeading } from './domain/scopeSummary';
+import { checkTagWord, TAG_FIELD_PREFIX } from './domain/scopeTags';
+import type { LearnEvent } from './domain/docFill';
+import { docKind, MAX_DOC_BYTES, readText, ReadError } from './extract/readText';
+import { loadPdfjs } from './extract/pdfjs';
 import { importContacts, importedUids, runImportPlan } from './db/importer';
 import type { ImportPlan } from './domain/importClassify';
 import type { ContactInput } from './domain/contacts';
@@ -25,8 +35,9 @@ import {
 } from './domain/report';
 import { parseBackup } from './domain/backup';
 import { eventsForBid, googleCalendarUrl, outlookCalendarUrl, outlookPersonalCalendarUrl, safeFileStem, toIcs, type CalEvent } from './domain/calendar';
-import { baseName, openCalendarFile, openText, reveal, saveBytes, saveText } from './files';
+import { baseName, fileSize, openCalendarFile, openText, pickDocument, readBytes, reveal, saveBytes, saveText } from './files';
 import { openUrl } from '@tauri-apps/plugin-opener';
+import { invoke } from '@tauri-apps/api/core';
 import { enable as enableAutostart, disable as disableAutostart, isEnabled as autostartEnabled } from '@tauri-apps/plugin-autostart';
 import { createChecklistTemplateRepo } from './db/checklistTemplate';
 import { DEFAULT_TEMPLATE, type TemplateItem } from './domain/checklist';
@@ -44,6 +55,28 @@ import {
   DEFAULT_PRICING, gridVendors, parsePaste, pasteNotice, quoteTotal, seedMarkup, withPricingDefaults, type Markup, type PricingDefaults,
 } from './domain/pricing';
 
+/** A bid document being read into the New bid form. Only kept in memory: never stored. */
+export interface DocImport {
+  /** Bumped per document, so an open form knows to fill again. */
+  seq: number;
+  name: string;
+  path: string;
+  status: 'reading' | 'ready' | 'empty' | 'no_text' | 'error';
+  lines: Line[];
+  suggestions: Suggestions | null;
+  /** status 'error': what went wrong, in words for the form. */
+  error?: string;
+}
+
+/** A read failure in words for the New bid form. */
+export function readErrorText(e: unknown): string {
+  if (e instanceof ReadError) {
+    if (e.code === 'pdf_unsupported') return 'PDF reading isn’t supported on this Mac — update macOS/Safari.';
+    return e.message || 'Couldn’t read this file.';
+  }
+  return 'Couldn’t read this file.';
+}
+
 export type View = { name: 'network' } | { name: 'bid'; id: string } | { name: 'contacts' } | { name: 'settings' } | { name: 'import' };
 
 type Repos = {
@@ -57,12 +90,18 @@ type Repos = {
   contacts: ReturnType<typeof createContactRepo>;
   backup: ReturnType<typeof createBackupRepo>;
   templates: ReturnType<typeof createChecklistTemplateRepo>;
+  extractLabels: ReturnType<typeof createExtractLabelRepo>;
 };
 
 class AppState {
   bids = $state<BidWithChildren[]>([]);
   view = $state<View>({ name: 'network' });
   quickAddOpen = $state(false);
+  docImport = $state<DocImport | null>(null);
+  /** Never resets (docImport does on close), so a slow read can't land in a later form. */
+  #docSeq = 0;
+  /** Label phrases learned from documents (Settings → Document import). */
+  extractLabels = $state<ExtractLabel[]>([]);
   error = $state<string | null>(null);
   ready = $state(false);
   nowMs = $state(Date.now());
@@ -150,6 +189,7 @@ class AppState {
       contacts: createContactRepo(sql),
       backup: createBackupRepo(sql),
       templates,
+      extractLabels: createExtractLabelRepo(sql),
     };
     this.#team = createTeamController({
       sql,
@@ -181,9 +221,10 @@ class AppState {
 
   async refresh() {
     const seq = ++this.#refreshSeq;
-    const [b, c] = await Promise.allSettled([this.repos.bids.listAll(), this.repos.contacts.list()]);
+    const [b, c, l] = await Promise.allSettled([this.repos.bids.listAll(), this.repos.contacts.list(), this.repos.extractLabels.listLearned()]);
     if (seq !== this.#refreshSeq) return;
     if (b.status === 'fulfilled') this.bids = b.value;
+    if (l.status === 'fulfilled') this.extractLabels = l.value;
     if (c.status === 'fulfilled') this.contactList = c.value;
     if (c.status === 'rejected') this.error = `Couldn't load contacts: ${c.reason instanceof Error ? c.reason.message : String(c.reason)}`;
     if (b.status === 'rejected') throw b.reason;
@@ -590,6 +631,7 @@ class AppState {
     this.view = { name: 'network' };
     this.panel = null;
     this.quickAddOpen = false;
+    this.docImport = null;
   }
 
   #hiddenByFilters(id: string): boolean {
@@ -629,6 +671,108 @@ class AppState {
     return out.id;
   }
   updateBid(id: string, patch: BidPatch) { return this.#run(() => this.repos.bids.update(id, patch)); }
+
+  // Bid document import
+  /** Read a dropped / picked document and open the New bid form with what it says (fills only blank inputs if already open). */
+  async importDocument(path: string) {
+    const name = baseName(path);
+    if (!docKind(name)) { this.error = `${name}: only PDF, Word (.docx) and Excel (.xlsx) files can be imported.`; return; }
+    try {
+      if ((await fileSize(path)) > MAX_DOC_BYTES) { this.error = `${name} is larger than 50 MB.`; return; }
+    } catch { this.error = `Couldn't open ${name}.`; return; }
+    const seq = ++this.#docSeq;
+    this.docImport = { seq, name, path, status: 'reading', lines: [], suggestions: null };
+    this.quickAddOpen = true;
+    let next: DocImport;
+    try {
+      const read = await readText(await readBytes(path), name, loadPdfjs);
+      if (read.kind === 'no_text') next = { seq, name, path, status: 'no_text', lines: [], suggestions: null };
+      else {
+        const suggestions = extract(read.lines, $state.snapshot(this.extractLabels), DateTime.now().toISODate()!);
+        next = { seq, name, path, status: isEmptySuggestions(suggestions) ? 'empty' : 'ready', lines: read.lines, suggestions };
+      }
+    } catch (e) {
+      if (!(e instanceof ReadError)) console.warn('[import] reading failed', e);
+      next = { seq, name, path, status: 'error', lines: [], suggestions: null, error: readErrorText(e) };
+    }
+    if (this.docImport?.seq === seq) this.docImport = next; // a newer drop wins
+  }
+
+  async importDocumentFromPicker() {
+    try {
+      const path = await pickDocument();
+      if (!path) return;
+      // Lets "Open file" open it later (a dropped file is registered by the app shell itself).
+      await invoke('register_document', { path }).catch((e) => console.warn('[import] register', e));
+      await this.importDocument(path);
+    } catch (e) { this.#fail(e); }
+  }
+
+  /** Open the document being imported in its default app (only the last dropped/picked file is allowed). */
+  async openImportedFile() {
+    if (this.docImport) await invoke('open_document', { path: this.docImport.path }).catch((e) => this.#fail(e));
+  }
+
+  /** New bid from the document form: bid, extra details, offered milestones and the buyer contact in one write. */
+  async createBidFromDocument(
+    input: NewBidInput, details: BidPatch, stops: Omit<MilestoneInput, 'bidId'>[], contact: ContactInput | null,
+  ): Promise<string | null> {
+    const out = { id: '', contactError: '' };
+    const ok = await this.#run(async () => {
+      out.id = await this.repos.bids.create(input);
+      if (Object.keys(details).length) await this.repos.bids.update(out.id, details);
+      for (const s of stops) await this.repos.milestones.add({ ...s, bidId: out.id });
+      if (!contact) return;
+      try {
+        const { id } = await this.repos.contacts.create(contact);
+        await this.repos.contacts.linkToBid(out.id, id, 'procurement');
+      } catch (e) {
+        out.contactError = e instanceof Error ? e.message : String(e);
+      }
+    });
+    if (!out.id) return null; // the bid itself wasn't written (#run showed why)
+    // A later write failed: the bid exists, so open it (re-saving the form would duplicate it).
+    if (!ok) this.error = `Bid saved, but not everything from the document was: ${this.error ?? 'unknown error'}`;
+    else if (out.contactError) this.error = `Bid saved, but the contact wasn’t added: ${out.contactError}`;
+    if (this.#hiddenByFilters(out.id)) this.notice = { text: 'Bid saved — hidden by your filters.' };
+    this.open(out.id);
+    return out.id;
+  }
+
+  /** After a save: learn new label phrases / count reused ones. Never blocks or fails the save. */
+  async learnFromDocument(lines: Line[], events: LearnEvent[]) {
+    if (!events.length) return;
+    try {
+      const today = DateTime.now().toISODate()!;
+      const learned = $state.snapshot(this.extractLabels) as ExtractLabel[];
+      await this.#exclusive(async () => {
+        for (const ev of events) {
+          if (ev.kind === 'scope_heading') {
+            const known = learned.filter((l) => l.field === 'scope_heading').map((l) => l.phrase);
+            const heading = learnScopeHeading(lines, ev.value, known, learned);
+            if (heading) await this.repos.extractLabels.recordLabel('scope_heading', heading);
+            continue;
+          }
+          const phrase = ev.kind === 'bump' ? ev.phrase : learnLabel(lines, ev.field, ev.value, knownLabels(ev.field, learned), today);
+          if (phrase) await this.repos.extractLabels.recordLabel(ev.field, phrase);
+        }
+      });
+      this.#team?.poke();
+      this.extractLabels = await this.repos.extractLabels.listLearned();
+    } catch (e) {
+      console.warn('[import] learning failed', e);
+    }
+  }
+
+  /** A team word for a scope tag (a new tag name makes a new tag); synced like learned phrases. */
+  addScopeTagWord(tag: string, word: string) {
+    const c = checkTagWord(tag, word);
+    if ('error' in c) { this.error = c.error; return Promise.resolve(false); }
+    return this.#run(() => this.repos.extractLabels.recordLabel(`${TAG_FIELD_PREFIX}${c.tag}`, c.word));
+  }
+
+  /** Soft delete (synced); the refresh after the write reloads the list. */
+  removeExtractLabel(id: string) { return this.#run(() => this.repos.extractLabels.remove(id)); }
   async removeBid(id: string) { if (await this.#run(() => this.repos.bids.remove(id))) this.home(); }
 
   // Quotes (RFQs)
@@ -709,9 +853,12 @@ class AppState {
     return this.#run(() => this.repos.bids.update(bidId, { markupType: m.type, markupValue: m.value }));
   }
   setSellRounding(bidId: string, sellRounding: number) { return this.#run(() => this.repos.bids.update(bidId, { sellRounding })); }
-  /** Whole mode: buy everything from this vendor; null = the lowest complete total. */
+  /** Whole mode: buy everything from this vendor; null = pick automatically (lowest complete total, else most lines priced). */
   setWholeVendor(bidId: string, wholeVendorId: string | null) { return this.#run(() => this.repos.bids.update(bidId, { wholeVendorId })); }
-  /** Paste from Excel: add the rows as lines, then any vendor prices (columns matched to the grid's vendor order). */
+  /**
+   * Paste from Excel: add the rows as lines, then any vendor prices (columns matched to the grid's vendor order).
+   * With no vendors, the one cost column fills each line's own cost.
+   */
   async pasteLines(bidId: string, text: string): Promise<boolean> {
     let notice = '';
     // Everything reads state inside the queue, so a vendor removed by an earlier queued write is already gone.
@@ -723,9 +870,10 @@ class AppState {
       if (!parsed.rows.length) throw new Error('Nothing to add. Paste rows with at least a Qty and a Description column.');
       const before = d.lines.length;
       // Every parsed row has a description, so addMany keeps them all and ids line up with rows.
-      const ids = await this.repos.quoteLines.addMany(bidId, parsed.rows);
+      const ids = await this.repos.quoteLines.addMany(bidId,
+        parsed.rows.map((r) => ({ qty: r.qty, description: r.description, partNo: r.partNo, unitCost: r.ownCost })));
       await this.#seedMarkup(bidId, before);
-      let priced = 0;
+      let priced = parsed.rows.filter((r) => r.ownCost !== null).length;
       let skipped = 0;
       for (let i = 0; i < ids.length; i++) {
         for (let k = 0; k < vendors.length; k++) {

@@ -5,6 +5,7 @@
   import { app } from '$lib/state.svelte';
   import TeamSettings from './TeamSettings.svelte';
   import PricingSettings from './PricingSettings.svelte';
+  import DocImportSettings from './DocImportSettings.svelte';
   import SettingsSection from './SettingsSection.svelte';
   import { MILESTONE_TYPE_LABELS } from '$lib/domain/labels';
   import { MAX_STALE_DAYS, NEEDS_LIMITS, validateSettingsDraft, type NotificationSettings } from '$lib/domain/settings';
@@ -221,6 +222,10 @@
 
   <SettingsSection id="pricing" title="Pricing" summary={pricingSummary} open={openSection === 'pricing'} ontoggle={toggle}>
     <PricingSettings />
+  </SettingsSection>
+
+  <SettingsSection id="docimport" title="Document import" summary="{app.extractLabels.length} learned phrase{app.extractLabels.length === 1 ? '' : 's'}" open={openSection === 'docimport'} ontoggle={toggle}>
+    <DocImportSettings />
   </SettingsSection>
 
   <SettingsSection id="team" title="Team" summary={teamSummary} open={openSection === 'team'} ontoggle={toggle}>

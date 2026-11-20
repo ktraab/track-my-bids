@@ -195,3 +195,23 @@ describe('quote children across repos', () => {
     await expect(repo.update(lineId, { chosenVendorId: v })).rejects.toThrow();
   });
 });
+
+describe('own cost (quote_lines.unit_cost)', () => {
+  it('update sets and clears a line own cost, validated like a price', async () => {
+    const l = await repo.add(bidId, { qty: 2, description: 'Cable' });
+    expect((await load()).lines[0].unitCost).toBeNull();
+    await repo.update(l, { unitCost: 12.5 });
+    expect((await load()).lines[0].unitCost).toBe(12.5);
+    await repo.update(l, { unitCost: null });
+    expect((await load()).lines[0].unitCost).toBeNull();
+    await expect(repo.update(l, { unitCost: -1 })).rejects.toThrow('Cost must be 0 or more');
+    await expect(repo.update(l, { unitCost: NaN })).rejects.toThrow('Cost must be 0 or more');
+  });
+
+  it('add and addMany take an optional own cost (paste with no vendors)', async () => {
+    await repo.add(bidId, { qty: 1, description: 'A', unitCost: 3 });
+    await repo.addMany(bidId, [{ qty: 1, description: 'B', unitCost: 4.25 }, { qty: 1, description: 'C' }]);
+    expect((await load()).lines.map((l) => l.unitCost)).toEqual([3, 4.25, null]);
+    await expect(repo.add(bidId, { qty: 1, description: 'D', unitCost: -2 })).rejects.toThrow('Cost must be 0 or more');
+  });
+});

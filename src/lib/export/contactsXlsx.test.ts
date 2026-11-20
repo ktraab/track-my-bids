@@ -7,7 +7,7 @@ const row: ReportRow = {
   bidId: 'b1', firstName: 'Jane', lastName: 'Doe', title: 'Purchasing', email: 'jdoe@cvisd.org', phone: '555',
   organization: 'Cedar Valley ISD', role: 'procurement', agencyName: 'Cedar Valley ISD', agencyType: 'k12',
   bidNumber: 'RFP 26-114', bidTitle: 'Chromebooks', estValue: 480000, stage: 'preparing', method: 'online',
-  dueAt: '2026-11-19T14:00:00.000-06:00', bidTimezone: 'America/Chicago', bidCreatedAt: '2026-11-02T00:00:00.000Z', kind: 'bid', receivedAt: null, ourPrice: null,
+  dueAt: '2026-11-19T14:00:00.000-06:00', bidTimezone: 'America/Chicago', bidCreatedAt: '2026-11-02T00:00:00.000Z', kind: 'bid', receivedAt: null, ourPrice: null, erate: false, erate470Number: null,
 };
 
 describe('contactsWorkbook', () => {

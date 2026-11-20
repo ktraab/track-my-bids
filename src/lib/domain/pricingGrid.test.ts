@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { DEFAULT_PRICING, gridVendors, pricingOf, quoteTotal } from './pricing';
+import { DEFAULT_PRICING, gridVendors, pricingOf, quotePrice, quoteTotal } from './pricing';
 import { makeLine, makePrice, makeQuote, makeVendorQuote, withPricing } from './fixtures';
 import type { Bid } from './types';
 
@@ -19,23 +19,32 @@ const quote = (over: Partial<Bid> = {}) =>
   withPricing(makeQuote({ markupType: 'pct', markupValue: 12, ...over }), [ins, cdw, shi], [cart, install, warranty], prices);
 
 describe('vendor totals', () => {
-  it('count only vendors with a price on every line; others are missing lines', () => {
+  it('sum the lines each vendor priced; complete when it priced every line', () => {
     const p = pricingOf(quote(), DEFAULT_PRICING);
     expect(p.vendors.map((v) => v.vendorName)).toEqual(['Insight', 'CDW-G', 'SHI']);
     expect(p.totals).toEqual([
-      { vendorId: 'ins', total: 19550, priced: 3 },
-      { vendorId: 'cdw', total: 19680, priced: 3 },
-      { vendorId: 'shi', total: null, priced: 0 },
+      { vendorId: 'ins', total: 19550, priced: 3, complete: true },
+      { vendorId: 'cdw', total: 19680, priced: 3, complete: true },
+      { vendorId: 'shi', total: null, priced: 0, complete: false },
     ]);
   });
 
-  it('a cleared price (null) and a deleted price both count as missing', () => {
+  it('a partial vendor shows the total of the lines it priced; cleared and deleted prices are missing', () => {
     const d = quote();
     d.prices = [...prices.filter((p) => p.id !== 'cdw:cart'), { ...makePrice('cdw', 'cart', 412), deletedAt: '2026-11-15T00:00:00.000Z' },
       makePrice('shi', 'cart', null)];
     const t = pricingOf(d, DEFAULT_PRICING).totals;
-    expect(t[1]).toEqual({ vendorId: 'cdw', total: null, priced: 2 });
-    expect(t[2]).toEqual({ vendorId: 'shi', total: null, priced: 0 });
+    expect(t[1]).toEqual({ vendorId: 'cdw', total: 540 * 3 + 39.5 * 40, priced: 2, complete: false });
+    expect(t[2]).toEqual({ vendorId: 'shi', total: null, priced: 0, complete: false });
+  });
+
+  it('a line own cost never counts toward a vendor total', () => {
+    const d = quote();
+    d.lines = [{ ...cart, unitCost: 1 }, install, { ...warranty, unitCost: 1 }];
+    d.prices = prices.filter((p) => p.id !== 'cdw:cart');
+    const t = pricingOf(d, DEFAULT_PRICING).totals;
+    expect(t[1]).toEqual({ vendorId: 'cdw', total: 540 * 3 + 39.5 * 40, priced: 2, complete: false });
+    expect(t[2]).toEqual({ vendorId: 'shi', total: null, priced: 0, complete: false });
   });
 
   it('deleted vendors leave the grid; skipped ones stay', () => {
@@ -78,9 +87,48 @@ describe('whole mode', () => {
     expect(p.summary).toMatchObject({ vendorsUsed: ['SHI'], cost: 380 * 40, priced: 1, flagged: 2 });
   });
 
-  it('no complete vendor → nothing chosen, every line flagged, total 0', () => {
+  it('no complete vendor → the vendor with the most priced lines (tie → lowest partial total)', () => {
     const d = quote();
-    d.prices = prices.filter((p) => p.lineId !== 'warranty');
+    d.prices = prices.filter((p) => p.lineId !== 'warranty'); // ins 17,870 and cdw 18,100, 2 of 3 each
+    const p = pricingOf(d, DEFAULT_PRICING);
+    expect([p.wholeVendorId, p.autoWhole]).toEqual(['ins', true]);
+    expect(p.lines.map((l) => [l.chosenVendorId, l.unitCost, l.flagged])).toEqual([['ins', 398, false], ['ins', 650, false], ['ins', null, true]]);
+    expect(p.summary).toMatchObject({ vendorsUsed: ['Insight'], cost: 17870, priced: 2, flagged: 1, lines: 3 });
+    expect(p.summary.total).toBeCloseTo(445.76 * 40 + 2100);
+  });
+
+  it('more priced lines beat a lower partial total; a complete total beats any partial', () => {
+    const d = quote();
+    d.prices = [makePrice('ins', 'cart', 398), makePrice('ins', 'install', 650), makePrice('shi', 'cart', 1)];
+    expect(pricingOf(d, DEFAULT_PRICING).wholeVendorId).toBe('ins');
+    d.prices = [makePrice('ins', 'cart', 398), makePrice('ins', 'install', 650),
+      makePrice('cdw', 'cart', 999), makePrice('cdw', 'install', 999), makePrice('cdw', 'warranty', 999)];
+    expect(pricingOf(d, DEFAULT_PRICING).wholeVendorId).toBe('cdw');
+  });
+
+  it('a skipped vendor ranks after every non-skipped one, complete or partial', () => {
+    const d = quote();
+    d.vendorQuotes = [ins, { ...cdw, skipped: true }, shi];
+    d.prices = [makePrice('ins', 'cart', 398), makePrice('cdw', 'cart', 1), makePrice('cdw', 'install', 1), makePrice('cdw', 'warranty', 1)];
+    expect(pricingOf(d, DEFAULT_PRICING).wholeVendorId).toBe('ins');
+    d.vendorQuotes = [{ ...ins, skipped: true }, { ...cdw, skipped: true }, shi];
+    d.prices = [makePrice('ins', 'cart', 398), makePrice('shi', 'cart', 5)];
+    expect(pricingOf(d, DEFAULT_PRICING).wholeVendorId).toBe('shi');
+    d.prices = [makePrice('ins', 'cart', 398), makePrice('ins', 'install', 650), makePrice('cdw', 'cart', 9)];
+    expect(pricingOf(d, DEFAULT_PRICING).wholeVendorId).toBe('ins');
+  });
+
+  it('a manual whole-vendor choice still wins over the auto-pick when nothing is complete', () => {
+    const d = quote({ wholeVendorId: 'shi' });
+    d.prices = [makePrice('ins', 'cart', 398), makePrice('ins', 'install', 650), makePrice('shi', 'cart', 380)];
+    const p = pricingOf(d, DEFAULT_PRICING);
+    expect([p.wholeVendorId, p.autoWhole]).toEqual(['shi', false]);
+    expect(p.summary).toMatchObject({ priced: 1, flagged: 2 });
+  });
+
+  it('no vendor priced anything → nothing chosen, every line flagged, total 0', () => {
+    const d = quote();
+    d.prices = [];
     const p = pricingOf(d, DEFAULT_PRICING);
     expect(p.wholeVendorId).toBeNull();
     expect(p.summary).toMatchObject({ total: 0, marginPct: null, priced: 0, flagged: 3, vendorsUsed: [] });
@@ -130,10 +178,74 @@ describe('sell prices', () => {
   });
 });
 
-describe('quoteTotal', () => {
+describe('quoteTotal / quotePrice', () => {
   it('null without lines; otherwise the summary total', () => {
     expect(quoteTotal(withPricing(makeQuote(), [ins], [], []), DEFAULT_PRICING)).toBeNull();
     expect(quoteTotal(quote(), DEFAULT_PRICING)).toBeCloseTo(21812);
+    expect(quotePrice(quote(), DEFAULT_PRICING)).toEqual({ total: 21812, partial: false, unpriced: 0 });
+  });
+
+  it('a partly priced quote gives the partial total, marked partial', () => {
+    const d = quote();
+    d.prices = prices.filter((p) => p.lineId !== 'warranty');
+    const want = Math.round((445.76 * 40 + 2100) * 100) / 100;
+    expect(quotePrice(d, DEFAULT_PRICING)).toEqual({ total: want, partial: true, unpriced: 1 });
+    expect(quoteTotal(d, DEFAULT_PRICING)).toBe(want);
+  });
+
+  it('null when no line is priced', () => {
+    const d = quote();
+    d.prices = [];
+    expect(quotePrice(d, DEFAULT_PRICING)).toBeNull();
+    expect(quoteTotal(d, DEFAULT_PRICING)).toBeNull();
+  });
+});
+
+describe('own cost', () => {
+  it('prices lines with no vendors at all; markup, rounding and overrides apply the same', () => {
+    const a = makeLine('a', { position: 0, qty: 2, description: 'Cable', unitCost: 10 });
+    const b = makeLine('b', { position: 1, qty: 1, description: 'Dock', unitCost: 100, sellOverride: 150 });
+    const c = makeLine('c', { position: 2, qty: 1, description: 'Freight' });
+    const d = withPricing(makeQuote({ markupType: 'pct', markupValue: 12, sellRounding: 1 }), [], [a, b, c], []);
+    const p = pricingOf(d, DEFAULT_PRICING);
+    expect(p.wholeVendorId).toBeNull();
+    expect(p.lines.map((l) => [l.chosenVendorId, l.unitCost, l.ownCost, l.unitSell, l.flagged])).toEqual([
+      [null, 10, true, 11, false], [null, 100, true, 150, false], [null, null, false, null, true],
+    ]);
+    expect(p.lines[1].derivedPct).toBe(50);
+    expect(p.summary).toMatchObject({ vendorsUsed: [], cost: 120, total: 172, priced: 2, flagged: 1, lines: 3, ownCost: 2 });
+    expect(quotePrice(d, DEFAULT_PRICING)).toEqual({ total: 172, partial: true, unpriced: 1 });
+  });
+
+  it('the chosen vendor price wins; own cost fills the lines it did not price', () => {
+    const d = quote();
+    d.lines = [{ ...cart, unitCost: 1 }, install, { ...warranty, unitCost: 30 }];
+    d.prices = prices.filter((p) => p.lineId !== 'warranty');
+    const p = pricingOf(d, DEFAULT_PRICING);
+    expect(p.wholeVendorId).toBe('ins');
+    expect(p.lines.map((l) => [l.chosenVendorId, l.unitCost, l.ownCost, l.flagged])).toEqual([
+      ['ins', 398, false, false], ['ins', 650, false, false], ['ins', 30, true, false],
+    ]);
+    expect(p.summary).toMatchObject({ vendorsUsed: ['Insight'], cost: 17870 + 1200, priced: 3, flagged: 0, ownCost: 1 });
+    expect(quotePrice(d, DEFAULT_PRICING)?.partial).toBe(false);
+  });
+
+  it('per-line mode: own cost when no vendor priced the line, or the picked vendor did not', () => {
+    const d = quote({ pricingMode: 'per_line' });
+    d.lines = [{ ...cart, chosenVendorId: 'shi', unitCost: 5 }, install, { ...warranty, unitCost: 2 }];
+    d.prices = prices.filter((p) => p.lineId !== 'warranty');
+    const p = pricingOf(d, DEFAULT_PRICING);
+    expect(p.lines.map((l) => [l.chosenVendorId, l.unitCost, l.ownCost])).toEqual([['shi', 5, true], ['cdw', 540, false], [null, 2, true]]);
+    expect(p.summary.vendorsUsed).toEqual(['CDW-G']);
+  });
+
+  it('own cost alone never makes a vendor the whole-mode pick', () => {
+    const d = quote();
+    d.lines = [{ ...cart, unitCost: 1 }, { ...install, unitCost: 1 }, { ...warranty, unitCost: 1 }];
+    d.prices = [];
+    const p = pricingOf(d, DEFAULT_PRICING);
+    expect(p.wholeVendorId).toBeNull();
+    expect(p.lines.every((l) => l.ownCost && l.chosenVendorId === null)).toBe(true);
   });
 });
 

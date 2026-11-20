@@ -2,6 +2,7 @@ import { describe, it, expect, beforeEach } from 'vitest';
 import { memorySql } from '../db/memorySql';
 import { migrate } from '../db/migrations';
 import { createBidRepo } from '../db/bids';
+import { createExtractLabelRepo } from '../db/extractLabels';
 import type { Sql } from '../db/sql';
 import { createSyncStore } from './syncState';
 import { createFakeServer } from './fakeBackend';
@@ -164,5 +165,31 @@ describe('push + pull', () => {
   it('refreshMembers caches the team list locally', async () => {
     await refreshMembers(a, ra.backend);
     expect((await loadMembers(a)).map((m) => m.displayName)).toEqual(['Ann', 'Bo']);
+  });
+});
+
+describe('learned document labels', () => {
+  it('two devices learn the same phrase: one row on the server, both devices end with it', async () => {
+    await createExtractLabelRepo(a, now, () => 'la').recordLabel('due', 'envelope opening');
+    await createExtractLabelRepo(b, now, () => 'lb').recordLabel('due', 'envelope opening');
+    await pushAll(a, ra.backend, run, now);
+    const pushed = await pushAll(b, rb.backend, run, now);
+    expect(pushed.rejected).toEqual([]);
+    expect(server.live('extract_labels').map((r) => r.id)).toEqual(['la']);
+    await pullAll(b, rb.backend, run, now);
+    expect((await createExtractLabelRepo(b).listLearned()).map((l) => l.id)).toEqual(['la']);
+    expect(await outboxCount(b)).toBe(0);
+  });
+
+  it('a deleted label syncs as deleted', async () => {
+    const repoA = createExtractLabelRepo(a, now, () => 'la');
+    await repoA.recordLabel('due', 'envelope opening');
+    await pushAll(a, ra.backend, run, now);
+    await pullAll(b, rb.backend, run, now);
+    await tick();
+    await repoA.remove('la');
+    await pushAll(a, ra.backend, run, now);
+    await pullAll(b, rb.backend, run, now);
+    expect(await createExtractLabelRepo(b).listLearned()).toEqual([]);
   });
 });

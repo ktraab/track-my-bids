@@ -1,0 +1,21 @@
+{
+  "due": "2027-01-08T14:00",
+  "pre_bid": null,
+  "pre_bid_mandatory": null,
+  "qa_deadline": "2026-12-04T14:00",
+  "site_walk": null,
+  "bid_number": null,
+  "agency_name": "KINGS CO OFFICE OF EDUCATION",
+  "buyer_email": "person1@kingscoe.org",
+  "title": "KingsCOE470FY2027-C2",
+  "erate": true,
+  "erate_470_number": "270003800",
+  "erate_funding_year": "2027",
+  "erate_category": "2",
+  "allowable_contract": "2026-12-16T17:00",
+  "scope_tags": [
+    "Cabling",
+    "Racks"
+  ],
+  "scope_has_summary": true
+}

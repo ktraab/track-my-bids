@@ -1,6 +1,6 @@
 /** Tables that sync in Team mode, parents first (the order rows are applied locally because of foreign keys). */
 export const SYNC_TABLES = [
-  'bids', 'contacts', 'milestones', 'checklist_items', 'bid_contacts',
+  'bids', 'contacts', 'extract_labels', 'milestones', 'checklist_items', 'bid_contacts',
   'vendor_quotes', 'quote_lines', 'vendor_line_prices',
 ] as const;
 export type SyncTable = (typeof SYNC_TABLES)[number];
@@ -30,8 +30,12 @@ export const SYNC_COLUMNS_V6: Record<SyncTableV6, readonly string[]> = {
   bid_contacts: ['bid_id', 'contact_id', 'role', 'created_at', 'updated_at', 'deleted_at'],
 };
 
+/** Tables that existed at schema v7. */
+export const SYNC_TABLES_V7 = [...SYNC_TABLES_V6, 'vendor_quotes', 'quote_lines', 'vendor_line_prices'] as const;
+type SyncTableV7 = (typeof SYNC_TABLES_V7)[number];
+
 /** Columns as of schema v7 (RFQ quotes). FROZEN: migration v7 builds its triggers from this. */
-export const SYNC_COLUMNS_V7: Record<SyncTable, readonly string[]> = {
+export const SYNC_COLUMNS_V7: Record<SyncTableV7, readonly string[]> = {
   ...SYNC_COLUMNS_V6,
   bids: [
     ...SYNC_COLUMNS_V6.bids,
@@ -49,7 +53,15 @@ export const SYNC_COLUMNS_V7: Record<SyncTable, readonly string[]> = {
   vendor_line_prices: ['bid_id', 'vendor_quote_id', 'line_id', 'unit_cost', 'created_at', 'updated_at', 'deleted_at'],
 };
 
-export const SYNC_COLUMNS = SYNC_COLUMNS_V7;
+/** Columns as of schema v8 (E-Rate tag, learned document labels, line own cost). FROZEN: migration v8 builds its triggers from this. */
+export const SYNC_COLUMNS_V8: Record<SyncTable, readonly string[]> = {
+  ...SYNC_COLUMNS_V7,
+  bids: [...SYNC_COLUMNS_V7.bids, 'erate', 'erate_470_number', 'erate_funding_year', 'erate_category'],
+  extract_labels: ['field', 'phrase', 'hits', 'created_at', 'updated_at', 'deleted_at'],
+  quote_lines: [...SYNC_COLUMNS_V7.quote_lines, 'unit_cost'],
+};
+
+export const SYNC_COLUMNS = SYNC_COLUMNS_V8;
 
 export const TABLE_ORDER: ReadonlyMap<SyncTable, number> = new Map(SYNC_TABLES.map((t, i) => [t, i]));
 

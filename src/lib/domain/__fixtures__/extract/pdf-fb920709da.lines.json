@@ -1,0 +1,623 @@
+{
+ "id": "pdf-fb920709da",
+ "kind": "pdf",
+ "today": "2026-11-20",
+ "lines": [
+  {
+   "text": "FCC Form 470 – Funding Year 2027",
+   "page": 1
+  },
+  {
+   "text": "Form 470 Application Number: 270004253",
+   "page": 1
+  },
+  {
+   "text": "36659 - ST HUGH CATHOLIC SCHOOL - C2 470",
+   "page": 1
+  },
+  {
+   "text": "Billed Entity | Contact Information",
+   "page": 1
+  },
+  {
+   "text": "ST HUGH CATHOLIC SCHOOL | Pat Morgan",
+   "page": 1
+  },
+  {
+   "text": "3460 ROYAL RD MIAMI, FL 33133-5813 DADE | person1@erateprogram.com",
+   "page": 1
+  },
+  {
+   "text": "555-555-0100 | 555-555-0101",
+   "page": 1
+  },
+  {
+   "text": "Billed Entity Number: 36659",
+   "page": 1
+  },
+  {
+   "text": "FCC Registration Number: 0020575015",
+   "page": 1
+  },
+  {
+   "text": "Number of Eligible Entities: 1",
+   "page": 1
+  },
+  {
+   "text": "Application Type",
+   "page": 1
+  },
+  {
+   "text": "Applicant Type: School",
+   "page": 1
+  },
+  {
+   "text": "Recipients of Services: Private School",
+   "page": 1
+  },
+  {
+   "text": "Consulting Firms",
+   "page": 1
+  },
+  {
+   "text": "Name | Consultant | Phone Number | Email",
+   "page": 1
+  },
+  {
+   "text": "Registration",
+   "page": 1
+  },
+  {
+   "text": "Number",
+   "page": 1
+  },
+  {
+   "text": "ErateProgram, LLC | 16048902 | 555-555-0102 | person1@erateprogram.com",
+   "page": 1
+  },
+  {
+   "text": "Consultants",
+   "page": 1
+  },
+  {
+   "text": "Name | Phone Number | Email",
+   "page": 1
+  },
+  {
+   "text": "Pat Morgan | 555-555-0101 | person1@erateprogram.com",
+   "page": 1
+  },
+  {
+   "text": "Sam Rivera | 555-555-0102 | person2@erateprogram.com",
+   "page": 1
+  },
+  {
+   "text": "Alex Chen | 555-555-0103 | person3@erateprogram.com",
+   "page": 1
+  },
+  {
+   "text": "Jordan Lee | 555-555-0104 | person4@erateprogram.com",
+   "page": 1
+  },
+  {
+   "text": "Casey Brooks | 555-555-0105 | person5@erateprogram.com",
+   "page": 1
+  },
+  {
+   "text": "RFPS",
+   "page": 1
+  },
+  {
+   "text": "ID | Name",
+   "page": 1
+  },
+  {
+   "text": "237200 | 36659 St. Hugh Catholic School C2 RFP and Bidding Instructions FY27",
+   "page": 1
+  },
+  {
+   "text": "1",
+   "page": 1
+  },
+  {
+   "text": "Category One Service Requests",
+   "page": 2
+  },
+  {
+   "text": "Service Type | Function | Function | Minimum | Maximum | Entities | Quantity Unit | Installation | Associated",
+   "page": 2
+  },
+  {
+   "text": "Other | Capacity | Capacity | and Initial | RFPs",
+   "page": 2
+  },
+  {
+   "text": "Description | Configuration?",
+   "page": 2
+  },
+  {
+   "text": "Description of Other Functions",
+   "page": 2
+  },
+  {
+   "text": "ID | Name",
+   "page": 2
+  },
+  {
+   "text": "Narrative",
+   "page": 2
+  },
+  {
+   "text": "Category Two Service Requests",
+   "page": 2
+  },
+  {
+   "text": "Service Type | Function | Manufacturer | Manufacturer Entities | Quantity | Unit | Installation | Associated",
+   "page": 2
+  },
+  {
+   "text": "Other | and Initial | RFPs",
+   "page": 2
+  },
+  {
+   "text": "Description | Configuration?",
+   "page": 2
+  },
+  {
+   "text": "Managed Internal Broadband | Existing Equipment | 1 | 237200",
+   "page": 2
+  },
+  {
+   "text": "Services",
+   "page": 2
+  },
+  {
+   "text": "Internal Connections | Wireless Access Points and | Ruckus or | 18 | Each | Yes | 237200",
+   "page": 2
+  },
+  {
+   "text": "Necessary Software and | equivalent",
+   "page": 2
+  },
+  {
+   "text": "Licenses",
+   "page": 2
+  },
+  {
+   "text": "Internal Connections | Switches and Necessary | Other or equivalent | 1 | 10 | Each | Yes | 237200",
+   "page": 2
+  },
+  {
+   "text": "Software and Licenses",
+   "page": 2
+  },
+  {
+   "text": "Internal Connections | Uninterruptable Power Supply/ | American Power | 2 | Each | No | 237200",
+   "page": 2
+  },
+  {
+   "text": "Battery Backup and Necessary | Conversion or",
+   "page": 2
+  },
+  {
+   "text": "Software and Licenses | equivalent",
+   "page": 2
+  },
+  {
+   "text": "Internal Connections | Caching and Necessary | Dell or equivalent | 1 | Each | No | 237200",
+   "page": 2
+  },
+  {
+   "text": "Software and Licenses",
+   "page": 2
+  },
+  {
+   "text": "Internal Connections | Firewall Service, Components, | SonicWALL or | 1 | Each | No | 237200",
+   "page": 2
+  },
+  {
+   "text": "and Necessary Software and | equivalent",
+   "page": 2
+  },
+  {
+   "text": "Licenses",
+   "page": 2
+  },
+  {
+   "text": "Basic Maintenance of Internal | Firewall Service and | SonicWALL | 1 | 1 | Each | 237200",
+   "page": 2
+  },
+  {
+   "text": "Connections | Components",
+   "page": 2
+  },
+  {
+   "text": "Basic Maintenance of Internal | Switches | Other or equivalent | 1 | 1 | 10 | Each | 237200",
+   "page": 2
+  },
+  {
+   "text": "Connections",
+   "page": 2
+  },
+  {
+   "text": "Basic Maintenance of Internal | Wireless Access Points | Ruckus | 1 | 18 | Each | 237200",
+   "page": 2
+  },
+  {
+   "text": "Connections",
+   "page": 2
+  },
+  {
+   "text": "Description of Other Manufacturers",
+   "page": 2
+  },
+  {
+   "text": "ID | Name",
+   "page": 2
+  },
+  {
+   "text": "1 | Datto",
+   "page": 2
+  },
+  {
+   "text": "2 | Datto",
+   "page": 2
+  },
+  {
+   "text": "2",
+   "page": 2
+  },
+  {
+   "text": "Narrative",
+   "page": 3
+  },
+  {
+   "text": "SEE RFP AND VENDOR BIDDING INSTRUCTION PDF AND REVIEW ALL PAGES.",
+   "page": 3
+  },
+  {
+   "text": "Technical Contact",
+   "page": 3
+  },
+  {
+   "text": "Riley Shaw",
+   "page": 3
+  },
+  {
+   "text": "555-555-0106",
+   "page": 3
+  },
+  {
+   "text": "person6@st-hugh.org",
+   "page": 3
+  },
+  {
+   "text": "State and Local Procurement Restrictions",
+   "page": 3
+  },
+  {
+   "text": "Billed Entities",
+   "page": 3
+  },
+  {
+   "text": "Billed Entity | Billed Entity Name",
+   "page": 3
+  },
+  {
+   "text": "Number",
+   "page": 3
+  },
+  {
+   "text": "36659 | ST HUGH CATHOLIC SCHOOL",
+   "page": 3
+  },
+  {
+   "text": "Certifications",
+   "page": 3
+  },
+  {
+   "text": "I certify that the applicant includes:",
+   "page": 3
+  },
+  {
+   "text": "I certify that the applicant includes schools under the statutory definitions of elementary and secondary schools found in the No Child",
+   "page": 3
+  },
+  {
+   "text": "Left Behind Act of 2001, 20 U.S.C. §§ 7801 (18) and (38), that do not operate as for-profit businesses, and do not have endowments",
+   "page": 3
+  },
+  {
+   "text": "exceeding $50 million.",
+   "page": 3
+  },
+  {
+   "text": "Other Certifications",
+   "page": 3
+  },
+  {
+   "text": "I certify that this FCC Form 470 and any applicable RFP will be available for review by potential bidders for at least 28 days before",
+   "page": 3
+  },
+  {
+   "text": "considering all bids received and selecting a service provider. I certify that all bids submitted will be carefully considered and the bid",
+   "page": 3
+  },
+  {
+   "text": "selected will be for the most cost-effective service or equipment offering, with price being the primary factor, and will be the most",
+   "page": 3
+  },
+  {
+   "text": "cost-effective means of meeting educational needs and technology goals.",
+   "page": 3
+  },
+  {
+   "text": "I certify that I will retain required documents for a period of at least 10 years (or whatever retention period is required by the rules",
+   "page": 3
+  },
+  {
+   "text": "in effect at the time of this certification) after the later of the last day of the applicable funding year or the service delivery deadline",
+   "page": 3
+  },
+  {
+   "text": "for the associated funding request. I certify that I will retain all documents necessary to demonstrate compliance with the statute and",
+   "page": 3
+  },
+  {
+   "text": "Commission rules regarding the form for, receipt of, and delivery of services receiving schools and libraries discounts. I acknowledge",
+   "page": 3
+  },
+  {
+   "text": "that I may be audited pursuant to participation in the schools and libraries program.",
+   "page": 3
+  },
+  {
+   "text": "I certify that I have reviewed all applicable FCC, state, and local procurement/competitive bidding requirements and that I have",
+   "page": 3
+  },
+  {
+   "text": "complied with them. I acknowledge that persons willfully making false statements on this form may be punished by fine or forfeiture,",
+   "page": 3
+  },
+  {
+   "text": "3",
+   "page": 3
+  },
+  {
+   "text": "under the Communications Act, 47 U.S.C. §§ 502, 503(b), or fine or imprisonment under Title 18 of the United States Code, 18",
+   "page": 4
+  },
+  {
+   "text": "U.S.C. § 1001.",
+   "page": 4
+  },
+  {
+   "text": "I acknowledge that FCC rules provide that persons who have been convicted of criminal violations or held civilly liable for certain",
+   "page": 4
+  },
+  {
+   "text": "acts arising from their participation in the schools and libraries support mechanism are subject to suspension and debarment from the",
+   "page": 4
+  },
+  {
+   "text": "program.",
+   "page": 4
+  },
+  {
+   "text": "I certify that the services the applicant purchases at discounts provided by 47 U.S.C. § 254 will be used primarily for educational",
+   "page": 4
+  },
+  {
+   "text": "purposes, see 47 C.F.R. § 54.500, and will not be sold, resold or transferred in consideration for money or any other thing of value,",
+   "page": 4
+  },
+  {
+   "text": "except as permitted by the Commission’s rules at 47 C.F.R. § 54.513. Additionally, I certify that the entity or entities listed on this",
+   "page": 4
+  },
+  {
+   "text": "form have not received anything of value or a promise of anything of value, other than services and equipment sought by means",
+   "page": 4
+  },
+  {
+   "text": "of this form, from the service provider, or any representative or agent thereof or any consultant in connection with this request for",
+   "page": 4
+  },
+  {
+   "text": "services.",
+   "page": 4
+  },
+  {
+   "text": "I acknowledge that support under this support mechanism is conditional upon the school(s) and/or library(ies) I represent securing",
+   "page": 4
+  },
+  {
+   "text": "access, separately or through this program, to all of the resources, including computers, training, software, internal connections,",
+   "page": 4
+  },
+  {
+   "text": "maintenance, and electrical capacity necessary to use the services purchased effectively. I recognize that some of the aforementioned",
+   "page": 4
+  },
+  {
+   "text": "resources are not eligible for support. I certify that I have considered what financial resources should be available to cover these",
+   "page": 4
+  },
+  {
+   "text": "costs. I certify that I am authorized to procure eligible services for the eligible entity(ies). I certify that I am authorized to submit this",
+   "page": 4
+  },
+  {
+   "text": "request on behalf of the eligible entity(ies) listed on this form, that I have examined this request, and to the best of my knowledge,",
+   "page": 4
+  },
+  {
+   "text": "information, and belief, all statements of fact contained herein are true.",
+   "page": 4
+  },
+  {
+   "text": "NOTICE:",
+   "page": 4
+  },
+  {
+   "text": "In accordance with Section 54.503 of the Federal Communications Commission’s (“Commission”) rules, certain schools and libraries",
+   "page": 4
+  },
+  {
+   "text": "ordering services that are eligible for and seeking universal service discounts must file this Description of Services Requested and",
+   "page": 4
+  },
+  {
+   "text": "Certification Form (FCC Form 470) with the Universal Service Administrator. 47 C.F.R. § 54.503. The collection of information",
+   "page": 4
+  },
+  {
+   "text": "stems from the Commission’s authority under Section 254 of the Communications Act of 1934, as amended. 47 U.S.C. § 254. The",
+   "page": 4
+  },
+  {
+   "text": "data in the report will be used to ensure that schools and libraries comply with the competitive bidding requirement contained in 47",
+   "page": 4
+  },
+  {
+   "text": "C.F.R. § 54.503. Schools and libraries must file this form themselves or as part of a consortium.",
+   "page": 4
+  },
+  {
+   "text": "An agency may not conduct or sponsor, and a person is not required to respond to, a collection of information unless it displays a",
+   "page": 4
+  },
+  {
+   "text": "currently valid OMB control number.",
+   "page": 4
+  },
+  {
+   "text": "The FCC is authorized under the Communications Act of 1934, as amended, to collect the information requested in this form. We",
+   "page": 4
+  },
+  {
+   "text": "will use the information you provide to determine whether you have complied with the competitive bidding requirements applicable",
+   "page": 4
+  },
+  {
+   "text": "to requests for universal service discounts. If we believe there may be a violation or a potential violation of any applicable statute,",
+   "page": 4
+  },
+  {
+   "text": "regulation, rule or order, the information you provide in this form may be referred to the Federal, state, or local agency responsible",
+   "page": 4
+  },
+  {
+   "text": "for investigating, prosecuting, enforcing, or implementing the statute, rule, regulation or order. In certain cases, the information",
+   "page": 4
+  },
+  {
+   "text": "you provide in this form may be disclosed to the Department of Justice or a court or adjudicative body when (a) the FCC; or (b)",
+   "page": 4
+  },
+  {
+   "text": "any employee of the FCC; or (c) the United States Government is a party of a proceeding before the body or has an interest in the",
+   "page": 4
+  },
+  {
+   "text": "proceeding. In addition, information provided in or submitted with this form, or in response to subsequent inquiries, may also be",
+   "page": 4
+  },
+  {
+   "text": "subject to disclosure consistent with the Communications Act of 1934, FCC regulations, the Freedom of Information Act, 5 U.S.C. §",
+   "page": 4
+  },
+  {
+   "text": "552, or other applicable law.",
+   "page": 4
+  },
+  {
+   "text": "If you owe a past due debt to the federal government, the information you provide in this form may also be disclosed to the",
+   "page": 4
+  },
+  {
+   "text": "Department of the Treasury Financial Management Service, other Federal agencies and/or your employer to offset your salary, IRS",
+   "page": 4
+  },
+  {
+   "text": "tax refund or other payments to collect that debt. The FCC may also provide the information to these agencies through the matching",
+   "page": 4
+  },
+  {
+   "text": "of computer records when authorized.",
+   "page": 4
+  },
+  {
+   "text": "4",
+   "page": 4
+  },
+  {
+   "text": "If you do not provide the information we request on the form, the FCC or Universal Service Administrator may return your form",
+   "page": 5
+  },
+  {
+   "text": "without action or deny a related request for universal service discounts.",
+   "page": 5
+  },
+  {
+   "text": "The foregoing Notice is required by the Paperwork Reduction Act of 1995, Pub. L. No. 104-13, 44 U.S.C. § 3501, et seq.",
+   "page": 5
+  },
+  {
+   "text": "Public reporting burden for this collection of information is estimated to average 3.5 hours per response, including the time for",
+   "page": 5
+  },
+  {
+   "text": "reviewing instructions, searching existing data sources, gathering and maintaining the data needed, completing, and reviewing",
+   "page": 5
+  },
+  {
+   "text": "the collection of information. Send comments regarding this burden estimate or any other aspect of this collection of information,",
+   "page": 5
+  },
+  {
+   "text": "including suggestions for reducing the reporting burden to the Federal Communications Commission, Performance Evaluation",
+   "page": 5
+  },
+  {
+   "text": "and Records Management, Washington, DC 20554. We also will accept your comments via the email if you send them to",
+   "page": 5
+  },
+  {
+   "text": "PRA@FCC.gov. DO NOT SEND COMPLETED WORKSHEETS TO THESE ADDRESSES.",
+   "page": 5
+  },
+  {
+   "text": "Authorized Person",
+   "page": 5
+  },
+  {
+   "text": "Alex Chen",
+   "page": 5
+  },
+  {
+   "text": "ErateProgram, LLC",
+   "page": 5
+  },
+  {
+   "text": "9506 Olive Blvd #708 St. Louis, MO 63132",
+   "page": 5
+  },
+  {
+   "text": "555-555-0103",
+   "page": 5
+  },
+  {
+   "text": "Certified Timestamp",
+   "page": 5
+  },
+  {
+   "text": "11/10/2026 03:37 PM EST",
+   "page": 5
+  },
+  {
+   "text": "5",
+   "page": 5
+  }
+ ]
+}

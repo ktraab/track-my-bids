@@ -3,6 +3,7 @@
   import { app } from '$lib/state.svelte';
   import type { Bid, ShipMethod } from '$lib/domain/types';
   import { AGENCY_TYPE_LABELS, METHOD_LABELS, SHIP_METHOD_LABELS, timezoneOptions } from '$lib/domain/labels';
+  import { parseFundingYear, toErateCategory } from '$lib/domain/erate';
 
   let { bid, onDone }: { bid: Bid; onDone: () => void } = $props();
   const tzs = untrack(() => timezoneOptions(bid.timezone));
@@ -26,6 +27,10 @@
     timezone: bid.timezone,
     rfpUrl: bid.rfpUrl ?? '',
     notes: bid.notes ?? '',
+    erate: bid.erate,
+    erate470Number: bid.erate470Number ?? '',
+    erateFundingYear: bid.erateFundingYear?.toString() ?? '',
+    erateCategory: (bid.erateCategory?.toString() ?? '') as '' | '1' | '2',
   })));
 
   const txt = (s: string) => s.trim() || null;
@@ -55,6 +60,10 @@
       timezone: f.timezone,
       rfpUrl: txt(f.rfpUrl),
       notes: txt(f.notes),
+      erate: f.erate,
+      erate470Number: f.erate ? txt(f.erate470Number) : null,
+      erateFundingYear: f.erate ? parseFundingYear(f.erateFundingYear) : null,
+      erateCategory: f.erate ? toErateCategory(f.erateCategory) : null,
     });
     if (ok) onDone();
   }
@@ -109,6 +118,19 @@
       <label class="field"><span>Ship lead (business days)</span><input type="number" min="0" max="10" bind:value={f.shipLeadBusinessDays} /></label>
     </div>
     <label class="check"><input type="checkbox" bind:checked={f.notarizeRequired} /> Notarization required</label>
+  {/if}
+
+  <label class="check"><input type="checkbox" bind:checked={f.erate} /> E-Rate bid (FCC Form 470)</label>
+  {#if f.erate}
+    <div class="grid3">
+      <label class="field"><span>Form 470 #</span><input bind:value={f.erate470Number} inputmode="numeric" placeholder="270012345" /></label>
+      <label class="field"><span>Funding year</span><input bind:value={f.erateFundingYear} inputmode="numeric" placeholder="2027" /></label>
+      <label class="field"><span>Category</span>
+        <select bind:value={f.erateCategory}>
+          <option value="1">1</option><option value="2">2</option><option value="">Both</option>
+        </select>
+      </label>
+    </div>
   {/if}
 
   <label class="field"><span>Notes</span><textarea bind:value={f.notes}></textarea></label>

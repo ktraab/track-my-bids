@@ -16,10 +16,11 @@ const isFkError = (e: unknown) => /FOREIGN KEY constraint/i.test(e instanceof Er
 export async function applyRemoteRows(sql: Sql, rows: RemoteRow[], now: () => string): Promise<ApplyResult> {
   const sorted = [...rows].sort((a, b) => TABLE_ORDER.get(a.tbl)! - TABLE_ORDER.get(b.tbl)! || a.seq - b.seq);
   const out: ApplyResult = { applied: 0, skipped: [] };
+  const revive: string[] = [];
   await withApplying(sql, async () => {
     for (const r of sorted) {
       try {
-        await applyOne(sql, r, now);
+        await applyOne(sql, r, now, revive);
         out.applied++;
       } catch (e) {
         if (!isFkError(e)) throw e;
@@ -27,18 +28,30 @@ export async function applyRemoteRows(sql: Sql, rows: RemoteRow[], now: () => st
       }
     }
   });
+  await reviveLabels(sql, revive, now);
   return out;
 }
 
 /** The server said our new row duplicates an existing one (`remote`): switch to the server's row. */
 export async function applyRemap(sql: Sql, tbl: SyncTable, localId: string, remote: RemoteRow, now: () => string): Promise<void> {
+  const revive: string[] = [];
   await withApplying(sql, async () => {
     if (tbl === 'contacts') await mergeContactInto(sql, localId, remote, now, { neverSynced: true });
-    else if (tbl === 'bid_contacts') await replaceLink(sql, localId, remote);
+    else if (tbl === 'bid_contacts' || tbl === 'extract_labels') await replaceLocal(sql, tbl, localId, remote, revive);
   });
+  await reviveLabels(sql, revive, now);
 }
 
-async function applyOne(sql: Sql, r: RemoteRow, now: () => string): Promise<void> {
+/** A live phrase we learned must not vanish under a deleted server copy: bring it back and queue it (outside withApplying). */
+async function reviveLabels(sql: Sql, ids: string[], now: () => string): Promise<void> {
+  const t = now();
+  for (const id of ids) {
+    await sql.execute('UPDATE extract_labels SET deleted_at = NULL, hits = 1, updated_at = ? WHERE id = ? AND deleted_at IS NOT NULL', [t, id]);
+    await enqueueFields(sql, 'extract_labels', id, ['deleted_at', 'hits', 'updated_at'], t);
+  }
+}
+
+async function applyOne(sql: Sql, r: RemoteRow, now: () => string, revive: string[]): Promise<void> {
   try {
     await upsert(sql, r);
   } catch (e) {
@@ -52,7 +65,13 @@ async function applyOne(sql: Sql, r: RemoteRow, now: () => string): Promise<void
       const [dup] = await sql.select<{ id: string }>(
         'SELECT id FROM bid_contacts WHERE bid_id = ? AND contact_id = ? AND role = ? AND id <> ?',
         [r.data.bid_id, r.data.contact_id, r.data.role, r.id]);
-      if (dup) return replaceLink(sql, dup.id, r);
+      if (dup) return replaceLocal(sql, 'bid_contacts', dup.id, r, revive);
+    }
+    if (r.tbl === 'extract_labels') {
+      // The team learned the same phrase first: theirs replaces ours (ours never reached the server, which keeps one per phrase).
+      const [dup] = await sql.select<{ id: string }>(
+        'SELECT id FROM extract_labels WHERE field = ? AND phrase = ? AND id <> ?', [r.data.field, r.data.phrase, r.id]);
+      if (dup) return replaceLocal(sql, 'extract_labels', dup.id, r, revive);
     }
     throw e;
   }
@@ -115,9 +134,17 @@ async function mergeContactInto(
   }
 }
 
-/** Our link duplicates the team's (same bid, contact, role): it never synced, so drop it. */
-async function replaceLink(sql: Sql, localId: string, remote: RemoteRow): Promise<void> {
-  await dropRow(sql, 'bid_contacts', localId);
-  await sql.execute('DELETE FROM bid_contacts WHERE id = ?', [localId]);
+/** Our row duplicates the team's (same link slot / same learned phrase): it never synced, so drop it for theirs. */
+async function replaceLocal(
+  sql: Sql, tbl: 'bid_contacts' | 'extract_labels', localId: string, remote: RemoteRow, revive: string[],
+): Promise<void> {
+  let wasLive = false;
+  if (tbl === 'extract_labels') {
+    wasLive = (await sql.select('SELECT id FROM extract_labels WHERE id = ? AND deleted_at IS NULL', [localId])).length > 0;
+  }
+  await dropRow(sql, tbl, localId);
+  await sql.execute(`DELETE FROM ${tbl} WHERE id = ?`, [localId]);
   await upsert(sql, remote);
+  // Our live phrase beats a deleted server copy; revived after the apply so it syncs like a re-learn.
+  if (wasLive && remote.data.deleted_at != null) revive.push(remote.id);
 }

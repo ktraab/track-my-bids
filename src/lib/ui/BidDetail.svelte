@@ -16,7 +16,7 @@
   import ContactsSection from './ContactsSection.svelte';
   import VendorsSection from './VendorsSection.svelte';
   import PricingSection from './PricingSection.svelte';
-  import { pricingOf, quoteTotal } from '$lib/domain/pricing';
+  import { quotePrice } from '$lib/domain/pricing';
 
   let { id }: { id: string } = $props();
   let editing = $state(false);
@@ -30,9 +30,9 @@
   const todayPct = $derived(win ? pctOf(app.nowMs, win) : null);
   const warnings = $derived(data ? dayWarnings(data, app.nowMs) : []);
   const stageIdx = $derived(data ? routeIndex(data.bid.stage) : 0);
-  /** "Our price": the quote total once the bid has priced lines. */
-  const ourPrice = $derived(data ? quoteTotal(data, app.pricingDefaults) : null);
-  const unpriced = $derived(data && ourPrice !== null ? pricingOf(data, app.pricingDefaults).summary.flagged : 0);
+  /** "Our price": the total of the priced lines once the bid has any (partial while some lines are unpriced). */
+  const ourPrice = $derived(data ? quotePrice(data, app.pricingDefaults) : null);
+  const unpriced = $derived(ourPrice?.unpriced ?? 0);
 
   /** Ship-by is derived; never let a bad value crash rendering. */
   function shipByLabel(dueAt: string, tz: string, lead: number): string {
@@ -85,7 +85,7 @@
       <div class="titles">
         <div class="eyebrow">{b.bidNumber ?? 'No bid #'} · {AGENCY_TYPE_LABELS[b.agencyType]}</div>
         <h1>{b.title}</h1>
-        <div class="sub">{b.agencyName} · {formatMoneyShort(b.estValue)}{#if ourPrice !== null} · Our price <strong>{formatMoney(ourPrice)}</strong>{#if unpriced > 0} · {unpriced} unpriced{/if}{/if} · <span class="method">{METHOD_LABELS[b.submissionMethod]}</span>
+        <div class="sub">{b.agencyName} · {formatMoneyShort(b.estValue)}{#if ourPrice !== null} · Our price <strong>{formatMoney(ourPrice.total)}</strong>{#if ourPrice.partial} partial · {unpriced} unpriced{/if}{/if} · <span class="method">{METHOD_LABELS[b.submissionMethod]}</span>
           {#if app.team.mode === 'team'}
             · Owner
             {#if app.canManage(b)}

@@ -2,6 +2,20 @@
 
 All notable changes to TrackMyBids.
 
+## v0.9.0 — 2026-11-20 (Bid document import, E-Rate, partial pricing)
+
+Drop a bid document on the app and get a filled-in New bid form. No AI and nothing leaves your computer: fixed rules read the text, and the app learns from your corrections.
+
+- **Import a bid document** — drag a PDF, Word (.docx) or Excel (.xlsx) file anywhere onto the window, or use **From document…** next to **+ New**. The New bid form opens filled in: bid number, title, agency and type, due date, pre-bid (with the mandatory ring), questions deadline, site walk, submission method, portal, copies, notarization, delivery address and the buyer contact (only when an email is found; matched to an existing contact by email). Each filled field has a dot: hover it to see the sentence and page it came from. When the document has several candidates (e.g. three dates near "due"), the field offers a short list, best guess first. Nothing is saved until you click Save.
+- **Scope** — the Scope field gets a tag line (e.g. Networking · Wi-Fi · Licensing, from 16 product tags) plus a short summary taken from a Form 470's service table or the document's scope section.
+- **It learns** — fix a field and save, and the wording in front of the value is remembered for next time and shared with your team. Agencies you've bid with before fill in their usual portal, submission method, copies and shipping. Settings → Document import lists what it has learned (delete anything wrong) and lets you add your own words to scope tags.
+- **Scanned PDFs** — the app says there's no readable text, opens a blank form and offers **Open file**. Password-protected or damaged files show a clear message.
+- **E-Rate** — tick E-Rate on a bid to record the Form 470 number, funding year and category (1, 2 or both). A new **Allowable contract date** stop marks the earliest day the contract can be signed (filled from the document, or the 470's certified date + 28 days). E-Rate bids get a badge on the map, an **E-Rate** filter chip, a hover line, and E-Rate / Form 470 # columns in the report. Form 470s from USAC are read automatically.
+- **Partial quotes still show your price** — if only some lines are priced, the summary shows the marked-up total for those lines with "3 of 5 lines priced", vendor columns show "$4,210.00 · 3 of 5", and Our price is marked "partial". In Whole quote mode, when no vendor has priced every line, the vendor with the most lines priced is picked (complete totals still come first; skipped vendors last). "Use lowest total" is now **Pick vendor automatically**.
+- **Own cost without vendors** — each line has its own **Cost**, so you can price a quote before (or without) asking vendors. Pasting from Excel with no vendors fills it. Once vendors exist, a narrow Own cost column stays; vendor prices win and own cost is used only when no vendor priced the line.
+- **Team servers must be updated first**: apply `supabase/migrations/20261120000000_extract_labels.sql` before installing this version (sync schema 3). Teammates on older versions see "The team server needs an update" and their sync pauses until they update; nothing is lost. See `docs/TEAM-SETUP.md`.
+- Verified: 879 unit tests, type check, every part code-reviewed with fixes; accuracy measured on 23 real bid documents (due date 96%, bid number 100%, questions deadline 100%, buyer email 100%, agency 96%, scope tags 94% found / 84% correct); hands-on check in an isolated test build.
+
 ## v0.8.0 — 2026-11-18 (RFQ Quotes)
 
 Quick RFQs that have no due date now live on the same map as bids.
@@ -17,7 +31,9 @@ Quick RFQs that have no due date now live on the same map as bids.
 - **Default markup** — Settings → Pricing (12% to start). A quote or bid takes it when its first line is added, so everyone on a team sees the same total.
 - **Our price** — a bid with priced lines shows its quote total next to the estimate (bid page and hover card). The hover card for a quote lists each vendor's total. Reports value quotes at their quote total (falling back to the estimate) and add an **Our Price** column for bids.
 - **Needs you** — a hand icon next to the bell lists what needs you right now: vendors that went quiet (1 business day after asking or your last nudge), quotes with no customer answer (3 business days after sending or your last follow-up), new quotes nobody has claimed (Team mode, 4 work hours), and a bid's mandatory stop within 24 hours. One click to Nudge, Quote without them, Claim / Assign, Followed up, Open bid / Mark done, or Snooze for a day (snoozes stay on your computer). The count turns red when something is overdue. Each new item sends one desktop notification (held during quiet hours, folded into the morning briefing). The thresholds are in Settings → Notifications. On the map, "Overdue only" and the red Status now include unclaimed quotes and mandatory stops within 24 hours.
+- **Settings** — sections (Notifications, Checklist template, Pricing, Team, General) now fold away: all start closed, opening one closes the others, and each closed header shows a one-line summary plus an "Unsaved" tag when edits are pending. The paste-from-Excel box shows an example layout using the quote's own vendor names.
 - **Team servers must be updated first**: apply `supabase/migrations/20261119000000_quotes.sql` before installing this version (sync schema 2). Teammates on older versions see "The team server needs an update" and their sync pauses until they update; nothing is lost. See `docs/TEAM-SETUP.md`.
+- **Released 2026-11-18:** the migration was applied to our team server first, then v0.8.0 was published (macOS universal .dmg, Windows .msi / -setup.exe, signed auto-update). Verified: 607 unit tests, type check, every batch code-reviewed, hands-on pricing / Needs you / Settings check in an isolated test build. Not yet verified: the team syncing on 0.8.0, and the auto-update from 0.7.1 to 0.8.0.
 
 ## v0.7.1 — 2026-11-18
 

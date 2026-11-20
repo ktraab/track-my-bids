@@ -1,0 +1,5787 @@
+{
+ "id": "pdf-f4c0ac18ba",
+ "kind": "pdf",
+ "today": "2026-11-20",
+ "lines": [
+  {
+   "text": "Washington County School District",
+   "page": 1
+  },
+  {
+   "text": "652 3rd Street",
+   "page": 1
+  },
+  {
+   "text": "Chipley, FL 32428",
+   "page": 1
+  },
+  {
+   "text": "REQUEST FOR PROPOSAL FOR CATEGORY 2 – NETWORK INFRASTRUCTURE EQUIPMENT",
+   "page": 1
+  },
+  {
+   "text": "RFP Purpose: It is the intent of Washington County School District to solicit your company to submit a bid on Network Infrastructure Equipment. All terms,",
+   "page": 1
+  },
+  {
+   "text": "specifications and conditions set forth in this RFP are incorporated into your response. An RFP will not be accepted unless all conditions have been met. All RFP’s",
+   "page": 1
+  },
+  {
+   "text": "must have an authorized signature in the space provided below. All RFP’s must be sealed and received in the District Office by the RFP “Opening Date & Time”.",
+   "page": 1
+  },
+  {
+   "text": "The official clock for the purpose of receiving RFP’s is located in the District Office. All envelopes containing sealed bids must reference the “RFP Title”, and the",
+   "page": 1
+  },
+  {
+   "text": "“RFP Opening Date & Time”. The School Board is not responsible for lost or late deliver of RFP’s by the U.S. Postal Service or other deliver services used by the",
+   "page": 1
+  },
+  {
+   "text": "Bidder. Neither faxed nor electronically submitted RFP’s will be accepted. RFP’s may not be withdrawn for a period of sixty (60) days after the bid opening unless",
+   "page": 1
+  },
+  {
+   "text": "otherwise specified.",
+   "page": 1
+  },
+  {
+   "text": "RFP Release Date: Friday, November 13, 2026",
+   "page": 1
+  },
+  {
+   "text": "RFP Title: Request for Proposal for Category 2 – Network Infrastructure Equipment",
+   "page": 1
+  },
+  {
+   "text": "RFP Contact: Pat Morgan, person1@wcsdschools.com",
+   "page": 1
+  },
+  {
+   "text": "Proposal Due Date and Time: Tuesday, December 15, 2026, 2:00 p.m. CST",
+   "page": 1
+  },
+  {
+   "text": "Proposal Opening Date and Time: Tuesday, December 15, 2026, 2:05 p.m. CST, 652 3rd Street, Chipley, FL 32428",
+   "page": 1
+  },
+  {
+   "text": "Tentative Award Recommendation Date: Monday, February 8, 2027",
+   "page": 1
+  },
+  {
+   "text": "RFP Submission Address: All proposals must be in a sealed envelope clearly marked, “Request For Proposal for Category 2 – Network Infrastructure",
+   "page": 1
+  },
+  {
+   "text": "Equipment” and be personally delivered or mailed to:",
+   "page": 1
+  },
+  {
+   "text": "Pat Morgan",
+   "page": 1
+  },
+  {
+   "text": "Director of IT/MIS",
+   "page": 1
+  },
+  {
+   "text": "Washington County School District",
+   "page": 1
+  },
+  {
+   "text": "652 3rd Street",
+   "page": 1
+  },
+  {
+   "text": "Chipley, FL 32428",
+   "page": 1
+  },
+  {
+   "text": "The following must be completed, signed in ink or indelible pencil, and returned as part of your proposal. Proposals WILL NOT be accepted without this",
+   "page": 1
+  },
+  {
+   "text": "form, signed by and authorized agent of the responder.",
+   "page": 1
+  },
+  {
+   "text": "COMPANY NAME:",
+   "page": 1
+  },
+  {
+   "text": "MAILING ADDRESS:",
+   "page": 1
+  },
+  {
+   "text": "CITY, STATE, ZIP:",
+   "page": 1
+  },
+  {
+   "text": "FEDERAL EMPLOYER’S IDENTIFICATION NUMBER (FEIN):",
+   "page": 1
+  },
+  {
+   "text": "SPIN NUMBER:",
+   "page": 1
+  },
+  {
+   "text": "TELEPHONE NUMBER: | (EXT. )",
+   "page": 1
+  },
+  {
+   "text": "EMAIL ADDRESS:",
+   "page": 1
+  },
+  {
+   "text": "I certify that this proposal is made without prior understanding, agreement, or connection with any other responder submitting a proposal for the same materials,",
+   "page": 1
+  },
+  {
+   "text": "supplies, equipment or services, and is in all respects fair and without collusion or fraud. I agree to abide to all terms and conditions of the proposal and certify that",
+   "page": 1
+  },
+  {
+   "text": "I am authorized to sign this proposal for the responder.",
+   "page": 1
+  },
+  {
+   "text": "________________________________________________________________",
+   "page": 1
+  },
+  {
+   "text": "Typed or printed name",
+   "page": 1
+  },
+  {
+   "text": "________________________________________________________________",
+   "page": 1
+  },
+  {
+   "text": "Authorized Signature",
+   "page": 1
+  },
+  {
+   "text": "________________________________________________________________ | ___________________________________________",
+   "page": 1
+  },
+  {
+   "text": "1",
+   "page": 1
+  },
+  {
+   "text": "Title | Date:",
+   "page": 2
+  },
+  {
+   "text": "Sealed proposals shall be received at:",
+   "page": 2
+  },
+  {
+   "text": "Washington County School District",
+   "page": 2
+  },
+  {
+   "text": "Pat Morgan",
+   "page": 2
+  },
+  {
+   "text": "Director of IT/MIS",
+   "page": 2
+  },
+  {
+   "text": "652 3rd Street",
+   "page": 2
+  },
+  {
+   "text": "Chipley, FL 32428",
+   "page": 2
+  },
+  {
+   "text": "Oral, telephonic (facsimile, telex), telegraphic or electronic (e-mail) proposals are invalid and will not receive",
+   "page": 2
+  },
+  {
+   "text": "consideration.",
+   "page": 2
+  },
+  {
+   "text": "Proposals POSITIVELY will not be considered after the time above.",
+   "page": 2
+  },
+  {
+   "text": "Proposals may not be withdrawn for a period of sixty (60) days from the date of the opening date.",
+   "page": 2
+  },
+  {
+   "text": "PROPOSAL ACKNOWLEDGEMENT FORM",
+   "page": 2
+  },
+  {
+   "text": "_____________________________________________________________________________________",
+   "page": 2
+  },
+  {
+   "text": "COMPANY",
+   "page": 2
+  },
+  {
+   "text": "____________________________________________________________________________________",
+   "page": 2
+  },
+  {
+   "text": "MAILING ADDRESS",
+   "page": 2
+  },
+  {
+   "text": "_____________________________________________________________________________________",
+   "page": 2
+  },
+  {
+   "text": "CITY – STATE – ZIP CODE",
+   "page": 2
+  },
+  {
+   "text": "_____________________________________________________________________________________",
+   "page": 2
+  },
+  {
+   "text": "TELEPHONE NUMBER | FAX NUMBER | E-MAIL ADDRESS",
+   "page": 2
+  },
+  {
+   "text": "BY:_________________________________________________________________________________",
+   "page": 2
+  },
+  {
+   "text": "NAME – PLEASE PRINT",
+   "page": 2
+  },
+  {
+   "text": "____________________________________________________________________________________",
+   "page": 2
+  },
+  {
+   "text": "SIGNATURE OF AUTHORIZED VENDOR REPRESENTATIVE",
+   "page": 2
+  },
+  {
+   "text": "NOTE: | THIS PROPOSAL IS NOT VALID UNLESS THIS PAGE IS SIGNED ON THE ABOVE LINE BY AUTHORIZED",
+   "page": 2
+  },
+  {
+   "text": "VENDOR REPRESENTATIVE & RETURNED WITH PROPOSAL.",
+   "page": 2
+  },
+  {
+   "text": "2",
+   "page": 2
+  },
+  {
+   "text": "Request for Proposal",
+   "page": 3
+  },
+  {
+   "text": "Network Infrastructure Equipment",
+   "page": 3
+  },
+  {
+   "text": "1.0 INTRODUCTION:",
+   "page": 3
+  },
+  {
+   "text": "Background:",
+   "page": 3
+  },
+  {
+   "text": "It is the intent of the Washington County School District is to solicit proposals from qualified businesses to supply the",
+   "page": 3
+  },
+  {
+   "text": "below manufacturers equipment or fully equivalent equipment compatible with existing equipment installed",
+   "page": 3
+  },
+  {
+   "text": "throughout the District’s facilities, pursuant to the terms, specifications, and conditions set forth within this RFP. The",
+   "page": 3
+  },
+  {
+   "text": "specifics regarding requested equipment is located on Attachment(s) “A”.",
+   "page": 3
+  },
+  {
+   "text": "2.0 TIME SCHEDULE:",
+   "page": 3
+  },
+  {
+   "text": "The District will attempt to use the following time schedule that will result in selection of proposer(s).",
+   "page": 3
+  },
+  {
+   "text": "November 13, 2026 - RFP issued",
+   "page": 3
+  },
+  {
+   "text": "December 15, 2026 - Proposals due no later than 2:00 PM CST",
+   "page": 3
+  },
+  {
+   "text": "February 8, 2027 – Approximate date Award letter will be issued",
+   "page": 3
+  },
+  {
+   "text": "3.0 SCOPE OF SERVICES:",
+   "page": 3
+  },
+  {
+   "text": "3.1 The Washington County School District is seeking vendors to supply the below manufacturers equipment or",
+   "page": 3
+  },
+  {
+   "text": "fully equivalent equipment compatible with existing equipment installed throughout the District’s facilities.",
+   "page": 3
+  },
+  {
+   "text": "3.1.1 Currently installed equipment manufacturers: Extreme",
+   "page": 3
+  },
+  {
+   "text": "3.2 The Washington County School District has established maintenance, repair and support services with the",
+   "page": 3
+  },
+  {
+   "text": "above manufacturers’ equipment. Manufacturer support includes no cost training (both on-site and hosted",
+   "page": 3
+  },
+  {
+   "text": "remotely), free phone and on-site technical support, free shipping on warranty repairs and the ability to monitor,",
+   "page": 3
+  },
+  {
+   "text": "manage and update IOS of equipment through a central software application. These services along with",
+   "page": 3
+  },
+  {
+   "text": "standardization are vital to the cost-effective operation of the school district’s network infrastructure.",
+   "page": 3
+  },
+  {
+   "text": "3.3 All Network Infrastructure Equipment is located in Washington County School District school sites.",
+   "page": 3
+  },
+  {
+   "text": "3.4 Service and price quotes:",
+   "page": 3
+  },
+  {
+   "text": "Proposed services and equipment and their pricing must be quoted in the format provided in Attachment A. Failure",
+   "page": 3
+  },
+  {
+   "text": "to quote in this format or omission of any of the data items can lead to rejection of the bid.",
+   "page": 3
+  },
+  {
+   "text": "3.5 Lowest Corresponding Price (LCP):",
+   "page": 3
+  },
+  {
+   "text": "Service provider’s bid must be the Lowest Corresponding Price (LCP). The proposed pricing for services and",
+   "page": 3
+  },
+  {
+   "text": "equipment must be the LCP of similarly situated nonresidential customers for similar services. When services and",
+   "page": 3
+  },
+  {
+   "text": "equipment are delivered and charged, the price billed must be no higher than LCP of similarly situated nonresidential",
+   "page": 3
+  },
+  {
+   "text": "customers for similar services.",
+   "page": 3
+  },
+  {
+   "text": "3.6 Bundled Services:",
+   "page": 3
+  },
+  {
+   "text": "Any E-Rate ineligible products, services, or components bundled with eligible products or services must be listed",
+   "page": 3
+  },
+  {
+   "text": "separately from the eligible products or services. Prices for these ineligible products or services must be allocated",
+   "page": 3
+  },
+  {
+   "text": "out of the price for the eligible services; failure to do so can lead to rejection of the bid. Allocations must comply",
+   "page": 3
+  },
+  {
+   "text": "3",
+   "page": 3
+  },
+  {
+   "text": "with USAC rules which specify that the allocation methodology must be based on tangible criteria and reach a",
+   "page": 4
+  },
+  {
+   "text": "realistic result. The District recognizes that some portion of the listed items may be ineligible for E-rate funding. To",
+   "page": 4
+  },
+  {
+   "text": "the extent that these items are included in the bidder’s proposal, the District expects to pay the full amount of any",
+   "page": 4
+  },
+  {
+   "text": "such E-rate ineligible costs. (Note: If E-Rate funding is not fully available for any reason, the District reserves the right",
+   "page": 4
+  },
+  {
+   "text": "to defer of cancel any agreements entered into at the District’s discretion.)",
+   "page": 4
+  },
+  {
+   "text": "3.7 Requested Equipment Minimum Standards or Equivalent:",
+   "page": 4
+  },
+  {
+   "text": "If submitting a better than equivalent option, please specify in the pricing notations and provide specifications",
+   "page": 4
+  },
+  {
+   "text": "indicating justification.",
+   "page": 4
+  },
+  {
+   "text": "See requested equipment a list Attachment A",
+   "page": 4
+  },
+  {
+   "text": "4.0 INSTRUCTIONS TO PROPOSERS:",
+   "page": 4
+  },
+  {
+   "text": "4.1 All proposals must be received no later than 2:00 PM CST on December 15, 2026. If a proposal is transmitted",
+   "page": 4
+  },
+  {
+   "text": "by US Mail or other delivery medium, the proposer(s) will be responsible for its timely delivery to Washington",
+   "page": 4
+  },
+  {
+   "text": "County School District, ATTN: Pat Morgan, 652 3rd Street, Chipley, FL 32428. No facsimile or email",
+   "page": 4
+  },
+  {
+   "text": "proposals will be accepted.",
+   "page": 4
+  },
+  {
+   "text": "4.2 All responding companies must be registered certified providers in the State of Florida with the ability to supply",
+   "page": 4
+  },
+  {
+   "text": "services to Washington County School District and the responding company must be in good standing with the SLD",
+   "page": 4
+  },
+  {
+   "text": "and agree to participate in the E-rate Program.",
+   "page": 4
+  },
+  {
+   "text": "4.3 RFP Proposal openings will be public on the date and time specified on the proposal acknowledgement form.",
+   "page": 4
+  },
+  {
+   "text": "All proposals received after the time indicated will be rejected as non-responsive. RFP’s by e-mail, fax, telegram, or",
+   "page": 4
+  },
+  {
+   "text": "verbally by telephone or in person will not be accepted. The public opening will acknowledge receipt of the RFP",
+   "page": 4
+  },
+  {
+   "text": "Proposals only. Details concerning pricing or the offering will not be announced. All Proposals submitted shall become",
+   "page": 4
+  },
+  {
+   "text": "public record upon an announcement of a recommended award or thirty days after the opening date whichever occurs",
+   "page": 4
+  },
+  {
+   "text": "first.",
+   "page": 4
+  },
+  {
+   "text": "4.4 One Manually signed (in blue ink) original and three (3) photocopies along with a digital/electronic copy on",
+   "page": 4
+  },
+  {
+   "text": "a thumb drive of the proposal, must be sealed in one package and clearly labeled “Request for Category 2 – Network",
+   "page": 4
+  },
+  {
+   "text": "Infrastructure Equipment” on the outside of the package. The legal name, address, proposer’s contact person, and",
+   "page": 4
+  },
+  {
+   "text": "telephone number should also be clearly annotated on the outside of the package.",
+   "page": 4
+  },
+  {
+   "text": "4.5 All proposals must be signed by an officer or employee having authority to legally bind the proposer(s).",
+   "page": 4
+  },
+  {
+   "text": "4.6 No handwritten corrections of unit prices. This includes corrections made using correction fluid (white out) or",
+   "page": 4
+  },
+  {
+   "text": "any other method of correction.",
+   "page": 4
+  },
+  {
+   "text": "4.7 Proposers should become familiar with any local conditions which may, in any manner, affect the services",
+   "page": 4
+  },
+  {
+   "text": "required. The proposer(s) is/are required to carefully examine the RFP terms and become thoroughly familiar with",
+   "page": 4
+  },
+  {
+   "text": "any and all conditions and requirements that may in any manner affect the work to be performed under the contract.",
+   "page": 4
+  },
+  {
+   "text": "No additional allowance will be made due to lack of knowledge of these conditions.",
+   "page": 4
+  },
+  {
+   "text": "4.8 Proposals not conforming to the instructions provided herein will be subject to disqualification at the sole",
+   "page": 4
+  },
+  {
+   "text": "discretion of the School Board.",
+   "page": 4
+  },
+  {
+   "text": "4.9 Any proposal may be withdrawn prior to the date and time the proposals are due. Any proposal not withdrawn",
+   "page": 4
+  },
+  {
+   "text": "will constitute an irrevocable offer, for a period of 60 days, to provide the District with the services specified in the",
+   "page": 4
+  },
+  {
+   "text": "proposal.",
+   "page": 4
+  },
+  {
+   "text": "4",
+   "page": 4
+  },
+  {
+   "text": "4.10 WARRANTY(IES):",
+   "page": 5
+  },
+  {
+   "text": "All goods and services furnished by the Responder(s), relating to and pursuant to the RFP will be warranted to meet",
+   "page": 5
+  },
+  {
+   "text": "or exceed the Specifications contained herein. In the event of a breach, the Responder(s) will take all necessary action,",
+   "page": 5
+  },
+  {
+   "text": "at Responder’s expense, to correct such breach in the most expeditious manner possible.",
+   "page": 5
+  },
+  {
+   "text": "4.11 PRICING:",
+   "page": 5
+  },
+  {
+   "text": "All pricing submitted will include all packaging, handling, shipping charges, and delivery to any point within Washington",
+   "page": 5
+  },
+  {
+   "text": "County, Florida to a secure area or inside delivery. The School Board is exempt and does not pay Federal Excise and",
+   "page": 5
+  },
+  {
+   "text": "State of Florida Sales Taxes.",
+   "page": 5
+  },
+  {
+   "text": "4.12 TRANSPORTATION AND TITLE:",
+   "page": 5
+  },
+  {
+   "text": "(1) Title to the goods will pass to the District upon receipt and acceptance at the destination indicated herein. Until",
+   "page": 5
+  },
+  {
+   "text": "acceptance, the Responder(s) retain the sole insurable interest in the goods. (2) The shipper will prepay all",
+   "page": 5
+  },
+  {
+   "text": "transportation charges. The District will not accept collect freight charges. (3) No premium carriers will be used for the",
+   "page": 5
+  },
+  {
+   "text": "District account without prior written consent of the Chief Finance Office.",
+   "page": 5
+  },
+  {
+   "text": "4.13 PACKING:",
+   "page": 5
+  },
+  {
+   "text": "All shipments will include an itemized list of each package’s content, and reference the District’s Purchase Order",
+   "page": 5
+  },
+  {
+   "text": "Number. No charges will be allowed for cartage or packing unless agreed upon by the District Prior to shipment.",
+   "page": 5
+  },
+  {
+   "text": "4.14 INSPECTION AND TESTING:",
+   "page": 5
+  },
+  {
+   "text": "The District will have the right to expedite, inspect and test any of the goods or work covered by the RFP. All goods or",
+   "page": 5
+  },
+  {
+   "text": "services are subject to the District’s inspection and approval upon arrival or completion. If rejected, they will be held",
+   "page": 5
+  },
+  {
+   "text": "for disposal at the Responders’ risk. Such inspection, or the waiver thereof, however, will not relieve the Responder(s)",
+   "page": 5
+  },
+  {
+   "text": "from full responsibility for furnishing goods or work conforming to the requirements of this RFP, and will not prejudice",
+   "page": 5
+  },
+  {
+   "text": "any claim, right, or privilege the District may have because of the use of defective or unsatisfactory goods or work.",
+   "page": 5
+  },
+  {
+   "text": "4.15 STOP WORK ORDER:",
+   "page": 5
+  },
+  {
+   "text": "The District designated Project Manager (TBD) may at any time, by written notice to the Responder, stop all or any",
+   "page": 5
+  },
+  {
+   "text": "part of the work for the RFP award. Upon receiving such notice, the Responder(s) will take all reasonable steps to",
+   "page": 5
+  },
+  {
+   "text": "minimize additional costs during the period of work stoppage. The District may subsequently either cancel the stop",
+   "page": 5
+  },
+  {
+   "text": "work order resulting in an equitable adjustment in the delivery schedule, the price, or terminate the work in",
+   "page": 5
+  },
+  {
+   "text": "accordance with the provisions of the RFP terms and conditions.",
+   "page": 5
+  },
+  {
+   "text": "4.16 RISK OF LOSS:",
+   "page": 5
+  },
+  {
+   "text": "The Responder(s) assumes the following risks: (1) all risks of loss or damage to all goods, work in process, materials",
+   "page": 5
+  },
+  {
+   "text": "and equipment until the delivery thereof as herein provided; (2) all risks of loss or damage to third persons and there",
+   "page": 5
+  },
+  {
+   "text": "property until delivery of all goods as herein provided; (3) all risks of loss or damage to any property received by the",
+   "page": 5
+  },
+  {
+   "text": "Responder(s) or held by the Responder(s) or its suppliers for the account of the District, until such property has been",
+   "page": 5
+  },
+  {
+   "text": "delivered to the District; (4) all risks of loss of damage to any of the goods or part thereof rejected by the District, from",
+   "page": 5
+  },
+  {
+   "text": "the time of shipment thereof to Responder(s) until redelivery thereof to the District.",
+   "page": 5
+  },
+  {
+   "text": "4.17 LAWS AND REGULATIONS:",
+   "page": 5
+  },
+  {
+   "text": "Responder(s) will comply with all applicable Federal, State and Local laws, statutes and ordinances including, but not",
+   "page": 5
+  },
+  {
+   "text": "limited to the rules, regulations and standards of the Occupational Safety and Health Act of 1970, the Federal Contract",
+   "page": 5
+  },
+  {
+   "text": "Work Hours and Safety Standards Act, and the rules and regulations promulgated under these Acts. Respondent agrees",
+   "page": 5
+  },
+  {
+   "text": "to comply with Florida’s E-Verify statute to the fullest extent. Responder(s) agree not to discriminate against any",
+   "page": 5
+  },
+  {
+   "text": "employee or applicant for employment because of race, sex, religion, color, age or national origin.",
+   "page": 5
+  },
+  {
+   "text": "5",
+   "page": 5
+  },
+  {
+   "text": "4.18 All agreements as a result of an award hereto and all extensions and modifications thereto and all questions",
+   "page": 6
+  },
+  {
+   "text": "relating to its validity, interpretation, performance or enforcement will be governed and construed in conformance to",
+   "page": 6
+  },
+  {
+   "text": "the laws of the State of Florida in the jurisdiction of Washington County Florida.",
+   "page": 6
+  },
+  {
+   "text": "4.19 PUBLIC ENTITY CRIMES:",
+   "page": 6
+  },
+  {
+   "text": "A Responder, person, or affiliate who has been placed on the convicted Contractor list following a conviction for a",
+   "page": 6
+  },
+  {
+   "text": "public entity crime may not submit a proposal for a RFP to provide any goods or services to a public entity for the",
+   "page": 6
+  },
+  {
+   "text": "construction or repair of a public building or public work, may not submit proposals on leases of real property to a",
+   "page": 6
+  },
+  {
+   "text": "public entity, may not be awarded or perform work as a contractor, supplier, sub-contractor, or consultant under a",
+   "page": 6
+  },
+  {
+   "text": "contract with any public entity, and may not transact business with any public entity in excess of the threshold amount",
+   "page": 6
+  },
+  {
+   "text": "provide in Florida State Statute, Section 287.017, for CATEGORY TWO for a period of thirty-six (36) months from the",
+   "page": 6
+  },
+  {
+   "text": "date of being placed on the convicted Contractor list.",
+   "page": 6
+  },
+  {
+   "text": "4.20 PATENTS:",
+   "page": 6
+  },
+  {
+   "text": "Responders agree to indemnify and save harmless the District, its officers, employees, agents, or representative using",
+   "page": 6
+  },
+  {
+   "text": "the goods specified herein from any loss damage or injury arising out of a claim or suit at law or equity for actual or",
+   "page": 6
+  },
+  {
+   "text": "alleged infringement of letters of patent by reason of the buying, selling or using the goods supplied under the",
+   "page": 6
+  },
+  {
+   "text": "solicitation, and will assume the defense of any and all suits and will pay all costs and expenses thereto.",
+   "page": 6
+  },
+  {
+   "text": "4.21 TERMINATION OF AWARD:",
+   "page": 6
+  },
+  {
+   "text": "The District may terminate all or any part of a subsequent award by giving notice of default to Responder(s), if",
+   "page": 6
+  },
+  {
+   "text": "Responder(s), (1) refuses or fails to deliver the goods or services within the time specified; (2) fails to comply with any",
+   "page": 6
+  },
+  {
+   "text": "of the provisions of this RFP or so fails to make progress as to endanger performances, hereunder, or; (3) becomes",
+   "page": 6
+  },
+  {
+   "text": "insolvent or subject to proceedings under any law relating to bankruptcy, insolvency, or relief or debtors. In the event",
+   "page": 6
+  },
+  {
+   "text": "of termination for default, the District’s liability will be limited to the payment for goods and services delivered and",
+   "page": 6
+  },
+  {
+   "text": "accepted as of the date of termination. The District may terminate for its convenience at any time, in whole or in part",
+   "page": 6
+  },
+  {
+   "text": "any subsequent award. In which event of termination for convenience, the District’s sole obligations will be to",
+   "page": 6
+  },
+  {
+   "text": "reimburse Responder(s) for (1) those goods or services actually shipped/performed and accepted up to the date of",
+   "page": 6
+  },
+  {
+   "text": "termination, and (2) costs incurred by Responder(s) for unfinished goods, which are specifically manufactured for the",
+   "page": 6
+  },
+  {
+   "text": "District and which are not standard products of the Responder(s), as of the date of termination, and a reasonable",
+   "page": 6
+  },
+  {
+   "text": "profit thereon. In no event is the District responsible for loss of anticipated profit nor will reimbursement exceed the",
+   "page": 6
+  },
+  {
+   "text": "amounts paid to Responder(s) under this RFP.",
+   "page": 6
+  },
+  {
+   "text": "4.22 DRUG-FREE WORKPLACE:",
+   "page": 6
+  },
+  {
+   "text": "Whenever two (2) or more RFPs are equal with respect to price, quality, and service, and RFP received from a business",
+   "page": 6
+  },
+  {
+   "text": "that certifies that it has implemented a drug-free workplace program as defined by Section 287.087 Florida Statutes,",
+   "page": 6
+  },
+  {
+   "text": "will be given preference in the award process.",
+   "page": 6
+  },
+  {
+   "text": "4.23 PERFORMANCE:",
+   "page": 6
+  },
+  {
+   "text": "In an effort to reduce the cost of doing business with the District, and unless indicated elsewhere, no bid or",
+   "page": 6
+  },
+  {
+   "text": "performance bond is required. However, upon award and subsequent default by Responder(s), the District reserves",
+   "page": 6
+  },
+  {
+   "text": "the right to pursue any or all of the following remedies: (1) to accept the next lowest available RFP price or to purchase",
+   "page": 6
+  },
+  {
+   "text": "materials or services on the open market, and to charge the original awardees for the difference in cost via a deduction",
+   "page": 6
+  },
+  {
+   "text": "to any outstanding or future obligations; (2) the Responder(s) in default will be prohibited from activity for a period of",
+   "page": 6
+  },
+  {
+   "text": "time determined by the severity of the default, but not to exceeding two (2) years; (3) any other remedy available to",
+   "page": 6
+  },
+  {
+   "text": "the District in tort or law.",
+   "page": 6
+  },
+  {
+   "text": "6",
+   "page": 6
+  },
+  {
+   "text": "4.24 AUDIT AND INSPECTION:",
+   "page": 7
+  },
+  {
+   "text": "The District or its representative reserves the right to inspect or audit all Responder(s) documents and records as they",
+   "page": 7
+  },
+  {
+   "text": "pertain to the products and services delivered under this RFP award. Such rights will be exercised with notice to the",
+   "page": 7
+  },
+  {
+   "text": "Responder(s) to determine compliance with and performance of the terms, conditions and specifications on all",
+   "page": 7
+  },
+  {
+   "text": "matters, rights and duties, and obligations established by this agreement. Documents/records in any form will be open",
+   "page": 7
+  },
+  {
+   "text": "to the District’s representative an may include but are not limited to all correspondence, ordering, payment, inspection",
+   "page": 7
+  },
+  {
+   "text": "and receiving records, and contracts or sub-contracts that directly or indirectly pertain to the transactions between",
+   "page": 7
+  },
+  {
+   "text": "the District and the Responder(s).",
+   "page": 7
+  },
+  {
+   "text": "4.25 SAMPLES AND BRAND NAMES:",
+   "page": 7
+  },
+  {
+   "text": "BRAND NAMES. Specifications referencing specific brand names and models are used to reflect the kind and type of",
+   "page": 7
+  },
+  {
+   "text": "quality in materials and workmanship, and the corresponding level of performance the District expects to receive as a",
+   "page": 7
+  },
+  {
+   "text": "minimum. Responders offering equivalent or superior products to the brand/model referenced will: (1) reference in",
+   "page": 7
+  },
+  {
+   "text": "their proposal the manufacture’s name, brand name, model or part number; (2) next to the price Responders will",
+   "page": 7
+  },
+  {
+   "text": "indicate “ALT” to reflect an alternate offering; (3) where no sample is provided with the RFP; Responders will enclose",
+   "page": 7
+  },
+  {
+   "text": "sufficient technical specification sheets and literature to enable the District to reach a preliminary evaluation; (4) the",
+   "page": 7
+  },
+  {
+   "text": "District may request and Responder(s) must agree to submit a sample or to provide its product on-trial or",
+   "page": 7
+  },
+  {
+   "text": "demonstration, whichever the District may deem appropriate, at no charge to the District; (5) the District reserves the",
+   "page": 7
+  },
+  {
+   "text": "right to determine the acceptability of any alternatives offered.",
+   "page": 7
+  },
+  {
+   "text": "SAMPLES. Any sample requested by the RFP or to be provided at the Responder(s) option, should be forwarded under",
+   "page": 7
+  },
+  {
+   "text": "separate cover to the attention of the Director of Technical Services. The package or envelope will reference the RFP",
+   "page": 7
+  },
+  {
+   "text": "Number, RFP Title, and RFP Item Number and clearly marked “Samples”. All samples will be provided free of charge,",
+   "page": 7
+  },
+  {
+   "text": "including transportation charges. Responder(s) are responsible for notifying and making arrangements for pick up from",
+   "page": 7
+  },
+  {
+   "text": "the District if a return of samples is expected. All samples unclaimed for thirty (30) days will be disposed of at the",
+   "page": 7
+  },
+  {
+   "text": "discretion of the District.",
+   "page": 7
+  },
+  {
+   "text": "4.26 PRIMARY EVALUATION CRITERIA:",
+   "page": 7
+  },
+  {
+   "text": "Primary criteria evaluated in reviewing proposals submitted in response to this RFP include, but are not limited to:",
+   "page": 7
+  },
+  {
+   "text": "total price, quality of the product, availability of the product the prior relevant experience of each Responder(s) and",
+   "page": 7
+  },
+  {
+   "text": "the responsiveness of each proposal to the specifications stated within the RFP.",
+   "page": 7
+  },
+  {
+   "text": "4.27 IDENTICAL PROPOSALS:",
+   "page": 7
+  },
+  {
+   "text": "Whenever two or more proposals are received by the District that are equal with respect to price, quality and service,",
+   "page": 7
+  },
+  {
+   "text": "preference will be given to the Responder whose business headquartered in the State of Florida.",
+   "page": 7
+  },
+  {
+   "text": "4.28 REJECTION OF PROPOSALS:",
+   "page": 7
+  },
+  {
+   "text": "All proposals which are timely submitted and in compliance with the specifications provided herein will be considered.",
+   "page": 7
+  },
+  {
+   "text": "However, the District reserves the right to reject, with or without cause, any or all proposals if deemed to be in the",
+   "page": 7
+  },
+  {
+   "text": "best interest(s) of the District In the event the District exercises its right to reject all proposals, the District reserves",
+   "page": 7
+  },
+  {
+   "text": "the right to reissue or not reissue this RFP if deemed to be in the best interest(s) of the District.",
+   "page": 7
+  },
+  {
+   "text": "4.29 RECOMMENDATION OF AWARD:",
+   "page": 7
+  },
+  {
+   "text": "“Network Infrastructure Equipment” RFP will tentatively be awarded on or about January 31, 2026. The District will",
+   "page": 7
+  },
+  {
+   "text": "make the winning bid available upon request for viewing at the office of Washington County School District, 652 3rd",
+   "page": 7
+  },
+  {
+   "text": "Street, Chipley, FL 32428. Responders desiring to protest the award decision shall file a written notice of protest within",
+   "page": 7
+  },
+  {
+   "text": "7",
+   "page": 7
+  },
+  {
+   "text": "72 hours after the District’s decision to award said RFP, shall file a formal written protest within 10 days after filing the",
+   "page": 8
+  },
+  {
+   "text": "notice of protest. At the time of filing the formal written protest, Responders desiring to protest the RFP award decision",
+   "page": 8
+  },
+  {
+   "text": "shall post with the District, a bond made payable to the District in an amount pursuant to the calculations provided",
+   "page": 8
+  },
+  {
+   "text": "for within District Policy.",
+   "page": 8
+  },
+  {
+   "text": "4.30 PROPOSAL PREPARATION COSTS:",
+   "page": 8
+  },
+  {
+   "text": "Neither the District nor its representatives will be liable for any expenses incurred in connection with the preparation",
+   "page": 8
+  },
+  {
+   "text": "of a response to this proposal.",
+   "page": 8
+  },
+  {
+   "text": "4.31 AGREEMENT FORM:",
+   "page": 8
+  },
+  {
+   "text": "All subsequent agreement as a result of an award hereunder, will incorporate all terms, conditions and specifications",
+   "page": 8
+  },
+  {
+   "text": "contained herein, and in response hereto, unless mutually amended in writing.",
+   "page": 8
+  },
+  {
+   "text": "4.32 ADDITIONAL TERMS AND CONDITIONS:",
+   "page": 8
+  },
+  {
+   "text": "The District reserves the right to reject offers containing terms and/or conditions contradictory to those requested in",
+   "page": 8
+  },
+  {
+   "text": "this solicitation.",
+   "page": 8
+  },
+  {
+   "text": "4.33 COMPLIANCE WITH LAWS:",
+   "page": 8
+  },
+  {
+   "text": "The Responder agrees to comply with all applicable laws, statutes, regulations rulings, or enactments of any",
+   "page": 8
+  },
+  {
+   "text": "governmental authority. The Responder will obtain from third parties, including State and local governments, all",
+   "page": 8
+  },
+  {
+   "text": "licenses and permissions necessary for the performance of the work. In the event that any changes or updates to the",
+   "page": 8
+  },
+  {
+   "text": "laws, regulations, statutes, rulings or enactment of any applicable governmental authority resulting in additional",
+   "page": 8
+  },
+  {
+   "text": "administrative, reporting or documentation costs will not be charged to the District during the term of this Agreement,",
+   "page": 8
+  },
+  {
+   "text": "including any additional renewals.",
+   "page": 8
+  },
+  {
+   "text": "4.34 EXAMINATION OF RECORDS:",
+   "page": 8
+  },
+  {
+   "text": "The Responder agrees that the District, the Comptroller General of the United States of America, the Inspector General",
+   "page": 8
+  },
+  {
+   "text": "of the Federal Sponsoring Agency, the Auditor General of the State of Florida or their duly authorized representatives",
+   "page": 8
+  },
+  {
+   "text": "will have access to, and right to examine, any directly pertinent books, papers, and records of the Responder involving",
+   "page": 8
+  },
+  {
+   "text": "transactions related to this agreement until the expiration of ten (10) years after final payment under this Agreement",
+   "page": 8
+  },
+  {
+   "text": "or such longer period as required by law.",
+   "page": 8
+  },
+  {
+   "text": "4.35 MISCELLANEOUS:",
+   "page": 8
+  },
+  {
+   "text": "5.35.1 Except as it relates to any warranty provision established by this Agreement, and in addition to any",
+   "page": 8
+  },
+  {
+   "text": "and all rights by the parties in law or equity, the Responder may only terminate this Agreement upon mutual",
+   "page": 8
+  },
+  {
+   "text": "agreement between the Responder and the District following a sixty (60) days written notice submitted to the",
+   "page": 8
+  },
+  {
+   "text": "RFP Contact person listed on page 1. The District may unilaterally terminate this Agreement or subsequent",
+   "page": 8
+  },
+  {
+   "text": "renewals in writing at any time. In the event of termination, either the Responder: (a) will be responsible for",
+   "page": 8
+  },
+  {
+   "text": "the delivery of all equipment for orders received up to the date of termination, or (b) may be mutually canceled",
+   "page": 8
+  },
+  {
+   "text": "without penalty upon agreement by the parties. The District will be responsible for payment of all goods,",
+   "page": 8
+  },
+  {
+   "text": "materials, and services ordered, received and accepted prior to termination. All warranty provisions as it relates",
+   "page": 8
+  },
+  {
+   "text": "to services/parts purchased during this Agreement will survive any termination between the parties regardless",
+   "page": 8
+  },
+  {
+   "text": "of cause and the supplier agrees to be obligated to continue to provide warranty repair service when and where",
+   "page": 8
+  },
+  {
+   "text": "needed as if no termination has occurred.",
+   "page": 8
+  },
+  {
+   "text": "4.35.2 No work shall begin without first receiving either a Purchase Order for the specific job or receiving",
+   "page": 8
+  },
+  {
+   "text": "prior authorization to bill the work from the Contract Performance point of contact. In the event a Purchasing",
+   "page": 8
+  },
+  {
+   "text": "Card is used, no additional fees may be charged.",
+   "page": 8
+  },
+  {
+   "text": "8",
+   "page": 8
+  },
+  {
+   "text": "4.35.3 Responder(s) must be certified E-rate provider(s), shall have a “Service Provider Information Number”",
+   "page": 9
+  },
+  {
+   "text": "(SPIN) from the Schools and Libraries Division of the Universal Service Administrative Company and be",
+   "page": 9
+  },
+  {
+   "text": "responsible for complying with all rules and regulations of the E-rate program. This certification must be",
+   "page": 9
+  },
+  {
+   "text": "maintained throughout the term of the Agreement. Evidence of Responder’s certification and annual re-",
+   "page": 9
+  },
+  {
+   "text": "certification by the Federal Communication Commission/Schools and Library Division (“FCC/SLD”) must be",
+   "page": 9
+  },
+  {
+   "text": "provided no later than thirty (30) calendar days following the start or renewal of an Agreement term. Failure",
+   "page": 9
+  },
+  {
+   "text": "of Responder to maintain this certification, re-certify annually, or have certification revoked by FCC/SLD shall",
+   "page": 9
+  },
+  {
+   "text": "constitute a material breach and be subject to immediate termination at the discretion of the District. Further,",
+   "page": 9
+  },
+  {
+   "text": "Responder shall reimburse the District for the full amount of any and all invoices resulting from the services",
+   "page": 9
+  },
+  {
+   "text": "provided by Responder under prior or current agreement terms that do not get approval for reimbursement",
+   "page": 9
+  },
+  {
+   "text": "by the FCC/SLD because of Responder’s lack of certification, failure to re-certify or revocation of certification,",
+   "page": 9
+  },
+  {
+   "text": "as required by the FCC/SLD.",
+   "page": 9
+  },
+  {
+   "text": "4.35.4 During the course of the Agreement, including renewals, should the District encounter performance",
+   "page": 9
+  },
+  {
+   "text": "issues in the execution of this RFP, the District will begin documenting information concerning those instances.",
+   "page": 9
+  },
+  {
+   "text": "After three (3) instances are recorded within an Agreement Term, a meeting will occur involving representative",
+   "page": 9
+  },
+  {
+   "text": "from the Responder in question, the and the Director of Technical Services or his/her representative to address",
+   "page": 9
+  },
+  {
+   "text": "these issues. If performance does not improve in accordance with the established benchmarks from the joint",
+   "page": 9
+  },
+  {
+   "text": "meeting, the District reserves the right to terminate the Agreement. Should an instance be of such severity that",
+   "page": 9
+  },
+  {
+   "text": "the District has reasonable concern for the safety or viability of the operational ability, then the District reserves",
+   "page": 9
+  },
+  {
+   "text": "the right to request an immediate meeting to address the issue without waiting for three (3) documented",
+   "page": 9
+  },
+  {
+   "text": "records.",
+   "page": 9
+  },
+  {
+   "text": "4.35.5 Responder agrees to hold pricing and proposal terms following award through the issuance of Funding",
+   "page": 9
+  },
+  {
+   "text": "Commitment Decision Letters (“FCDL”) by USAC. In the event that the District does not receive a positive",
+   "page": 9
+  },
+  {
+   "text": "funding commitment letter through initial submission or following an appeal or that the funding for this request",
+   "page": 9
+  },
+  {
+   "text": "is discontinued, the District will have sole and exclusive right to revoke the award or proceed in advance of a",
+   "page": 9
+  },
+  {
+   "text": "positive FCDL. In the event that the District wishes to proceed with the goods and services with an alternate",
+   "page": 9
+  },
+  {
+   "text": "payment source, the Responder and District will negotiate any changes separately.",
+   "page": 9
+  },
+  {
+   "text": "5.0 CONTRACTOR CONDUCT WHILE ON SCHOOL BOARD PROPERTY:",
+   "page": 9
+  },
+  {
+   "text": "5.1 Contractor shall be responsible for the supervision and direction of work performed by its employees, agents",
+   "page": 9
+  },
+  {
+   "text": "and/or subcontractors. Washington County District Schools shall not exercise any control or supervision over",
+   "page": 9
+  },
+  {
+   "text": "contractor’s employees.",
+   "page": 9
+  },
+  {
+   "text": "5.2 Contractor’s employees shall observe the rules and policies of Washington County School District while working",
+   "page": 9
+  },
+  {
+   "text": "on Washington County School District premises. Hours of work will be mutually agreed upon by site of work Manager",
+   "page": 9
+  },
+  {
+   "text": "and Contractor.",
+   "page": 9
+  },
+  {
+   "text": "5.3 Contractor’s employees/subcontractors will refrain from smoking or use of tobacco in any facility, property. Any",
+   "page": 9
+  },
+  {
+   "text": "person wishing to use tobacco products must leave the school grounds to do so.",
+   "page": 9
+  },
+  {
+   "text": "5.4 Contractor’s employees shall not operate in any method, school computers, telephones or other equipment.",
+   "page": 9
+  },
+  {
+   "text": "However, limited local emergency telephone calls may be completed.",
+   "page": 9
+  },
+  {
+   "text": "5.5 Contractor’s employees shall refrain from the use of vulgarities while on school district property.",
+   "page": 9
+  },
+  {
+   "text": "5.6 All employees of and/or subcontractors shall wear proper attire for the work required. Clothing shall have no",
+   "page": 9
+  },
+  {
+   "text": "vulgarities, sexually suggestive graphics, or emotionally inflammatory content.",
+   "page": 9
+  },
+  {
+   "text": "5.7 Employees of and/or contractors shall not have contact with District staff outside of appointed staff and/or",
+   "page": 9
+  },
+  {
+   "text": "administrator’s hours as determined necessary by the facility managers.",
+   "page": 9
+  },
+  {
+   "text": "5.8 At no time shall any employee of the contractor or a subcontractor be deemed an employee of Washington",
+   "page": 9
+  },
+  {
+   "text": "9",
+   "page": 9
+  },
+  {
+   "text": "County School District. The contractor will accept full and exclusive responsibility and liability for compliance with all",
+   "page": 10
+  },
+  {
+   "text": "laws and regulations related to the payment of withholding taxes, tax contributions, expenses, commissions and",
+   "page": 10
+  },
+  {
+   "text": "benefits including, but not limited to, Social Security contributions, workers’ compensation fees, and health care",
+   "page": 10
+  },
+  {
+   "text": "premiums.",
+   "page": 10
+  },
+  {
+   "text": "5.9 Washington County School District retains the right to require the contractor to dismiss any employee deemed",
+   "page": 10
+  },
+  {
+   "text": "incompetent, careless, insubordinate, or otherwise objectionable, or any personnel whose actions are deemed to be",
+   "page": 10
+  },
+  {
+   "text": "contrary to public interest or inconsistent with the best interest of Washington County School District in connection",
+   "page": 10
+  },
+  {
+   "text": "with contractor’s performance under the contract. Dismissed personnel are restricted from and shall not be allowed",
+   "page": 10
+  },
+  {
+   "text": "to return to any district site (s) without the submission of a written request from the contractor asking for approval",
+   "page": 10
+  },
+  {
+   "text": "from the district for the employee(s) to return to service. The contractor will not be responsible to the District for",
+   "page": 10
+  },
+  {
+   "text": "damages resulting out of bodily injury or damages to property which the contractor can establish as being attributable",
+   "page": 10
+  },
+  {
+   "text": "to the sole negligence of the District, its respective agents or employees",
+   "page": 10
+  },
+  {
+   "text": "6.0 AWARD:",
+   "page": 10
+  },
+  {
+   "text": "6.1 The School Board reserves the right to accept or reject any or all proposals.",
+   "page": 10
+  },
+  {
+   "text": "6.2 The School Board reserves the right to waive any irregularities and technicalities and may, at its sole discretion,",
+   "page": 10
+  },
+  {
+   "text": "request a clarification or other information to evaluate any or all proposals.",
+   "page": 10
+  },
+  {
+   "text": "6.3 The School Board reserves the right, before awarding the contract, to require proposer(s) to submit evidence of",
+   "page": 10
+  },
+  {
+   "text": "qualifications or any other information the School Board may deem necessary.",
+   "page": 10
+  },
+  {
+   "text": "6.4 The School Board reserves the right to cancel the RFP or portions thereof, without penalty.",
+   "page": 10
+  },
+  {
+   "text": "6.5 The School Board prefers to award to only one firm, however, reserves the right to: (1) accept the proposals of",
+   "page": 10
+  },
+  {
+   "text": "any or all of the items it deems, at its sole discretion, to be in the best interest of the District; and (2) the School",
+   "page": 10
+  },
+  {
+   "text": "Board reserves the right to reject any and/or all items proposed or award to multiple proposers.",
+   "page": 10
+  },
+  {
+   "text": "6.6 The School Board reserves the right to further negotiate any proposal, including price, with the highest rated",
+   "page": 10
+  },
+  {
+   "text": "proposer. If an agreement cannot be reached with the highest rated proposer, the School Board reserves the",
+   "page": 10
+  },
+  {
+   "text": "right to negotiate and recommend award to the next highest proposer or subsequent proposers until an",
+   "page": 10
+  },
+  {
+   "text": "agreement is reached.",
+   "page": 10
+  },
+  {
+   "text": "7.0 INVOICING FOR WORK/PROGRESS BILLING",
+   "page": 10
+  },
+  {
+   "text": "7.1 The normal terms of payment will be Net 30 Days from receipt and acceptance of goods or services and",
+   "page": 10
+  },
+  {
+   "text": "Responder’s invoice. Itemized invoices, each bearing the Purchase Order Number must be mailed on the day of",
+   "page": 10
+  },
+  {
+   "text": "shipment. Invoicing subject to cash discounts will be mailed on the day that they are dated.",
+   "page": 10
+  },
+  {
+   "text": "7.2 Invoices must be detailed as specified in EVALUATION AND AWARD, Proposal Submission Format section.",
+   "page": 10
+  },
+  {
+   "text": "Invoices submitted more than sixty (60) days after project completion or service period may be deemed waived and",
+   "page": 10
+  },
+  {
+   "text": "not subject to payment. Audits will be conducted at the discretion of the District. Responder agrees that all",
+   "page": 10
+  },
+  {
+   "text": "documentation necessary to validate pricing listed on invoice will be provided to the requesting District",
+   "page": 10
+  },
+  {
+   "text": "representative within ten (10) business days of the written request. In the event additional time is required to obtain",
+   "page": 10
+  },
+  {
+   "text": "the necessary documentation, the successful Responder will notify the District designee within five (5) business",
+   "page": 10
+  },
+  {
+   "text": "days of the District’s written request and provide a specified date that the documentation will be ready, which will",
+   "page": 10
+  },
+  {
+   "text": "not exceed thirty (30) days from the date of the written request. Further, the Responder agrees that payment",
+   "page": 10
+  },
+  {
+   "text": "for the invoice in question will be held, without penalty to the District, until the requested documentation has been",
+   "page": 10
+  },
+  {
+   "text": "provided and reviewed by the District, which will not be unreasonably delayed.",
+   "page": 10
+  },
+  {
+   "text": "8.0 TERM OF CONTRACT:",
+   "page": 10
+  },
+  {
+   "text": "8.1 TERMS OF AGREEMENT:",
+   "page": 10
+  },
+  {
+   "text": "10",
+   "page": 10
+  },
+  {
+   "text": "The term of this contract shall be for one year, July 1, 2027 through June 30, 2028, and may, by mutual agreement",
+   "page": 11
+  },
+  {
+   "text": "between the District, and the awardee, be extended due to unforeseen circumstances or Acts of God. More than",
+   "page": 11
+  },
+  {
+   "text": "one vendor may be awarded parts of this RFP.",
+   "page": 11
+  },
+  {
+   "text": "9.0 CANCELLATION OF AWARD/TERMINATION:",
+   "page": 11
+  },
+  {
+   "text": "9.1 In the event any of the provisions of this proposal are violated by the proposer(s), the Superintendent or",
+   "page": 11
+  },
+  {
+   "text": "designee will give written notice to the proposer(s) stating the deficiencies and unless the deficiencies are corrected",
+   "page": 11
+  },
+  {
+   "text": "within ten (10) days, recommendation will be made to the School Board for immediate cancellation. Upon",
+   "page": 11
+  },
+  {
+   "text": "cancellation hereunder, the School Board may pursue any and all legal remedies as provided herein and by law.",
+   "page": 11
+  },
+  {
+   "text": "9.2 The School Board reserves the right to terminate any contract resulting from this RFP, at any time and for any",
+   "page": 11
+  },
+  {
+   "text": "reason upon giving 90 days prior written notice to the other party. If said contract should be terminated for",
+   "page": 11
+  },
+  {
+   "text": "convenience as provided herein, the School Board will be relieved of all obligations under said contract. The School",
+   "page": 11
+  },
+  {
+   "text": "Board will only be required to pay to the proposer(s) that amount of the contract actually performed to the date of",
+   "page": 11
+  },
+  {
+   "text": "termination. Access to any and all work papers will be provided to the School Board after the Termination of the",
+   "page": 11
+  },
+  {
+   "text": "contract.",
+   "page": 11
+  },
+  {
+   "text": "9.3 The awardee(s) will have the option to terminate the contract upon written notice. Such notice must be",
+   "page": 11
+  },
+  {
+   "text": "received at least 90 days prior to the effective date of termination.",
+   "page": 11
+  },
+  {
+   "text": "9.4 Cancellation of contract by awardee may result in removal from bidders/proposer list for a period of three",
+   "page": 11
+  },
+  {
+   "text": "years.",
+   "page": 11
+  },
+  {
+   "text": "10.0 FUNDING OUT & CANCELLATION:",
+   "page": 11
+  },
+  {
+   "text": "10.1 Florida Laws prohibit Washington County School District from creating obligations in anticipation of",
+   "page": 11
+  },
+  {
+   "text": "budgeted revenues from one fiscal year to another without year‐to‐year extension provisions in the agreements. It is",
+   "page": 11
+  },
+  {
+   "text": "necessary that fiscal funding out provisions be included in all proposals in which the terms are for periods longer",
+   "page": 11
+  },
+  {
+   "text": "than one (1) year. The following funding out provisions are an integral part of this proposal and shall be agreed to by",
+   "page": 11
+  },
+  {
+   "text": "all respondents:",
+   "page": 11
+  },
+  {
+   "text": "10.1.1 Washington County School District shall, at any time during the contract period, terminate or",
+   "page": 11
+  },
+  {
+   "text": "discontinue the services specified herein and/or at the end of the current fiscal year upon the issuance of a",
+   "page": 11
+  },
+  {
+   "text": "sixty (60) day prior written notice to the successful respondent.",
+   "page": 11
+  },
+  {
+   "text": "10.1.2 A Funding Out statement must be included as part of any agreement. No agreement shall be",
+   "page": 11
+  },
+  {
+   "text": "considered that does not include this provision for “funding out, with such notice clearly defining reasons for",
+   "page": 11
+  },
+  {
+   "text": "said termination. Upon receipt of this written notification shall immediately and thereafter release",
+   "page": 11
+  },
+  {
+   "text": "Washington County School District of all further obligations as related to the services specified and required",
+   "page": 11
+  },
+  {
+   "text": "herein",
+   "page": 11
+  },
+  {
+   "text": "11.0 DEFAULT: In the event that the awarded proposer should breach this contract, the School Board reserves",
+   "page": 11
+  },
+  {
+   "text": "the right to seek remedies in law and/or in equity.",
+   "page": 11
+  },
+  {
+   "text": "12.0 INFORMATION TO BE INCLUDED IN THE SUBMITTED PROPOSAL:",
+   "page": 11
+  },
+  {
+   "text": "12.1 In order to maintain comparability and enhance the review process, it is requested that proposals be organized",
+   "page": 11
+  },
+  {
+   "text": "in the manner specified below. Include all information in your proposal.",
+   "page": 11
+  },
+  {
+   "text": "Title Page: Show the RFP number, subject, the name of the proposer, address, telephone number and the date.",
+   "page": 11
+  },
+  {
+   "text": "Letter of Transmittal – Limited to one or two pages and:",
+   "page": 11
+  },
+  {
+   "text": "A. Briefly state the understanding of the proposer regarding the work to be done and make a positive",
+   "page": 11
+  },
+  {
+   "text": "commitment to perform the work within the specified time period;",
+   "page": 11
+  },
+  {
+   "text": "11",
+   "page": 11
+  },
+  {
+   "text": "B. Give the names of the persons who will be authorized to make representations for the proposer, their titles,",
+   "page": 12
+  },
+  {
+   "text": "addresses and telephone numbers; and",
+   "page": 12
+  },
+  {
+   "text": "C. Give the Federal taxpayer identification number of the proposer.",
+   "page": 12
+  },
+  {
+   "text": "Proposal Acknowledgement Form (Page #2 of RFP): with all required information completed and all signatures as",
+   "page": 12
+  },
+  {
+   "text": "specified.",
+   "page": 12
+  },
+  {
+   "text": "NOTE: On the proposal submission marked “Original”, signatures should be original and while a blue ink signature is",
+   "page": 12
+  },
+  {
+   "text": "preferred, failure to sign in blue ink on the “Original” proposal submission will not, by itself, be a disqualifying factor:",
+   "page": 12
+  },
+  {
+   "text": "Completed and signed “470 Request for Proposal” acknowledgement",
+   "page": 12
+  },
+  {
+   "text": "Indemnification/Hold Harmless Agreement",
+   "page": 12
+  },
+  {
+   "text": "Drug Free Workplace",
+   "page": 12
+  },
+  {
+   "text": "Completed and signed “Certification Regarding Debarment, Suspension, Ineligibility and Voluntary Exclusion-",
+   "page": 12
+  },
+  {
+   "text": "Lower Tier Covered Transactions”",
+   "page": 12
+  },
+  {
+   "text": "Conflict of Interest Disclosure Form",
+   "page": 12
+  },
+  {
+   "text": "Completed and signed “E-rate Certification Form”",
+   "page": 12
+  },
+  {
+   "text": "PRICE:",
+   "page": 12
+  },
+  {
+   "text": "Pricing from Attachment A.",
+   "page": 12
+  },
+  {
+   "text": "Indicate if additional/replacement equipment will be necessary for the performance of this 470 Project and include",
+   "page": 12
+  },
+  {
+   "text": "equipment specifications and cost. Separate pricing by E-Rate eligible and ineligible.",
+   "page": 12
+  },
+  {
+   "text": "WARRANTY/REPAIR/RESPONSE:",
+   "page": 12
+  },
+  {
+   "text": "What preventative maintenance actions are routinely undertaken by the Respondent? Provide brief description and",
+   "page": 12
+  },
+  {
+   "text": "frequency.",
+   "page": 12
+  },
+  {
+   "text": "Describe response priority in relation to other entities. After emergency operations and hospitals, where would the",
+   "page": 12
+  },
+  {
+   "text": "District fall for the expectation of returning to service, bearing in mind the expectation that schools functioning as",
+   "page": 12
+  },
+  {
+   "text": "storm shelters would receive priority.",
+   "page": 12
+  },
+  {
+   "text": "STATEMENT OF WORK:",
+   "page": 12
+  },
+  {
+   "text": "The District seeks to have this project operational no later than June 30, 2028. Submit a Statement of Work detailing",
+   "page": 12
+  },
+  {
+   "text": "proposed completion/operational date which may be subject to potential penalties which may, at the District’s",
+   "page": 12
+  },
+  {
+   "text": "discretion include termination or financial penalties if delay is due to Responder, if not operational by the Responder-",
+   "page": 12
+  },
+  {
+   "text": "provided timeline. The plan should include information on how the Responder proposes to ensure a seamless transfer",
+   "page": 12
+  },
+  {
+   "text": "from the existing equipment with minimum downtime and no additional costs. The timeline should reflect information",
+   "page": 12
+  },
+  {
+   "text": "and planning in the event the project is disrupted due to severe weather or other Force Majeure events. Also indicate",
+   "page": 12
+  },
+  {
+   "text": "if there is any lead-time required from issuance of Purchase Order to start of project. Lastly, in the event of contract",
+   "page": 12
+  },
+  {
+   "text": "termination, describe the phase-down process to concurrently run services until transition is complete.",
+   "page": 12
+  },
+  {
+   "text": "ADMINISTRATIVE:",
+   "page": 12
+  },
+  {
+   "text": "Indicate acceptance of SPI, Service Provider Invoicing.",
+   "page": 12
+  },
+  {
+   "text": "REFERENCES:",
+   "page": 12
+  },
+  {
+   "text": "Submit a maximum of three (3) references for similar services within the last five (5) years for school districts or public",
+   "page": 12
+  },
+  {
+   "text": "entities with equal to or greater than the District’s requested numbers. Each reference must be for a separate",
+   "page": 12
+  },
+  {
+   "text": "entity/location and contain; name, title, phone number, email, brief explanation of type of work completed and when.",
+   "page": 12
+  },
+  {
+   "text": "12",
+   "page": 12
+  },
+  {
+   "text": "If references are submitted, Responder agrees the submission of contact information serves as permission to contact",
+   "page": 13
+  },
+  {
+   "text": "and receive information from references.",
+   "page": 13
+  },
+  {
+   "text": "Indicate if the District will be provided a dedicated Point of Contact and if so, provide his/her contact information",
+   "page": 13
+  },
+  {
+   "text": "Provide a brief (maximum two pages) overview of the company to specifically address:",
+   "page": 13
+  },
+  {
+   "text": "• Number of years in business as a telephone service provider",
+   "page": 13
+  },
+  {
+   "text": "• Insurance held",
+   "page": 13
+  },
+  {
+   "text": "• Number of employees in company",
+   "page": 13
+  },
+  {
+   "text": "• Any past, current or pending suspension and/or debarment from participating as an E-Rate provider",
+   "page": 13
+  },
+  {
+   "text": "• What sets your company apart as a provider of telephone services",
+   "page": 13
+  },
+  {
+   "text": "• Indicate if subcontractors will or are expected to be utilized in the performance of this service. If subcontractors",
+   "page": 13
+  },
+  {
+   "text": "will be used, describe extent of involvement as well as the company names and type of work they would be",
+   "page": 13
+  },
+  {
+   "text": "contracted to perform if utilized.",
+   "page": 13
+  },
+  {
+   "text": "• Indicate the level of assistance to be provided by District personnel (i.e., dedicated Point of Contact,",
+   "page": 13
+  },
+  {
+   "text": "disconnect/reconnect of District owned equipment (if allowed for in response, etc.).",
+   "page": 13
+  },
+  {
+   "text": "Provide a sample invoice that will be used during the term of this proposal. At a minimum, the invoice should clearly",
+   "page": 13
+  },
+  {
+   "text": "identify the name and location of the Responder and include:",
+   "page": 13
+  },
+  {
+   "text": "• Date of invoice",
+   "page": 13
+  },
+  {
+   "text": "• Date(s) of service",
+   "page": 13
+  },
+  {
+   "text": "• FRN #",
+   "page": 13
+  },
+  {
+   "text": "• Detailed description of goods/services provided",
+   "page": 13
+  },
+  {
+   "text": "• Clearly identify the breakdown of eligible/ineligible charges (as applicable)",
+   "page": 13
+  },
+  {
+   "text": "• Responder SPIN #",
+   "page": 13
+  },
+  {
+   "text": "• Statement certifying the invoice is accurate with Responder authorized signature",
+   "page": 13
+  },
+  {
+   "text": "CERTIFICATE OF INSURANCE: Provide proof of your company’s insurance as required in Section 24.0 of this RFP or",
+   "page": 13
+  },
+  {
+   "text": "submit a letter of your intention to have the required insurance within ten days of notification by the District.",
+   "page": 13
+  },
+  {
+   "text": "13.0 PROPOSAL EVALUATION PROCESS:",
+   "page": 13
+  },
+  {
+   "text": "13.1 Proposals are received and publicly opened. Only names of Responders and whether the correct",
+   "page": 13
+  },
+  {
+   "text": "number of submissions are included are read at this time.",
+   "page": 13
+  },
+  {
+   "text": "13.2 An Evaluation Committee will review, convene and evaluate all proposals submitted based on the",
+   "page": 13
+  },
+  {
+   "text": "factors set forth in the RFP. The District reserves the right to waive any irregularities and technicalities.",
+   "page": 13
+  },
+  {
+   "text": "13.3 The Evaluation Committee reserves the right to interview any or all Responders and to require a",
+   "page": 13
+  },
+  {
+   "text": "formal presentation with the key people who will administer and be assigned to work on the RFP before",
+   "page": 13
+  },
+  {
+   "text": "recommendation of award. This interview is to be based upon the written proposal received. The District will",
+   "page": 13
+  },
+  {
+   "text": "not be liable for any costs incurred by the Responder in connection with such interviews (i.e., travel,",
+   "page": 13
+  },
+  {
+   "text": "accommodations, etc.). The District also has the right to require Responders to submit additional evidence of",
+   "page": 13
+  },
+  {
+   "text": "qualifications or any other information the District may deem necessary. Such information will not materially",
+   "page": 13
+  },
+  {
+   "text": "change the original proposal response nor serve to allow the addition of new information that was not originally",
+   "page": 13
+  },
+  {
+   "text": "expressed or referenced.",
+   "page": 13
+  },
+  {
+   "text": "13.4 All proposals will be evaluated in accordance with the evaluation criteria specified in this document.",
+   "page": 13
+  },
+  {
+   "text": "13",
+   "page": 13
+  },
+  {
+   "text": "Information derived by investigation and overall due diligence of District staff will be considered. Based on",
+   "page": 14
+  },
+  {
+   "text": "the proposals received, the District may elect to proceed based on any of the following options, but will not",
+   "page": 14
+  },
+  {
+   "text": "necessarily be limited only to these options: (1) award to the best initial proposal without any further",
+   "page": 14
+  },
+  {
+   "text": "discussion or negotiation; (2) negotiate with the highest ranked Responder; or, (3) allow the top ranked",
+   "page": 14
+  },
+  {
+   "text": "Responders to make oral presentations.",
+   "page": 14
+  },
+  {
+   "text": "13.5The District reserves the right to negotiate out unacceptable clauses or restrictions incorporated within an",
+   "page": 14
+  },
+  {
+   "text": "otherwise acceptable proposal. In the event that a mutually acceptable Agreement between the District and the",
+   "page": 14
+  },
+  {
+   "text": "selected Responder(s) cannot be successfully negotiated and executed, then the District reserves the right to",
+   "page": 14
+  },
+  {
+   "text": "discontinue negotiations with such Responder(s) and to negotiate and execute a contract with the next-ranked",
+   "page": 14
+  },
+  {
+   "text": "Responder(s).",
+   "page": 14
+  },
+  {
+   "text": "13.6 The District reserves all rights, in its sole discretion, not to issue an award to any Responder, to cancel this",
+   "page": 14
+  },
+  {
+   "text": "RFP at any time, to reissue this RFP for any reason, or a combination of any or all of the above. The District will not be",
+   "page": 14
+  },
+  {
+   "text": "liable to any Responder for any costs incurred in connection with this RFP as a result of any of the above stated",
+   "page": 14
+  },
+  {
+   "text": "actions taken by the District.",
+   "page": 14
+  },
+  {
+   "text": "14.0 EVALUATION CRITERIA:",
+   "page": 14
+  },
+  {
+   "text": "The Evaluation Committee shall review all proposals received which meet the submittal requirements. The following",
+   "page": 14
+  },
+  {
+   "text": "factors will be considered in ranking the proposals received:",
+   "page": 14
+  },
+  {
+   "text": "NOTE: On the proposal submission marked “Original”, signatures should be original and while a blue ink signature is",
+   "page": 14
+  },
+  {
+   "text": "preferred, failure to sign in blue ink on the “Original” proposal submission will not, by itself, be a disqualifying",
+   "page": 14
+  },
+  {
+   "text": "factor:",
+   "page": 14
+  },
+  {
+   "text": "• Completed and signed “470 Request for Proposal” acknowledgement",
+   "page": 14
+  },
+  {
+   "text": "• Completed and signed “Certification Regarding Debarment, Suspension, Ineligibility and Voluntary",
+   "page": 14
+  },
+  {
+   "text": "Exclusion-Lower Tier Covered Transactions”",
+   "page": 14
+  },
+  {
+   "text": "• Completed and signed “E-rate Certification Form”",
+   "page": 14
+  },
+  {
+   "text": "• Drug Free Workplace",
+   "page": 14
+  },
+  {
+   "text": "• Conflict of Interest Disclosure Form",
+   "page": 14
+  },
+  {
+   "text": "• Indemnification/Hold Harmless Agreement",
+   "page": 14
+  },
+  {
+   "text": "• PRICE (40 points maximum)",
+   "page": 14
+  },
+  {
+   "text": "• Qualifications Experience (20 points)",
+   "page": 14
+  },
+  {
+   "text": "• Specifications/Scope of Work (30 points)",
+   "page": 14
+  },
+  {
+   "text": "• Completed and signed required forms – E-Rate Certification Form, E-Verify Compliance Form, Certification",
+   "page": 14
+  },
+  {
+   "text": "Regarding Debarment, Suspension, Ineligibility and Voluntary Exclusion-Lower Tier Covered Transaction,",
+   "page": 14
+  },
+  {
+   "text": "Public Entity Crimes Form, Conflict of Interest Disclosure Form, Preference for a Drug Free Workplace Form,",
+   "page": 14
+  },
+  {
+   "text": "Affidavit Regarding the Use of Coercion for Labor and Services, Attestation Foreign Country of Concern (5",
+   "page": 14
+  },
+  {
+   "text": "points)",
+   "page": 14
+  },
+  {
+   "text": "• Minority/Women’s Business Enterprise (M/WBE) participation (5 points)",
+   "page": 14
+  },
+  {
+   "text": "DESCRIPTION | WEIGHT",
+   "page": 14
+  },
+  {
+   "text": "Preliminary Phase. Washington District Schools intends to perform a side-by-side | Pass/Fail",
+   "page": 14
+  },
+  {
+   "text": "comparison of like proposals. Procurement Services shall perform the preliminary phase",
+   "page": 14
+  },
+  {
+   "text": "upon initial proposal screening, this phase shall be passed or fail, as determined by",
+   "page": 14
+  },
+  {
+   "text": "Procurement Services. Procurement Services will review the proposals as to whether:",
+   "page": 14
+  },
+  {
+   "text": "14",
+   "page": 14
+  },
+  {
+   "text": "• Required Forms: all required forms are signed and submitted; and",
+   "page": 15
+  },
+  {
+   "text": "• Does proposer meet the minimum requirements; and",
+   "page": 15
+  },
+  {
+   "text": "• Whether the information provided is in the required sequence.",
+   "page": 15
+  },
+  {
+   "text": "Evaluation Phase. Procurement Services may negotiate the proposed terms, conditions, and costs with",
+   "page": 15
+  },
+  {
+   "text": "the highest ranked Proposer prior to Board approval. If Procurement Services is unable to reach",
+   "page": 15
+  },
+  {
+   "text": "acceptable terms with a highest-ranked Proposer, the District may seek to reach acceptable terms with",
+   "page": 15
+  },
+  {
+   "text": "the next highest-ranked proposer and recommend a contract with said proposer. The District may",
+   "page": 15
+  },
+  {
+   "text": "continue the process until an agreement is reached or until the termination of the solicitation process.",
+   "page": 15
+  },
+  {
+   "text": "The District will select the proposer whose proposal the District determines best meets the District’s",
+   "page": 15
+  },
+  {
+   "text": "needs, based on the requirements and evaluation criteria set forth herein. The lowest-cost proposal",
+   "page": 15
+  },
+  {
+   "text": "submitted may not necessarily be determined to be the most responsive and responsible proposal when",
+   "page": 15
+  },
+  {
+   "text": "all factors have been considered. However, the quoted price is a key factor in the determination of the",
+   "page": 15
+  },
+  {
+   "text": "selected Proposal.",
+   "page": 15
+  },
+  {
+   "text": "The District reserves the right to award the proposal under the most beneficial economic terms for the",
+   "page": 15
+  },
+  {
+   "text": "District. The weighted selection criteria will include the following:",
+   "page": 15
+  },
+  {
+   "text": "Cost/Best Value (40 Points). The cost of E-Rate Eligible products and services.",
+   "page": 15
+  },
+  {
+   "text": "Qualifications and Experience/References (20 Points). This section shall provide the District",
+   "page": 15
+  },
+  {
+   "text": "with information as to Proposer’s experience and qualifications with the related goods and",
+   "page": 15
+  },
+  {
+   "text": "services. Proposer shall demonstrate the vendor’s ability to:",
+   "page": 15
+  },
+  {
+   "text": "• Meet the minimum experience requirements: and",
+   "page": 15
+  },
+  {
+   "text": "• Provide adequate business references; and",
+   "page": 15
+  },
+  {
+   "text": "• Previous history with vendor; and",
+   "page": 15
+  },
+  {
+   "text": "• Have ready access to resources to provide all goods and services.",
+   "page": 15
+  },
+  {
+   "text": "Specifications/Statement of Work (30 Points). This section shall provide the District with",
+   "page": 15
+  },
+  {
+   "text": "information as to the Proposer’s understanding of the required scope of work (tasks and service",
+   "page": 15
+  },
+  {
+   "text": "levels). Proposer shall demonstrate the vendor’s ability to:",
+   "page": 15
+  },
+  {
+   "text": "• Provide deliverables within the required timeframe; and",
+   "page": 15
+  },
+  {
+   "text": "• (if applicable) provide a timeline and milestone payment information for the completion",
+   "page": 15
+  },
+  {
+   "text": "of deliverables; and",
+   "page": 15
+  },
+  {
+   "text": "• Identify Proposer’s customer service procedures",
+   "page": 15
+  },
+  {
+   "text": "Ability for solution to be integrated with existing system. See section 1 D.3 Minimum",
+   "page": 15
+  },
+  {
+   "text": "Requirements",
+   "page": 15
+  },
+  {
+   "text": "Completed and Signed Required Forms (5 Points)",
+   "page": 15
+  },
+  {
+   "text": "Utilization of a Minority Business Enterprise. Participation will be evaluated and points",
+   "page": 15
+  },
+  {
+   "text": "assigned as defined within the evaluation criteria.",
+   "page": 15
+  },
+  {
+   "text": "15.0 LEGAL REQUIREMENTS:",
+   "page": 15
+  },
+  {
+   "text": "15.1 It shall be the responsibility of the contractor to be knowledgeable of all federal, state, county and local laws,",
+   "page": 15
+  },
+  {
+   "text": "ordinances, rules, and regulations that in any manner affect the items covered herein which may apply. Lack of",
+   "page": 15
+  },
+  {
+   "text": "knowledge by the proposer(s) will in no way be a cause for relief from responsibility.",
+   "page": 15
+  },
+  {
+   "text": "15.2 Proposer(s) doing business with the District are prohibited from discriminating against any employee,",
+   "page": 15
+  },
+  {
+   "text": "applicant, or client because of race, creed, color, national origin, sex or age with regard to but not limited to the",
+   "page": 15
+  },
+  {
+   "text": "following employment practices, rates of pay or other compensation methods and training selection.",
+   "page": 15
+  },
+  {
+   "text": "16.0 DISCRIMINATORY VENDOR LIST:",
+   "page": 15
+  },
+  {
+   "text": "An entity or affiliate who has been placed on the discriminatory vendor list may not submit a bid on a contract to",
+   "page": 15
+  },
+  {
+   "text": "15",
+   "page": 15
+  },
+  {
+   "text": "provide goods or services to a public entity, may not submit a bid on a contract with a public entity for the",
+   "page": 16
+  },
+  {
+   "text": "construction or repair of a public building or public work, may not submit bids on leases of real property to a public",
+   "page": 16
+  },
+  {
+   "text": "entity, may not award or perform work as a contractor, supplies, subcontractor, or consultant under contract with",
+   "page": 16
+  },
+  {
+   "text": "any public entity, and may not transact business with any public entity. Complete attached form.",
+   "page": 16
+  },
+  {
+   "text": "17.0 PUBLIC ENTITY CRIMES:",
+   "page": 16
+  },
+  {
+   "text": "A person or affiliate who has been placed on the convicted vendor list following a conviction for a public entity",
+   "page": 16
+  },
+  {
+   "text": "crime may not submit a bid on a contract or provide any goods or services to a public entity, may not submit a bid",
+   "page": 16
+  },
+  {
+   "text": "on a contract with a public entity for the construction or repair of a public building or public work, may not submit",
+   "page": 16
+  },
+  {
+   "text": "bids on leases of real property to a public entity, may not be awarded or perform work as a contractor, supplier,",
+   "page": 16
+  },
+  {
+   "text": "subcontractor, or consultant under a contract with any public entity, any may not transact business with any public",
+   "page": 16
+  },
+  {
+   "text": "entity in excess of the threshold amount provided in section 287.017., for category two for a period of 36 months",
+   "page": 16
+  },
+  {
+   "text": "from the date of being placed on the convicted vendor list. Complete attached form.",
+   "page": 16
+  },
+  {
+   "text": "18.0 PREFERENCE FOR A DRUG-FREE WORKPLACE:",
+   "page": 16
+  },
+  {
+   "text": "Whenever two or more bids which are equal with respect to price, quality and service are received, preference",
+   "page": 16
+  },
+  {
+   "text": "shall be given to a bid received from a business that certifies that it has implemented a drug-free workplace",
+   "page": 16
+  },
+  {
+   "text": "program in accordance with Section 287.087, Florida Statutes. In order to receive preference, a signed certification",
+   "page": 16
+  },
+  {
+   "text": "of compliance must be submitted with the bid response.",
+   "page": 16
+  },
+  {
+   "text": "19.0 LEVEL 2 SCREENING REQUIREMENTS:",
+   "page": 16
+  },
+  {
+   "text": "The following provisions which implement the requirements of Florida Statute 1012.465, 1012.467 and 1012.468",
+   "page": 16
+  },
+  {
+   "text": "shall be added as additional terms and conditions of the contract:",
+   "page": 16
+  },
+  {
+   "text": "a) Finger Printing and Background Check:",
+   "page": 16
+  },
+  {
+   "text": "The vendor/contractor agrees to comply with all requirements of Florida Statutes # 1012.465 (Also known as",
+   "page": 16
+  },
+  {
+   "text": "the Jessica Lunsford Act) by certifying that any/all employees who will be on schools grounds shall/will have",
+   "page": 16
+  },
+  {
+   "text": "completed this mandatory background screening as required by the referenced statutes and meet the",
+   "page": 16
+  },
+  {
+   "text": "standards established by the statutes and or meet any/all requirements of the District. These certifications",
+   "page": 16
+  },
+  {
+   "text": "will be provided to Washington County School District, in advance of the vendor/contractor providing any/all",
+   "page": 16
+  },
+  {
+   "text": "services as required herein.",
+   "page": 16
+  },
+  {
+   "text": "The vendor/contractor will bear the cost of acquiring the background screening required and any/all fees",
+   "page": 16
+  },
+  {
+   "text": "imposed by the Florida Department of Law Enforcement and or the District to maintain the fingerprints",
+   "page": 16
+  },
+  {
+   "text": "provided with respect to vendor/contractor and its employees.",
+   "page": 16
+  },
+  {
+   "text": "The vendor/contractor will follow procedures for obtaining employees background screening as established",
+   "page": 16
+  },
+  {
+   "text": "by the Washington County School District Human Resources Department.",
+   "page": 16
+  },
+  {
+   "text": "b) Firearms & Weapons:",
+   "page": 16
+  },
+  {
+   "text": "The procession of any/all weapons, firearm and or any other device is strictly prohibited on any/all District",
+   "page": 16
+  },
+  {
+   "text": "properties as per Florida Statutes # 790.115",
+   "page": 16
+  },
+  {
+   "text": "c) Drug Free Workplace:",
+   "page": 16
+  },
+  {
+   "text": "All vendors/contractors will be required to have a Drug Free Work Program for the duration of the contract",
+   "page": 16
+  },
+  {
+   "text": "period, as per Florida Statutes 287.087.",
+   "page": 16
+  },
+  {
+   "text": "d) Building Security:",
+   "page": 16
+  },
+  {
+   "text": "The Contractor shall coordinate building entry and exit procedures with the designed person from the",
+   "page": 16
+  },
+  {
+   "text": "Washington County School District to assure that building security is maintained.",
+   "page": 16
+  },
+  {
+   "text": "e) Unauthorized Personnel:",
+   "page": 16
+  },
+  {
+   "text": "At no time shall Contractor allow any people into the building other than bona fide employees of the",
+   "page": 16
+  },
+  {
+   "text": "contractor. At no time shall contractor allow family members, friends, etc. to be on the grounds or parking",
+   "page": 16
+  },
+  {
+   "text": "16",
+   "page": 16
+  },
+  {
+   "text": "lot of the facility during working hours, other than to pick-up or drop-off an employee.",
+   "page": 17
+  },
+  {
+   "text": "20.0 FEDERAL AND STATE TAX:",
+   "page": 17
+  },
+  {
+   "text": "The District is exempt from federal and state taxes for tangible personal property.",
+   "page": 17
+  },
+  {
+   "text": "21.0 CONFLICT OF INTEREST:",
+   "page": 17
+  },
+  {
+   "text": "21.1 Any award there under is subject to provisions of chapter 112, F.S., all bidders must disclose – with their bid",
+   "page": 17
+  },
+  {
+   "text": "– the name of any officer, director, or agent who is also an employee of the Washington County School District,",
+   "page": 17
+  },
+  {
+   "text": "Washington County Florida. Further, all bidders must disclose the name of any Washington County School District",
+   "page": 17
+  },
+  {
+   "text": "employee who owns, directly or indirectly, an interest of five percent (5%) or more in the bidder’s firm or any of its",
+   "page": 17
+  },
+  {
+   "text": "branches. Affirmation of such will be by signature on the Conflict of Interest form (attached).",
+   "page": 17
+  },
+  {
+   "text": "21.2 COVENANT AGAINST CONTINGENT FEES: The Responder warrants that no person or selling agency",
+   "page": 17
+  },
+  {
+   "text": "has been employed or retained to solicit or secure this Agreement upon an agreement or understanding for",
+   "page": 17
+  },
+  {
+   "text": "a commission, percentage, brokerage, or contingency fee, excepting bona fide employees or bona fide",
+   "page": 17
+  },
+  {
+   "text": "established commercial or selling agencies maintained by the Independent Contractor for purposes of securing",
+   "page": 17
+  },
+  {
+   "text": "business. For breach or violation of this warranty, the District will have the right to terminate this Agreement",
+   "page": 17
+  },
+  {
+   "text": "without liability, or, in its discretion, to deduct from the Agreement price or consideration, or otherwise recover,",
+   "page": 17
+  },
+  {
+   "text": "the full amount of such commission, percentage, brokerage or contingent fee.",
+   "page": 17
+  },
+  {
+   "text": "22.0 CONE OF SILENCE:",
+   "page": 17
+  },
+  {
+   "text": "Responders to this RFP or persons acting on their behalf may not contact, between the release of the RFP and the",
+   "page": 17
+  },
+  {
+   "text": "end of the 72-hour period following the District posting the notice of intended award, excluding Saturday, Sundays,",
+   "page": 17
+  },
+  {
+   "text": "and state holidays, any employee member, or official of the District concerning any aspect of the RFP. Any",
+   "page": 17
+  },
+  {
+   "text": "Responder or persons acting on their behalf who violates this provision may cause their proposal to be considered",
+   "page": 17
+  },
+  {
+   "text": "non-responsive and therefore ineligible for award.",
+   "page": 17
+  },
+  {
+   "text": "23.0 INSURANCE REQUIREMENTS:",
+   "page": 17
+  },
+  {
+   "text": "The proposers shall furnish to the Board proof by Certificate of Insurance for each type of insurance listed below.",
+   "page": 17
+  },
+  {
+   "text": "Each Certificate of Insurance shall state that the Board, its members, officers, elected officials, employees, and",
+   "page": 17
+  },
+  {
+   "text": "agents are additional insured under the policy or policies.",
+   "page": 17
+  },
+  {
+   "text": "A. Professional Liability Insurance. The proposer should present evidence of Professional Liability Insurance",
+   "page": 17
+  },
+  {
+   "text": "for the life of this audit and two years thereafter. This insurance shall provide coverage against such liability",
+   "page": 17
+  },
+  {
+   "text": "resulting from this audit. The minimum limits of such coverage shall be $1,000,000 with a deductible not",
+   "page": 17
+  },
+  {
+   "text": "to exceed $100,000. The deductible will be the responsibility of the insured.",
+   "page": 17
+  },
+  {
+   "text": "Professional liability policies shall include an endorsement whereby The Auditor and his insurance carrier",
+   "page": 17
+  },
+  {
+   "text": "shall hold harmless The Board and each officer, agent, and employee of The Board for any and all claims",
+   "page": 17
+  },
+  {
+   "text": "against them arising from the negligent performance of professional services or caused by an error,",
+   "page": 17
+  },
+  {
+   "text": "omission or negligent act of The Auditor or anyone employed by The Auditor. Such coverage shall not be",
+   "page": 17
+  },
+  {
+   "text": "suspended or modified except after prior written approval of The Board. Certificates of Insurance meeting",
+   "page": 17
+  },
+  {
+   "text": "this requirement shall be forwarded to The Risk Management Department and approved prior to the start",
+   "page": 17
+  },
+  {
+   "text": "of any work.",
+   "page": 17
+  },
+  {
+   "text": "B. Workers’ Compensation Insurance. The Contractor shall secure and maintain during the life of this",
+   "page": 17
+  },
+  {
+   "text": "Agreement Workers’ Compensation insurance for all of his employees employed at the site of the project",
+   "page": 17
+  },
+  {
+   "text": "or on any connected with the work, including supervision, administration or management, of this project",
+   "page": 17
+  },
+  {
+   "text": "and in case any work is sublet, with the approval of the Washington County School District. The Contractor",
+   "page": 17
+  },
+  {
+   "text": "17",
+   "page": 17
+  },
+  {
+   "text": "shall require the subcontractor similarly to provide Workers’ Compensation insurance for all employees",
+   "page": 18
+  },
+  {
+   "text": "employed at the site of the project and such evidence of insurance shall be furnished to the Washington",
+   "page": 18
+  },
+  {
+   "text": "County School District not less than ten (10) days prior to the commencement of any and all sub contractual",
+   "page": 18
+  },
+  {
+   "text": "agreements which have been approved by the Risk Management Department.",
+   "page": 18
+  },
+  {
+   "text": "Such insurance shall comply with the Florida Workers’ Compensation Law.",
+   "page": 18
+  },
+  {
+   "text": "No class of employee, including the Contractor himself, shall be excluded from the Workers’",
+   "page": 18
+  },
+  {
+   "text": "Compensation insurance coverage. The Workers’ Compensation insurance shall also include Employer’s",
+   "page": 18
+  },
+  {
+   "text": "Liability coverage and shall include Broad Form All States Endorsement.",
+   "page": 18
+  },
+  {
+   "text": "Coverage shall include a waiver of subrogation clause in favor of Washington County School District. Also,",
+   "page": 18
+  },
+  {
+   "text": "this endorsement must be indicated on all Certificates of Insurance.",
+   "page": 18
+  },
+  {
+   "text": "C. Business Automobile and Public Liability Insurance. The Contractor shall maintain Business Automobile",
+   "page": 18
+  },
+  {
+   "text": "Liability insurance coverage throughout the life of this Agreement. The insurance shall include owned, non-",
+   "page": 18
+  },
+  {
+   "text": "owned and hired motor vehicle coverage.",
+   "page": 18
+  },
+  {
+   "text": "The Contractor shall carry other public liability insurance against all other bodily injury, property damage",
+   "page": 18
+  },
+  {
+   "text": "and personal and advertising injury exposures. The coverage shall include both on- and off-premises",
+   "page": 18
+  },
+  {
+   "text": "operations, contractual liability, Broad form property damage. General liability policy shall not exclude",
+   "page": 18
+  },
+  {
+   "text": "care custody or control of the building and generator.",
+   "page": 18
+  },
+  {
+   "text": "All liability insurance shall be written on an occurrence basis and shall not be written on a claim-made",
+   "page": 18
+  },
+  {
+   "text": "basis. If the insurance is issued with an aggregate limit of liability, the aggregate limit of liability shall",
+   "page": 18
+  },
+  {
+   "text": "apply only to the locations included in this Agreement. If, as the result of any claims or other reasons, the",
+   "page": 18
+  },
+  {
+   "text": "available limits of insurance reduce to less than those stated in the LIMITS OF LIABILITY, the Contractor",
+   "page": 18
+  },
+  {
+   "text": "shall notify the School District representative in writing. The Contractor shall purchase additional liability",
+   "page": 18
+  },
+  {
+   "text": "insurance to maintain the requirements established in this Agreement. Umbrella or Excess Liability",
+   "page": 18
+  },
+  {
+   "text": "insurance can be purchased to meet the Limits of Liability specified in this agreement.",
+   "page": 18
+  },
+  {
+   "text": "Public liability coverage shall be endorsed to include following:",
+   "page": 18
+  },
+  {
+   "text": "• On and Off premises – Operation liability",
+   "page": 18
+  },
+  {
+   "text": "• Occurrence Bodily Injury and Property Damage Liability",
+   "page": 18
+  },
+  {
+   "text": "• Independent Contractors Liability",
+   "page": 18
+  },
+  {
+   "text": "• Blanket Broad Form Contractual Liability, including the indemnification set out in the General",
+   "page": 18
+  },
+  {
+   "text": "Conditions and all other contracts relative to the project",
+   "page": 18
+  },
+  {
+   "text": "• Personal Injury Liability Insurance",
+   "page": 18
+  },
+  {
+   "text": "• Broad Form Property Damage Liability Insurance (including Completed Operations)",
+   "page": 18
+  },
+  {
+   "text": "Limits of Liability. The insurance required shall be written for not less than the following or greater if",
+   "page": 18
+  },
+  {
+   "text": "required by law and shall include Employer’s liability with limits as prescribed in this contract:",
+   "page": 18
+  },
+  {
+   "text": "Type | Limit",
+   "page": 18
+  },
+  {
+   "text": "Workers’ Compensation",
+   "page": 18
+  },
+  {
+   "text": "State | Statutory",
+   "page": 18
+  },
+  {
+   "text": "Employer’s Liability | $1 Million Each Accident",
+   "page": 18
+  },
+  {
+   "text": "Comprehensive Automotive Liability Insurance | $500,000 Each Occurrence",
+   "page": 18
+  },
+  {
+   "text": "(A Combined Single Limit)",
+   "page": 18
+  },
+  {
+   "text": "General Liability | $1 Million Each Occurrence (School",
+   "page": 18
+  },
+  {
+   "text": "District as Additional Insured)",
+   "page": 18
+  },
+  {
+   "text": "Personal and Advertising Injury | $250,000",
+   "page": 18
+  },
+  {
+   "text": "18",
+   "page": 18
+  },
+  {
+   "text": "Notice of Claims or Litigation. The Contractor agrees to report any incident or claim that results from",
+   "page": 19
+  },
+  {
+   "text": "performance of this Agreement. Within ten (10) days of the Contractor’s knowledge, the County",
+   "page": 19
+  },
+  {
+   "text": "representative shall receive written notice describing the incident or claim. In the event such incident or",
+   "page": 19
+  },
+  {
+   "text": "claim involves injury or property damage to a third party, verbal notification shall be given the same day the",
+   "page": 19
+  },
+  {
+   "text": "Contractor becomes aware of the incident or claim. A detailed written report is to be made within ten (10)",
+   "page": 19
+  },
+  {
+   "text": "days.",
+   "page": 19
+  },
+  {
+   "text": "24.0 INDEMNIFICATION/HOLD HARMLESS AGREEMENT:",
+   "page": 19
+  },
+  {
+   "text": "Contractor shall protect, defend, indemnify and hold the School Board of Washington County Florida, its officers,",
+   "page": 19
+  },
+  {
+   "text": "and employees completely harmless from and against any and all liabilities, demands, suits, claims, losses, fines, or",
+   "page": 19
+  },
+  {
+   "text": "judgments arising by reason of the injury or death of any person or damage to any property including all reasonable",
+   "page": 19
+  },
+  {
+   "text": "costs from investigation and defense thereof (including but not limited to attorney fees, court costs, and expert",
+   "page": 19
+  },
+  {
+   "text": "fees), of any nature whatsoever arising out of or incident to this contract or Contractor’s officers, employed,",
+   "page": 19
+  },
+  {
+   "text": "agents, contractors, subcontractors, licensees or invitees regardless of where the injury, death or damage may",
+   "page": 19
+  },
+  {
+   "text": "occur; unless such injury, death or damage is caused by the sole negligence of the County. The School District shall",
+   "page": 19
+  },
+  {
+   "text": "give Contractor reasonable notice of any such claims or actions. Contractor, in carrying out its obligations",
+   "page": 19
+  },
+  {
+   "text": "hereunder, shall use counsel reasonably acceptable to the School District. The provisions of this section shall",
+   "page": 19
+  },
+  {
+   "text": "survive the expiration or earlier termination of this contract.",
+   "page": 19
+  },
+  {
+   "text": "_____________________________________ ____________________________________",
+   "page": 19
+  },
+  {
+   "text": "BIDDER’S COMPANY NAME | AUTHORIZED SIGNATURE (MANUAL)",
+   "page": 19
+  },
+  {
+   "text": "_____________________________________ ____________________________________",
+   "page": 19
+  },
+  {
+   "text": "PHYSICAL ADDRESS | AUTHORIZED SIGNATURE (TYPED)",
+   "page": 19
+  },
+  {
+   "text": "_____________________________________ ____________________________________",
+   "page": 19
+  },
+  {
+   "text": "MAILING ADDRESS | TITLE",
+   "page": 19
+  },
+  {
+   "text": "_____________________________________ ____________________________________",
+   "page": 19
+  },
+  {
+   "text": "CITY, STATE, ZIP | EMAIL ADDRESS",
+   "page": 19
+  },
+  {
+   "text": "_____________________________________ ____________________________________",
+   "page": 19
+  },
+  {
+   "text": "19",
+   "page": 19
+  },
+  {
+   "text": "PHONE NUMBER | FAX NUMBER",
+   "page": 20
+  },
+  {
+   "text": "20",
+   "page": 20
+  },
+  {
+   "text": "25.0 PUBLIC RECORD LAW:",
+   "page": 21
+  },
+  {
+   "text": "CONTRACTOR’S RESPONSIBILITY FOR COMPLIANCE WITH CHAPER 119,",
+   "page": 21
+  },
+  {
+   "text": "FLORIDA STATUTES. Pursuant to Section 119.0701, F.S., CONTRACTOR agrees",
+   "page": 21
+  },
+  {
+   "text": "to comply with all public records laws.",
+   "page": 21
+  },
+  {
+   "text": "Washington County School District takes its public records responsibilities as provided under chapter 119, Florida",
+   "page": 21
+  },
+  {
+   "text": "Statutes and Article I, Section 24 of the Florida Constitution, very seriously. If respondent considers any portion of",
+   "page": 21
+  },
+  {
+   "text": "the documents, data or records submitted in response to this solicitation to be confidential, trade secret or",
+   "page": 21
+  },
+  {
+   "text": "otherwise not subject to disclosure pursuant to Chapter 119, Florida Statutes, the Florida Constitution or other",
+   "page": 21
+  },
+  {
+   "text": "authority, respondent must also simultaneously provide the District with a separate redacted copy of its response.",
+   "page": 21
+  },
+  {
+   "text": "This redacted copy shall contain the District’s solicitation name, number, and the name of the respondent on the",
+   "page": 21
+  },
+  {
+   "text": "cover, and shall be clearly titled “redacted copy.” The redacted copy shall be provided to the District at the same",
+   "page": 21
+  },
+  {
+   "text": "time respondent submits its response to the solicitation and must only exclude or obliterate those exact portions",
+   "page": 21
+  },
+  {
+   "text": "which are claimed confidential, proprietary, or trade secret.",
+   "page": 21
+  },
+  {
+   "text": "Respondent shall be responsible for defending its determination that the redacted portions of its response are",
+   "page": 21
+  },
+  {
+   "text": "confidential, trade secret or otherwise not subject to disclosure. Further, respondent shall protect, defend, and",
+   "page": 21
+  },
+  {
+   "text": "indemnify the District for any and all claims arising from or relating to respondent’s determination that the",
+   "page": 21
+  },
+  {
+   "text": "redacted portions of its response are confidential, proprietary, trade secret or otherwise not subject to disclosure.",
+   "page": 21
+  },
+  {
+   "text": "If respondent fails to submit a redacted copy with its response, the District is authorized to produce the entire",
+   "page": 21
+  },
+  {
+   "text": "documents, data or records submitted by respondent in answer to a public records request for these records.",
+   "page": 21
+  },
+  {
+   "text": "26.0 ASSIGNMENT OF CONTRACT AND/OR PAYMENT:",
+   "page": 21
+  },
+  {
+   "text": "26.1 This contract or agreement is personal to the parties herein and may not be assigned, in whole or in part, by",
+   "page": 21
+  },
+  {
+   "text": "the proposer without prior written consent of the School Board.",
+   "page": 21
+  },
+  {
+   "text": "26.2 The proposer herein shall not assign payments under this contract or agreement without the prior written",
+   "page": 21
+  },
+  {
+   "text": "consent of the School Board.",
+   "page": 21
+  },
+  {
+   "text": "27.0 AGREEMENT:",
+   "page": 21
+  },
+  {
+   "text": "A purchase order and/or a contract will be released, after award, for any work to be performed as a result of this",
+   "page": 21
+  },
+  {
+   "text": "RFP. The proposal, negotiated term, agreement if applicable, and the corresponding purchase order will constitute",
+   "page": 21
+  },
+  {
+   "text": "the complete agreement between proposer and the District. If proposer requires an additional contract, then",
+   "page": 21
+  },
+  {
+   "text": "proposer should include their sample contract as an attachment to the proposal submitted for review.",
+   "page": 21
+  },
+  {
+   "text": "28.0 JOINT PROPOSAL:",
+   "page": 21
+  },
+  {
+   "text": "In the event multiple proposers submit a joint proposal in response to the RFP, a single proposer shall be identified",
+   "page": 21
+  },
+  {
+   "text": "as the Prime Vendor. If offering a joint proposal, Prime Vendor must include the name and address of all parties of",
+   "page": 21
+  },
+  {
+   "text": "the joint proposal. Prime Vendor shall provide all bonding and insurance requirements, execute any Contract,",
+   "page": 21
+  },
+  {
+   "text": "complete the RFP Cover Sheet shown herein, and have overall and complete accountability to resolve any dispute",
+   "page": 21
+  },
+  {
+   "text": "arising within this contract. Only a single contract with one proposer shall be acceptable. Prime Vendor",
+   "page": 21
+  },
+  {
+   "text": "responsibilities shall include, but not be limited to, performing of overall contract administration, preside over",
+   "page": 21
+  },
+  {
+   "text": "other proposers participating or present at District meetings, oversee preparation of reports and presentations,",
+   "page": 21
+  },
+  {
+   "text": "and file any notice of protest as described herein. Prime Vendor shall also prepare and present a consolidated",
+   "page": 21
+  },
+  {
+   "text": "invoice(s) for services performed. The District shall issue only one check for each consolidated invoice to the Prime",
+   "page": 21
+  },
+  {
+   "text": "Vendor for services performed. Prime Vendor shall remain responsible for performing services associated with",
+   "page": 21
+  },
+  {
+   "text": "response to this RFP.",
+   "page": 21
+  },
+  {
+   "text": "21",
+   "page": 21
+  },
+  {
+   "text": "29.0 VIEWING OF RFP TABULATIONS:",
+   "page": 22
+  },
+  {
+   "text": "29.1 “Network Infrastructure Equipment” RFP tabulations will be made available for review by interested parties,",
+   "page": 22
+  },
+  {
+   "text": "in the Washington County School District, 652 3rd Street, Chipley, FL 32428. The recommended award information",
+   "page": 22
+  },
+  {
+   "text": "for this RFP will be available for view upon request on or about February 8, 2027. Failure to file a protest within the",
+   "page": 22
+  },
+  {
+   "text": "time prescribed in Section 120.57(3), Florida Statutes, will constitute a waiver of proceedings under chapter 120,",
+   "page": 22
+  },
+  {
+   "text": "Florida Statutes. Any proposer who is adversely affected by the recommended award may file a protest within the",
+   "page": 22
+  },
+  {
+   "text": "time prescribed in section 120.57(3), Florida Statutes.",
+   "page": 22
+  },
+  {
+   "text": "29.2 These documents constitute the complete set of specifications, requirements, and/or proposal forms.",
+   "page": 22
+  },
+  {
+   "text": "29.3 All terms and conditions of this RFP, any addenda, proposer’s submissions and negotiated terms, are",
+   "page": 22
+  },
+  {
+   "text": "incorporated into the contract by the reference as set forth herein.",
+   "page": 22
+  },
+  {
+   "text": "29.4 Document files may be examined, during normal working hours; ten days after proposals have been opened.",
+   "page": 22
+  },
+  {
+   "text": "22",
+   "page": 22
+  },
+  {
+   "text": "DRUG FREE WORKPLACE",
+   "page": 23
+  },
+  {
+   "text": "Section 287.087 Florida Statutes",
+   "page": 23
+  },
+  {
+   "text": "Preference shall be given to businesses with drug-free workplace programs. Whenever two or more bids which are",
+   "page": 23
+  },
+  {
+   "text": "equal with respect to price, quality, and service, are received by the State or by any political subdivision for the",
+   "page": 23
+  },
+  {
+   "text": "procurement of commodities or contractual services, a bid received from a business that certifies that it has",
+   "page": 23
+  },
+  {
+   "text": "implemented a drug-free workplace program shall be given preference in the award process.",
+   "page": 23
+  },
+  {
+   "text": "Established procedures for processing tie bids will be followed if none of the tied vendors have a drug-free workplace",
+   "page": 23
+  },
+  {
+   "text": "program. In order to have a drug-free workplace program, a business shall:",
+   "page": 23
+  },
+  {
+   "text": "1. Publish a statement notifying employees that the unlawful manufacture, distribution, dispensing, possession, or",
+   "page": 23
+  },
+  {
+   "text": "use of a controlled substance is prohibited in the workplace and specifying the actions that will be taken against",
+   "page": 23
+  },
+  {
+   "text": "employees for violations of such prohibition.",
+   "page": 23
+  },
+  {
+   "text": "2. Inform employees about the dangers of drug abuse in the workplace, the business's policy of maintaining a drug-",
+   "page": 23
+  },
+  {
+   "text": "free workplace, any available drug counseling, rehabilitation, and employee assistance programs, and the",
+   "page": 23
+  },
+  {
+   "text": "penalties that may be imposed upon employees for drug abuse violations.",
+   "page": 23
+  },
+  {
+   "text": "3. Give each employee engaged in providing the commodities or contractual services that are under bid a copy of",
+   "page": 23
+  },
+  {
+   "text": "the statement specified in subsection (1).",
+   "page": 23
+  },
+  {
+   "text": "4. In the statement specified in subsection (1), notify the employees that, as a condition of working on the",
+   "page": 23
+  },
+  {
+   "text": "commodities or contractual services that are under bid, the employees will abide by the terms of the statement",
+   "page": 23
+  },
+  {
+   "text": "and will notify the employer of any conviction of, or plea of guilty or nolo contendere to, any violation of Chapter",
+   "page": 23
+  },
+  {
+   "text": "893 or of any controlled substance law of the United States or any state, for a violation occurring in the workplace",
+   "page": 23
+  },
+  {
+   "text": "no later than five (5) days after such conviction.",
+   "page": 23
+  },
+  {
+   "text": "5. Impose a sanction on, or require the satisfactory participation in a drug abuse assistance or rehabilitation program",
+   "page": 23
+  },
+  {
+   "text": "if such is available in the employee's community, by an employee who is so convicted.",
+   "page": 23
+  },
+  {
+   "text": "6. Make a good faith effort to continue to maintain a drug-free workplace through implementation of this section.",
+   "page": 23
+  },
+  {
+   "text": "As the person authorized to sign the statement, I certify that this firm complies fully with the above requirements.",
+   "page": 23
+  },
+  {
+   "text": "Vendor's Signature: ___________________________________",
+   "page": 23
+  },
+  {
+   "text": "23",
+   "page": 23
+  },
+  {
+   "text": "Certification Regarding Debarment, Suspension, Ineligibility and Voluntary Exclusion",
+   "page": 24
+  },
+  {
+   "text": "Lower Tier Covered Transactions.",
+   "page": 24
+  },
+  {
+   "text": "This certification is required by the Department of Education regulations implementing Executive Order 12549, Debarment and Suspension,",
+   "page": 24
+  },
+  {
+   "text": "34 CFR Part 85, for all lower tier transactions meeting the threshold and tier requirements stated at Section85.110.",
+   "page": 24
+  },
+  {
+   "text": "1. By signing and submitting this proposal, the prospective lower tier participant is providing the certification set out below.",
+   "page": 24
+  },
+  {
+   "text": "2. The certification in this clause is a material representation of fact upon which reliance was placed when this transaction was entered",
+   "page": 24
+  },
+  {
+   "text": "into. If is later determined that the prospective lower tier participant knowingly rendered an erroneous certification, in addition to other",
+   "page": 24
+  },
+  {
+   "text": "remedies available to the Federal Government, the department or agency with which this transaction originated may pursue available",
+   "page": 24
+  },
+  {
+   "text": "remedies, including suspension and/or debarment.",
+   "page": 24
+  },
+  {
+   "text": "3. The prospective lower tier participant shall provide immediate written notice to the person to which this proposal is submitted if at any",
+   "page": 24
+  },
+  {
+   "text": "time the prospective lower tier participant learns that its certification was erroneous when submitted or has become erroneous by",
+   "page": 24
+  },
+  {
+   "text": "reason of changed circumstances.",
+   "page": 24
+  },
+  {
+   "text": "4. The terms “covered transaction,” “debarred,” “suspended,” “ineligible,” “lower tier covered transaction,” “participant, “person,”",
+   "page": 24
+  },
+  {
+   "text": "“primary covered transaction,” “ principal,” “proposal,” and voluntarily excluded,” as used in this clause, have the meanings set out in",
+   "page": 24
+  },
+  {
+   "text": "the Definitions and Coverage section of the rules implementing Executive Order 12549. You may contact the person to which this",
+   "page": 24
+  },
+  {
+   "text": "proposal is submitted for assistance in obtaining a copy of those regulations (13CFR Part 145).",
+   "page": 24
+  },
+  {
+   "text": "5. The prospective lower tier participants agrees by submitting this proposal that, should the proposed covered transaction be entered",
+   "page": 24
+  },
+  {
+   "text": "into, it shall not knowingly enter into any lower tier covered transaction with a person who is debarred, suspended, declared ineligible,",
+   "page": 24
+  },
+  {
+   "text": "or voluntarily excluded from participation in this covered transaction, unless authorized by the department or agency with which this",
+   "page": 24
+  },
+  {
+   "text": "transaction originated.",
+   "page": 24
+  },
+  {
+   "text": "6. The prospective lower tier participant further agrees by submitting this proposal that it will include the clause titled “Certification",
+   "page": 24
+  },
+  {
+   "text": "Regarding Debarment, Suspension, Ineligibility and Voluntary Exclusion – Lower Tier Covered Transaction,” without modification, in all",
+   "page": 24
+  },
+  {
+   "text": "lower tier covered transactions and in all solicitations for lower tier covered transactions.",
+   "page": 24
+  },
+  {
+   "text": "7. A participant in a covered transaction may rely upon a certification of a prospective participant in a lower tier covered transaction that",
+   "page": 24
+  },
+  {
+   "text": "is not due it knows that the certification is erroneous. A participant may decide the method and frequency by which it determines the",
+   "page": 24
+  },
+  {
+   "text": "ineligibility of its principals. Each participant may, but Is not required to, check the Non-procurement List.",
+   "page": 24
+  },
+  {
+   "text": "8. Nothing contained in the foregoing shall be construed to require establishment of a system of records in order to render in good faith",
+   "page": 24
+  },
+  {
+   "text": "the certification required by this clause. The knowledge and information of a participant is not required to exceed that which is normally",
+   "page": 24
+  },
+  {
+   "text": "possessed by a prudent person in the ordinary course of business dealings.",
+   "page": 24
+  },
+  {
+   "text": "9. Except of transactions authorized under paragraph 5 of these instructions, if a participant in a covered transaction knowingly enters",
+   "page": 24
+  },
+  {
+   "text": "into a lower tier covered transaction with a person who is suspended, debarred, ineligible, or voluntarily excluded from participation in",
+   "page": 24
+  },
+  {
+   "text": "this transaction, in addition to other remedies available to the Federal Government, the department or agency with which this",
+   "page": 24
+  },
+  {
+   "text": "transaction originated may pursue available remedies, including suspension and/or debarment.",
+   "page": 24
+  },
+  {
+   "text": "24",
+   "page": 24
+  },
+  {
+   "text": "Certification",
+   "page": 25
+  },
+  {
+   "text": "1. The prospective lower tier participant certifies, by submission of this proposal, that neither it nor its principals are presently debarred,",
+   "page": 25
+  },
+  {
+   "text": "suspended, proposed for debarment, declared ineligible, or voluntarily excluded from participation in this transaction by any Federal",
+   "page": 25
+  },
+  {
+   "text": "department or agency.",
+   "page": 25
+  },
+  {
+   "text": "2. Where the prospective lower tier participant is unable to certify to any of the statements in this certification, such prospective",
+   "page": 25
+  },
+  {
+   "text": "participant will attach an explanation to this proposal.",
+   "page": 25
+  },
+  {
+   "text": "Business Name: _______________________________________________________________________",
+   "page": 25
+  },
+  {
+   "text": "Date: | ______________________ | By: ____________________________________",
+   "page": 25
+  },
+  {
+   "text": "____________________________________",
+   "page": 25
+  },
+  {
+   "text": "Signature of Authorized Representative",
+   "page": 25
+  },
+  {
+   "text": "Conflict of Interest/Disclosure: Proposer must execute either Section I or Section II hereunder relative to Florida State",
+   "page": 25
+  },
+  {
+   "text": "Statute 112.313(12). Failure to execute either section may result in rejection of this proposal/proposal.",
+   "page": 25
+  },
+  {
+   "text": "SECTION I",
+   "page": 25
+  },
+  {
+   "text": "I hereby certify that no official or employee of Washington County School District requiring the goods or services",
+   "page": 25
+  },
+  {
+   "text": "described in these specifications has a material financial interest in this company.",
+   "page": 25
+  },
+  {
+   "text": "___ | ____",
+   "page": 25
+  },
+  {
+   "text": "Signature | Company Name",
+   "page": 25
+  },
+  {
+   "text": "___ | ____",
+   "page": 25
+  },
+  {
+   "text": "Name of Official (Type or Print) | Business Address",
+   "page": 25
+  },
+  {
+   "text": "City, State, ZIP Code",
+   "page": 25
+  },
+  {
+   "text": "25",
+   "page": 25
+  },
+  {
+   "text": "SECTION II",
+   "page": 26
+  },
+  {
+   "text": "I hereby certify that the following named Washington County School District official(s) and/or employee(s) having",
+   "page": 26
+  },
+  {
+   "text": "material financial interest(s) (in excess of 5%) in this company have filed Conflict of Interest Statements with the",
+   "page": 26
+  },
+  {
+   "text": "Supervisor of Elections, 652 3rd Street, Chipley, FL 32428, prior to proposal opening.",
+   "page": 26
+  },
+  {
+   "text": "Name | Title or Position | Date of Filing",
+   "page": 26
+  },
+  {
+   "text": "Name | Title or Position | Date of Filing",
+   "page": 26
+  },
+  {
+   "text": "____",
+   "page": 26
+  },
+  {
+   "text": "Signature | Company Name",
+   "page": 26
+  },
+  {
+   "text": "____",
+   "page": 26
+  },
+  {
+   "text": "Print Name of Certifying Official | Business Address",
+   "page": 26
+  },
+  {
+   "text": "____",
+   "page": 26
+  },
+  {
+   "text": "City, State, ZIP Code",
+   "page": 26
+  },
+  {
+   "text": "26",
+   "page": 26
+  },
+  {
+   "text": "E-RATE CERTIFICATION FORM",
+   "page": 27
+  },
+  {
+   "text": "Responder(s) must be a certified E-rate provider, shall have a “Service Provider Information Number”",
+   "page": 27
+  },
+  {
+   "text": "(SPIN) from the Schools and Libraries Division of the Universal Service Administrative Company, and",
+   "page": 27
+  },
+  {
+   "text": "be responsible for complying with all rules and regulations of the E-rate program. Evidence of this",
+   "page": 27
+  },
+  {
+   "text": "certification will be demonstrated by the return of the most recent Service Provider Annual Certification",
+   "page": 27
+  },
+  {
+   "text": "(SPAC-Form 473) along with the SPIN information.",
+   "page": 27
+  },
+  {
+   "text": "This certification must be maintained throughout the term of the contract. Evidence of",
+   "page": 27
+  },
+  {
+   "text": "Responder’s certification and annual re-certification by the Federal Communication",
+   "page": 27
+  },
+  {
+   "text": "Commission/Schools and Library Division (“FCC/SLD”) must be provided as part of the",
+   "page": 27
+  },
+  {
+   "text": "proposal submission and no later than thirty (30) calendar days following the renewal of an",
+   "page": 27
+  },
+  {
+   "text": "Agreement term.",
+   "page": 27
+  },
+  {
+   "text": "Failure of Responder to maintain this certification, re-certify annually, or have certification",
+   "page": 27
+  },
+  {
+   "text": "revoked by FCC/SLD shall constitute a breach of contract. Further, Responder shall",
+   "page": 27
+  },
+  {
+   "text": "reimburse the District for the full amount of any and all invoices resulting from the services",
+   "page": 27
+  },
+  {
+   "text": "provided by Responder under the pending or current contract that is not reimbursed by the",
+   "page": 27
+  },
+  {
+   "text": "FCC/SLD because of Responder’s lack of certification, failure to re-certify or revocation of",
+   "page": 27
+  },
+  {
+   "text": "certification, as required by the FCC/SLD.",
+   "page": 27
+  },
+  {
+   "text": "As the person authorized to sign the statement, I certify that this firm complies fully with the above",
+   "page": 27
+  },
+  {
+   "text": "requirements.",
+   "page": 27
+  },
+  {
+   "text": "Responder’s Printed Name ____________________________________________________",
+   "page": 27
+  },
+  {
+   "text": "Responder’s Signature",
+   "page": 27
+  },
+  {
+   "text": "Responder’s SPIN ____________________________________________________________",
+   "page": 27
+  },
+  {
+   "text": "Date of last certification ________________________________________________________",
+   "page": 27
+  },
+  {
+   "text": "27",
+   "page": 27
+  },
+  {
+   "text": "Attachment A",
+   "page": 28
+  },
+  {
+   "text": "Network Infrastructure Equipment",
+   "page": 28
+  },
+  {
+   "text": "Qty. Part Number | Description | Individual Expanded Ineligible",
+   "page": 28
+  },
+  {
+   "text": "Price | Price | Amount",
+   "page": 28
+  },
+  {
+   "text": "8 | 7520-48Y-8C | Extreme Network - 7520-48Y Switch with two empty",
+   "page": 28
+  },
+  {
+   "text": "power supply slots, six empty fan slots, Ships with",
+   "page": 28
+  },
+  {
+   "text": "one 4-post rack mount kit. Supports 48 x",
+   "page": 28
+  },
+  {
+   "text": "1G/10G/25G fiber ports and 8 x 40G/100G fiber",
+   "page": 28
+  },
+  {
+   "text": "ports, or equivalent",
+   "page": 28
+  },
+  {
+   "text": "48 | XN-FAN-001-F | Extreme Network - Single Fan module Front to Back",
+   "page": 28
+  },
+  {
+   "text": "Airflow for VSP7400 SLX9150 SLX9250 X695 8520 and",
+   "page": 28
+  },
+  {
+   "text": "8720, or equivalent",
+   "page": 28
+  },
+  {
+   "text": "16 | XN-ACPWR-800W-F | Extreme Network - AC 800W PSU, Front to Back",
+   "page": 28
+  },
+  {
+   "text": "Airflow for use in 7520, 7720, or equivalent",
+   "page": 28
+  },
+  {
+   "text": "16 | 10061 | Extreme Network - Power Cord,10A,NEMA 5-",
+   "page": 28
+  },
+  {
+   "text": "15P,IEC320-C13, or equivalent",
+   "page": 28
+  },
+  {
+   "text": "8 | ExtremeSwitching 5520 24 1Gb/10Gb SFP+ ports 2",
+   "page": 28
+  },
+  {
+   "text": "5520-24X | stacking/QSFP28 1 unpopulated VIM slot includes 2",
+   "page": 28
+  },
+  {
+   "text": "fan modules 2 unpopulated modular PSU slots, or",
+   "page": 28
+  },
+  {
+   "text": "equivalent",
+   "page": 28
+  },
+  {
+   "text": "16 | XN-ACPWR-350W-FB | Extreme Network - 350 Watt AC Power Supply",
+   "page": 28
+  },
+  {
+   "text": "Module - Front to Back airflow, or equivalent",
+   "page": 28
+  },
+  {
+   "text": "16 | 10061 | Extreme Network - Power Cord,10A,NEMA 5-",
+   "page": 28
+  },
+  {
+   "text": "15P,IEC320-C13, or equivalent",
+   "page": 28
+  },
+  {
+   "text": "30 | 5320-24P-8XE | Extreme Network - 5320 24x10/100/1000BASET",
+   "page": 28
+  },
+  {
+   "text": "FDX/HDX PoE+ 8x10G unpopulated SFP+ MACSec",
+   "page": 28
+  },
+  {
+   "text": "capable 1x internal fixed PSU fans, or equivalent",
+   "page": 28
+  },
+  {
+   "text": "30 | 10061 | Extreme Network - Power Cord,10A,NEMA 5-",
+   "page": 28
+  },
+  {
+   "text": "15P,IEC320-C13, or equivalent",
+   "page": 28
+  },
+  {
+   "text": "60 | 5320-48P-8XE | Extreme Network - 5320 48x10/100/1000BASET",
+   "page": 28
+  },
+  {
+   "text": "FDX/HDX PoE+ 8x10G unpopulated SFP+ MACSec",
+   "page": 28
+  },
+  {
+   "text": "capable 1x internal fixed PSU fans, or equivalent",
+   "page": 28
+  },
+  {
+   "text": "60 | 10138 | Extreme Network - PWR CORD,NEMA,13A,NEMA 5-",
+   "page": 28
+  },
+  {
+   "text": "15P,C13,ST, or equivalent",
+   "page": 28
+  },
+  {
+   "text": "60 | 5420F-48P-4XE | Extreme Network - ExtremeSwitching 5420F 48",
+   "page": 28
+  },
+  {
+   "text": "10/100/1000BASET FDX/HDX PoE+ 2 stacking/SFP-DD",
+   "page": 28
+  },
+  {
+   "text": "4 10G unpopulated SFP+ MACsec capable internal",
+   "page": 28
+  },
+  {
+   "text": "fixed PSU fans 1 unpopulated modular PSU slots, or",
+   "page": 28
+  },
+  {
+   "text": "equivalent",
+   "page": 28
+  },
+  {
+   "text": "60 | XN-ACPWR-1200W-FB | Extreme Network - 1200 Watt AC PoE Power Supply",
+   "page": 28
+  },
+  {
+   "text": "Module - Front to Back airflow, or equivalent",
+   "page": 28
+  },
+  {
+   "text": "120 10142 | Extreme Network - 523PWR CORD,NEMA,15A,NEMA",
+   "page": 28
+  },
+  {
+   "text": "5-15P,C13,RA, or equivalent",
+   "page": 28
+  },
+  {
+   "text": "28",
+   "page": 28
+  },
+  {
+   "text": "523 EP1-STD-TA-S-C-EW-1YR | Extreme Network - Extreme Platform ONE Standard",
+   "page": 29
+  },
+  {
+   "text": "Networking Right-to-use and EW TAC OS Support for",
+   "page": 29
+  },
+  {
+   "text": "one (1) device of Tier A per year, or equivalent",
+   "page": 29
+  },
+  {
+   "text": "60 | EP1-STD-TB-S-C-EW-1YR | Extreme Network - EP1-STD-TB-S-C-EW-1YR, or",
+   "page": 29
+  },
+  {
+   "text": "equivalent",
+   "page": 29
+  },
+  {
+   "text": "8 | EP1-STD-TC-S-C-EW-1YR | Extreme Network - Extreme Platform ONE Standard",
+   "page": 29
+  },
+  {
+   "text": "Networking Right-to-use and EW TAC OS Support for",
+   "page": 29
+  },
+  {
+   "text": "one (1) device of Tier C per year, or equivalent",
+   "page": 29
+  },
+  {
+   "text": "8 | EP1-STD-TD-S-C-EW-1YR | Extreme Network -Extreme Platform ONE Standard",
+   "page": 29
+  },
+  {
+   "text": "Networking Right-to-use and EW TAC OS Support for",
+   "page": 29
+  },
+  {
+   "text": "one (1) device of Tier D per year, or equivalent",
+   "page": 29
+  },
+  {
+   "text": "4 | EP1-SEC-S-C-1K-EW | Extreme Network - Extreme Platform ONE Secure",
+   "page": 29
+  },
+  {
+   "text": "Subscription with EW Support for 1,000 endpoints",
+   "page": 29
+  },
+  {
+   "text": "per year, or equivalent",
+   "page": 29
+  },
+  {
+   "text": "1 | XIQ-CACT-VT | Extreme Network - ExtremeCloud IQ Controller",
+   "page": 29
+  },
+  {
+   "text": "Activation License for Virtual Appliances, or",
+   "page": 29
+  },
+  {
+   "text": "equivalent",
+   "page": 29
+  },
+  {
+   "text": "1 | 97003-XIQ-CACT-VT | Extreme Network - EW Software Support XIQ-CACT-",
+   "page": 29
+  },
+  {
+   "text": "VT, or equivalent",
+   "page": 29
+  },
+  {
+   "text": "1 | EP1-STD-TA-S-C-EW-1YR | Extreme Network - Extreme Platform ONE Standard",
+   "page": 29
+  },
+  {
+   "text": "Networking Right-to-use and EW TAC OS Support for",
+   "page": 29
+  },
+  {
+   "text": "one (1) device of Tier A per year, or equivalent",
+   "page": 29
+  },
+  {
+   "text": "1 | XIQ-CACT-VT | Extreme Network - ExtremeCloud IQ Controller",
+   "page": 29
+  },
+  {
+   "text": "Activation License for Virtual Appliances, or",
+   "page": 29
+  },
+  {
+   "text": "equivalent",
+   "page": 29
+  },
+  {
+   "text": "1 | 97003-XIQ-CACT-VT | Extreme Network - EW Software Support XIQ-CACT-",
+   "page": 29
+  },
+  {
+   "text": "VT, or equivalent",
+   "page": 29
+  },
+  {
+   "text": "400 AP4020-WW | Extreme Network - Indoor Quad Radio Wi-Fi 7",
+   "page": 29
+  },
+  {
+   "text": "(2x2:2): 2.4GHz, 5GHz, 6GHz and dedicated sensor,",
+   "page": 29
+  },
+  {
+   "text": "Multi-Rate Port, internal antennas. T-Bar, Incl Mt",
+   "page": 29
+  },
+  {
+   "text": "(AH-ACC-BKT-AX-TB). Domain: World SKU [AP4020-",
+   "page": 29
+  },
+  {
+   "text": "WW-5pk based pricing], or equivalent",
+   "page": 29
+  },
+  {
+   "text": "20 | AP5022-WW | Extreme Network - Indoor Quad Radio Wi-Fi 7",
+   "page": 29
+  },
+  {
+   "text": "(4x4:4): 2.4 GHz, 5 GHz, 6 GHz & dedicated full time",
+   "page": 29
+  },
+  {
+   "text": "sensor, Dual IOT, Dual 5 GHz, Dual 6 GHz, Multi-Rate",
+   "page": 29
+  },
+  {
+   "text": "Port, Internal antennas. T-Bar, Incl Mt (AH-ACC-BKT-",
+   "page": 29
+  },
+  {
+   "text": "AX-TB). Domain: World SKU, or equivalent",
+   "page": 29
+  },
+  {
+   "text": "10 | AP4060-WW | Extreme Network - Outdoor Quad Radio Wi-Fi 7",
+   "page": 29
+  },
+  {
+   "text": "(2x2:2): 2.4GHz, 5GHz, 6GHz and dedicated sensor,",
+   "page": 29
+  },
+  {
+   "text": "Multi-Rate Port, internal antennas. Domain: World",
+   "page": 29
+  },
+  {
+   "text": "SKU, or equivalent",
+   "page": 29
+  },
+  {
+   "text": "10 | AH-ACC-BKT-ASM | Extreme Network - Outdoor AP stainless steel wall",
+   "page": 29
+  },
+  {
+   "text": "bracket assembly, or equivalent",
+   "page": 29
+  },
+  {
+   "text": "50 | 12342 | Extreme Network - FS transceivers, Extreme",
+   "page": 29
+  },
+  {
+   "text": "Networks 10301 Compatible 10GBASE-SR SFP+",
+   "page": 29
+  },
+  {
+   "text": "850nm 300m DOM Duplex LC/UPC MMF Optical",
+   "page": 29
+  },
+  {
+   "text": "Transceiver Module, or equivalent",
+   "page": 29
+  },
+  {
+   "text": "30 | 4120-24MW-4Y | Extreme Network - 4120 24 port stackable MultiGig",
+   "page": 29
+  },
+  {
+   "text": "switch with 24 10M/100M/1G/2.5GBaseT 90W POE",
+   "page": 29
+  },
+  {
+   "text": "ports 2x100G QSFP28 Universal/Stack ports 4x25G",
+   "page": 29
+  },
+  {
+   "text": "SFP28 ports fixed fans 1 internal fixed AC PSU 1",
+   "page": 29
+  },
+  {
+   "text": "unpopulated modular PSU slot, or equivalent",
+   "page": 29
+  },
+  {
+   "text": "29",
+   "page": 29
+  },
+  {
+   "text": "30 | 97004-4120-24MW-4Y | Extreme Network - EW NBD AHR 4120-24MW-4Y, or",
+   "page": 30
+  },
+  {
+   "text": "equivalent, or equivalent",
+   "page": 30
+  },
+  {
+   "text": "30 | XN-ACPWR-920W-FB-U | Extreme Network - Power Supply, or equivalent",
+   "page": 30
+  },
+  {
+   "text": "120 10138 | Extreme Network - Extreme Platform ONE Standard",
+   "page": 30
+  },
+  {
+   "text": "Networking for Tier A includes ExtremeWorks Right-",
+   "page": 30
+  },
+  {
+   "text": "to-Use Subscription and TAC OS for one Tier A device",
+   "page": 30
+  },
+  {
+   "text": "per year (US K-12) , or equivalent",
+   "page": 30
+  },
+  {
+   "text": "60 | 4120-48MW-4Y | Extreme Network - 4120 48 port stackable MultiGig",
+   "page": 30
+  },
+  {
+   "text": "switch with 48 10M/100M/1G/2.5GBaseT 90W POE",
+   "page": 30
+  },
+  {
+   "text": "ports 2x100G QSFP28 Universal/Stack ports 4x25G",
+   "page": 30
+  },
+  {
+   "text": "SFP28 ports fixed fans 1 internal fixed AC PSU 1",
+   "page": 30
+  },
+  {
+   "text": "unpopulated modular PSU slot, or equivalent",
+   "page": 30
+  },
+  {
+   "text": "60 | 97004-4120-48MW-4Y | Extreme Network - EW NBD AHR 4120-48MW-4Y, or",
+   "page": 30
+  },
+  {
+   "text": "equivalent",
+   "page": 30
+  },
+  {
+   "text": "60 | XN-ACPWR-1200W-FB-U | Extreme Network - 1200 Watt AC PoE Power Supply",
+   "page": 30
+  },
+  {
+   "text": "Module - Front to Back airflow, or equivalent",
+   "page": 30
+  },
+  {
+   "text": "60 | 10099 | Extreme Network -",
+   "page": 30
+  },
+  {
+   "text": "PWR CORD,NEMA,13A,NEMA 5-15P,C13,ST, or",
+   "page": 30
+  },
+  {
+   "text": "equivalent",
+   "page": 30
+  },
+  {
+   "text": "90 | USK12-STD-A-S-C-EW | Extreme Network -",
+   "page": 30
+  },
+  {
+   "text": "Extreme Platform ONE Standard Networking for Tier",
+   "page": 30
+  },
+  {
+   "text": "A includes ExtremeWorks Right-to-Use Subscription",
+   "page": 30
+  },
+  {
+   "text": "and TAC OS for one Tier A device per year (US K-12) ,",
+   "page": 30
+  },
+  {
+   "text": "or equivalent",
+   "page": 30
+  },
+  {
+   "text": "20 | SMART2200RMXLN | Tripp Lite series SmartPro 1950VA 1950W 120V Line-",
+   "page": 30
+  },
+  {
+   "text": "Interactive Sine Wave UPS - 7 Outlets, Network Card",
+   "page": 30
+  },
+  {
+   "text": "Included, LCD, USB, DB9, 2U Rack/Tower, or",
+   "page": 30
+  },
+  {
+   "text": "equivalent",
+   "page": 30
+  },
+  {
+   "text": "20 | OR1500LCDRM1U | CyberPower OR1500LCDRM1U, 1500 VA / 900 W, 3",
+   "page": 30
+  },
+  {
+   "text": "Year warranty, or equivalent",
+   "page": 30
+  },
+  {
+   "text": "40 | ECS-24-PoE | Ubiquiti - Enterprise-grade 24-port, Layer 3",
+   "page": 30
+  },
+  {
+   "text": "Etherlighting™ PoE+++ switch with high-capacity 10",
+   "page": 30
+  },
+  {
+   "text": "GbE RJ45 and 25G SFP28 connections for high",
+   "page": 30
+  },
+  {
+   "text": "availability system design, or equivalent",
+   "page": 30
+  },
+  {
+   "text": "60 | ECS-48-PoE | Ubiquiti - Enterprise-grade 48-port, Layer 3",
+   "page": 30
+  },
+  {
+   "text": "Etherlighting™ PoE+++ switch with high-capacity 10",
+   "page": 30
+  },
+  {
+   "text": "GbE RJ45 and 25G SFP28 connections for high",
+   "page": 30
+  },
+  {
+   "text": "availability system design, or equivalent",
+   "page": 30
+  },
+  {
+   "text": "20 | ECS-48S-PoE | Ubiquiti - Enterprise-grade 48-port, Layer 3",
+   "page": 30
+  },
+  {
+   "text": "Etherlighting™ PoE+++ switch with Stacking support",
+   "page": 30
+  },
+  {
+   "text": "and high-capacity 10 GbE RJ45 and 25G SFP28",
+   "page": 30
+  },
+  {
+   "text": "connections for high availability system design, or",
+   "page": 30
+  },
+  {
+   "text": "equivalent",
+   "page": 30
+  },
+  {
+   "text": "20 | USW-Pro-XG-24-PoE | Ubiquiti - Professional-grade, 24-port Layer 3",
+   "page": 30
+  },
+  {
+   "text": "Etherlighting™ PoE+++ switch with (16) 10 GbE, (8)",
+   "page": 30
+  },
+  {
+   "text": "2.5 GbE, and (2) 25G SFP28 ports, or equivalent",
+   "page": 30
+  },
+  {
+   "text": "20 | USW-Pro-XG-48-PoE | Ubiquiti - Professional-grade, 48-port Layer 3",
+   "page": 30
+  },
+  {
+   "text": "Etherlighting™ PoE+++ switch with (32) 10 GbE, (16)",
+   "page": 30
+  },
+  {
+   "text": "2.5 GbE PoE, and (4) 25G SFP28 ports, or equivalent",
+   "page": 30
+  },
+  {
+   "text": "30",
+   "page": 30
+  },
+  {
+   "text": "400 E7 | Ubiquiti - Enterprise-grade indoor access point with",
+   "page": 31
+  },
+  {
+   "text": "10-stream WiFi 7 performance, a 10 GbE uplink, and",
+   "page": 31
+  },
+  {
+   "text": "a redundant GbE port for high availability, or",
+   "page": 31
+  },
+  {
+   "text": "equivalent",
+   "page": 31
+  },
+  {
+   "text": "20 | UACC-DAC-SFP10-0.5M | Ubiquiti - SFP+ direct attach cable with a 10 Gbps",
+   "page": 31
+  },
+  {
+   "text": "max data rate, or equivalent",
+   "page": 31
+  },
+  {
+   "text": "20 | UACC-DAC-SFP10-1M | Ubiquiti - SFP+ direct attach cable with a 10 Gbps",
+   "page": 31
+  },
+  {
+   "text": "max data rate, or equivalent",
+   "page": 31
+  },
+  {
+   "text": "60 | UACC-OM-MM-10G-D | Ubiquiti - SFP+ transceiver that supports 10G",
+   "page": 31
+  },
+  {
+   "text": "connections up to 400 m using multi-mode fiber with",
+   "page": 31
+  },
+  {
+   "text": "a duplex LC UPC connector, or equivalent",
+   "page": 31
+  },
+  {
+   "text": "1 | UACC-OM-MM-1G-D-20 | Ubiquiti - SFP transceiver that supports 1G",
+   "page": 31
+  },
+  {
+   "text": "connections up to 550 m using multi-mode fiber with",
+   "page": 31
+  },
+  {
+   "text": "a duplex LC UPC connector, or equivalent",
+   "page": 31
+  },
+  {
+   "text": "Ubiquiti - List All With or Without UI Care (no specific",
+   "page": 31
+  },
+  {
+   "text": "SKU numbers for these, or equivalent",
+   "page": 31
+  },
+  {
+   "text": "30 | EX-SFP-10GE-DAC-1M | Juniper Networks - SFP+, 10GE Direct Attach Copper",
+   "page": 31
+  },
+  {
+   "text": "Cable, 1-meter, Standard Temperature (0 through 70",
+   "page": 31
+  },
+  {
+   "text": "DEGREE C), 0.57W, 30 AWG, or equivalent",
+   "page": 31
+  },
+  {
+   "text": "1 | EX-SFP-10GE-DAC-3M | Juniper Networks - SFP+, 10GE Direct Attach Copper",
+   "page": 31
+  },
+  {
+   "text": "Cable, 3 meters, Standard Temperature (0 through 70",
+   "page": 31
+  },
+  {
+   "text": "DEGREE C), 0.57W, 30 AWG, or equivalent",
+   "page": 31
+  },
+  {
+   "text": "1 | EX-SFP-10GE-DAC-5M | Juniper Networks - SFP+, 10GE Direct Attach Copper",
+   "page": 31
+  },
+  {
+   "text": "Cable, 5 meters, Standard Temperature (0 through 70",
+   "page": 31
+  },
+  {
+   "text": "DEGREE C), 0.57W, 24 AWG, or equivalent",
+   "page": 31
+  },
+  {
+   "text": "30 | EX4000-24P | Juniper Networks - EX4000 24-Port",
+   "page": 31
+  },
+  {
+   "text": "10/100/1000BaseT PoE+, 4x 1G/10G SFP/SFP+ (optics",
+   "page": 31
+  },
+  {
+   "text": "sold separately) with Standard SW, or equivalent",
+   "page": 31
+  },
+  {
+   "text": "30 | S-EX-S-C2-5M2-C-E | Juniper Networks - E-rate bundle, SW EX Standard,",
+   "page": 31
+  },
+  {
+   "text": "Class 2 (24 ports), Includes Wired Assurance and VNA",
+   "page": 31
+  },
+  {
+   "text": "subscription for EX24 Port Switches with SVC CORE",
+   "page": 31
+  },
+  {
+   "text": "support, 5 YEARS, or equivalent",
+   "page": 31
+  },
+  {
+   "text": "1 | SFP-10G-DAC-50CM | Juniper Networks - SFP+, 10GE Direct Attach Copper",
+   "page": 31
+  },
+  {
+   "text": "Cable, 50cm, Standard Temperature (0 through 70",
+   "page": 31
+  },
+  {
+   "text": "deg C), or equivalent",
+   "page": 31
+  },
+  {
+   "text": "60 | EX-SFP-10GE-DAC-1M | Juniper Networks - SFP+, 10GE Direct Attach Copper",
+   "page": 31
+  },
+  {
+   "text": "Cable, 1-meter, Standard Temperature (0 through 70",
+   "page": 31
+  },
+  {
+   "text": "DEGREE C), 0.57W, 30 AWG, or equivalent",
+   "page": 31
+  },
+  {
+   "text": "60 | EX4000-48P | Juniper Networks - EX4000 48-Port",
+   "page": 31
+  },
+  {
+   "text": "10/100/1000BaseT PoE+, 4x 1G/10G SFP/SFP+ (optics",
+   "page": 31
+  },
+  {
+   "text": "sold separately) with Standard SW, or equivalent",
+   "page": 31
+  },
+  {
+   "text": "60 | S-EX-S-C3-5M2-C-E | Juniper Networks - E-rate bundle, SW EX Standard,",
+   "page": 31
+  },
+  {
+   "text": "Class 3 (32 or 48 ports), Includes Wired Assurance",
+   "page": 31
+  },
+  {
+   "text": "and VNA subscription for EX32 or EX48 Port Switches",
+   "page": 31
+  },
+  {
+   "text": "with SVC CORE support, 5 YEARS, or equivalent",
+   "page": 31
+  },
+  {
+   "text": "60 | CBL-PWR-C13-US-48P | Juniper Networks - Power Cord, AC, US/Canada, C13,",
+   "page": 31
+  },
+  {
+   "text": "15A/125V, 2.5m, Straight, or equivalent",
+   "page": 31
+  },
+  {
+   "text": "60 | EX-SFP-10GE-DAC-1M | Juniper Networks - SFP+, 10GE Direct Attach Copper",
+   "page": 31
+  },
+  {
+   "text": "Cable, 1-meter, Standard Temperature (0 through 70",
+   "page": 31
+  },
+  {
+   "text": "DEGREE C), 0.57W, 30 AWG, or equivalent",
+   "page": 31
+  },
+  {
+   "text": "31",
+   "page": 31
+  },
+  {
+   "text": "60 | EX4100-48P | Juniper Networks - EX4100 48-Port",
+   "page": 32
+  },
+  {
+   "text": "10/100/1000BaseT PoE+, 4x 10G SFP+ Uplink ports,",
+   "page": 32
+  },
+  {
+   "text": "4x 25G SFP28 Stacking/Uplink ports, redundant fans,",
+   "page": 32
+  },
+  {
+   "text": "1 AC PSU JPSU-920-AC-AFO included (optics sold",
+   "page": 32
+  },
+  {
+   "text": "separately) with Standard SW, or equivalent",
+   "page": 32
+  },
+  {
+   "text": "120 EX4100-FAN-AFO | Juniper Networks - INCLUDED: EX4100 FRONT-TO-",
+   "page": 32
+  },
+  {
+   "text": "BACK FAN, or equivalent",
+   "page": 32
+  },
+  {
+   "text": "60 | JPSU-920-AC-AFO | Juniper Networks - INCLUDED: EX4100 and EX3400",
+   "page": 32
+  },
+  {
+   "text": "920W AC Power Supply, Front-to-Back airflow (power",
+   "page": 32
+  },
+  {
+   "text": "cord needs to be ordered separately , or equivalent",
+   "page": 32
+  },
+  {
+   "text": "60 | EX-RMK | Juniper Networks - INCLUDED: Rack Mount Kit for",
+   "page": 32
+  },
+  {
+   "text": "EX4400, EX4300, EX4100, EX3400, EX4100-F, and",
+   "page": 32
+  },
+  {
+   "text": "EX2300 Switches, or equivalent",
+   "page": 32
+  },
+  {
+   "text": "1 | JNP-SFP-25G-DAC-1M | Juniper Networks - SFP28, 25GE Direct Attach Copper",
+   "page": 32
+  },
+  {
+   "text": "Cable, 1-meter, Standard Temperature (0 through 70",
+   "page": 32
+  },
+  {
+   "text": "DEGREE C), 0.5W, 30 AWG, or equivalent",
+   "page": 32
+  },
+  {
+   "text": "1 | JNP-SFP-25G-DAC-3M | Juniper Networks - SFP28, 25GE Direct Attach Copper",
+   "page": 32
+  },
+  {
+   "text": "Cable, 3 meters, Standard Temperature (0 through 70",
+   "page": 32
+  },
+  {
+   "text": "DEGREE C), 0.5W, 26 AWG, or equivalent",
+   "page": 32
+  },
+  {
+   "text": "1 | JNP-SFP-25G-DAC-5M | Juniper Networks - SFP28, 25GE Direct Attach Copper",
+   "page": 32
+  },
+  {
+   "text": "Cable, 5 meters, Standard Temperature (0 through 70",
+   "page": 32
+  },
+  {
+   "text": "DEGREE C), 0.5W, 26 AWG, or equivalent",
+   "page": 32
+  },
+  {
+   "text": "60 | JPSU-920-AC-AFO | Juniper Networks - EX4100 and EX3400 920W AC",
+   "page": 32
+  },
+  {
+   "text": "Power Supply, Front-to-Back airflow (power cord",
+   "page": 32
+  },
+  {
+   "text": "needs to be ordered separately), or equivalent",
+   "page": 32
+  },
+  {
+   "text": "60 | S-EX-S-C3-5M2-C-E | Juniper Networks - E-rate bundle, SW EX Standard,",
+   "page": 32
+  },
+  {
+   "text": "Class 3 (32 or 48 ports), Includes Wired Assurance",
+   "page": 32
+  },
+  {
+   "text": "and VNA subscription for EX32 or EX48 Port Switches",
+   "page": 32
+  },
+  {
+   "text": "with SVC CORE support, 5 YEARS, or equivalent",
+   "page": 32
+  },
+  {
+   "text": "1 | SFP-25G-DAC-50CM | Juniper Networks - SFP-28 to SFP-28, 25G, Direct",
+   "page": 32
+  },
+  {
+   "text": "Attach Cable, 50cm, Standard Temperature (0",
+   "page": 32
+  },
+  {
+   "text": "through 70 deg C), or equivalent",
+   "page": 32
+  },
+  {
+   "text": "8 | EX4650-48Y-AFO | Juniper Networks - EX4650 48x25G+8x100G 1U AC",
+   "page": 32
+  },
+  {
+   "text": "port side intake and PSU side exhaust, or equivalent",
+   "page": 32
+  },
+  {
+   "text": "40 | QFX5110-FANAFO | Juniper Networks - INCLUDED: QFX5110-FANAFO FAN",
+   "page": 32
+  },
+  {
+   "text": "Model, front-to-back airflow, or equivalent",
+   "page": 32
+  },
+  {
+   "text": "16 | JPSU-650W-AC-AO | Juniper Networks - INCLUDED: JNP204 AC power",
+   "page": 32
+  },
+  {
+   "text": "supply air flow out, or equivalent",
+   "page": 32
+  },
+  {
+   "text": "8 | EX-4PST-RMK | Juniper Networks - INCLUDED: 4-Post Adjustable Rack",
+   "page": 32
+  },
+  {
+   "text": "Mount Kit for EX4400, EX4300, EX4100, EX3400,",
+   "page": 32
+  },
+  {
+   "text": "EX4100-F, and EX2300 Switches, or equivalent",
+   "page": 32
+  },
+  {
+   "text": "1 | JNP-100G-DAC-1M | Juniper Networks - QSFP28, 100GE Direct Attach",
+   "page": 32
+  },
+  {
+   "text": "Copper Cable, 1-meter, Standard Temperature (0",
+   "page": 32
+  },
+  {
+   "text": "through 70 DEGREE C), 0.015W, 30 AWG, or",
+   "page": 32
+  },
+  {
+   "text": "equivalent",
+   "page": 32
+  },
+  {
+   "text": "1 | JNP-100G-DAC-3M | Juniper Networks - QSFP28, 100GE Direct Attach",
+   "page": 32
+  },
+  {
+   "text": "Copper Cable, 3 meters, Standard Temperature (0",
+   "page": 32
+  },
+  {
+   "text": "through 70 DEGREE C), 0.015W, 26 AWG, or",
+   "page": 32
+  },
+  {
+   "text": "equivalent",
+   "page": 32
+  },
+  {
+   "text": "32",
+   "page": 32
+  },
+  {
+   "text": "1 | JNP-100G-DAC-5M | Juniper Networks - QSFP28, 100GE Direct Attach",
+   "page": 33
+  },
+  {
+   "text": "Copper Cable, 5 meters, Standard Temperature (0",
+   "page": 33
+  },
+  {
+   "text": "through 70 DEGREE C), 0.015W, 26 AWG, or",
+   "page": 33
+  },
+  {
+   "text": "equivalent",
+   "page": 33
+  },
+  {
+   "text": "8 | QFX-QSFP-DAC-1M | Juniper Networks - QSFP+, 40GE Direct Attach Copper",
+   "page": 33
+  },
+  {
+   "text": "Cable, 1-meter, Industrial Temperature (-40 through",
+   "page": 33
+  },
+  {
+   "text": "85 DEGREE C), 0.015W, 30 AWG, or equivalent",
+   "page": 33
+  },
+  {
+   "text": "1 | QFX-QSFP-DAC-3M | Juniper Networks - QSFP+, 40GE Direct Attach Copper",
+   "page": 33
+  },
+  {
+   "text": "Cable, 3 meters, Industrial Temperature (-40 through",
+   "page": 33
+  },
+  {
+   "text": "85 DEGREE C), 0.015W, 30 AWG, or equivalent",
+   "page": 33
+  },
+  {
+   "text": "1 | QFX-QSFP-DACBO-1M | Juniper Networks - QSFP+ to SFP+, 40GE to 4x10GE",
+   "page": 33
+  },
+  {
+   "text": "Direct Attach Copper Cable for Breakout, 1-meter,",
+   "page": 33
+  },
+  {
+   "text": "Extended Temperature (-40 through 85 DEGREE C),",
+   "page": 33
+  },
+  {
+   "text": "30AWG, or equivalent",
+   "page": 33
+  },
+  {
+   "text": "1 | QFX-QSFP-DACBO-3M | Juniper Networks - QSFP+ to SFP+, 40GE to 4x10GE",
+   "page": 33
+  },
+  {
+   "text": "Direct Attach Copper Cable for Breakout, 3 meters,",
+   "page": 33
+  },
+  {
+   "text": "Extended Temperature (-40 through 85 DEGREE C),",
+   "page": 33
+  },
+  {
+   "text": "30 AWG, or equivalent",
+   "page": 33
+  },
+  {
+   "text": "1 | QSFP-100G-DAC-50CM | Juniper Networks - QSFP28, 100GE Direct Attach",
+   "page": 33
+  },
+  {
+   "text": "Copper Cable, 50 cm, Standard Temperature (0",
+   "page": 33
+  },
+  {
+   "text": "through 70 deg C), or equivalent",
+   "page": 33
+  },
+  {
+   "text": "8 | S-EX-S-C3-5M246C-E | Juniper Networks - E-rate bundle, SW EX Standard,",
+   "page": 33
+  },
+  {
+   "text": "EX4600 Series Switches, Includes Wired Assurance",
+   "page": 33
+  },
+  {
+   "text": "and VNA subscription for EX4600 Series Switches",
+   "page": 33
+  },
+  {
+   "text": "with SVC CORE support, 5 YEARS, or equivalent",
+   "page": 33
+  },
+  {
+   "text": "40 | AP27-US | Juniper Networks - High-Performance Multi-Gigabit",
+   "page": 33
+  },
+  {
+   "text": "Wi-Fi 7 Access Point (2x2:2) with Bluetooth Low",
+   "page": 33
+  },
+  {
+   "text": "Energy, with built-in Internal Antenna US only;",
+   "page": 33
+  },
+  {
+   "text": "Universal Mounting Bracket is included, or equivalent",
+   "page": 33
+  },
+  {
+   "text": "40 | APBR-U | Juniper Networks - INCLUDED: Universal AP Bracket",
+   "page": 33
+  },
+  {
+   "text": "for T-Rail and Drywall mounting for Indoor Access",
+   "page": 33
+  },
+  {
+   "text": "Points, or equivalent",
+   "page": 33
+  },
+  {
+   "text": "40 | SUB-2S-5Y-E | Juniper Networks - E-RATE, Subscription for 1 service",
+   "page": 33
+  },
+  {
+   "text": "(SUB-MAN, SUB-VNA) for one access point for 5",
+   "page": 33
+  },
+  {
+   "text": "years: includes upgrades, cloud function subscription",
+   "page": 33
+  },
+  {
+   "text": "and limited lifetime warranty benefits on indoor",
+   "page": 33
+  },
+  {
+   "text": "access points. Subscription for 2 Services [ SUB-MAN-",
+   "page": 33
+  },
+  {
+   "text": "BND SUB-VNA-BND], or equivalent",
+   "page": 33
+  },
+  {
+   "text": "40 | SUB-MAN-BND | Juniper Networks - INCLUDED: WIFI Assurance",
+   "page": 33
+  },
+  {
+   "text": "Subscription for one access point for 1 Month:",
+   "page": 33
+  },
+  {
+   "text": "Includes software updates, upgrades, cloud (wi-fi)",
+   "page": 33
+  },
+  {
+   "text": "function Subscriptions, network insights and limited",
+   "page": 33
+  },
+  {
+   "text": "lifetime warranty on indoor access points, or",
+   "page": 33
+  },
+  {
+   "text": "equivalent",
+   "page": 33
+  },
+  {
+   "text": "40 | SUB-VNA-BND | Juniper Networks - INCLUDED: Virtual Network",
+   "page": 33
+  },
+  {
+   "text": "Assistant Subscription for wireless operations.",
+   "page": 33
+  },
+  {
+   "text": "Includes software updates, upgrades, and",
+   "page": 33
+  },
+  {
+   "text": "enhancements on the VNA service for 1 Month.",
+   "page": 33
+  },
+  {
+   "text": "Requires WIFI Assurance Subscription to be enabled",
+   "page": 33
+  },
+  {
+   "text": "on the access point, or equivalent",
+   "page": 33
+  },
+  {
+   "text": "33",
+   "page": 33
+  },
+  {
+   "text": "10 | AP66-US | Juniper Networks - High-Performance Outdoor Multi-",
+   "page": 34
+  },
+  {
+   "text": "Gigabit Wi-Fi 7 Access Point (2x2:2) with Bluetooth",
+   "page": 34
+  },
+  {
+   "text": "Low Energy, with built-in Internal Antenna - US only;",
+   "page": 34
+  },
+  {
+   "text": "Flush Mounting Bracket is included, or equivalent",
+   "page": 34
+  },
+  {
+   "text": "10 | APOUTBR-FM2 | Juniper Networks - INCLUDED: Flush mount bracket",
+   "page": 34
+  },
+  {
+   "text": "for outdoor AP64 wall and pole mounting, or",
+   "page": 34
+  },
+  {
+   "text": "equivalent",
+   "page": 34
+  },
+  {
+   "text": "10 | SUB-2S-5Y-E | Juniper Networks - E-RATE, Subscription for 1 service",
+   "page": 34
+  },
+  {
+   "text": "(SUB-MAN, SUB-VNA) for one access point for 5 year:",
+   "page": 34
+  },
+  {
+   "text": "includes upgrades, cloud function subscription and",
+   "page": 34
+  },
+  {
+   "text": "limited lifetime warranty benefits on indoor access",
+   "page": 34
+  },
+  {
+   "text": "points. Subscription for 2 Services [ SUB-MAN-BND",
+   "page": 34
+  },
+  {
+   "text": "SUB-VNA-BND ] , or equivalent",
+   "page": 34
+  },
+  {
+   "text": "10 | SUB-MAN-BND | Juniper Networks - INCLUDED: WIFI Assurance",
+   "page": 34
+  },
+  {
+   "text": "Subscription for one access point for 1 Month:",
+   "page": 34
+  },
+  {
+   "text": "Includes software updates, upgrades, cloud (wi-fi)",
+   "page": 34
+  },
+  {
+   "text": "function Subscriptions, network insights and limited",
+   "page": 34
+  },
+  {
+   "text": "lifetime warranty on indoor access points, or",
+   "page": 34
+  },
+  {
+   "text": "equivalent",
+   "page": 34
+  },
+  {
+   "text": "10 | SUB-VNA-BND | Juniper Networks - INCLUDED: Virtual Network",
+   "page": 34
+  },
+  {
+   "text": "Assistant Subscription for wireless operations.",
+   "page": 34
+  },
+  {
+   "text": "Includes software updates, upgrades, and",
+   "page": 34
+  },
+  {
+   "text": "enhancements on the VNA service for 1 Month.",
+   "page": 34
+  },
+  {
+   "text": "Requires WIFI Assurance Subscription to be enabled",
+   "page": 34
+  },
+  {
+   "text": "on the access point, or equivalent",
+   "page": 34
+  },
+  {
+   "text": "360 AP47-US | Juniper Networks - Premium Performance Multi-",
+   "page": 34
+  },
+  {
+   "text": "Gigabit Wi-Fi 7 Access Point (4x4:4) with vBLE Array",
+   "page": 34
+  },
+  {
+   "text": "for Advanced Location based services, with built in",
+   "page": 34
+  },
+  {
+   "text": "Internal Antenna - US only; Universal Mounting",
+   "page": 34
+  },
+  {
+   "text": "Bracket is included, or equivalent",
+   "page": 34
+  },
+  {
+   "text": "360 APBR-U | Juniper Networks - INCLUDED: Universal AP Bracket",
+   "page": 34
+  },
+  {
+   "text": "for T-Rail and Drywall mounting for Indoor Access",
+   "page": 34
+  },
+  {
+   "text": "Points, or equivalent",
+   "page": 34
+  },
+  {
+   "text": "360 SUB-2S-5Y-E | Juniper Networks - E-RATE, Subscription for 1 service",
+   "page": 34
+  },
+  {
+   "text": "(SUB-MAN, SUB-VNA) for one access point for 5",
+   "page": 34
+  },
+  {
+   "text": "years: includes upgrades, cloud function subscription",
+   "page": 34
+  },
+  {
+   "text": "and limited lifetime warranty benefits on indoor",
+   "page": 34
+  },
+  {
+   "text": "access points. Subscription for 2 Services [ SUB-MAN-",
+   "page": 34
+  },
+  {
+   "text": "BND SUB-VNA-BND ], or equivalent",
+   "page": 34
+  },
+  {
+   "text": "360 SUB-MAN-BND | Juniper Networks - INCLUDED: WIFI Assurance",
+   "page": 34
+  },
+  {
+   "text": "Subscription for one access point for 1 Month:",
+   "page": 34
+  },
+  {
+   "text": "Includes software updates, upgrades, cloud (wi-fi)",
+   "page": 34
+  },
+  {
+   "text": "function Subscriptions, network insights and limited",
+   "page": 34
+  },
+  {
+   "text": "lifetime warranty on indoor access points, or",
+   "page": 34
+  },
+  {
+   "text": "equivalent",
+   "page": 34
+  },
+  {
+   "text": "360 SUB-VNA-BND | Juniper Networks - INCLUDED: Virtual Network",
+   "page": 34
+  },
+  {
+   "text": "Assistant Subscription for wireless operations.",
+   "page": 34
+  },
+  {
+   "text": "Includes software updates, upgrades, and",
+   "page": 34
+  },
+  {
+   "text": "enhancements on the VNA service for 1 Month.",
+   "page": 34
+  },
+  {
+   "text": "Requires WIFI Assurance Subscription to be enabled",
+   "page": 34
+  },
+  {
+   "text": "on the access point, or equivalent",
+   "page": 34
+  },
+  {
+   "text": "34",
+   "page": 34
+  },
+  {
+   "text": "2 | H04KKE | Hewlett Packard Enterprise - ANW 5Y FC 4H OS SW",
+   "page": 35
+  },
+  {
+   "text": "E/R CP N1000 SVC [for S3N67A], or equivalent",
+   "page": 35
+  },
+  {
+   "text": "1 | HA0G0E | Hewlett Packard Enterprise - Aruba 5Y FC SW E/R CP",
+   "page": 35
+  },
+  {
+   "text": "NL AC 5K CE E-LTU SVC [for JZ404AAE], or equivalent",
+   "page": 35
+  },
+  {
+   "text": "2 | JW124A | Hewlett Packard Enterprise - Aruba Networking PC-",
+   "page": 35
+  },
+  {
+   "text": "AC-NA 125V/10A 1.8m C13 to NEMA 5-15P (NA) AC",
+   "page": 35
+  },
+  {
+   "text": "Power Cord, or equivalent",
+   "page": 35
+  },
+  {
+   "text": "1 | JZ404AAE | Hewlett Packard Enterprise - Aruba Networking",
+   "page": 35
+  },
+  {
+   "text": "ClearPass Access License 5K Concurrent Endpoints E-",
+   "page": 35
+  },
+  {
+   "text": "LTU, or equivalent",
+   "page": 35
+  },
+  {
+   "text": "2 | S3N67A | Hewlett Packard Enterprise - Aruba Networking",
+   "page": 35
+  },
+  {
+   "text": "ClearPass N1000 1G Hardware Appliance, or",
+   "page": 35
+  },
+  {
+   "text": "equivalent",
+   "page": 35
+  },
+  {
+   "text": "2 | H9WY9E | Hewlett Packard Enterprise - Aruba 5Y FC SW E/R CP",
+   "page": 35
+  },
+  {
+   "text": "Cx000V VM Appl E-LTU SVC [for JZ399AAE], or",
+   "page": 35
+  },
+  {
+   "text": "equivalent",
+   "page": 35
+  },
+  {
+   "text": "1 | HA0G0E | Hewlett Packard Enterprise - Aruba 5Y FC SW E/R CP",
+   "page": 35
+  },
+  {
+   "text": "NL AC 5K CE E-LTU SVC [for JZ404AAE], or equivalent",
+   "page": 35
+  },
+  {
+   "text": "2 | JZ399AAE | Hewlett Packard Enterprise - Aruba Networking",
+   "page": 35
+  },
+  {
+   "text": "ClearPass NAC Cx000V VM-Based Appliance License",
+   "page": 35
+  },
+  {
+   "text": "E-LTU, or equivalent",
+   "page": 35
+  },
+  {
+   "text": "1 | JZ404AAE | Hewlett Packard Enterprise - Aruba Networking",
+   "page": 35
+  },
+  {
+   "text": "ClearPass Access License 5K Concurrent Endpoints E-",
+   "page": 35
+  },
+  {
+   "text": "LTU, or equivalent",
+   "page": 35
+  },
+  {
+   "text": "100 CBL-PWR-C13-US-48P | Juniper Network - Power Cord, AC, US/Canada, C13,",
+   "page": 35
+  },
+  {
+   "text": "15A/125V, 2.5m, Straight, or equivalent",
+   "page": 35
+  },
+  {
+   "text": "100 EX4000-24MP | Juniper Network - EX4000 24-Port Multi-Gig with 4x",
+   "page": 35
+  },
+  {
+   "text": "100M/1G/2.5GBaseT, 20x 10/100/1000BaseT, PoE++,",
+   "page": 35
+  },
+  {
+   "text": "4x 1G/10G SFP/SFP+(optics sold separately) with",
+   "page": 35
+  },
+  {
+   "text": "Standard SW, or equivalent",
+   "page": 35
+  },
+  {
+   "text": "100 EX4000-48MP | Juniper Network - EX4000 48-Port Multi-Gig with 8x",
+   "page": 35
+  },
+  {
+   "text": "100M/1G/2.5GBaseT, 40x 10/100/1000BaseT, PoE++,",
+   "page": 35
+  },
+  {
+   "text": "4x 1G/10G SFP/SFP+(optics sold separately) with",
+   "page": 35
+  },
+  {
+   "text": "Standard SW, or equivalent",
+   "page": 35
+  },
+  {
+   "text": "100 | Juniper Network - EX4100 48-Port Multi-Gig with 32 x",
+   "page": 35
+  },
+  {
+   "text": "EX4100-48MP | 1G, 16 x 1G/2.5G PoE++, 4x 10G SFP+ Uplink ports, 4x",
+   "page": 35
+  },
+  {
+   "text": "25G SFP28 Stacking/Uplink ports, redundant fans, 1",
+   "page": 35
+  },
+  {
+   "text": "AC PSU JPSU-920-AC-AFO included (optics sold",
+   "page": 35
+  },
+  {
+   "text": "separately) with Standard SW, or equivalent",
+   "page": 35
+  },
+  {
+   "text": "200 EX4100-FAN-AFO | Juniper Network - INCLUDED: EX4100 FRONT-TO-",
+   "page": 35
+  },
+  {
+   "text": "BACK FAN, or equivalent",
+   "page": 35
+  },
+  {
+   "text": "100 JPSU-920-AC-AFO | Juniper Network - INCLUDED: EX4100 and EX3400",
+   "page": 35
+  },
+  {
+   "text": "920W AC Power Supply, Front-to-Back airflow (power",
+   "page": 35
+  },
+  {
+   "text": "cord needs to be ordered separately), or equivalent",
+   "page": 35
+  },
+  {
+   "text": "100 EX-RMK | Juniper Network - INCLUDED: Rack Mount Kit for",
+   "page": 35
+  },
+  {
+   "text": "EX4400, EX4300, EX4100, EX3400, EX4100-F, and",
+   "page": 35
+  },
+  {
+   "text": "EX2300 Switches, or equivalent",
+   "page": 35
+  },
+  {
+   "text": "100 JPSU-920-AC-AFO | Juniper Network - EX4100 and EX3400 920W AC",
+   "page": 35
+  },
+  {
+   "text": "Power Supply, Front-to-Back airflow (power cord",
+   "page": 35
+  },
+  {
+   "text": "needs to be ordered separately), or equivalent",
+   "page": 35
+  },
+  {
+   "text": "35",
+   "page": 35
+  },
+  {
+   "text": "100 S-EX-S-C2-5M2-C-E | Juniper Network - Erate bundle, SW EX Standard,",
+   "page": 36
+  },
+  {
+   "text": "Class 2 (24 ports), Includes Wired Assurance and VNA",
+   "page": 36
+  },
+  {
+   "text": "subscription for EX24 Port Switches with SVC CORE",
+   "page": 36
+  },
+  {
+   "text": "support, 5 YEAR, or equivalent",
+   "page": 36
+  },
+  {
+   "text": "200 S-EX-S-C3-5M2-C-E | Juniper Network - E-rate bundle, SW EX Standard,",
+   "page": 36
+  },
+  {
+   "text": "Class 3 (32 or 48 ports), Includes Wired Assurance",
+   "page": 36
+  },
+  {
+   "text": "and VNA subscription for EX32 or EX48 Port Switches",
+   "page": 36
+  },
+  {
+   "text": "with SVC CORE support, 5 YEAR, or equivalent",
+   "page": 36
+  },
+  {
+   "text": "100 SFP-1G-LX-C | Juniper Network - SFP, 1G, SMF 10km and MMF",
+   "page": 36
+  },
+  {
+   "text": "550m, Extended Temperature (-5 through 70 DegC),",
+   "page": 36
+  },
+  {
+   "text": "Duplex LC connector, or equivalent",
+   "page": 36
+  },
+  {
+   "text": "100 SFP-1G-SX-C | Juniper Network - SFP, 1G, FDDI 220m and OM1",
+   "page": 36
+  },
+  {
+   "text": "275m/OM2 MMF 550m, Extended Temperature (-10",
+   "page": 36
+  },
+  {
+   "text": "through 85 DegC), Duplex LC connector, or equivalent",
+   "page": 36
+  },
+  {
+   "text": "100 SFP-25G-LR-C | Juniper Network - SFP28, 25GBASE-LR, SMF 10 km,",
+   "page": 36
+  },
+  {
+   "text": "Standard Temperature (0 through 70 DEGREE C),",
+   "page": 36
+  },
+  {
+   "text": "Duplex LC connector, or equivalent",
+   "page": 36
+  },
+  {
+   "text": "100 SFP-25G-SR-C | Juniper Network - SFP28, 25GBASE-SR, MMF OM3 70",
+   "page": 36
+  },
+  {
+   "text": "meters and OM4 100 meters, Standard Temperature",
+   "page": 36
+  },
+  {
+   "text": "(0 through 70 DEGREE C), Duplex LC connector, or",
+   "page": 36
+  },
+  {
+   "text": "equivalent",
+   "page": 36
+  },
+  {
+   "text": "100 SFPP-10G-LRT2-C | Juniper Network - +, 10GBASE-LR Type 2, SMF 10 km,",
+   "page": 36
+  },
+  {
+   "text": "Standard Temperature (0 through 70 DEGREE C),",
+   "page": 36
+  },
+  {
+   "text": "Duplex LC connector, or equivalent",
+   "page": 36
+  },
+  {
+   "text": "100 SFPP-10G-SR-C | Juniper Network - SFP+, 10GBASE-SR, MMF OM3 300",
+   "page": 36
+  },
+  {
+   "text": "meters and OM4 400 meters, Standard Temperature",
+   "page": 36
+  },
+  {
+   "text": "(0 through 70 DEGREE C), Duplex LC connector, or",
+   "page": 36
+  },
+  {
+   "text": "equivalent",
+   "page": 36
+  },
+  {
+   "text": "100 SFPP-10G-T | Juniper Network - SFP+, 10GE BASE-T,Copper,",
+   "page": 36
+  },
+  {
+   "text": "Standard Temperature (0 through 70 degC); RJ45",
+   "page": 36
+  },
+  {
+   "text": "receptacle, or equivalent",
+   "page": 36
+  },
+  {
+   "text": "100 | Juniper Network - SFP+, 10GBASE-USR, MMF OM3",
+   "page": 36
+  },
+  {
+   "text": "SFPP-10G-USR-C | 100 meters, Standard Temperature (0 through 70",
+   "page": 36
+  },
+  {
+   "text": "DEGREE C), Duplex LC connector, or equivalent",
+   "page": 36
+  },
+  {
+   "text": "100 | Juniper Network - 24x1/2.5/5/10G Multigigabit",
+   "page": 36
+  },
+  {
+   "text": "EX4400-24MP | switch with 2x100G uplink/stacking ports. 90W POE.",
+   "page": 36
+  },
+  {
+   "text": "MACsec AES256. Optional extension module: 4x10G",
+   "page": 36
+  },
+  {
+   "text": "or 4x25G, or equivalent",
+   "page": 36
+  },
+  {
+   "text": "200 EX4400-FAN | Juniper Network - INCLUDED: EX4400 AFO Fan, or",
+   "page": 36
+  },
+  {
+   "text": "equivalent, or equivalent",
+   "page": 36
+  },
+  {
+   "text": "100 JPSU-1050-C-AC-AFO | Juniper Network - INCLUDED: 1050W Compact AC",
+   "page": 36
+  },
+  {
+   "text": "AFO power supply for EX4400 switches, or equivalent",
+   "page": 36
+  },
+  {
+   "text": "100 EX-RMK | Juniper Network - INCLUDED: Rack Mount Kit for",
+   "page": 36
+  },
+  {
+   "text": "EX4400, EX4300, EX4100, EX3400, EX4100-F, and",
+   "page": 36
+  },
+  {
+   "text": "EX2300 Switches, or equivalent",
+   "page": 36
+  },
+  {
+   "text": "100 EX4400-48MP | Juniper Network - 12x1/2.5/5/10G, 36x1/2.5G",
+   "page": 36
+  },
+  {
+   "text": "Multigigabit switch with 2x100G uplink/stacking",
+   "page": 36
+  },
+  {
+   "text": "ports. 90W POE. MACsec AES256. Optional extension",
+   "page": 36
+  },
+  {
+   "text": "module:4x10G or 4x25G, or equivalent",
+   "page": 36
+  },
+  {
+   "text": "200 EX4400-FAN | Juniper Network - INCLUDED: EX4400 AFO Fan, or",
+   "page": 36
+  },
+  {
+   "text": "equivalent",
+   "page": 36
+  },
+  {
+   "text": "36",
+   "page": 36
+  },
+  {
+   "text": "100 JPSU-1600-C-AC-AFO | Juniper Network - INCLUDED: 1600W Compact AC",
+   "page": 37
+  },
+  {
+   "text": "AFO power supply for EX4400 switches, or equivalent",
+   "page": 37
+  },
+  {
+   "text": "100 EX-RMK | Juniper Network - INCLUDED: Rack Mount Kit for",
+   "page": 37
+  },
+  {
+   "text": "EX4400, EX4300, EX4100, EX3400, EX4100-F, and",
+   "page": 37
+  },
+  {
+   "text": "EX2300 Switches, or equivalent",
+   "page": 37
+  },
+  {
+   "text": "100 QSFP-100G-DR | Juniper Network - QSFP28, 100GBASE-DR, SMF 500",
+   "page": 37
+  },
+  {
+   "text": "meters, Standard Temperature (0 through 70 DEGREE",
+   "page": 37
+  },
+  {
+   "text": "C), Duplex LC connector, or equivalent",
+   "page": 37
+  },
+  {
+   "text": "100 QSFP-100G-FR | Juniper Network - QSFP28, 100GBASE-FR1, SMF 2 km,",
+   "page": 37
+  },
+  {
+   "text": "Standard Temperature (0 through 70 DEGREE C),",
+   "page": 37
+  },
+  {
+   "text": "Duplex LC connector, or equivalent",
+   "page": 37
+  },
+  {
+   "text": "100 QSFP-100G-LR | Juniper Network - QSF28, 100GBASE-LR1, SMF 10 km,",
+   "page": 37
+  },
+  {
+   "text": "Standard Temperature (0 through 70 DEGREE C),",
+   "page": 37
+  },
+  {
+   "text": "Duplex LC connector, or equivalent",
+   "page": 37
+  },
+  {
+   "text": "100 S-EX-S-C2-5M2-C-E | Juniper Network - E-rate bundle, SW EX Standard,",
+   "page": 37
+  },
+  {
+   "text": "Class 2 (24 ports), Includes Wired Assurance and VNA",
+   "page": 37
+  },
+  {
+   "text": "subscription for EX24 Port Switches with SVC CORE",
+   "page": 37
+  },
+  {
+   "text": "support, 5 YEAR, or equivalent",
+   "page": 37
+  },
+  {
+   "text": "100 S-EX-S-C3-5M2-C-E | Juniper Network - E-rate bundle, SW EX Standard,",
+   "page": 37
+  },
+  {
+   "text": "Class 3 (32 or 48 ports), Includes Wired Assurance",
+   "page": 37
+  },
+  {
+   "text": "and VNA subscription for EX32 or EX48 Port Switches",
+   "page": 37
+  },
+  {
+   "text": "with SVC CORE support, 5 YEAR, or equivalent",
+   "page": 37
+  },
+  {
+   "text": "100 AP36-US | Juniper Network - Superior Performance Multi-",
+   "page": 37
+  },
+  {
+   "text": "Gigabit Wi-Fi 7 Access Point (10 stream) with",
+   "page": 37
+  },
+  {
+   "text": "Bluetooth Low Energy, with built-in Internal Antenna",
+   "page": 37
+  },
+  {
+   "text": "- US only; Universal Mounting Bracket is included, or",
+   "page": 37
+  },
+  {
+   "text": "equivalent",
+   "page": 37
+  },
+  {
+   "text": "100 APBR-U | Juniper Network - INCLUDED: Universal AP Bracket",
+   "page": 37
+  },
+  {
+   "text": "for T-Rail and Drywall mounting for Indoor Access",
+   "page": 37
+  },
+  {
+   "text": "Points, or equivalent",
+   "page": 37
+  },
+  {
+   "text": "100 SUB-2S-5Y-E | Juniper Network - E-RATE, Subscription for 1 service",
+   "page": 37
+  },
+  {
+   "text": "(SUB-MAN, SUB-VNA) for one access point for 5 year:",
+   "page": 37
+  },
+  {
+   "text": "includes upgrades, cloud function subscription and",
+   "page": 37
+  },
+  {
+   "text": "limited lifetime warranty benefits on indoor access",
+   "page": 37
+  },
+  {
+   "text": "points Subscription for 2 Services [ SUB-MAN-BND",
+   "page": 37
+  },
+  {
+   "text": "SUB-VNA-BND ], or equivalent",
+   "page": 37
+  },
+  {
+   "text": "100 SUB-MAN-BND | Juniper Network - INCLUDED: WIFI Assurance",
+   "page": 37
+  },
+  {
+   "text": "Subscription for one access point for 1 Month:",
+   "page": 37
+  },
+  {
+   "text": "Includes software updates, upgrades, cloud (wi-fi)",
+   "page": 37
+  },
+  {
+   "text": "function Subscriptions, network insights and limited",
+   "page": 37
+  },
+  {
+   "text": "lifetime warranty on indoor access points, or",
+   "page": 37
+  },
+  {
+   "text": "equivalent",
+   "page": 37
+  },
+  {
+   "text": "100 SUB-VNA-BND | Juniper Network - INCLUDED: Virtual Network",
+   "page": 37
+  },
+  {
+   "text": "Assistant Subscription for wireless operations.",
+   "page": 37
+  },
+  {
+   "text": "Includes software updates, upgrades, and",
+   "page": 37
+  },
+  {
+   "text": "enhancements on the VNA service for 1 Month.",
+   "page": 37
+  },
+  {
+   "text": "Requires WIFI Assurance Subscription to be enabled",
+   "page": 37
+  },
+  {
+   "text": "on the access point, or equivalent",
+   "page": 37
+  },
+  {
+   "text": "37",
+   "page": 37
+  }
+ ]
+}

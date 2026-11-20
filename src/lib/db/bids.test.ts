@@ -280,3 +280,23 @@ describe('pricing fields', () => {
     expect((await repo.listAll()).find((d) => d.bid.id === id)!.bid.wholeVendorId).toBeNull();
   });
 });
+
+describe('bid repo — E-Rate', () => {
+  it('rejects an E-Rate category other than 1, 2 or none', async () => {
+    const id = await repo.create(input);
+    await expect(repo.update(id, { erateCategory: 3 as never })).rejects.toThrow('E-Rate category');
+    await expect(repo.update(id, { erateCategory: 1.5 as never })).rejects.toThrow('E-Rate category');
+    expect((await repo.listAll())[0].bid.erateCategory).toBeNull();
+    await repo.update(id, { erateCategory: 1 });
+    expect((await repo.listAll())[0].bid.erateCategory).toBe(1);
+  });
+
+  it('stores and clears the E-Rate tag', async () => {
+    const id = await repo.create(input);
+    expect((await repo.listAll())[0].bid).toMatchObject({ erate: false, erate470Number: null, erateFundingYear: null, erateCategory: null });
+    await repo.update(id, { erate: true, erate470Number: '270012345', erateFundingYear: 2027, erateCategory: 2 });
+    expect((await repo.listAll())[0].bid).toMatchObject({ erate: true, erate470Number: '270012345', erateFundingYear: 2027, erateCategory: 2 });
+    await repo.update(id, { erate: false, erate470Number: null, erateFundingYear: null, erateCategory: null });
+    expect((await repo.listAll())[0].bid).toMatchObject({ erate: false, erate470Number: null, erateFundingYear: null, erateCategory: null });
+  });
+});

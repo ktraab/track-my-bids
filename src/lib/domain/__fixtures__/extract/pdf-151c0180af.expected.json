@@ -1,0 +1,25 @@
+{
+  "due": "2026-12-07T17:00",
+  "pre_bid": null,
+  "pre_bid_mandatory": null,
+  "qa_deadline": null,
+  "site_walk": null,
+  "bid_number": null,
+  "agency_name": "Grace Community Church of Naples",
+  "buyer_email": "person7@e2eexchange.com",
+  "title": "2027_17008293_Grace Community Church of Naples",
+  "erate": true,
+  "erate_470_number": "270002937",
+  "erate_funding_year": "2027",
+  "erate_category": "both",
+  "allowable_contract": "2026-12-07T17:00",
+  "scope_tags": [
+    "Networking",
+    "Wi-Fi",
+    "Cabling",
+    "Racks",
+    "Power / UPS",
+    "Licensing"
+  ],
+  "scope_has_summary": true
+}

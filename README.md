@@ -10,7 +10,9 @@ A free desktop app (macOS and Windows) for sales teams that chase public-sector 
 - **Reminders and a morning briefing:** desktop notifications per milestone type, quiet hours and nudges about idle bids.
 - **Contacts** linked to bids. Imports Outlook contacts (CSV) and calendars (.ics or CSV), turning calendar events into bids and milestones.
 - **Quick quotes (RFQs)** on the same map as bids, for requests with no due date. Each line shows who has the ball (us, a vendor or the customer) and for how long, with vendor follow-ups and one-click nudges.
-- **Pricing grid** on quotes and bids: paste lines from Excel, compare vendor prices, pick the cheapest vendor overall or per line, and set markup as %, $ per unit or $ per line. Shows cost, margin and the quote total.
+- **Bid document import:** drag a bid PDF, Word or Excel file onto the app and the New bid form fills itself in (bid number, agency, due date, pre-bid, questions deadline, submission details, buyer contact, scope tags and summary). Rules only, no AI, nothing leaves your computer; hover any field to see where it came from. It learns from your corrections.
+- **E-Rate:** tag bids with the Form 470 number, funding year and category, track the allowable contract date, and filter the map to E-Rate bids. USAC Form 470s are read automatically.
+- **Pricing grid** on quotes and bids: paste lines from Excel, compare vendor prices (or enter your own cost with no vendors), pick the cheapest vendor overall or per line, and set markup as %, $ per unit or $ per line. Shows cost, margin and the quote total, even when only some lines are priced.
 - **Needs you:** one list of what needs your attention right now (quiet vendors, unanswered quotes, unclaimed requests, mandatory bid stops within 24 hours), with snooze and one desktop notification per item.
 - **Filters** by stage, agency type, submission method, owner, bids vs quotes and who has the ball, plus search and saved views.
 - **Backups and export:** save one backup file and restore it on another computer, or export bids to Excel or CSV.
