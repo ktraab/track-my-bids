@@ -2,7 +2,7 @@ import { DateTime } from 'luxon';
 import type { BidWithChildren } from './types';
 import type { NotificationSettings } from './settings';
 import type { LogEntry, NeedsAlert } from './alerts';
-import { isOpen } from './stages';
+import { isOnNetwork, isOpen } from './stages';
 import { isMine } from './ownership';
 import { effectiveStops } from './stops';
 import { addWorkHours } from './time';
@@ -14,12 +14,13 @@ import {
 
 const HOUR = 3_600_000;
 
-/** Spec §5 rules: vendor quiet, new RFQ with no owner, customer no answer, mandatory bid stop soon. */
-export type NeedsRule = 'vendor' | 'unclaimed' | 'customer' | 'stop';
+/** Spec §5 rules: vendor quiet, new RFQ with no owner, customer no answer, mandatory bid stop soon; plus a bid's next step coming due (touchpoint log). */
+export type NeedsRule = 'next' | 'vendor' | 'unclaimed' | 'customer' | 'stop';
 export type NeedsTab = 'all' | NeedsRule;
-export const NEEDS_TABS: NeedsTab[] = ['all', 'vendor', 'unclaimed', 'customer', 'stop'];
+export const NEEDS_TABS: NeedsTab[] = ['all', 'next', 'vendor', 'unclaimed', 'customer', 'stop'];
 export const NEEDS_TAB_LABELS: Record<NeedsTab, string> = {
   all: 'All',
+  next: 'Next steps',
   vendor: 'Vendors quiet',
   unclaimed: 'Unclaimed',
   customer: 'Customer follow-up',
@@ -88,7 +89,7 @@ export interface NeedsItem {
   notifyKey: string;
   rule: NeedsRule;
   bidId: string;
-  /** Vendor quote id (vendor), bid id (unclaimed / customer), milestone id (stop). */
+  /** Vendor quote id (vendor), bid id (next / unclaimed / customer), milestone id (stop). */
   targetId: string;
   /** When the item entered Needs you. */
   dueMs: number;
@@ -142,6 +143,12 @@ export function rowNeeds(d: BidWithChildren, ctx: NeedsCtx): NeedsItem[] {
   const { nowMs, zone } = ctx;
   const out: NeedsItem[] = [];
   if (bid.deletedAt) return out;
+
+  // Next step due (touchpoint log): the rep's own planned date has come, on any bid or RFQ still on the map.
+  if (bid.nextAt && isOnNetwork(bid.stage)) {
+    const at = Date.parse(bid.nextAt);
+    if (at <= nowMs) out.push(item(d, 'next', bid.id, at, at, true, `${bid.nextText || 'Next step'} · was due ${relDay(at, nowMs, zone)}`));
+  }
 
   // Vendor quiet: each pending vendor, on open RFQs and open bids (Plan 2 decision 6).
   if (isOpen(bid.stage)) {
@@ -205,7 +212,7 @@ export function isRowOverdue(d: BidWithChildren, ctx: NeedsCtx): boolean {
 }
 
 export function needsCounts(items: NeedsItem[]): Record<NeedsTab, number> {
-  const c: Record<NeedsTab, number> = { all: items.length, vendor: 0, unclaimed: 0, customer: 0, stop: 0 };
+  const c: Record<NeedsTab, number> = { all: items.length, next: 0, vendor: 0, unclaimed: 0, customer: 0, stop: 0 };
   for (const i of items) c[i.rule]++;
   return c;
 }
@@ -236,6 +243,7 @@ export function snoozesFromLog(log: ReadonlyMap<string, LogEntry>): Map<string, 
 }
 
 const ALERT_TITLE: Record<Exclude<NeedsRule, 'stop'>, (i: NeedsItem) => string> = {
+  next: (i) => `Needs you · Next step for ${i.title}`,
   vendor: (i) => `Needs you · Nudge ${i.vendorName ?? 'vendor'}`,
   unclaimed: () => 'Needs you · New RFQ, no owner',
   customer: (i) => `Needs you · Follow up with ${i.title}`,

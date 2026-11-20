@@ -6,6 +6,8 @@ import { lineLetter } from './palette';
 import {
   historyEvents, historySegments, MAP_EVENT_KINDS, nextNudge, receivedIso, type FollowUpThresholds, type Holder,
 } from './rfq';
+import { tickTooltip, touchParty, type TouchParty } from './touches';
+import { isOnNetwork } from './stages';
 
 export interface LayoutWindow {
   startMs: number;
@@ -14,8 +16,8 @@ export interface LayoutWindow {
 }
 
 export type { StopKind };
-/** Bid stops plus RFQ history events and the next-nudge marker. */
-export type LayoutStopKind = StopKind | 'event' | 'nudge';
+/** Bid stops plus RFQ history events, the next-nudge marker and the manual next step. */
+export type LayoutStopKind = StopKind | 'event' | 'nudge' | 'next';
 
 export interface LayoutStop {
   id: string;
@@ -26,6 +28,8 @@ export interface LayoutStop {
   dateLabel: string;
   labelBelow: boolean;
   tooltip: string;
+  /** Next-step stop whose date has come: drawn red. */
+  late?: boolean;
 }
 
 export interface Segment {
@@ -35,6 +39,14 @@ export interface Segment {
 
 export interface HolderSeg extends Segment {
   holder: Holder;
+}
+
+/** A logged touch drawn on the line (spec §3), coloured by party. */
+export interface TouchTick {
+  id: string;
+  pct: number;
+  party: TouchParty;
+  tooltip: string;
 }
 
 export interface LayoutLine {
@@ -48,16 +60,20 @@ export interface LayoutLine {
   futureSeg: Segment | null;
   /** RFQs: who held the ball, received → today. Empty for bids. */
   holderSegs: HolderSeg[];
-  /** RFQs: dotted line from today to the next nudge / follow-up. */
+  /** Dotted line to a future marker past the line's end: RFQ nudge / follow-up, or the manual next step. */
   ghostSeg: Segment | null;
   /** RFQs received before the window start: "since Oct 30 →". */
   clipLabel: string | null;
+  /** Touches inside the window; a touch before the line starts sits at the line's start. */
+  ticks: TouchTick[];
 }
 
 export interface LayoutOptions {
   /** Zone for RFQ day grouping, labels and business-day clocks: the viewer's zone, as the status column uses. */
   zone: string;
   followUp?: FollowUpThresholds;
+  /** Contact id → name, for touches with a contact that isn't linked to the bid. */
+  contactNames?: ReadonlyMap<string, string>;
 }
 
 export function makeWindow(opts: {
@@ -110,21 +126,30 @@ function placeLabels(stops: LayoutStop[]): LayoutStop[] {
       anchor = s;
     }
   }
-  let lastAbove = -Infinity;
-  let lastBelow = -Infinity;
+  let above: LayoutStop | null = null;
+  let below: LayoutStop | null = null;
+  const room = (lane: LayoutStop | null, s: LayoutStop) => (lane ? s.pct - lane.pct : Infinity);
+  const hide = (s: LayoutStop) => { s.label = ''; s.dateLabel = ''; };
   for (const s of out) {
     if (!s.label) continue;
-    const fitsAbove = s.pct - lastAbove >= LABEL_GAP_PCT;
-    const fitsBelow = s.pct - lastBelow >= LABEL_GAP_PCT;
-    if (fitsAbove && (!fitsBelow || lastAbove <= lastBelow)) {
+    const fitsAbove = room(above, s) >= LABEL_GAP_PCT;
+    const fitsBelow = room(below, s) >= LABEL_GAP_PCT;
+    if (fitsAbove && (!fitsBelow || room(above, s) >= room(below, s))) {
       s.labelBelow = false;
-      lastAbove = s.pct;
+      above = s;
     } else if (fitsBelow) {
       s.labelBelow = true;
-      lastBelow = s.pct;
+      below = s;
+    } else if (s.kind === 'next') {
+      // The next step is what the user plans around: its label bumps the lane's previous label,
+      // preferring a minor stop over DUE / a mandatory meeting, then the lane with more room.
+      const major = (l: LayoutStop | null) => l?.kind === 'terminus' || l?.kind === 'mandatory';
+      const useBelow = major(above) !== major(below) ? major(above) : room(below, s) > room(above, s);
+      hide((useBelow ? below : above)!);
+      s.labelBelow = useBelow;
+      if (useBelow) below = s; else above = s;
     } else {
-      s.label = '';
-      s.dateLabel = '';
+      hide(s);
     }
   }
   return out;
@@ -132,12 +157,56 @@ function placeLabels(stops: LayoutStop[]): LayoutStop[] {
 
 const inWindow = (pct: number) => pct >= 0 && pct <= 100;
 
+/**
+ * The manual next step as a stop (open / submitted work only). An overdue one is red and clamps to
+ * the left edge; a future one clamps to the right edge. Off the other side (user paged away) → null.
+ */
+export function nextStepStop(bid: BidWithChildren['bid'], w: LayoutWindow, zone: string): LayoutStop | null {
+  if (!bid.nextAt || !isOnNetwork(bid.stage)) return null;
+  const ms = Date.parse(bid.nextAt);
+  if (!Number.isFinite(ms)) return null;
+  const late = ms <= w.todayMs;
+  const raw = pctOf(ms, w);
+  if (late ? raw > 100 : raw < 0) return null;
+  const when = formatDateTime(bid.nextAt, zone);
+  return {
+    id: `next:${bid.id}`,
+    pct: late ? Math.max(0, raw) : Math.min(100, raw),
+    kind: 'next',
+    past: false,
+    late,
+    label: 'NEXT',
+    dateLabel: formatStopDate(bid.nextAt, zone),
+    labelBelow: false,
+    tooltip: [late ? 'Overdue' : null, bid.nextText || 'Next step', when].filter(Boolean).join(' · '),
+  };
+}
+
+/** Dotted run from `fromMs` (clamped to today or later) to a future `toMs`; null when there's nothing ahead. */
+function ghostTo(fromMs: number, toMs: number, w: LayoutWindow): Segment | null {
+  if (!(toMs > w.todayMs) || toMs <= fromMs) return null;
+  return segment(clamp(pctOf(Math.max(fromMs, w.todayMs), w)), clamp(pctOf(toMs, w)));
+}
+
+/** Ticks for every touch, clamped to the line's start (`startMs`), kept when inside the window. */
+export function touchTicks(data: BidWithChildren, w: LayoutWindow, startMs: number, opts: LayoutOptions): TouchTick[] {
+  return data.touches
+    .map((t) => ({
+      id: t.id,
+      pct: pctOf(Math.max(Date.parse(t.at), startMs), w),
+      party: touchParty(t),
+      tooltip: tickTooltip(t, data, opts.zone, opts.contactNames),
+    }))
+    .filter((t) => inWindow(t.pct));
+}
+
 export function layoutLine(data: BidWithChildren, w: LayoutWindow, opts: LayoutOptions): LayoutLine {
   if (data.bid.kind === 'rfq') return layoutRfqLine(data, w, opts);
   const { bid } = data;
   const raw = effectiveStops(data);
-  const stops: LayoutStop[] = placeLabels(raw
-    .map((r) => ({
+  const next = nextStepStop(bid, w, bid.timezone);
+  const stops: LayoutStop[] = placeLabels([...raw
+    .map((r): LayoutStop => ({
       id: r.id,
       pct: pctOf(r.ms, w),
       kind: r.kind,
@@ -151,7 +220,7 @@ export function layoutLine(data: BidWithChildren, w: LayoutWindow, opts: LayoutO
         formatDateTime(r.iso, bid.timezone),
         r.derived ? 'Sealed bid must ship' : (data.milestones.find((m) => m.id === r.id)?.location ?? null),
       ].filter(Boolean).join(' · '),
-    }))).filter((s) => inWindow(s.pct));
+    })), ...(next ? [next] : [])]).filter((s) => inWindow(s.pct));
 
   let pastSeg: Segment | null = null;
   let futureSeg: Segment | null = null;
@@ -164,10 +233,13 @@ export function layoutLine(data: BidWithChildren, w: LayoutWindow, opts: LayoutO
     if (firstMs < w.todayMs) pastSeg = segment(first, Math.min(today, last));
     if (lastMs > w.todayMs) futureSeg = segment(Math.max(first, today), last);
   }
+  // A next step past the line's own end gets a dotted run to it, like the RFQ nudge.
+  const ghostSeg = next ? ghostTo(raw.length ? raw[raw.length - 1].ms : w.todayMs, Date.parse(bid.nextAt!), w) : null;
 
   return {
     bidId: bid.id, kind: 'bid', color: bid.lineColor, letter: lineLetter(bid.agencyName), stops, pastSeg, futureSeg,
-    holderSegs: [], ghostSeg: null, clipLabel: null,
+    holderSegs: [], ghostSeg, clipLabel: null,
+    ticks: touchTicks(data, w, raw.length ? Math.min(raw[0].ms, w.todayMs) : Number.NEGATIVE_INFINITY, opts),
   };
 }
 
@@ -191,10 +263,8 @@ function layoutRfqLine(data: BidWithChildren, w: LayoutWindow, opts: LayoutOptio
     tooltip: `${e.detail} · ${formatDateTime(e.iso, zone)}`,
   }));
 
-  let ghostSeg: Segment | null = null;
   const n = nextNudge(data, zone, opts.followUp);
   if (n && n.atMs > nowMs) {
-    ghostSeg = segment(clamp(pctOf(nowMs, w)), clamp(pctOf(n.atMs, w)));
     const iso = DateTime.fromMillis(n.atMs, { zone }).toISO()!;
     const what = n.target === 'customer' ? `Follow up with ${n.name}` : `Nudge ${n.name}`;
     all.push({
@@ -208,6 +278,10 @@ function layoutRfqLine(data: BidWithChildren, w: LayoutWindow, opts: LayoutOptio
       tooltip: `${what} · ${formatDateTime(iso, zone)}`,
     });
   }
+  const next = nextStepStop(bid, w, zone);
+  if (next) all.push(next);
+  const nudgeMs = n && n.atMs > nowMs ? n.atMs : -Infinity;
+  const ghostSeg = ghostTo(nowMs, Math.max(nudgeMs, next ? Date.parse(bid.nextAt!) : -Infinity), w);
   const stops = placeLabels(all).filter((s) => inWindow(s.pct));
 
   const startMs = Date.parse(receivedIso(bid));
@@ -218,6 +292,7 @@ function layoutRfqLine(data: BidWithChildren, w: LayoutWindow, opts: LayoutOptio
   return {
     bidId: bid.id, kind: 'rfq', color: bid.lineColor, letter: lineLetter(bid.agencyName), stops,
     pastSeg: null, futureSeg: null, holderSegs, ghostSeg, clipLabel,
+    ticks: touchTicks(data, w, startMs, opts),
   };
 }
 

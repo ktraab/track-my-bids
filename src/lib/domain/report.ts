@@ -1,8 +1,9 @@
 import { DateTime } from 'luxon';
-import type { AgencyType, BidKind, ContactRole, Method, Stage } from './types';
+import type { AgencyType, BidKind, ContactRole, Method, Stage, Touch, TouchKind } from './types';
 import { OUTCOMES, ROUTE, STAGE_LABELS, stageLabel } from './stages';
 import { AGENCY_TYPE_LABELS, METHOD_LABELS } from './labels';
 import { CONTACT_ROLE_LABELS } from './contacts';
+import { TOUCH_KIND_LABELS } from './touches';
 
 export type DatePreset = 'this_month' | 'last_month' | 'this_quarter' | 'last_quarter' | 'this_year' | 'all' | 'custom';
 export type DateField = 'due' | 'created';
@@ -53,6 +54,27 @@ export interface ReportRow {
   ourPrice: number | null; // quote total of the priced lines, partial or not (filled by withOurPrice)
   erate: boolean;
   erate470Number: string | null;
+  /** Touchpoint log (filled by withTouchStats): newest touch, and how many touches fall in the report's date range. */
+  lastTouchAt: string | null;
+  lastTouchKind: TouchKind | null;
+  touchCount: number;
+  nextAt: string | null;
+  nextText: string | null;
+}
+
+/**
+ * Attach the touch columns: the bid's newest touch, and the number of touches whose time falls inside `range`
+ * (the report's date range; all-time when null). `touchesByBid` lists each bid's live touches.
+ */
+export function withTouchStats(
+  rows: ReportRow[], touchesByBid: ReadonlyMap<string, readonly Touch[]>, range: { startMs: number; endMs: number } | null,
+): ReportRow[] {
+  return rows.map((r) => {
+    const ts = (touchesByBid.get(r.bidId) ?? []).filter((t) => !t.deletedAt);
+    const newest = ts.reduce<Touch | null>((a, t) => (!a || Date.parse(t.at) > Date.parse(a.at) ? t : a), null);
+    const inRange = range ? ts.filter((t) => { const ms = Date.parse(t.at); return ms >= range.startMs && ms <= range.endMs; }) : ts;
+    return { ...r, lastTouchAt: newest?.at ?? null, lastTouchKind: newest?.kind ?? null, touchCount: inRange.length };
+  });
 }
 
 /** Attach each bid's quote total ("Our price"); bids without priced lines get null. */
@@ -156,6 +178,13 @@ function fmtDue(r: ReportRow): string {
   return d.isValid ? d.toFormat('yyyy-MM-dd h:mm a ZZZZ') : '';
 }
 
+/** "2026-11-18" in the bid's zone; '' when missing or unparseable. */
+function fmtDay(iso: string | null, tz: string): string {
+  if (!iso) return '';
+  const d = DateTime.fromISO(iso).setZone(tz);
+  return d.isValid ? d.toFormat('yyyy-MM-dd') : '';
+}
+
 function fmtReceived(r: ReportRow): string {
   if (r.kind !== 'rfq' || !r.receivedAt) return '';
   const d = DateTime.fromISO(r.receivedAt).setZone(r.bidTimezone);
@@ -183,6 +212,9 @@ export const REPORT_COLUMNS: { header: string; width: number; value: (r: ReportR
   { header: 'Received', width: 20, value: fmtReceived },
   { header: 'E-Rate', width: 8, value: (r) => (r.erate ? 'Yes' : '') },
   { header: 'Form 470 #', width: 14, value: (r) => (r.erate ? r.erate470Number : null) },
+  { header: 'Last Touch', width: 18, value: (r) => (r.lastTouchKind ? `${fmtDay(r.lastTouchAt, r.bidTimezone)} · ${TOUCH_KIND_LABELS[r.lastTouchKind]}` : '') },
+  { header: 'Touches', width: 9, value: (r) => r.touchCount },
+  { header: 'Next Step', width: 30, value: (r) => (r.nextAt ? [fmtDay(r.nextAt, r.bidTimezone), r.nextText].filter(Boolean).join(' · ') : '') },
 ];
 
 function csvCell(v: string | number | null): string {
@@ -192,12 +224,22 @@ function csvCell(v: string | number | null): string {
   return /[",\r\n]/.test(s) || s.startsWith("'") ? `"${s.replace(/"/g, '""')}"` : s;
 }
 
-export function toCsv(rows: ReportRow[]): string {
+export interface CsvColumn<T> {
+  header: string;
+  value: (r: T) => string | number | null;
+}
+
+/** BOM + header + CRLF rows, quoted, with the formula-injection guard. */
+export function csvOf<T>(columns: readonly CsvColumn<T>[], rows: T[]): string {
   const lines = [
-    REPORT_COLUMNS.map((c) => csvCell(c.header)).join(','),
-    ...rows.map((r) => REPORT_COLUMNS.map((c) => csvCell(c.value(r))).join(',')),
+    columns.map((c) => csvCell(c.header)).join(','),
+    ...rows.map((r) => columns.map((c) => csvCell(c.value(r))).join(',')),
   ];
   return '\uFEFF' + lines.join('\r\n');
+}
+
+export function toCsv(rows: ReportRow[]): string {
+  return csvOf(REPORT_COLUMNS, rows);
 }
 
 function rangeSlug(f: ReportFilters, nowMs: number, zone: string): string {
@@ -213,9 +255,9 @@ function rangeSlug(f: ReportFilters, nowMs: number, zone: string): string {
   }
 }
 
-export function reportFileName(f: ReportFilters, nowMs: number, zone: string, ext: 'xlsx' | 'csv'): string {
+export function reportFileName(f: ReportFilters, nowMs: number, zone: string, ext: 'xlsx' | 'csv', what = 'Contacts'): string {
   const stamp = DateTime.fromMillis(nowMs, { zone }).toFormat('yyyyMMdd');
-  return `TrackMyBids-Contacts-${rangeSlug(f, nowMs, zone)}-${stamp}.${ext}`;
+  return `TrackMyBids-${what}-${rangeSlug(f, nowMs, zone)}-${stamp}.${ext}`;
 }
 
 export function describeFilters(f: ReportFilters, nowMs: number, zone: string): string {

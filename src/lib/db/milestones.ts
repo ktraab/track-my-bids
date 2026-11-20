@@ -2,7 +2,6 @@ import type { Milestone, MilestoneType } from '../domain/types';
 import type { Sql } from './sql';
 import { isoNow, newId } from './ids';
 import { toDb } from './rows';
-import { touchBid } from './touch';
 
 export interface NewMilestoneInput {
   bidId: string;
@@ -50,7 +49,6 @@ export function createMilestoneRepo(sql: Sql, now: () => string = isoNow, uuid: 
       [id, input.bidId, input.type, input.label?.trim() || null, input.at, input.location ?? null,
         input.mandatory ? 1 : 0, input.externalUid ?? null, offsetsToDb(input.reminderOffsets), t, t],
     );
-    await touchBid(sql, input.bidId, t);
     return id;
   }
 
@@ -65,7 +63,6 @@ export function createMilestoneRepo(sql: Sql, now: () => string = isoNow, uuid: 
     await sql.execute(
       `UPDATE milestones SET ${keys.map((k) => `${COLS[k]} = ?`).join(', ')}, updated_at = ? WHERE id = ?`,
       [...vals, t, id]);
-    await touchBid(sql, bid_id, t);
   }
 
   async function remove(id: string): Promise<void> {
@@ -73,7 +70,6 @@ export function createMilestoneRepo(sql: Sql, now: () => string = isoNow, uuid: 
     if (r.type === 'due') throw new Error('The due date can’t be deleted — change its date instead');
     const t = now();
     await sql.execute('UPDATE milestones SET deleted_at = ?, updated_at = ? WHERE id = ?', [t, t, id]);
-    await touchBid(sql, r.bid_id, t);
   }
 
   return { add, update, remove };

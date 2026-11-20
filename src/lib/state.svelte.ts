@@ -3,6 +3,9 @@ import type { Sql } from './db/sql';
 import { migrate } from './db/migrations';
 import { createBidRepo, type BidPatch } from './db/bids';
 import { createVendorQuoteRepo, type NewVendorQuote } from './db/vendorQuotes';
+import { createTouchRepo, type NewTouch, type TouchPatch } from './db/touches';
+import { canDeleteTouch } from './domain/touches';
+import { contactName } from './domain/contacts';
 import { createQuoteLineRepo, type NewQuoteLine, type QuoteLinePatch } from './db/quoteLines';
 import { createMilestoneRepo, type MilestonePatch, type NewMilestoneInput } from './db/milestones';
 import { createChecklistRepo } from './db/checklist';
@@ -30,9 +33,10 @@ import type { Role } from './sync/types';
 import { canManage, isMine, memberName } from './domain/ownership';
 import { isoNow } from './db/ids';
 import {
-  DEFAULT_REPORT_FILTERS, describeFilters, filterReportRows, reportFileName, summarizeByStage, toCsv,
-  withOurPrice, withReportDefaults, type ReportFilters, type ReportRow,
+  DEFAULT_REPORT_FILTERS, csvOf, describeFilters, filterReportRows, rangeFor, reportFileName, summarizeByStage, toCsv,
+  withOurPrice, withReportDefaults, withTouchStats, type ReportFilters, type ReportRow,
 } from './domain/report';
+import { TOUCH_COLUMNS, touchReportRows, type TouchReportRow } from './domain/touchReport';
 import { parseBackup } from './domain/backup';
 import { eventsForBid, googleCalendarUrl, outlookCalendarUrl, outlookPersonalCalendarUrl, safeFileStem, toIcs, type CalEvent } from './domain/calendar';
 import { baseName, fileSize, openCalendarFile, openText, pickDocument, readBytes, reveal, saveBytes, saveText } from './files';
@@ -83,6 +87,7 @@ type Repos = {
   bids: ReturnType<typeof createBidRepo>;
   milestones: ReturnType<typeof createMilestoneRepo>;
   vendorQuotes: ReturnType<typeof createVendorQuoteRepo>;
+  touches: ReturnType<typeof createTouchRepo>;
   quoteLines: ReturnType<typeof createQuoteLineRepo>;
   checklist: ReturnType<typeof createChecklistRepo>;
   settings: ReturnType<typeof createSettingsRepo>;
@@ -126,6 +131,8 @@ class AppState {
   followUp = $derived<NeedsThresholds>(thresholdsFromSettings(this.notificationSettings));
   /** Needs-you snoozes on this device (key → ISO end). Never synced. */
   needsSnoozes = $state<Map<string, string>>(new Map());
+  /** Contact id → display name, for touches with a contact that isn't linked to the bid. */
+  contactNames = $derived<ReadonlyMap<string, string>>(new Map(this.contactList.map((c) => [c.contact.id, contactName(c.contact)])));
   /** Team user id, or null in Local mode (Local mode owns everything). */
   meId = $derived(this.team.mode === 'team' ? this.team.userId : null);
   myRole = $derived(this.team.mode === 'team' ? this.team.me?.role ?? null : null);
@@ -181,7 +188,8 @@ class AppState {
     this.#repos = {
       bids: createBidRepo(sql, undefined, undefined, () => templates.load(), () => this.meId),
       milestones: createMilestoneRepo(sql),
-      vendorQuotes: createVendorQuoteRepo(sql),
+      vendorQuotes: createVendorQuoteRepo(sql, undefined, undefined, () => this.meId),
+      touches: createTouchRepo(sql, undefined, undefined, () => this.meId),
       quoteLines: createQuoteLineRepo(sql),
       checklist: createChecklistRepo(sql),
       settings: createSettingsRepo(sql),
@@ -546,7 +554,10 @@ class AppState {
     let path: string | null;
     let count: number;
     try {
-      const rows = filterReportRows(withOurPrice(await this.repos.contacts.reportRows(), this.quoteTotals()), filters, now, zone);
+      const touches = new Map(this.bidsSnapshot().map((d) => [d.bid.id, d.touches]));
+      const rows = withTouchStats(
+        filterReportRows(withOurPrice(await this.repos.contacts.reportRows(), this.quoteTotals()), filters, now, zone),
+        touches, rangeFor(filters, now, zone));
       count = rows.length;
       const name = reportFileName(filters, now, zone, format);
       if (format === 'csv') {
@@ -561,6 +572,44 @@ class AppState {
     }
     if (path) {
       this.notice = { text: `Saved ${count} row${count === 1 ? '' : 's'} to ${baseName(path)}`, path };
+      try {
+        this.reportFilters = filters;
+        await this.repos.settings.setRaw('export_filters', JSON.stringify(filters));
+      } catch { /* remembering filters is best effort; the export succeeded */ }
+    }
+    return { path };
+  }
+
+  /** Touches export rows (same filters as the contacts report; the date range applies to each touch's time). */
+  touchReportRows(filters: ReportFilters, nowMs: number = this.nowMs): TouchReportRow[] {
+    return touchReportRows(this.bidsSnapshot(), filters, nowMs, this.#zone(), {
+      ourPrice: this.quoteTotals(),
+      contactNames: this.contactNames,
+      authorName: (id) => this.memberName(id),
+    });
+  }
+
+  async exportTouchesReport(filters: ReportFilters, format: 'xlsx' | 'csv'): Promise<{ path: string | null } | { error: string }> {
+    const now = Date.now();
+    const zone = this.#zone();
+    let path: string | null;
+    let count: number;
+    try {
+      const rows = this.touchReportRows(filters, now);
+      count = rows.length;
+      const name = reportFileName(filters, now, zone, format, 'Touches');
+      if (format === 'csv') {
+        path = await saveText(name, [{ name: 'CSV', extensions: ['csv'] }], csvOf(TOUCH_COLUMNS, rows));
+      } else {
+        const { touchesWorkbook } = await import('./export/touchesXlsx');
+        const about = describeFilters(filters, now, zone).replace(/^(Due date|Added): /, 'Touch date: ');
+        path = await saveBytes(name, [{ name: 'Excel workbook', extensions: ['xlsx'] }], await touchesWorkbook(rows, about));
+      }
+    } catch (e) {
+      return { error: e instanceof Error ? e.message : String(e) };
+    }
+    if (path) {
+      this.notice = { text: `Saved ${count} touch${count === 1 ? '' : 'es'} to ${baseName(path)}`, path };
       try {
         this.reportFilters = filters;
         await this.repos.settings.setRaw('export_filters', JSON.stringify(filters));
@@ -779,7 +828,8 @@ class AppState {
   markQuoteSent(id: string) { return this.#run(() => this.repos.bids.update(id, { stage: 'submitted', quotedAt: isoNow() })); }
   /** "Back to open" after marking sent by mistake: clears the quote time too. */
   unsendQuote(id: string) { return this.#run(() => this.repos.bids.update(id, { stage: 'reviewing', quotedAt: null })); }
-  markFollowedUp(id: string) { return this.#run(() => this.repos.bids.update(id, { followedUpAt: isoNow() })); }
+  /** "Followed up": stamps the follow-up clock and logs an email touch (one repo call). */
+  markFollowedUp(id: string) { return this.#run(() => this.repos.bids.markFollowedUp(id)); }
   setQuoteStage(id: string, stage: Stage) { return this.#run(() => this.repos.bids.update(id, { stage })); }
   async convertToBid(id: string, dueAtLocal: string, timezone: string): Promise<boolean> {
     let dueIso: string;
@@ -892,6 +942,32 @@ class AppState {
     if (ok) this.notice = { text: notice };
     return ok;
   }
+
+  // Touchpoint log
+  /** Log a touch and, when `next` is given, set (or clear) the bid's next step in the same queued write. */
+  logTouch(input: NewTouch, next?: { nextAt: string | null; nextText: string | null }) {
+    return this.#run(async () => {
+      if (next) await this.repos.bids.update(input.bidId, next);
+      await this.repos.touches.add(input);
+    });
+  }
+  updateTouch(id: string, patch: TouchPatch) { return this.#run(() => this.repos.touches.update(id, patch)); }
+  /** Author, the bid's owner (or anyone on an unowned bid) or an admin; always in Local mode. */
+  deleteTouch(id: string): Promise<boolean> {
+    const d = this.bids.find((x) => x.touches.some((t) => t.id === id));
+    const t = d?.touches.find((x) => x.id === id);
+    if (!d || !t) return Promise.resolve(false);
+    if (!canDeleteTouch(t, d.bid, this.meId, this.myRole)) {
+      this.error = 'Only who logged it, the bid’s owner or an admin can delete this touch.';
+      return Promise.resolve(false);
+    }
+    return this.#run(() => this.repos.touches.remove(id));
+  }
+  setNextStep(bidId: string, nextAt: string | null, nextText: string | null) {
+    return this.#run(() => this.repos.bids.update(bidId, { nextAt, nextText }));
+  }
+  /** "Done" on the next step: clears it. */
+  clearNextStep(bidId: string) { return this.setNextStep(bidId, null, null); }
 
   addMilestone(input: NewMilestoneInput) { return this.#run(() => this.repos.milestones.add(input)); }
   updateMilestone(id: string, patch: MilestonePatch) { return this.#run(() => this.repos.milestones.update(id, patch)); }

@@ -8,6 +8,8 @@ export type ShipMethod = 'fedex' | 'ups' | 'usps' | 'courier' | 'hand_delivery';
 export type BidKind = 'bid' | 'rfq';
 export type PricingMode = 'whole' | 'per_line';
 export type MarkupType = 'pct' | 'unit' | 'line';
+export type TouchKind = 'call' | 'email' | 'meeting' | 'note';
+export type TouchSource = 'manual' | 'nudge' | 'followup';
 
 export interface Bid {
   id: string;
@@ -45,6 +47,8 @@ export interface Bid {
   erate470Number: string | null; // Form 470 application number
   erateFundingYear: number | null;
   erateCategory: 1 | 2 | null; // null = both / unknown
+  nextAt: string | null; // next step (ISO); null = none planned
+  nextText: string | null; // short next-step text; may be null with a date set
   createdAt: string;
   updatedAt: string;
   deletedAt: string | null;
@@ -122,6 +126,22 @@ export interface VendorLinePrice {
   deletedAt: string | null;
 }
 
+/** One logged touch on a bid: a call, email, meeting or note. At most one of contactId / vendorQuoteId is set. */
+export interface Touch {
+  id: string;
+  bidId: string;
+  kind: TouchKind;
+  contactId: string | null; // customer (or any) contact
+  vendorQuoteId: string | null; // vendor party
+  note: string | null;
+  at: string; // when it happened (ISO), never in the future
+  authorId: string | null; // team member; null in Local mode
+  source: TouchSource;
+  createdAt: string;
+  updatedAt: string;
+  deletedAt: string | null;
+}
+
 export interface NewQuoteInput {
   title: string;
   agencyName: string;
@@ -140,6 +160,7 @@ export interface BidWithChildren {
   vendorQuotes: VendorQuote[];
   lines: QuoteLine[];
   prices: VendorLinePrice[];
+  touches: Touch[]; // newest first
 }
 
 export interface NewBidInput {

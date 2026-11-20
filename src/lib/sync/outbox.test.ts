@@ -47,7 +47,7 @@ describe('outbox', () => {
     await new Promise((r) => setTimeout(r, 5));
     await repo.update(id, { notes: 'edited while pushing' });
     await clearSent(sql, batch.entries);
-    expect([...(await pendingFields(sql, 'bids', id))].sort()).toEqual(['last_touched_at', 'notes', 'updated_at']);
+    expect([...(await pendingFields(sql, 'bids', id))].sort()).toEqual(['notes', 'updated_at']);
   });
 
   it('drops entries for rows that no longer exist', async () => {

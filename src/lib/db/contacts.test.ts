@@ -136,13 +136,14 @@ describe('contacts repo', () => {
     expect(all.find((r) => r.id === proc.linkId)!.deleted_at).not.toBeNull();
   });
 
-  it('remove touches linked bids and rejects missing or deleted contacts', async () => {
+  it('remove leaves linked bids untouched and rejects missing or deleted contacts', async () => {
+    const [before] = await sql.select<{ last_touched_at: string }>('SELECT last_touched_at FROM bids WHERE id = ?', [bidId]);
     const { id } = await repo.create({ firstName: 'Jane' });
     await repo.linkToBid(bidId, id, 'procurement');
     const later = createContactRepo(sql, fixedClock('2026-11-20T00:00:00.000Z'), seqIds('l'));
     await later.remove(id);
     const [b] = await sql.select<{ last_touched_at: string }>('SELECT last_touched_at FROM bids WHERE id = ?', [bidId]);
-    expect(b.last_touched_at).toBe('2026-11-20T00:00:00.000Z');
+    expect(b.last_touched_at).toBe(before.last_touched_at);
     await expect(later.remove(id)).rejects.toThrow('Contact not found');
     await expect(later.remove('nope')).rejects.toThrow('Contact not found');
   });

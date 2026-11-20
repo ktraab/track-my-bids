@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
-import { rowStatus, sortByUrgency } from './rowStatus';
-import { makeBid, makeMilestone, makeQuote, makeVendorQuote as vq, withChildren, withVendors } from './fixtures';
+import { rfqNextText, rowStatus, sortByUrgency } from './rowStatus';
+import { makeBid, makeMilestone, makeQuote, makeTouch, makeVendorQuote as vq, withChildren, withVendors } from './fixtures';
 
 const NY = 'America/New_York';
 const NOW = Date.parse('2026-11-18T20:00:00Z'); // Wed 15:00 ET
@@ -73,5 +73,26 @@ describe('stopCountdown', () => {
     const stop = now + 24 * 3600_000 + 60_000;
     expect(stopCountdown(stop, now, NY)).not.toMatch(/in 0 days/);
     expect(stopCountdown(now + 3 * 3600_000, now, NY)).toBe('in 3h 00m');
+  });
+});
+
+describe('touchpoint lines', () => {
+  it('bids get a touch line: next step, else last touch, else none', () => {
+    expect(rowStatus(b1, ctx)).toMatchObject({ touchLine: 'No touches yet', touchLate: false });
+    const touched = { ...b1, touches: [makeTouch('t', '2026-11-17T19:00:00.000Z', { kind: 'meeting' })] };
+    expect(rowStatus(touched, ctx)).toMatchObject({ touchLine: 'Last: Meeting · 1d ago' });
+    const planned = { ...b1, bid: { ...b1.bid, nextAt: '2026-11-17T14:00:00.000Z', nextText: 'call Dana' } };
+    expect(rowStatus(planned, ctx)).toMatchObject({ touchLine: 'Next · call Dana · yesterday', touchLate: true, overdue: true });
+  });
+  it('RFQs: the earlier of the manual next step and the automatic nudge; manual wins ties', () => {
+    // q3's automatic nudge: Thu Nov 19 19:00Z.
+    const at = (nextAt: string, nextText: string | null = 'call buyer') => ({ ...q3, bid: { ...q3.bid, nextAt, nextText } });
+    expect(rfqNextText(at('2026-11-19T14:00:00.000Z'), NOW, NY)).toBe('Next · call buyer · tomorrow');
+    expect(rfqNextText(at('2026-11-19T19:00:00.000Z', null), NOW, NY)).toBe('Next step · tomorrow');
+    expect(rfqNextText(at('2026-11-20T14:00:00.000Z'), NOW, NY)).toBe('Nudge W tomorrow');
+    expect(rowStatus(at('2026-11-19T14:00:00.000Z'), ctx)).toMatchObject({ kind: 'rfq', next: 'Next · call buyer · tomorrow' });
+    // No automatic follow-up at all (q2 has no vendors): the manual step shows.
+    expect(rfqNextText({ ...q2, bid: { ...q2.bid, nextAt: '2026-11-25T14:00:00.000Z' } }, NOW, NY)).toBe('Next step · Nov 25');
+    expect(rfqNextText({ ...q4, bid: { ...q4.bid, nextAt: '2026-11-19T14:00:00.000Z' } }, NOW, NY)).toBe('Lost');
   });
 });

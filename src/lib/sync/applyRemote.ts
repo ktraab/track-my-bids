@@ -53,7 +53,7 @@ async function reviveLabels(sql: Sql, ids: string[], now: () => string): Promise
 
 async function applyOne(sql: Sql, r: RemoteRow, now: () => string, revive: string[]): Promise<void> {
   try {
-    await upsert(sql, r);
+    await upsert(sql, r, now);
   } catch (e) {
     if (!isUniqueError(e)) throw e;
     if (r.tbl === 'contacts' && typeof r.data.email === 'string' && r.data.deleted_at == null) {
@@ -77,15 +77,31 @@ async function applyOne(sql: Sql, r: RemoteRow, now: () => string, revive: strin
   }
 }
 
-async function upsert(sql: Sql, r: RemoteRow): Promise<void> {
+async function upsert(sql: Sql, r: RemoteRow, now?: () => string): Promise<void> {
   const cols = SYNC_COLUMNS[r.tbl].filter((c) => Object.hasOwn(r.data, c));
   const [exists] = await sql.select(`SELECT id FROM ${r.tbl} WHERE id = ?`, [r.id]);
   if (exists) {
     const pending = await pendingFields(sql, r.tbl, r.id);
-    const upd = cols.filter((c) => !pending.has(c));
-    if (!upd.length) return;
-    await sql.execute(`UPDATE ${r.tbl} SET ${upd.map((c) => `${c} = ?`).join(', ')} WHERE id = ?`,
-      [...upd.map((c) => r.data[c] ?? null), r.id]);
+    let upd = cols.filter((c) => !pending.has(c));
+    // last_touched_at only moves forward: a later local value beats an older remote one, and is re-queued to win back.
+    let keepNewest = false;
+    if (r.tbl === 'bids' && now && upd.includes('last_touched_at')) {
+      const [cur] = await sql.select<{ later: number | null }>(
+        'SELECT julianday(last_touched_at) > julianday(?) AS later FROM bids WHERE id = ?', [r.data.last_touched_at ?? null, r.id]);
+      if (cur && Number(cur.later) === 1) {
+        keepNewest = true;
+        upd = upd.filter((c) => c !== 'last_touched_at');
+      }
+    }
+    if (upd.length) {
+      await sql.execute(`UPDATE ${r.tbl} SET ${upd.map((c) => `${c} = ?`).join(', ')} WHERE id = ?`,
+        [...upd.map((c) => r.data[c] ?? null), r.id]);
+    }
+    if (keepNewest) {
+      const t = now!();
+      await sql.execute('UPDATE bids SET updated_at = ? WHERE id = ?', [t, r.id]);
+      await enqueueFields(sql, 'bids', r.id, ['last_touched_at', 'updated_at'], t);
+    }
   } else {
     await sql.execute(`INSERT INTO ${r.tbl} (id, ${cols.join(', ')}) VALUES (?, ${cols.map(() => '?').join(', ')})`,
       [r.id, ...cols.map((c) => r.data[c] ?? null)]);
@@ -127,6 +143,11 @@ async function mergeContactInto(
   for (const v of vqs) {
     await sql.execute('UPDATE vendor_quotes SET contact_id = ?, updated_at = ? WHERE id = ?', [remote.id, t, v.id]);
     await enqueueFields(sql, 'vendor_quotes', v.id, ['contact_id', 'updated_at'], t);
+  }
+  const touches = await sql.select<{ id: string }>('SELECT id FROM touches WHERE contact_id = ?', [localId]);
+  for (const x of touches) {
+    await sql.execute('UPDATE touches SET contact_id = ?, updated_at = ? WHERE id = ?', [remote.id, t, x.id]);
+    await enqueueFields(sql, 'touches', x.id, ['contact_id', 'updated_at'], t);
   }
   if (opts.neverSynced) {
     await dropRow(sql, 'contacts', localId);

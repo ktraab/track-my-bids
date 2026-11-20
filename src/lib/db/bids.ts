@@ -1,4 +1,4 @@
-import type { Bid, BidContact, BidWithChildren, ChecklistItem, Method, Milestone, NewBidInput, NewQuoteInput, QuoteLine, VendorLinePrice, VendorQuote } from '../domain/types';
+import type { Bid, BidContact, BidWithChildren, ChecklistItem, Method, Milestone, NewBidInput, NewQuoteInput, QuoteLine, Touch, VendorLinePrice, VendorQuote } from '../domain/types';
 import { pickLineColor } from '../domain/palette';
 import { DEFAULT_TEMPLATE, templateFor, type TemplateItem } from '../domain/checklist';
 import { IANAZone } from 'luxon';
@@ -6,7 +6,8 @@ import { localToIso } from '../domain/time';
 import type { Row, Sql } from './sql';
 import { isoNow, newId } from './ids';
 import { CONTACT_SELECT, rowToBidContact } from './contacts';
-import { rowToBid, rowToChecklist, rowToMilestone, rowToQuoteLine, rowToVendorLinePrice, rowToVendorQuote, toDb } from './rows';
+import { insertTouch } from './touches';
+import { rowToBid, rowToChecklist, rowToMilestone, rowToQuoteLine, rowToTouch, rowToVendorLinePrice, rowToVendorQuote, toDb } from './rows';
 
 const BID_COLUMNS = {
   bidNumber: 'bid_number', title: 'title', agencyName: 'agency_name', agencyType: 'agency_type',
@@ -19,13 +20,14 @@ const BID_COLUMNS = {
   pricingMode: 'pricing_mode', markupType: 'markup_type', markupValue: 'markup_value',
   sellRounding: 'sell_rounding', wholeVendorId: 'whole_vendor_id',
   erate: 'erate', erate470Number: 'erate_470_number', erateFundingYear: 'erate_funding_year', erateCategory: 'erate_category',
+  nextAt: 'next_at', nextText: 'next_text',
 } as const;
 
 export type EditableBidKey = keyof typeof BID_COLUMNS;
 export type BidPatch = Partial<Pick<Bid, EditableBidKey>>;
 
 /** Child tables soft-deleted and restored with their bid. */
-const CHILD_TABLES = ['milestones', 'checklist_items', 'bid_contacts', 'vendor_quotes', 'quote_lines', 'vendor_line_prices'] as const;
+const CHILD_TABLES = ['milestones', 'checklist_items', 'bid_contacts', 'vendor_quotes', 'quote_lines', 'vendor_line_prices', 'touches'] as const;
 
 function groupBy<T extends { bidId: string }>(xs: T[]): Map<string, T[]> {
   const m = new Map<string, T[]>();
@@ -61,6 +63,9 @@ export function createBidRepo(
       'SELECT l.* FROM quote_lines l JOIN bids b ON b.id = l.bid_id WHERE l.deleted_at IS NULL AND b.deleted_at IS NULL ORDER BY l.position, l.created_at, l.id')).map(rowToQuoteLine);
     const vp = (await sql.select<Row>(
       'SELECT p.* FROM vendor_line_prices p JOIN bids b ON b.id = p.bid_id JOIN vendor_quotes v ON v.id = p.vendor_quote_id AND v.deleted_at IS NULL JOIN quote_lines l ON l.id = p.line_id AND l.deleted_at IS NULL WHERE p.deleted_at IS NULL AND b.deleted_at IS NULL')).map(rowToVendorLinePrice);
+    const tc = (await sql.select<Row>(
+      'SELECT t.* FROM touches t JOIN bids b ON b.id = t.bid_id WHERE t.deleted_at IS NULL AND b.deleted_at IS NULL ORDER BY t.at DESC, t.created_at DESC, t.id')).map(rowToTouch);
+    const tcBy = groupBy<Touch>(tc);
     const vqBy = groupBy<VendorQuote>(vq);
     const qlBy = groupBy<QuoteLine>(ql);
     const vpBy = groupBy<VendorLinePrice>(vp);
@@ -78,6 +83,7 @@ export function createBidRepo(
       vendorQuotes: vqBy.get(bid.id) ?? [],
       lines: qlBy.get(bid.id) ?? [],
       prices: vpBy.get(bid.id) ?? [],
+      touches: tcBy.get(bid.id) ?? [],
     }));
   }
 
@@ -189,6 +195,9 @@ export function createBidRepo(
     if (patch.erateCategory !== undefined && patch.erateCategory !== null && patch.erateCategory !== 1 && patch.erateCategory !== 2) {
       throw new Error('E-Rate category must be 1 or 2');
     }
+    if (patch.nextAt !== undefined && patch.nextAt !== null && Number.isNaN(Date.parse(patch.nextAt))) {
+      throw new Error('Next step date is invalid');
+    }
     if (patch.wholeVendorId) {
       const v = await sql.select('SELECT id FROM vendor_quotes WHERE id = ? AND bid_id = ? AND deleted_at IS NULL', [patch.wholeVendorId, id]);
       if (!v.length) throw new Error('Vendor not found on this bid');
@@ -201,8 +210,8 @@ export function createBidRepo(
     if (keys.length === 0) return;
     if (patch.title !== undefined && !patch.title.trim()) throw new Error('Title is required');
     if (patch.agencyName !== undefined && !patch.agencyName.trim()) throw new Error('Agency is required');
-    const live = await sql.select<{ kind: string; quoted_at: string | null }>(
-      'SELECT kind, quoted_at FROM bids WHERE id = ? AND deleted_at IS NULL', [id]);
+    const live = await sql.select<{ kind: string; quoted_at: string | null; stage: string }>(
+      'SELECT kind, quoted_at, stage FROM bids WHERE id = ? AND deleted_at IS NULL', [id]);
     if (!live.length) throw new Error('Bid not found');
     await checkPricing(id, patch);
     const t = now();
@@ -212,8 +221,37 @@ export function createBidRepo(
       keys.push('quotedAt');
     }
     const sets = keys.map((k) => `${BID_COLUMNS[k]} = ?`).join(', ');
-    const vals = keys.map((k) => (k === 'estValue' ? toDb(roundValue(patch[k] as number | null)) : toDb(patch[k])));
-    await sql.execute(`UPDATE bids SET ${sets}, updated_at = ?, last_touched_at = ? WHERE id = ?`, [...vals, t, t, id]);
+    const vals = keys.map((k) => {
+      if (k === 'estValue') return toDb(roundValue(patch[k] as number | null));
+      if (k === 'nextText') return patch.nextText?.trim() || null;
+      if (k === 'nextAt') return patch.nextAt ? new Date(Date.parse(patch.nextAt)).toISOString() : null;
+      return toDb(patch[k]);
+    });
+    // Only a stage change counts as activity (spec §2); plain field edits leave last_touched_at alone.
+    if (patch.stage !== undefined && patch.stage !== live[0].stage) {
+      await sql.execute(`UPDATE bids SET ${sets}, updated_at = ?, last_touched_at = ? WHERE id = ?`, [...vals, t, t, id]);
+    } else {
+      await sql.execute(`UPDATE bids SET ${sets}, updated_at = ? WHERE id = ?`, [...vals, t, id]);
+    }
+  }
+
+  /**
+   * "Followed up": stamp followed_up_at and log an email touch (source 'followup') with the bid's first linked
+   * contact (Procurement first), or nobody.
+   */
+  async function markFollowedUp(id: string): Promise<void> {
+    const live = await sql.select('SELECT id FROM bids WHERE id = ? AND deleted_at IS NULL', [id]);
+    if (!live.length) throw new Error('Bid not found');
+    const [c] = await sql.select<{ contact_id: string }>(
+      `SELECT bc.contact_id FROM bid_contacts bc JOIN contacts c ON c.id = bc.contact_id AND c.deleted_at IS NULL
+       WHERE bc.bid_id = ? AND bc.deleted_at IS NULL
+       ORDER BY bc.role <> 'procurement', COALESCE(c.last_name, c.first_name, c.email) COLLATE NOCASE, c.id LIMIT 1`, [id]);
+    const t = now();
+    await sql.execute('UPDATE bids SET followed_up_at = ?, updated_at = ? WHERE id = ?', [t, t, id]);
+    await insertTouch(sql, {
+      id: uuid(), bidId: id, kind: 'email', contactId: c?.contact_id ?? null, vendorQuoteId: null, note: null, at: t,
+      authorId: owner(), source: 'followup',
+    }, t);
   }
 
   async function remove(id: string): Promise<void> {
@@ -248,5 +286,5 @@ export function createBidRepo(
     }
   }
 
-  return { listAll, create, createQuote, convertToBid, update, remove, setOwner, listTrash, restore };
+  return { listAll, create, createQuote, convertToBid, update, markFollowedUp, remove, setOwner, listTrash, restore };
 }

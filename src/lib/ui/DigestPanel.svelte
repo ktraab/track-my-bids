@@ -11,6 +11,7 @@
   const sections = $derived<[string, DigestLine[], boolean][]>([
     ['Overdue', dg.overdue, true],
     ['Today', dg.today, false],
+    ['Next steps due today', dg.nextToday, false],
     ['Ship within 3 days', dg.shipBy, true],
     ['Next 7 days', dg.week, false],
     ['Idle bids', dg.stale, false],

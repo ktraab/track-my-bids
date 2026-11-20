@@ -5,6 +5,7 @@ import { createBidRepo } from './bids';
 import { createContactRepo } from './contacts';
 import { createVendorQuoteRepo } from './vendorQuotes';
 import { createQuoteLineRepo } from './quoteLines';
+import { createTouchRepo } from './touches';
 import { createBackupRepo } from './backup';
 import { parseBackup } from '../domain/backup';
 
@@ -135,7 +136,7 @@ describe('backup: quote tables', () => {
     await lines.setPrice(v, l, 412);
     await bidsA.update(id, { markupType: 'pct', markupValue: 12 });
     const backup = await createBackupRepo(a).exportAll('2026-11-18T00:00:00.000Z');
-    expect(backup.version).toBe(2);
+    expect(backup.version).toBe(3);
 
     const b = await memorySql();
     await migrate(b);
@@ -168,11 +169,46 @@ describe('backup: quote tables', () => {
     expect((await createBidRepo(c).listAll())[0].lines[0]).toMatchObject({ description: 'Cable', unitCost: null });
   });
 
+  it('accepts a version 2 backup with no touches table', async () => {
+    const sql = await memorySql();
+    await migrate(sql);
+    const v2 = parseBackup(JSON.stringify({ format: 'trackmybids-backup', version: 2, exportedAt: '', tables: { bids: [], vendor_quotes: [] } }));
+    expect(v2.tables.touches).toEqual([]);
+    await expect(createBackupRepo(sql).importAll(v2)).resolves.toEqual({ inserted: 0, updated: 0, skipped: 0 });
+  });
+
   it('accepts a version 1 backup with no quote tables', async () => {
     const sql = await memorySql();
     await migrate(sql);
     const v1 = parseBackup(JSON.stringify({ format: 'trackmybids-backup', version: 1, exportedAt: '', tables: { bids: [] } }));
     expect(v1.tables.vendor_quotes).toEqual([]);
     await expect(createBackupRepo(sql).importAll(v1)).resolves.toBeDefined();
+  });
+});
+
+describe('backup: touches (format 3)', () => {
+  it('round-trips touches and the bid next step; a touch contact is remapped to the matching local contact', async () => {
+    const a = await memorySql();
+    await migrate(a);
+    const ids = seqIds('a');
+    const clock = fixedClock('2026-11-18T15:00:00.000Z');
+    const bidsA = createBidRepo(a, clock, ids);
+    const id = await bidsA.create({ title: 'Wi-Fi', agencyName: 'Lincoln USD', agencyType: 'k12',
+      submissionMethod: 'online', dueAtLocal: '2026-12-12T14:00', timezone: 'America/Chicago' });
+    const { id: dana } = await createContactRepo(a, clock, ids).create({ firstName: 'Dana', email: 'dana@lincoln.org' });
+    await createTouchRepo(a, clock, ids, () => 'u1').add({ bidId: id, kind: 'call', contactId: dana, note: 'Wants 6 more APs' });
+    await bidsA.update(id, { nextAt: '2026-11-27T15:00:00.000Z', nextText: 'send revised quote' });
+    const backup = parseBackup(JSON.stringify(await createBackupRepo(a).exportAll('2026-11-20T00:00:00.000Z')));
+    expect(backup.version).toBe(3);
+    expect(backup.tables.touches).toHaveLength(1);
+
+    const b = await memorySql();
+    await migrate(b);
+    const { id: local } = await createContactRepo(b, clock, seqIds('b')).create({ firstName: 'Dana', email: 'DANA@lincoln.org' });
+    const r = await createBackupRepo(b).importAll(backup);
+    expect(r.skipped).toBe(0);
+    const [d] = await createBidRepo(b).listAll();
+    expect(d.bid).toMatchObject({ nextAt: '2026-11-27T15:00:00.000Z', nextText: 'send revised quote' });
+    expect(d.touches).toEqual([expect.objectContaining({ kind: 'call', contactId: local, note: 'Wants 6 more APs', authorId: 'u1' })]);
   });
 });

@@ -23,7 +23,6 @@ export function createChecklistRepo(sql: Sql, now: () => string = isoNow, uuid: 
     await sql.execute(
       'INSERT INTO checklist_items (id, bid_id, text, position, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?)',
       [id, bidId, clean, position, t, t]);
-    await touchBid(sql, bidId, t);
     return id;
   }
 
@@ -31,14 +30,14 @@ export function createChecklistRepo(sql: Sql, now: () => string = isoNow, uuid: 
     const { bidId } = await find(id);
     const t = now();
     await sql.execute('UPDATE checklist_items SET done = ?, updated_at = ? WHERE id = ?', [done ? 1 : 0, t, id]);
-    await touchBid(sql, bidId, t);
+    // Checking an item off is progress on the bid (spec §2); unchecking, adding, removing and moving are not.
+    if (done) await touchBid(sql, bidId, t);
   }
 
   async function remove(id: string): Promise<void> {
     const { bidId } = await find(id);
     const t = now();
     await sql.execute('UPDATE checklist_items SET deleted_at = ?, updated_at = ? WHERE id = ?', [t, t, id]);
-    await touchBid(sql, bidId, t);
   }
 
   async function move(id: string, dir: -1 | 1): Promise<void> {
@@ -53,7 +52,6 @@ export function createChecklistRepo(sql: Sql, now: () => string = isoNow, uuid: 
     await sql.execute(
       'UPDATE checklist_items SET position = CASE id WHEN ? THEN ? ELSE ? END, updated_at = ? WHERE id IN (?, ?)',
       [id, Number(neighbor.position), position, t, id, neighbor.id]);
-    await touchBid(sql, bidId, t);
   }
 
   return { add, setDone, remove, move };

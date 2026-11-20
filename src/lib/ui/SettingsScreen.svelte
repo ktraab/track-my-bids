@@ -171,6 +171,11 @@
         <input type="number" min="1" max={NEEDS_LIMITS.stopWithinHours} step="1" bind:value={s.stopWithinHours} aria-invalid={!!errors.needs?.stopWithinHours} />
       </label>
     </div>
+    <div class="inline">
+      <label class="field"><span>Default next step after logging a touch (business days)</span>
+        <input type="number" min="1" max={NEEDS_LIMITS.nextDefaultBusinessDays} step="1" bind:value={s.nextDefaultBusinessDays} aria-invalid={!!errors.needs?.nextDefaultBusinessDays} />
+      </label>
+    </div>
     {#each Object.entries(errors.needs ?? {}) as [k, msg] (k)}<p class="err" role="alert">{msg}</p>{/each}
     <p class="hint">Business days skip weekends and US holidays. Work hours are 8 AM–5 PM, Monday to Friday.</p>
 

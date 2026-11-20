@@ -13,6 +13,8 @@
   let dialog: HTMLDialogElement | undefined = $state();
   let f = $state<ReportFilters>(untrack(() => structuredClone($state.snapshot(app.reportFilters))));
   let format = $state<'xlsx' | 'csv'>('xlsx');
+  /** Contacts report (one row per bid contact) or Touches (one row per logged touch). */
+  let what = $state<'contacts' | 'touches'>('contacts');
   let busy = $state(false);
   let loading = $state(true);
   let error = $state<string | null>(null);
@@ -24,6 +26,8 @@
   const summary = $derived(summarizeByStage(preview));
   const total = $derived(summary.reduce((s, x) => s + x.value, 0));
   const bidCount = $derived(summary.reduce((s, x) => s + x.bids, 0));
+  const touchPreview = $derived(what === 'touches' ? app.touchReportRows(f, app.nowMs) : []);
+  const count = $derived(what === 'touches' ? touchPreview.length : preview.length);
 
   const presets = Object.entries(DATE_PRESET_LABELS) as [DatePreset, string][];
   const stages: Stage[] = [...ROUTE, ...OUTCOMES];
@@ -50,7 +54,7 @@
     error = null;
     const snap = $state.snapshot(f);
     const clean = withReportDefaults({ ...snap, from: f.from || null, to: f.to || null, minValue: nonNeg(f.minValue), maxValue: nonNeg(f.maxValue) });
-    const r = await app.exportContactsReport(clean, format);
+    const r = what === 'touches' ? await app.exportTouchesReport(clean, format) : await app.exportContactsReport(clean, format);
     busy = false;
     if ('error' in r) error = r.error;
     else if (r.path) dialog?.close();
@@ -59,13 +63,17 @@
 
 <dialog bind:this={dialog} onclose={onClose} aria-labelledby="export-title">
   <form onsubmit={run}>
-    <h2 id="export-title">Export contacts report</h2>
+    <h2 id="export-title">Export report</h2>
+    <fieldset class="fmt"><legend class="sr">Rows</legend>
+      <label class="check"><input type="radio" bind:group={what} value="contacts" /> Contacts (one row per bid contact)</label>
+      <label class="check"><input type="radio" bind:group={what} value="touches" /> Touches (one row per call, email, meeting or note)</label>
+    </fieldset>
 
     <div class="grid2">
       <label class="field"><span>Date range</span>
         <select bind:value={f.preset}>{#each presets as [v, l] (v)}<option value={v}>{l}</option>{/each}</select>
       </label>
-      <fieldset class="field"><legend>Based on</legend>
+      <fieldset class="field" disabled={what === 'touches'}><legend>Based on</legend>
         <label class="check"><input type="radio" bind:group={f.dateField} value="due" /> Bid due date</label>
         <label class="check"><input type="radio" bind:group={f.dateField} value="created" /> Date bid was added</label>
       </fieldset>
@@ -88,7 +96,8 @@
         <label class="chip"><input type="checkbox" checked={f.agencyTypes.includes(a)} onchange={() => (f.agencyTypes = toggle(f.agencyTypes, a))} /> {AGENCY_TYPE_LABELS[a]}</label>
       {/each}</div>
     </fieldset>
-    <fieldset><legend>Contact roles</legend>
+    {#if what === 'touches'}<p class="hint">Touches: the date range applies to when each touch happened; contact roles don’t apply.</p>{/if}
+    <fieldset disabled={what === 'touches'}><legend>Contact roles</legend>
       <div class="chips">{#each roles as r (r)}
         <label class="chip"><input type="checkbox" checked={f.roles.includes(r)} onchange={() => (f.roles = toggle(f.roles, r))} /> {CONTACT_ROLE_LABELS[r]}</label>
       {/each}</div>
@@ -103,7 +112,9 @@
     {#if valueBad}<p class="warn">Min is greater than max</p>{/if}
 
     <div class="preview" aria-live="polite">
-      {#if loading}Loading…{:else}
+      {#if loading}Loading…{:else if what === 'touches'}
+        <strong>{touchPreview.length}</strong> touch{touchPreview.length === 1 ? '' : 'es'}
+      {:else}
         <strong>{preview.length}</strong> contact row{preview.length === 1 ? '' : 's'} · {bidCount} bid{bidCount === 1 ? '' : 's'} · {formatMoneyShort(total)}
       {/if}
     </div>
@@ -116,7 +127,7 @@
       </fieldset>
       <div class="actions">
         <button type="button" class="btn" onclick={() => dialog?.close()}>Cancel</button>
-        <button type="submit" class="btn primary" disabled={busy || loading || preview.length === 0}>{busy ? 'Saving…' : 'Export'}</button>
+        <button type="submit" class="btn primary" disabled={busy || loading || count === 0}>{busy ? 'Saving…' : 'Export'}</button>
       </div>
     </div>
   </form>

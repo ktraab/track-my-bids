@@ -1,7 +1,7 @@
 /** Tables that sync in Team mode, parents first (the order rows are applied locally because of foreign keys). */
 export const SYNC_TABLES = [
   'bids', 'contacts', 'extract_labels', 'milestones', 'checklist_items', 'bid_contacts',
-  'vendor_quotes', 'quote_lines', 'vendor_line_prices',
+  'vendor_quotes', 'touches', 'quote_lines', 'vendor_line_prices',
 ] as const;
 export type SyncTable = (typeof SYNC_TABLES)[number];
 
@@ -53,15 +53,29 @@ export const SYNC_COLUMNS_V7: Record<SyncTableV7, readonly string[]> = {
   vendor_line_prices: ['bid_id', 'vendor_quote_id', 'line_id', 'unit_cost', 'created_at', 'updated_at', 'deleted_at'],
 };
 
+/** Tables that existed at schema v8. */
+export const SYNC_TABLES_V8 = [...SYNC_TABLES_V7, 'extract_labels'] as const;
+type SyncTableV8 = (typeof SYNC_TABLES_V8)[number];
+
 /** Columns as of schema v8 (E-Rate tag, learned document labels, line own cost). FROZEN: migration v8 builds its triggers from this. */
-export const SYNC_COLUMNS_V8: Record<SyncTable, readonly string[]> = {
+export const SYNC_COLUMNS_V8: Record<SyncTableV8, readonly string[]> = {
   ...SYNC_COLUMNS_V7,
   bids: [...SYNC_COLUMNS_V7.bids, 'erate', 'erate_470_number', 'erate_funding_year', 'erate_category'],
   extract_labels: ['field', 'phrase', 'hits', 'created_at', 'updated_at', 'deleted_at'],
   quote_lines: [...SYNC_COLUMNS_V7.quote_lines, 'unit_cost'],
 };
 
-export const SYNC_COLUMNS = SYNC_COLUMNS_V8;
+/** Columns as of schema v9 (touchpoint log, bid next step). FROZEN: migration v9 builds its triggers from this. */
+export const SYNC_COLUMNS_V9: Record<SyncTable, readonly string[]> = {
+  ...SYNC_COLUMNS_V8,
+  bids: [...SYNC_COLUMNS_V8.bids, 'next_at', 'next_text'],
+  touches: [
+    'bid_id', 'kind', 'contact_id', 'vendor_quote_id', 'note', 'at', 'author_id', 'source',
+    'created_at', 'updated_at', 'deleted_at',
+  ],
+};
+
+export const SYNC_COLUMNS = SYNC_COLUMNS_V9;
 
 export const TABLE_ORDER: ReadonlyMap<SyncTable, number> = new Map(SYNC_TABLES.map((t, i) => [t, i]));
 

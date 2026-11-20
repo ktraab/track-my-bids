@@ -140,3 +140,17 @@ describe('Needs-you thresholds', () => {
     expect(validateSettingsDraft({ ...D, unclaimedWorkHours: 40 })).toEqual({});
   });
 });
+
+describe('nextDefaultBusinessDays', () => {
+  it('defaults to 5; keeps whole numbers 1..30; older settings get the default', () => {
+    expect(D.nextDefaultBusinessDays).toBe(5);
+    expect(withDefaults({ staleDays: 3 }).nextDefaultBusinessDays).toBe(5);
+    expect(withDefaults({ nextDefaultBusinessDays: 10 }).nextDefaultBusinessDays).toBe(10);
+    expect(withDefaults({ nextDefaultBusinessDays: 30 }).nextDefaultBusinessDays).toBe(30);
+    for (const bad of [0, 31, 2.5, '5', null]) expect(withDefaults({ nextDefaultBusinessDays: bad }).nextDefaultBusinessDays).toBe(5);
+  });
+  it('validateSettingsDraft flags an out-of-range value', () => {
+    expect(validateSettingsDraft({ ...D, nextDefaultBusinessDays: 31 }).needs?.nextDefaultBusinessDays).toMatch(/Default next step.*1 to 30/);
+    expect(validateSettingsDraft({ ...D, nextDefaultBusinessDays: 1 })).toEqual({});
+  });
+});

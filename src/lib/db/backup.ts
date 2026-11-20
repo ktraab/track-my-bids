@@ -10,12 +10,14 @@ export const BACKUP_COLUMNS: Record<BackupTable, string[]> = {
     'portal_name', 'portal_url', 'delivery_address', 'copies_required', 'notarize_required', 'ship_method',
     'ship_lead_business_days', 'stage', 'timezone', 'rfp_url', 'notes', 'last_touched_at', 'line_color', 'owner_id',
     'kind', 'received_at', 'quoted_at', 'followed_up_at', 'pricing_mode', 'markup_type', 'markup_value',
-    'sell_rounding', 'whole_vendor_id', 'erate', 'erate_470_number', 'erate_funding_year', 'erate_category', ...STAMPS],
+    'sell_rounding', 'whole_vendor_id', 'erate', 'erate_470_number', 'erate_funding_year', 'erate_category',
+    'next_at', 'next_text', ...STAMPS],
   contacts: ['id', 'first_name', 'last_name', 'title', 'organization', 'email', 'phone', 'notes', ...STAMPS],
   milestones: ['id', 'bid_id', 'type', 'label', 'at', 'location', 'mandatory', 'reminder_offsets', 'done', 'external_uid', ...STAMPS],
   checklist_items: ['id', 'bid_id', 'text', 'done', 'position', 'due_at', ...STAMPS],
   bid_contacts: ['id', 'bid_id', 'contact_id', 'role', ...STAMPS],
   vendor_quotes: ['id', 'bid_id', 'contact_id', 'vendor_name', 'asked_at', 'replied_at', 'nudged_at', 'skipped', 'skipped_at', 'notes', ...STAMPS],
+  touches: ['id', 'bid_id', 'kind', 'contact_id', 'vendor_quote_id', 'note', 'at', 'author_id', 'source', ...STAMPS],
   quote_lines: ['id', 'bid_id', 'position', 'qty', 'description', 'part_no', 'markup_type', 'markup_value',
     'sell_override', 'chosen_vendor_id', 'unit_cost', ...STAMPS],
   vendor_line_prices: ['id', 'bid_id', 'vendor_quote_id', 'line_id', 'unit_cost', ...STAMPS],
@@ -59,7 +61,7 @@ export function createBackupRepo(sql: Sql) {
       for (const original of backup.tables[t]) {
         let raw = original;
         if (t === 'contacts' && Object.hasOwn(raw, 'email')) raw = { ...raw, email: normalizeEmail(typeof raw.email === 'string' ? raw.email : null) };
-        if ((t === 'bid_contacts' || t === 'vendor_quotes') && typeof raw.contact_id === 'string' && contactMap.has(raw.contact_id)) {
+        if ((t === 'bid_contacts' || t === 'vendor_quotes' || t === 'touches') && typeof raw.contact_id === 'string' && contactMap.has(raw.contact_id)) {
           raw = { ...raw, contact_id: contactMap.get(raw.contact_id) };
         }
         const cols = BACKUP_COLUMNS[t].filter((c) => Object.hasOwn(raw, c));

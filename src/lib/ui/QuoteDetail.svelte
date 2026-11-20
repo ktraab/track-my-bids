@@ -4,8 +4,9 @@
   import { AGENCY_TYPE_LABELS, timezoneOptions } from '$lib/domain/labels';
   import { RFQ_STAGE_LABELS, isClosed } from '$lib/domain/stages';
   import {
-    ballOf, ballText, customerFollowUpAt, historyEvents, isOverdue, nextStepText, receivedIso, relDay,
+    ballOf, ballText, customerFollowUpAt, historyEvents, isOverdue, receivedIso, relDay,
   } from '$lib/domain/rfq';
+  import { rfqNextText } from '$lib/domain/rowStatus';
   import { lineLetter } from '$lib/domain/palette';
   import { formatDateTime, isoToLocalInput, localToIso } from '$lib/domain/time';
   import { initials } from '$lib/domain/ownership';
@@ -14,6 +15,8 @@
   import PricingSection from './PricingSection.svelte';
   import Checklist from './Checklist.svelte';
   import ContactsSection from './ContactsSection.svelte';
+  import ActivitySection from './ActivitySection.svelte';
+  import { touchWho } from '$lib/domain/touches';
 
   let { id }: { id: string } = $props();
   const zone = Intl.DateTimeFormat().resolvedOptions().timeZone;
@@ -28,13 +31,13 @@
   const data = $derived(app.bids.find((d) => d.bid.id === id));
   const ball = $derived(data ? ballOf(data.bid, data.vendorQuotes) : null);
   const overdue = $derived(data ? isOverdue(data, app.nowMs, zone, app.followUp) : false);
-  const history = $derived(data ? historyEvents(data.bid, data.vendorQuotes, zone) : []);
+  const history = $derived(data ? historyEvents(data.bid, data.vendorQuotes, zone, data.touches, (t) => touchWho(t, data, app.contactNames)) : []);
   /** Team mode names who holds an "on us" quote. */
   const usWho = $derived(
     data && app.team.mode === 'team' ? (data.bid.ownerId ? initials(app.memberName(data.bid.ownerId)) : 'unassigned') : null);
   const HIST_COLOR: Record<string, string> = {
     in: 'var(--us)', asked: 'var(--vendor)', reply: 'var(--vendor)', skip: 'var(--past)', nudge: 'var(--red)',
-    sent: 'var(--cust)', followup: 'var(--cust)',
+    sent: 'var(--cust)', followup: 'var(--cust)', call: 'var(--ink-2)', email: 'var(--ink-2)', meeting: 'var(--ink-2)',
   };
 
   function safeLocal(iso: string): string {
@@ -123,7 +126,7 @@
           <span class="ball {ball.holder}" class:late={overdue}>{ballText(ball, app.nowMs, ball.holder === 'us' ? usWho : ball.who)}</span>
         {/if}
         <span class="stage">{RFQ_STAGE_LABELS[b.stage]}</span>
-        <span class="hint" class:late-text={overdue}>{nextStepText(data, app.nowMs, zone, app.followUp)}</span>
+        <span class="hint" class:late-text={overdue}>{rfqNextText(data, app.nowMs, zone, app.followUp)}</span>
       </div>
     </header>
 
@@ -193,6 +196,8 @@
         {/if}
       {/if}
     </section>
+
+    <ActivitySection {data} />
 
     <div class="cols">
       <div class="col main">

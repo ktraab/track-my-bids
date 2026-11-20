@@ -57,6 +57,20 @@ describe('vendor quote repo', () => {
     expect((await vqs())[0]).toMatchObject({ skipped: false, skippedAt: null });
   });
 
+  it('nudge logs an email touch with the vendor (source nudge) and touches the bid', async () => {
+    const id = await repo.add(bidId, { vendorName: 'SHI' });
+    const authored = createVendorQuoteRepo(sql, clock, seqIds('n'), () => 'u7');
+    clockIso = '2026-11-17T09:00:00.000Z';
+    await authored.nudge(id);
+    const [d] = await bids.listAll();
+    expect(d.vendorQuotes[0].nudgedAt).toBe('2026-11-17T09:00:00.000Z');
+    expect(d.touches).toEqual([expect.objectContaining({
+      kind: 'email', vendorQuoteId: id, contactId: null, source: 'nudge', authorId: 'u7', at: '2026-11-17T09:00:00.000Z',
+    })]);
+    expect(d.bid.lastTouchedAt).toBe('2026-11-17T09:00:00.000Z');
+    await expect(authored.nudge('nope')).rejects.toThrow('Vendor quote not found');
+  });
+
   it('updates name and notes', async () => {
     const id = await repo.add(bidId, { vendorName: 'SHI' });
     await repo.update(id, { vendorName: 'SHI International', notes: 'Rep: Dana' });
@@ -64,11 +78,26 @@ describe('vendor quote repo', () => {
     await expect(repo.update(id, { vendorName: '' })).rejects.toThrow('Vendor name');
   });
 
-  it('touches the bid', async () => {
+  it('asking, replying and skipping a vendor touch the bid; editing and removing do not', async () => {
+    const touched = async () => (await bids.listAll())[0].bid.lastTouchedAt;
+    const base = await touched();
+    clockIso = '2026-11-17T08:00:00.000Z';
     const id = await repo.add(bidId, { vendorName: 'SHI' });
+    expect(await touched()).toBe('2026-11-17T08:00:00.000Z');
     clockIso = '2026-11-18T08:00:00.000Z';
     await repo.setReplied(id, true);
-    expect((await bids.listAll())[0].bid.lastTouchedAt).toBe('2026-11-18T08:00:00.000Z');
+    expect(await touched()).toBe('2026-11-18T08:00:00.000Z');
+    clockIso = '2026-11-19T08:00:00.000Z';
+    await repo.setSkipped(id, true);
+    expect(await touched()).toBe('2026-11-19T08:00:00.000Z');
+    expect(base).toBe('2026-11-16T13:42:00.000Z');
+    clockIso = '2026-11-20T08:00:00.000Z';
+    await repo.setReplied(id, false);
+    await repo.setSkipped(id, false); // clearing is not activity
+    await repo.update(id, { vendorName: 'SHI Intl', notes: 'asked twice' });
+    expect(await touched()).toBe('2026-11-19T08:00:00.000Z');
+    await repo.remove(id);
+    expect(await touched()).toBe('2026-11-19T08:00:00.000Z');
   });
 
   it('remove soft-deletes the vendor quote and clears the whole-quote pick', async () => {

@@ -11,7 +11,9 @@
   import { CONTACT_ROLE_LABELS, contactName } from '$lib/domain/contacts';
   import { initials } from '$lib/domain/ownership';
   import { erateSummary } from '$lib/domain/erate';
-  import { ballOf, ballText, liveVendors, nextStepText, receivedIso, vendorStatusText } from '$lib/domain/rfq';
+  import { ballOf, ballText, liveVendors, receivedIso, relDay, vendorStatusText } from '$lib/domain/rfq';
+  import { rfqNextText } from '$lib/domain/rowStatus';
+  import { nextLine, recentTouches, touchTitle } from '$lib/domain/touches';
 
   let {
     id,
@@ -34,6 +36,8 @@
   const usWho = $derived(app.team.mode === 'team' ? (b.ownerId ? initials(app.memberName(b.ownerId)) : 'unassigned') : null);
   const vendors = $derived(liveVendors(data.vendorQuotes));
   const pricing = $derived(data.lines.length ? pricingOf(data, app.pricingDefaults) : null);
+  const recent = $derived(recentTouches(data));
+  const nextStep = $derived(nextLine(b, app.nowMs, zone));
   const ourPrice = $derived(pricing && pricing.summary.priced ? pricing.summary.total : null);
   const unpricedText = $derived(pricing && pricing.summary.flagged > 0 ? ` partial · ${pricing.summary.flagged} unpriced` : '');
   /** A vendor's total ("$19,550.00"), or its partial total with coverage ("$4,210.00 · 3 of 5"). */
@@ -63,7 +67,7 @@
   {#if app.team.mode === 'team'}<div class="line"><span class="k">Owner</span>{b.ownerId ? app.memberName(b.ownerId) : 'Unassigned'}</div>{/if}
   {#if isQuote}
     {#if ball}<div class="line"><span class="k">Ball</span>{ballText(ball, app.nowMs, ball.holder === 'us' ? usWho : ball.who)}</div>{/if}
-    <div class="line"><span class="k">Next</span>{nextStepText(data, app.nowMs, zone, app.followUp)}</div>
+    <div class="line"><span class="k">Next</span>{rfqNextText(data, app.nowMs, zone, app.followUp)}</div>
     {#if ourPrice !== null}<div class="line"><span class="k">Quote total</span>{formatMoney(ourPrice)}{unpricedText}</div>{/if}
     {#each vendors as v (v.id)}
       {@const price = vendorPrice(v.id)}
@@ -75,6 +79,7 @@
     {#if next}
       <div class="line"><span class="k">Next</span>{next.mandatory ? 'MANDATORY ' : ''}{next.title} — {formatDateTime(next.iso, b.timezone)} <em>(in {formatCountdown(app.nowMs, next.ms)})</em></div>
     {/if}
+    {#if nextStep}<div class="line"><span class="k">Next step</span><span class:late-text={nextStep.overdue}>{nextStep.text.replace(/^Next( step)? · /, '')}</span></div>{/if}
     {#if ship}<div class="line"><span class="k">Ship by</span>{formatDateTime(ship.iso, b.timezone)}</div>{/if}
     <div class="line"><span class="k">Checklist</span>{done}/{data.checklist.length} done</div>
     {#if ourPrice !== null}<div class="line"><span class="k">Our price</span>{formatMoney(ourPrice)}{unpricedText} <em>(est. {formatMoneyShort(b.estValue)})</em></div>{/if}
@@ -85,6 +90,11 @@
   {#if contact}
     <div class="line"><span class="k">{CONTACT_ROLE_LABELS[contact.role]}</span>{contactName(contact.contact)}{contact.contact.phone ? ` · ${contact.contact.phone}` : ''}{contact.contact.email ? ` · ${contact.contact.email}` : ''}</div>
   {/if}
+  {#each recent as t, i (t.id)}
+    <div class="line"><span class="k">{i === 0 ? 'Touches' : ''}</span>{touchTitle(t, data, app.contactNames)} · {relDay(Date.parse(t.at), app.nowMs, zone)}</div>
+  {:else}
+    <div class="line"><span class="k">Touches</span>None logged yet</div>
+  {/each}
   {#each warnings as w (w.text)}<div class="warn">⚠ {w.text}</div>{/each}
 </div>
 

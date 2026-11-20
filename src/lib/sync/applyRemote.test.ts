@@ -61,6 +61,24 @@ describe('applyRemoteRows', () => {
     expect((await pendingFields(sql, 'bids', 'b1')).has('notes')).toBe(true);
   });
 
+  it('keeps a later local last_touched_at over an older remote one and re-queues it, without looping', async () => {
+    await applyRemoteRows(sql, [bidRow('b1')], now);
+    const later = '2026-11-17T11:00:00.000Z';
+    await sql.execute('UPDATE bids SET last_touched_at = ? WHERE id = ?', [later, 'b1']);
+    await sql.execute('DELETE FROM sync_outbox');
+    await applyRemoteRows(sql, [bidRow('b1', { last_touched_at: '2026-11-17T10:30:00.000Z', title: 'Renamed' }, 2)], now);
+    const [r] = await sql.select<{ last_touched_at: string; title: string }>('SELECT last_touched_at, title FROM bids WHERE id = ?', ['b1']);
+    expect(r.last_touched_at).toBe(later);
+    expect(r.title).toBe('Renamed');
+    const pending = await pendingFields(sql, 'bids', 'b1');
+    expect(pending.has('last_touched_at')).toBe(true);
+    expect(pending.has('updated_at')).toBe(true);
+    // Our own value coming back is equal, not later: nothing is re-queued.
+    await sql.execute('DELETE FROM sync_outbox');
+    await applyRemoteRows(sql, [bidRow('b1', { last_touched_at: later }, 3)], now);
+    expect(await outboxCount(sql)).toBe(0);
+  });
+
   it('skips orphans (parent missing) instead of failing', async () => {
     const res = await applyRemoteRows(sql, [msRow('m9', 'nope')], now);
     expect(res.skipped).toEqual(['milestones:m9']);
@@ -131,6 +149,41 @@ describe('applyRemoteRows: quote tables', () => {
     await applyRemoteRows(sql, [contactRow('team', 'rep@cdw.com', 9)], now);
     const [v] = await sql.select<{ contact_id: string }>("SELECT contact_id FROM vendor_quotes WHERE id = 'v1'");
     expect(v.contact_id).toBe('team');
+  });
+});
+
+const touchRow = (id: string, bidId: string, extra: Record<string, unknown> = {}, seq = 1): RemoteRow => ({
+  tbl: 'touches', id, seq,
+  data: { bid_id: bidId, kind: 'call', contact_id: null, vendor_quote_id: null, note: 'Asked about APs', at: T,
+    author_id: 'u2', source: 'manual', created_at: T, updated_at: T, deleted_at: null, ...extra },
+});
+
+describe('applyRemoteRows: touches', () => {
+  it('applies a touch after its bid and vendor quote; it does not bump the local last_touched_at by itself', async () => {
+    const res = await applyRemoteRows(sql, [
+      touchRow('t1', 'b1', { vendor_quote_id: 'v1', at: '2026-11-17T11:00:00.000Z' }, 3), vqRow('v1', 'b1', null, 2), bidRow('b1', {}, 1),
+    ], now);
+    expect(res).toEqual({ applied: 3, skipped: [] });
+    const [d] = await createBidRepo(sql).listAll();
+    expect(d.touches).toEqual([expect.objectContaining({ id: 't1', vendorQuoteId: 'v1', authorId: 'u2', note: 'Asked about APs' })]);
+    expect(d.bid.lastTouchedAt).toBe(T);
+    expect(await outboxCount(sql)).toBe(0);
+  });
+
+  it('bid next step fields round-trip', async () => {
+    await applyRemoteRows(sql, [bidRow('b1', { next_at: '2026-11-27T15:00:00.000Z', next_text: 'send revised quote' })], now);
+    const [d] = await createBidRepo(sql).listAll();
+    expect(d.bid).toMatchObject({ nextAt: '2026-11-27T15:00:00.000Z', nextText: 'send revised quote' });
+  });
+
+  it('contact merge on pull repoints touches at the team contact', async () => {
+    const contacts = createContactRepo(sql);
+    const { id: local } = await contacts.create({ firstName: 'Local', email: 'dana@lincoln.org' });
+    await applyRemoteRows(sql, [bidRow('b1'), touchRow('t1', 'b1', { contact_id: local })], now);
+    await applyRemoteRows(sql, [contactRow('team', 'dana@lincoln.org', 9)], now);
+    const [x] = await sql.select<{ contact_id: string }>("SELECT contact_id FROM touches WHERE id = 't1'");
+    expect(x.contact_id).toBe('team');
+    expect([...(await pendingFields(sql, 'touches', 't1'))].sort()).toEqual(['contact_id', 'updated_at']);
   });
 });
 

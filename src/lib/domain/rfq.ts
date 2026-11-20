@@ -1,5 +1,5 @@
 import { DateTime } from 'luxon';
-import type { Bid, BidWithChildren, VendorQuote } from './types';
+import type { Bid, BidWithChildren, Touch, VendorQuote } from './types';
 import { isClosed, isOpen, RFQ_STAGE_LABELS } from './stages';
 import { addBusinessDays } from './time';
 
@@ -247,7 +247,7 @@ export function historySegments(bid: QuoteTimes, vendorQuotes: VendorQuote[], no
   return out;
 }
 
-export type HistoryEventKind = 'in' | 'asked' | 'reply' | 'skip' | 'nudge' | 'sent' | 'followup';
+export type HistoryEventKind = 'in' | 'asked' | 'reply' | 'skip' | 'nudge' | 'sent' | 'followup' | 'call' | 'email' | 'meeting';
 /** Kinds drawn as stops on the map line (spec §1); the detail panel lists all kinds. */
 export const MAP_EVENT_KINDS: ReadonlySet<HistoryEventKind> = new Set(['in', 'asked', 'reply', 'sent']);
 
@@ -265,9 +265,21 @@ const shortLabel = (s: string) => {
   return u.length > 12 ? `${u.slice(0, 11)}…` : u;
 };
 
-export function historyEvents(bid: QuoteTimes & Pick<Bid, 'id'>, vendorQuotes: VendorQuote[], zone: string): HistoryEvent[] {
+const TOUCH_WORD: Record<'call' | 'email' | 'meeting', string> = { call: 'Call', email: 'Email', meeting: 'Meeting' };
+
+/**
+ * `touches` adds one event per manual call / email / meeting (notes are left out; the Nudge and Followed up
+ * auto-touches are already events through nudged_at / followed_up_at). `whoOf` names who it was with.
+ */
+export function historyEvents(
+  bid: QuoteTimes & Pick<Bid, 'id'>, vendorQuotes: VendorQuote[], zone: string,
+  touches: Touch[] = [], whoOf: (t: Touch) => string | null = () => null,
+): HistoryEvent[] {
   const ev = (id: string, iso: string, kind: HistoryEventKind, label: string, detail: string): HistoryEvent =>
     ({ id, ms: Date.parse(iso), iso, kind, label, detail });
+  // A manual touch also stamps nudged_at / followed_up_at with the same time; show it once, as the touch.
+  const manual = touches.filter((t) => !t.deletedAt && t.source === 'manual');
+  const same = (a: string | null | undefined, b: string) => !!a && Date.parse(a) === Date.parse(b);
   const out: HistoryEvent[] = [ev(`in:${bid.id}`, receivedIso(bid), 'in', 'IN', 'Request came in')];
   const live = liveVendors(vendorQuotes);
   const byDay = new Map<string, VendorQuote[]>();
@@ -282,10 +294,17 @@ export function historyEvents(bid: QuoteTimes & Pick<Bid, 'id'>, vendorQuotes: V
   for (const v of live) {
     if (v.repliedAt) out.push(ev(`reply:${v.id}`, v.repliedAt, 'reply', shortLabel(v.vendorName), `${v.vendorName} replied`));
     else if (v.skipped) out.push(ev(`skip:${v.id}`, skipTime(v), 'skip', 'SKIPPED', `Skipped ${v.vendorName}`));
-    if (v.nudgedAt) out.push(ev(`nudge:${v.id}`, v.nudgedAt, 'nudge', 'NUDGED', `Nudged ${v.vendorName}`));
+    if (v.nudgedAt && !manual.some((t) => t.vendorQuoteId === v.id && same(v.nudgedAt, t.at))) out.push(ev(`nudge:${v.id}`, v.nudgedAt, 'nudge', 'NUDGED', `Nudged ${v.vendorName}`));
   }
   const sent = sentMs(bid);
   if (sent !== null) out.push(ev(`sent:${bid.id}`, bid.quotedAt ?? bid.updatedAt, 'sent', 'SENT', 'Quote sent'));
-  if (bid.followedUpAt) out.push(ev(`followup:${bid.id}`, bid.followedUpAt, 'followup', 'FOLLOWED UP', `Followed up with ${bid.agencyName}`));
+  if (bid.followedUpAt && !manual.some((t) => !t.vendorQuoteId && t.contactId && same(bid.followedUpAt, t.at))) out.push(ev(`followup:${bid.id}`, bid.followedUpAt, 'followup', 'FOLLOWED UP', `Followed up with ${bid.agencyName}`));
+  for (const t of touches) {
+    if (t.deletedAt || t.source !== 'manual' || t.kind === 'note') continue;
+    const who = whoOf(t);
+    const word = TOUCH_WORD[t.kind];
+    out.push(ev(`touch:${t.id}`, t.at, t.kind, word.toUpperCase(),
+      `${word}${who ? ` with ${who}` : ''}${t.note ? ` — ${t.note}` : ''}`));
+  }
   return out.sort((a, b) => a.ms - b.ms);
 }

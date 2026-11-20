@@ -21,6 +21,7 @@
   import HoverCard from './HoverCard.svelte';
   import StatusCell from './StatusCell.svelte';
   import NeedsYou from './NeedsYou.svelte';
+  import LogPopover from './LogPopover.svelte';
 
   const DAY = 86_400_000;
   const zone = Intl.DateTimeFormat().resolvedOptions().timeZone;
@@ -37,7 +38,7 @@
   const rows = $derived(
     sortByUrgency(visible, ctx).map((data) => ({
       data,
-      line: layoutLine(data, win, { zone, followUp: app.followUp }),
+      line: layoutLine(data, win, { zone, followUp: app.followUp, contactNames: app.contactNames }),
       status: rowStatus(data, ctx),
     })),
   );
@@ -103,9 +104,25 @@
   }
   $effect(() => () => clearTimer());
   const hovered = $derived(hover ? app.bids.find((d) => d.bid.id === hover!.id) ?? null : null);
+  /** "+ Log" quick composer: which row, and the button it hangs from. */
+  let logFor = $state<{ id: string; anchor: DOMRect } | null>(null);
+  let logTrigger: HTMLElement | null = null;
+  const logData = $derived(logFor ? app.bids.find((d) => d.bid.id === logFor!.id) ?? null : null);
+  function openLog(id: string, anchor: DOMRect, trigger?: HTMLElement) {
+    hideHover();
+    if (logFor?.id === id) { closeLog(); return; }
+    logTrigger = trigger ?? null;
+    logFor = { id, anchor };
+  }
+  function closeLog(refocus = true) {
+    logFor = null;
+    const t = logTrigger;
+    logTrigger = null;
+    if (refocus && t?.isConnected) t.focus();
+  }
 </script>
 
-<svelte:window onkeydown={(e) => e.key === 'Escape' && hideHover()} onscroll={hideHover} />
+<svelte:window onkeydown={(e) => { if (e.key === 'Escape') { hideHover(); if (logFor) closeLog(); } }} onscroll={() => { hideHover(); closeLog(false); }} />
 
 <section class="page">
   <header class="top">
@@ -265,7 +282,7 @@
               {/if}
             </span>
           </button>
-          <StatusCell status={r.status} bid={b} />
+          <StatusCell status={r.status} bid={b} onLog={(anchor, el) => openLog(b.id, anchor, el)} />
           <TransitLine line={r.line} {todayPct} />
         </div>
       {:else}
@@ -322,6 +339,7 @@
   {#if activeFilterCount(f)}
     <p class="hint cards-hint">Cards show all open work</p>
   {/if}
+  {#if logFor && logData}<LogPopover data={logData} anchor={logFor.anchor} onClose={() => closeLog()} />{/if}
   {#if hover && hovered}<HoverCard id={HOVER_ID} data={hovered} top={hover.top} bottom={hover.bottom} left={hover.left} bind:height={cardHeight} />{/if}
 </section>
 
@@ -383,7 +401,7 @@
   @media (prefers-reduced-motion: reduce) { .dot.busy { animation: none; } }
   .dot.bad { background: var(--red); }
   @keyframes pulse { 50% { opacity: 0.35; } }
-  .status-head { width: 200px; flex: none; position: sticky; left: 300px; z-index: 1; background: var(--card); padding: 0 10px 6px; }
+  .status-head { width: 232px; flex: none; position: sticky; left: 300px; z-index: 1; background: var(--card); padding: 0 10px 6px; }
   .kind-seg { display: inline-flex; border: 1px solid var(--line); border-radius: 15px; overflow: hidden; }
   .kind-seg button { height: 30px; padding: 0 12px; border: 0; background: #fff; font-size: 13px; font-weight: 600; color: var(--ink-2); }
   .kind-seg button + button { border-left: 1px solid var(--line); }

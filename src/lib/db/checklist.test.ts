@@ -80,4 +80,19 @@ describe('checklist repo', () => {
     const d = (await early.listAll()).find((x) => x.bid.id === id)!;
     expect(d.bid.lastTouchedAt).toBe('2026-11-16T13:42:00.000Z');
   });
+
+  it('unchecking, adding, removing and moving leave lastTouchedAt alone', async () => {
+    const early = createBidRepo(sql, fixedClock('2026-11-01T00:00:00.000Z'), seqIds('e'));
+    const id = await early.create({
+      title: 'T', agencyName: 'A', agencyType: 'city', submissionMethod: 'email',
+      dueAtLocal: '2026-12-01T17:00', timezone: 'America/Chicago',
+    });
+    const item = (await early.listAll()).find((d) => d.bid.id === id)!.checklist[0];
+    await repo.setDone(item.id, false);
+    const added = await repo.add(id, 'Extra');
+    await repo.move(added, -1);
+    await repo.remove(added);
+    const d = (await early.listAll()).find((x) => x.bid.id === id)!;
+    expect(d.bid.lastTouchedAt).toBe('2026-11-01T00:00:00.000Z');
+  });
 });

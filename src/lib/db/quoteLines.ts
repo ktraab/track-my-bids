@@ -1,7 +1,6 @@
 import type { MarkupType } from '../domain/types';
 import type { Sql } from './sql';
 import { isoNow, newId } from './ids';
-import { touchBid } from './touch';
 
 export interface NewQuoteLine {
   qty: number;
@@ -85,7 +84,6 @@ export function createQuoteLineRepo(sql: Sql, now: () => string = isoNow, uuid: 
     await requireBid(bidId);
     const t = now();
     const id = await insert(bidId, input, await nextPosition(bidId), t);
-    await touchBid(sql, bidId, t);
     return id;
   }
 
@@ -101,7 +99,6 @@ export function createQuoteLineRepo(sql: Sql, now: () => string = isoNow, uuid: 
       const unitCost = typeof r.unitCost === 'number' && Number.isFinite(r.unitCost) && r.unitCost >= 0 ? r.unitCost : null;
       ids.push(await insert(bidId, { ...r, qty, unitCost }, pos++, t));
     }
-    if (ids.length) await touchBid(sql, bidId, t);
     return ids;
   }
 
@@ -126,7 +123,6 @@ export function createQuoteLineRepo(sql: Sql, now: () => string = isoNow, uuid: 
     const t = now();
     await sql.execute(`UPDATE quote_lines SET ${keys.map((k) => `${PATCH_COLUMNS[k]} = ?`).join(', ')}, updated_at = ? WHERE id = ?`,
       [...vals, t, id]);
-    await touchBid(sql, bidId, t);
   }
 
   async function move(id: string, dir: -1 | 1): Promise<void> {
@@ -142,7 +138,6 @@ export function createQuoteLineRepo(sql: Sql, now: () => string = isoNow, uuid: 
       if (Number(list[n].position) === n) continue;
       await sql.execute('UPDATE quote_lines SET position = ?, updated_at = ? WHERE id = ?', [n, t, list[n].id]);
     }
-    await touchBid(sql, bidId, t);
   }
 
   async function remove(id: string): Promise<void> {
@@ -150,7 +145,6 @@ export function createQuoteLineRepo(sql: Sql, now: () => string = isoNow, uuid: 
     const t = now();
     await sql.execute('UPDATE quote_lines SET deleted_at = ?, updated_at = ? WHERE id = ?', [t, t, id]);
     await sql.execute('UPDATE vendor_line_prices SET deleted_at = ?, updated_at = ? WHERE line_id = ? AND deleted_at IS NULL', [t, t, id]);
-    await touchBid(sql, bidId, t);
   }
 
   /** Set (or clear with null) one vendor's unit cost for one line. One row per cell, id = priceId(). */
@@ -170,7 +164,6 @@ export function createQuoteLineRepo(sql: Sql, now: () => string = isoNow, uuid: 
         'INSERT INTO vendor_line_prices (id, bid_id, vendor_quote_id, line_id, unit_cost, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?)',
         [id, bidId, vendorQuoteId, lineId, unitCost, t, t]);
     }
-    await touchBid(sql, bidId, t);
   }
 
   return { add, addMany, update, move, remove, setPrice };

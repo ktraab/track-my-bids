@@ -21,6 +21,8 @@ export interface NotificationSettings {
   unclaimedWorkHours: number;
   /** A bid's mandatory stop lands in Needs you this many hours before it. */
   stopWithinHours: number;
+  /** Logging a touch on a bid pre-fills its next step this many business days ahead (touchpoint log). */
+  nextDefaultBusinessDays: number;
 }
 
 export const DEFAULT_NOTIFICATION_SETTINGS: NotificationSettings = {
@@ -46,6 +48,7 @@ export const DEFAULT_NOTIFICATION_SETTINGS: NotificationSettings = {
   customerBusinessDays: 3,
   unclaimedWorkHours: 4,
   stopWithinHours: 24,
+  nextDefaultBusinessDays: 5,
 };
 
 const HHMM = /^([01]\d|2[0-3]):([0-5]\d)$/;
@@ -75,6 +78,7 @@ export const NEEDS_LIMITS = {
   customerBusinessDays: 30,
   unclaimedWorkHours: 40,
   stopWithinHours: 72,
+  nextDefaultBusinessDays: 30,
 } as const;
 export type NeedsLimitKey = keyof typeof NEEDS_LIMITS;
 export const NEEDS_KEYS = Object.keys(NEEDS_LIMITS) as NeedsLimitKey[];
@@ -83,6 +87,7 @@ const NEEDS_NAMES: Record<NeedsLimitKey, string> = {
   customerBusinessDays: 'Customer follow-up',
   unclaimedWorkHours: 'New RFQ unclaimed',
   stopWithinHours: 'Mandatory bid stop',
+  nextDefaultBusinessDays: 'Default next step',
 };
 
 const inNeedsRange = (k: NeedsLimitKey, v: unknown): v is number =>
@@ -123,6 +128,7 @@ export function withDefaults(raw: unknown): NotificationSettings {
     customerBusinessDays: inNeedsRange('customerBusinessDays', r.customerBusinessDays) ? r.customerBusinessDays : d.customerBusinessDays,
     unclaimedWorkHours: inNeedsRange('unclaimedWorkHours', r.unclaimedWorkHours) ? r.unclaimedWorkHours : d.unclaimedWorkHours,
     stopWithinHours: inNeedsRange('stopWithinHours', r.stopWithinHours) ? r.stopWithinHours : d.stopWithinHours,
+    nextDefaultBusinessDays: inNeedsRange('nextDefaultBusinessDays', r.nextDefaultBusinessDays) ? r.nextDefaultBusinessDays : d.nextDefaultBusinessDays,
   };
 }
 

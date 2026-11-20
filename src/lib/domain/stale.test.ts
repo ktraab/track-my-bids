@@ -20,4 +20,10 @@ describe('stale', () => {
   it('respects custom days', () => {
     expect(isStale(bid('found', '2026-11-13T13:42:00.000Z'), NOW, 3)).toBe(true);
   });
+  it('a next step in the future exempts an idle bid; an overdue one does not', () => {
+    const idle = bid('reviewing', '2026-11-01T00:00:00.000Z');
+    expect(isStale({ ...idle, nextAt: '2026-11-20T15:00:00.000Z' }, NOW)).toBe(false);
+    expect(isStale({ ...idle, nextAt: '2026-11-16T13:00:00.000Z' }, NOW)).toBe(true);
+    expect(isStale({ ...idle, nextAt: null }, NOW)).toBe(true);
+  });
 });

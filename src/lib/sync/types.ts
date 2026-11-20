@@ -66,5 +66,5 @@ export class SyncError extends Error {
 }
 
 /** Must equal `sync_schema_version()` on the server. */
-export const SCHEMA_VERSION = 3;
+export const SCHEMA_VERSION = 4;
 export const SCHEMA_MESSAGE = 'The team server needs an update — see docs/TEAM-SETUP.md.';

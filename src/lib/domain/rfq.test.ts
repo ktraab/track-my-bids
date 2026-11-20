@@ -3,7 +3,7 @@ import {
   historyEvents, historySegments, ballOf, ballText, customerFollowUpAt, isOverdue, nextNudge, nextStepText, nudgeMessage, relDay,
   vendorCounts, vendorDots, vendorNudgeAt, vendorStatusText,
 } from './rfq';
-import { makeBid, makeQuote, makeVendorQuote as vq, withVendors } from './fixtures';
+import { makeBid, makeQuote, makeTouch, makeVendorQuote as vq, withVendors } from './fixtures';
 
 const NY = 'America/New_York';
 const NOW = Date.parse('2026-11-18T20:00:00Z'); // Wed 15:00 ET
@@ -233,5 +233,46 @@ describe('missing timestamps never come due', () => {
 describe('relDay with a never-due time', () => {
   it('says "not scheduled" instead of an invalid date', () => {
     expect(relDay(Infinity, Date.parse('2026-11-18T12:00:00Z'), 'America/New_York')).toBe('not scheduled');
+  });
+});
+
+describe('historyEvents: manual touches', () => {
+  it('adds CALL / EMAIL / MEETING events for manual touches; notes and auto-touches are left out', () => {
+    const q = makeQuote({ id: 'q', receivedAt: R });
+    const touches = [
+      makeTouch('t1', '2026-11-17T15:00:00.000Z', { contactId: 'c1', note: 'Wants 6 more APs' }),
+      makeTouch('t2', '2026-11-17T16:00:00.000Z', { kind: 'note', note: 'Board meets 12/8' }),
+      makeTouch('t3', '2026-11-17T17:00:00.000Z', { kind: 'email', vendorQuoteId: 'a', source: 'nudge' }),
+      makeTouch('t4', '2026-11-17T18:00:00.000Z', { kind: 'meeting' }),
+      makeTouch('t5', '2026-11-17T19:00:00.000Z', { deletedAt: '2026-11-17T20:00:00.000Z' }),
+    ];
+    const ev = historyEvents(q, [], NY, touches, (t) => (t.contactId ? 'Dana Ortiz' : null));
+    expect(ev.map((e) => [e.id, e.kind, e.label, e.detail])).toEqual([
+      ['in:q', 'in', 'IN', 'Request came in'],
+      ['touch:t1', 'call', 'CALL', 'Call with Dana Ortiz — Wants 6 more APs'],
+      ['touch:t4', 'meeting', 'MEETING', 'Meeting'],
+    ]);
+  });
+  it('a manual vendor touch replaces the NUDGED event it also stamped; Nudge-button clicks still show NUDGED', () => {
+    const q = makeQuote({ id: 'q', receivedAt: R });
+    const at = '2026-11-18T14:00:00.000Z';
+    const vs = [vq('a', { askedAt: ASK, nudgedAt: at }), vq('c', { askedAt: ASK, nudgedAt: at })];
+    const touches = [
+      makeTouch('t1', at, { kind: 'call', vendorQuoteId: 'a' }),
+      makeTouch('t2', at, { kind: 'email', vendorQuoteId: 'c', source: 'nudge' }),
+    ];
+    const ev = historyEvents(q, vs, NY, touches);
+    expect(ev.map((e) => e.id)).toContain('touch:t1');
+    expect(ev.map((e) => e.id)).not.toContain('nudge:a');
+    expect(ev.map((e) => e.id)).toContain('nudge:c');
+  });
+  it('a manual customer touch replaces the FOLLOWED UP event it also stamped', () => {
+    const at = '2026-11-18T15:00:00.000Z';
+    const q = makeQuote({ id: 'q', receivedAt: R, stage: 'submitted', quotedAt: '2026-11-17T17:00:00.000Z', followedUpAt: at });
+    const manual = historyEvents(q, [], NY, [makeTouch('t1', at, { contactId: 'c1' })]);
+    expect(manual.map((e) => e.id)).toContain('touch:t1');
+    expect(manual.map((e) => e.id)).not.toContain('followup:q');
+    const auto = historyEvents(q, [], NY, [makeTouch('t2', at, { contactId: 'c1', source: 'followup' })]);
+    expect(auto.map((e) => e.id)).toContain('followup:q');
   });
 });

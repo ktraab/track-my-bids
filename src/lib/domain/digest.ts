@@ -1,7 +1,7 @@
 import { DateTime } from 'luxon';
 import type { BidWithChildren } from './types';
 import { effectiveStops, type EffectiveStop } from './stops';
-import { isOpen } from './stages';
+import { isOnNetwork, isOpen } from './stages';
 import { idleDays, isStale } from './stale';
 import type { NotificationSettings } from './settings';
 import { dayWarnings, nextDue } from './dayWarnings';
@@ -9,7 +9,7 @@ import { dayWarnings, nextDue } from './dayWarnings';
 const DAY_MS = 86_400_000;
 export const WEEK_LIMIT = 5;
 
-export type DigestTag = 'overdue' | 'today' | 'week' | 'shipby' | 'stale' | 'heads_up';
+export type DigestTag = 'overdue' | 'today' | 'week' | 'shipby' | 'stale' | 'heads_up' | 'next';
 
 export interface DigestLine {
   bidId: string;
@@ -30,6 +30,8 @@ export interface Digest {
   weekMore: number;
   shipBy: DigestLine[];
   stale: DigestLine[];
+  /** Next steps (touchpoint log) dated today in the user's zone, overdue-earlier-today included. */
+  nextToday: DigestLine[];
   /** Day-of-week / holiday warnings for bids due within 14 days. Not counted. */
   headsUp: DigestLine[];
   empty: boolean;
@@ -86,6 +88,20 @@ export function buildDigest(
       mandatory: false,
     }));
 
+  const startOfToday = DateTime.fromMillis(nowMs, { zone }).startOf('day').toMillis();
+  const nextToday: DigestLine[] = list
+    .filter((d) => isOnNetwork(d.bid.stage) && d.bid.nextAt)
+    .map((d) => ({ d, ms: Date.parse(d.bid.nextAt!) }))
+    .filter(({ ms }) => ms >= startOfToday && ms <= endOfToday)
+    .sort((x, y) => x.ms - y.ms)
+    .map(({ d }) => ({
+      bidId: d.bid.id,
+      text: `${d.bid.agencyName}: ${d.bid.nextText || 'next step'} · ${formatWhen(d.bid.nextAt!, zone)}`,
+      atIso: d.bid.nextAt,
+      tag: 'next' as const,
+      mandatory: false,
+    }));
+
   // 14 calendar days: through the end of the day two weeks out.
   const headsEnd = DateTime.fromMillis(nowMs, { zone }).plus({ days: 14 }).endOf('day').toMillis();
   const heads: Item[] = [];
@@ -108,11 +124,12 @@ export function buildDigest(
   const sb = sorted(shipBy);
   const wAll = sorted(week);
   const w = wAll.slice(0, WEEK_LIMIT);
-  const empty = !o.length && !t.length && !sb.length && !wAll.length && !stale.length;
+  const empty = !o.length && !t.length && !sb.length && !wAll.length && !stale.length && !nextToday.length;
 
   const counts = [
     [o.length, 'overdue'],
     [t.length, 'today'],
+    [nextToday.length, nextToday.length === 1 ? 'next step due today' : 'next steps due today'],
     [sb.length, 'to ship'],
     [wAll.length, 'this week'],
     [stale.length, 'idle'],
@@ -120,7 +137,7 @@ export function buildDigest(
     .filter(([n]) => (n as number) > 0)
     .map(([n, label]) => `${n} ${label}`)
     .join(' · ');
-  const top = t[0] ?? sb[0] ?? o[0] ?? w[0] ?? stale[0];
+  const top = t[0] ?? nextToday[0] ?? sb[0] ?? o[0] ?? w[0] ?? stale[0];
 
   const subtitle = DateTime.fromMillis(nowMs, { zone }).toFormat('cccc LLL d');
   return {
@@ -133,6 +150,7 @@ export function buildDigest(
     weekMore: wAll.length - w.length,
     shipBy: sb,
     stale,
+    nextToday,
     headsUp,
     empty,
   };

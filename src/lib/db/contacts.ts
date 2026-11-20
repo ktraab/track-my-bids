@@ -4,7 +4,6 @@ import type { ReportRow } from '../domain/report';
 import type { Row, Sql } from './sql';
 import { isoNow, newId } from './ids';
 import { rowToContact } from './rows';
-import { touchBid } from './touch';
 
 const COLS = {
   firstName: 'first_name', lastName: 'last_name', title: 'title', organization: 'organization',
@@ -101,11 +100,8 @@ export function createContactRepo(sql: Sql, now: () => string = isoNow, uuid: ()
   async function remove(id: string): Promise<void> {
     await requireLive('contacts', id, 'Contact');
     const t = now();
-    const affected = await sql.select<{ bid_id: string }>(
-      'SELECT DISTINCT bid_id FROM bid_contacts WHERE contact_id = ? AND deleted_at IS NULL', [id]);
     await sql.execute('UPDATE bid_contacts SET deleted_at = ?, updated_at = ? WHERE contact_id = ? AND deleted_at IS NULL', [t, t, id]);
     await sql.execute('UPDATE contacts SET deleted_at = ?, updated_at = ? WHERE id = ?', [t, t, id]);
-    for (const { bid_id } of affected) await touchBid(sql, bid_id, t);
   }
 
   async function list(): Promise<ContactWithBids[]> {
@@ -138,7 +134,6 @@ export function createContactRepo(sql: Sql, now: () => string = isoNow, uuid: ()
         'INSERT INTO bid_contacts (id, bid_id, contact_id, role, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?)',
         [uuid(), bidId, contactId, role, t, t]);
     }
-    await touchBid(sql, bidId, t);
   }
 
   async function findLink(linkId: string) {
@@ -151,7 +146,6 @@ export function createContactRepo(sql: Sql, now: () => string = isoNow, uuid: ()
     const l = await findLink(linkId);
     const t = now();
     await sql.execute('UPDATE bid_contacts SET deleted_at = ?, updated_at = ? WHERE id = ?', [t, t, linkId]);
-    await touchBid(sql, l.bid_id, t);
   }
 
   async function setRole(linkId: string, role: ContactRole): Promise<void> {
@@ -173,7 +167,6 @@ export function createContactRepo(sql: Sql, now: () => string = isoNow, uuid: ()
     } else {
       await sql.execute('UPDATE bid_contacts SET role = ?, updated_at = ? WHERE id = ?', [role, t, linkId]);
     }
-    await touchBid(sql, l.bid_id, t);
   }
 
   async function reportRows(): Promise<ReportRow[]> {
@@ -181,7 +174,7 @@ export function createContactRepo(sql: Sql, now: () => string = isoNow, uuid: ()
       `SELECT c.first_name, c.last_name, c.title AS contact_title, c.email, c.phone, c.organization,
               bc.role, b.id AS bid_id, b.agency_name, b.agency_type, b.bid_number, b.title AS bid_title,
               b.est_value, b.stage, b.submission_method, b.timezone, b.created_at AS bid_created_at, m.at AS due_at,
-              b.kind, b.received_at, b.erate, b.erate_470_number
+              b.kind, b.received_at, b.erate, b.erate_470_number, b.next_at, b.next_text
        FROM bid_contacts bc
        JOIN contacts c ON c.id = bc.contact_id AND c.deleted_at IS NULL
        JOIN bids b ON b.id = bc.bid_id AND b.deleted_at IS NULL
@@ -194,6 +187,7 @@ export function createContactRepo(sql: Sql, now: () => string = isoNow, uuid: ()
       estValue: r.est_value ?? null, stage: r.stage, method: r.submission_method, dueAt: r.due_at ?? null,
       bidTimezone: r.timezone, bidCreatedAt: r.bid_created_at, kind: r.kind === 'rfq' ? ('rfq' as const) : ('bid' as const), receivedAt: r.received_at ?? null,
       ourPrice: null, erate: !!r.erate, erate470Number: r.erate_470_number ?? null,
+      lastTouchAt: null, lastTouchKind: null, touchCount: 0, nextAt: r.next_at ?? null, nextText: r.next_text ?? null,
     }));
   }
 

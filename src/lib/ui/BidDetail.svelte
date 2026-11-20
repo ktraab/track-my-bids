@@ -16,6 +16,7 @@
   import ContactsSection from './ContactsSection.svelte';
   import VendorsSection from './VendorsSection.svelte';
   import PricingSection from './PricingSection.svelte';
+  import ActivitySection from './ActivitySection.svelte';
   import { quotePrice } from '$lib/domain/pricing';
 
   let { id }: { id: string } = $props();
@@ -26,7 +27,7 @@
   const due = $derived(data?.milestones.find((m) => m.type === 'due'));
   const win = $derived(data ? windowAround(data, app.nowMs, data.bid.timezone) : null);
   const zone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-  const line = $derived(data && win ? layoutLine(data, win, { zone, followUp: app.followUp }) : null);
+  const line = $derived(data && win ? layoutLine(data, win, { zone, followUp: app.followUp, contactNames: app.contactNames }) : null);
   const todayPct = $derived(win ? pctOf(app.nowMs, win) : null);
   const warnings = $derived(data ? dayWarnings(data, app.nowMs) : []);
   const stageIdx = $derived(data ? routeIndex(data.bid.stage) : 0);
@@ -138,6 +139,8 @@
     {#if line}
       <div class="card timeline"><TransitLine {line} height={130} {todayPct} /></div>
     {/if}
+
+    <ActivitySection {data} />
 
     <div class="cols">
       <div class="col main">

@@ -13,3 +13,5 @@ supabase/.branches/
 
 # private bid samples for extraction tests (never commit)
 /samples/
+
+.superpowers/

@@ -50,7 +50,7 @@ describe('schema v6 sync tables + triggers', () => {
     await sql.execute('DELETE FROM sync_outbox');
     await new Promise((r) => setTimeout(r, 5)); // so updated_at/last_touched_at differ from create time
     await repo.update(id, { title: 'Core Switching' });
-    expect((await outbox()).map((r) => r.field).sort()).toEqual(['last_touched_at', 'title', 'updated_at']);
+    expect((await outbox()).map((r) => r.field).sort()).toEqual(['title', 'updated_at']);
   });
 
   it('keeps one entry per field with the latest time', async () => {

@@ -1,5 +1,5 @@
 export const BACKUP_FORMAT = 'trackmybids-backup';
-export const BACKUP_VERSION = 2;
+export const BACKUP_VERSION = 3;
 
 /**
  * Parent tables first so foreign keys resolve on restore. notification_log is intentionally excluded, and so is
@@ -8,7 +8,7 @@ export const BACKUP_VERSION = 2;
  */
 export const BACKUP_TABLES = [
   'bids', 'contacts', 'milestones', 'checklist_items', 'bid_contacts',
-  'vendor_quotes', 'quote_lines', 'vendor_line_prices', 'checklist_template', 'settings',
+  'vendor_quotes', 'touches', 'quote_lines', 'vendor_line_prices', 'checklist_template', 'settings',
 ] as const;
 export type BackupTable = (typeof BACKUP_TABLES)[number];
 /** Per-device settings that must never travel between machines via backup. */

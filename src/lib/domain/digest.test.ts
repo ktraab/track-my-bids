@@ -103,3 +103,22 @@ describe('digest heads-up', () => {
     expect(buildDigest([f], NOW, CHI, S).headsUp).toEqual([]);
   });
 });
+
+describe('buildDigest: next steps due today', () => {
+  const e = withChildren(makeBid({ id: 'e', agencyName: 'Lincoln USD', lastTouchedAt: FRESH, nextAt: '2026-11-16T15:00:00.000Z', nextText: 'send revised quote' }), []);
+  const early = withChildren(makeBid({ id: 'f', agencyName: 'Ashland', lastTouchedAt: FRESH, nextAt: '2026-11-16T06:30:00.000Z' }), []); // 00:30 CST today
+  const tomorrow = withChildren(makeBid({ id: 'g', lastTouchedAt: FRESH, nextAt: '2026-11-17T15:00:00.000Z' }), []);
+  const closed = withChildren(makeBid({ id: 'h', stage: 'lost', lastTouchedAt: FRESH, nextAt: '2026-11-16T15:00:00.000Z' }), []);
+
+  it('lists next steps dated today (local zone), earliest first, and counts them in the summary', () => {
+    const dg = buildDigest([e, early, tomorrow, closed], NOW, CHI, S);
+    expect(dg.nextToday.map((l) => [l.bidId, l.tag])).toEqual([['f', 'next'], ['e', 'next']]);
+    expect(dg.nextToday[1].text).toBe('Lincoln USD: send revised quote · Mon Nov 16, 9:00 AM');
+    expect(dg.nextToday[0].text).toBe('Ashland: next step · Mon Nov 16, 12:30 AM');
+    expect(dg.body.split('\n')[0]).toBe('2 next steps due today');
+    expect(dg.empty).toBe(false);
+  });
+  it('one next step reads singular', () => {
+    expect(buildDigest([e], NOW, CHI, S).body.split('\n')[0]).toBe('1 next step due today');
+  });
+});

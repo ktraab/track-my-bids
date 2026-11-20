@@ -6,7 +6,8 @@ import {
 } from './rfq';
 import { isRowOverdue, type NeedsThresholds } from './needsYou';
 import { effectiveStops } from './stops';
-import { isOnNetwork, stageLabel } from './stages';
+import { isClosed, isOnNetwork, stageLabel } from './stages';
+import { bidTouchLine, nextLine } from './touches';
 import { formatCountdown } from './time';
 import { nextMilestoneMs } from './transitLayout';
 
@@ -41,6 +42,10 @@ export interface BidStatus {
   overdue: boolean;
   checklistDone: number;
   checklistTotal: number;
+  /** Touchpoint log line: "Next · … · Friday", else "Last: Call · 2d ago", else "No touches yet". */
+  touchLine: string;
+  /** The next step is due (red). */
+  touchLate: boolean;
   /** Only filled while at least one vendor is pending. */
   vendors: VendorDot[];
   replied: number;
@@ -56,6 +61,19 @@ export function stopCountdown(stopMs: number, nowMs: number, zone: string): stri
   return days === 1 ? 'tomorrow' : `in ${days} days`;
 }
 
+/**
+ * RFQ Status-column next line (spec §3): the earlier of the manual next step and the automatic nudge /
+ * follow-up; the manual one wins ties. Closed RFQs keep their stage text.
+ */
+export function rfqNextText(d: BidWithChildren, nowMs: number, zone: string, t: FollowUpThresholds = DEFAULT_FOLLOW_UP): string {
+  const manual = isClosed(d.bid.stage) ? null : nextLine(d.bid, nowMs, zone);
+  if (manual) {
+    const n = nextNudge(d, zone, t);
+    if (!n || Date.parse(d.bid.nextAt!) <= n.atMs) return manual.text;
+  }
+  return nextStepText(d, nowMs, zone, t);
+}
+
 export function rowStatus(d: BidWithChildren, ctx: StatusCtx): RowStatus {
   const t = ctx.followUp ?? DEFAULT_FOLLOW_UP;
   const vendors = vendorDots(d.vendorQuotes, ctx.nowMs, ctx.zone, t);
@@ -64,7 +82,7 @@ export function rowStatus(d: BidWithChildren, ctx: StatusCtx): RowStatus {
   if (d.bid.kind === 'rfq') {
     return {
       kind: 'rfq', ball: ballOf(d.bid, d.vendorQuotes), overdue, vendors, replied,
-      next: nextStepText(d, ctx.nowMs, ctx.zone, t), stage: stageLabel('rfq', d.bid.stage),
+      next: rfqNextText(d, ctx.nowMs, ctx.zone, t), stage: stageLabel('rfq', d.bid.stage),
     };
   }
   const next = effectiveStops(d).find((s) => !s.done && s.ms >= ctx.nowMs);
@@ -72,9 +90,11 @@ export function rowStatus(d: BidWithChildren, ctx: StatusCtx): RowStatus {
     ? `${next.title} ${stopCountdown(next.ms, ctx.nowMs, ctx.zone)}`
     : d.bid.stage === 'submitted' ? 'Submitted' : isOnNetwork(d.bid.stage) ? 'No upcoming stops' : stageLabel('bid', d.bid.stage);
   const pending = vendors.some((v) => v.state === 'waiting' || v.state === 'quiet');
+  const touch = bidTouchLine(d, ctx.nowMs, ctx.zone);
   return {
     kind: 'bid', countdown, late: !!next && next.mandatory && next.ms - ctx.nowMs <= DAY, overdue,
     checklistDone: d.checklist.filter((c) => c.done).length, checklistTotal: d.checklist.length,
+    touchLine: touch.text, touchLate: touch.overdue,
     vendors: pending ? vendors : [], replied,
   };
 }

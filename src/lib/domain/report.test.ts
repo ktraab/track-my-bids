@@ -1,8 +1,9 @@
 import { describe, it, expect } from 'vitest';
 import {
   rangeFor, filterReportRows, summarizeByStage, stageSummaryLabel, toCsv, reportFileName, withReportDefaults, describeFilters,
-  DEFAULT_REPORT_FILTERS as D, REPORT_COLUMNS, reportValue, withOurPrice, type ReportRow,
+  DEFAULT_REPORT_FILTERS as D, REPORT_COLUMNS, reportValue, withOurPrice, withTouchStats, type ReportRow,
 } from './report';
+import { makeTouch } from './fixtures';
 
 const CHI = 'America/Chicago';
 const NOW = Date.parse('2026-11-16T14:00:00-06:00');
@@ -11,7 +12,8 @@ const row = (over: Partial<ReportRow> = {}): ReportRow => ({
   bidId: 'b1', firstName: 'Jane', lastName: 'Doe', title: 'Purchasing Agent', email: 'jdoe@cvisd.org', phone: '555-0100',
   organization: 'Cedar Valley ISD', role: 'procurement', agencyName: 'Cedar Valley ISD', agencyType: 'k12',
   bidNumber: 'RFP 26-114', bidTitle: 'Chromebooks', estValue: 480000, stage: 'preparing', method: 'online',
-  dueAt: '2026-11-19T14:00:00.000-06:00', bidTimezone: CHI, bidCreatedAt: '2026-11-02T15:00:00.000Z', kind: 'bid', receivedAt: null, ourPrice: null, erate: false, erate470Number: null, ...over,
+  dueAt: '2026-11-19T14:00:00.000-06:00', bidTimezone: CHI, bidCreatedAt: '2026-11-02T15:00:00.000Z', kind: 'bid', receivedAt: null, ourPrice: null, erate: false, erate470Number: null,
+  lastTouchAt: null, lastTouchKind: null, touchCount: 0, nextAt: null, nextText: null, ...over,
 });
 
 describe('rangeFor', () => {
@@ -198,10 +200,36 @@ describe('toCsv our price', () => {
 
 describe('E-Rate in reports', () => {
   const col = (h: string) => REPORT_COLUMNS.find((c) => c.header === h)!;
-  it('E-Rate (Yes / blank) and Form 470 # columns, last', () => {
+  it('E-Rate (Yes / blank) and Form 470 # columns, just before the touch columns', () => {
     const e = row({ erate: true, erate470Number: '270012345' });
     expect([col('E-Rate').value(e), col('Form 470 #').value(e)]).toEqual(['Yes', '270012345']);
     expect([col('E-Rate').value(row()), col('Form 470 #').value(row({ erate470Number: '270012345' }))]).toEqual(['', null]);
-    expect(REPORT_COLUMNS.slice(-2).map((c) => c.header)).toEqual(['E-Rate', 'Form 470 #']);
+    expect(REPORT_COLUMNS.slice(-5).map((c) => c.header)).toEqual(['E-Rate', 'Form 470 #', 'Last Touch', 'Touches', 'Next Step']);
+  });
+});
+
+describe('touch columns', () => {
+  const col = (h: string) => REPORT_COLUMNS.find((c) => c.header === h)!;
+  const touches = new Map([['b1', [
+    makeTouch('t1', '2026-11-18T19:00:00.000Z', { kind: 'email' }),
+    makeTouch('t2', '2026-10-20T19:00:00.000Z'),
+    makeTouch('t3', '2026-11-20T19:00:00.000Z', { kind: 'meeting', deletedAt: '2026-11-21T00:00:00.000Z' }),
+  ]]]);
+  it('last touch (date + kind) and the count inside the date range, all-time without one', () => {
+    const [r] = withTouchStats([row()], touches, rangeFor({ ...D, preset: 'this_month' }, NOW, CHI));
+    expect(r).toMatchObject({ lastTouchAt: '2026-11-18T19:00:00.000Z', lastTouchKind: 'email', touchCount: 1 });
+    expect(col('Last Touch').value(r)).toBe('2026-11-18 · Email');
+    expect(col('Touches').value(r)).toBe(1);
+    expect(withTouchStats([row()], touches, null)[0].touchCount).toBe(2);
+    const [none] = withTouchStats([row({ bidId: 'zz' })], touches, null);
+    expect([none.lastTouchAt, none.touchCount, col('Last Touch').value(none)]).toEqual([null, 0, '']);
+  });
+  it('next step: date + text in the bid zone', () => {
+    expect(col('Next Step').value(row({ nextAt: '2026-11-27T15:00:00.000Z', nextText: 'send revised quote' }))).toBe('2026-11-27 · send revised quote');
+    expect(col('Next Step').value(row({ nextAt: '2026-11-27T15:00:00.000Z' }))).toBe('2026-11-27');
+    expect(col('Next Step').value(row())).toBe('');
+  });
+  it('file name names what is exported', () => {
+    expect(reportFileName({ ...D, preset: 'all' }, NOW, CHI, 'csv', 'Touches')).toBe('TrackMyBids-Touches-all-20261116.csv');
   });
 });

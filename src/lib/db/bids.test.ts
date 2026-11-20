@@ -98,14 +98,21 @@ describe('bid repo', () => {
     expect(d.bid.id).toBe(id);
   });
 
-  it('update stores null notes, bumps lastTouchedAt, rounds estValue', async () => {
+  it('update stores null notes and rounds estValue; field edits leave lastTouchedAt alone, a stage change bumps it', async () => {
     const early = createBidRepo(sql, fixedClock('2026-11-01T00:00:00.000Z'), seqIds('e'));
     const id = await early.create({ ...input, estValue: 100.6 });
     expect((await early.listAll())[0].bid.estValue).toBe(101);
     await repo.update(id, { notes: null, estValue: 5.4 });
-    const [d] = await repo.listAll();
+    let [d] = await repo.listAll();
     expect(d.bid.notes).toBeNull();
     expect(d.bid.estValue).toBe(5);
+    expect(d.bid.updatedAt).toBe('2026-11-16T13:42:00.000Z');
+    expect(d.bid.lastTouchedAt).toBe('2026-11-01T00:00:00.000Z');
+    await repo.update(id, { stage: 'found' }); // same stage: not a change
+    [d] = await repo.listAll();
+    expect(d.bid.lastTouchedAt).toBe('2026-11-01T00:00:00.000Z');
+    await repo.update(id, { stage: 'preparing' });
+    [d] = await repo.listAll();
     expect(d.bid.lastTouchedAt).toBe('2026-11-16T13:42:00.000Z');
   });
 
@@ -239,6 +246,47 @@ describe('bids repo: quotes', () => {
     await bids.convertToBid(id, '2026-12-01T10:00:00.000-05:00', 'America/New_York');
     [d] = await bids.listAll();
     expect([d.bid.kind, d.bid.timezone, d.milestones.length]).toEqual(['bid', 'America/New_York', 1]);
+  });
+});
+
+describe('bid next step', () => {
+  it('stores, trims and clears next_at / next_text without touching the bid', async () => {
+    const early = createBidRepo(sql, fixedClock('2026-11-01T00:00:00.000Z'), seqIds('e'));
+    const id = await early.create(input);
+    await repo.update(id, { nextAt: '2026-11-27T15:00:00.000Z', nextText: '  send revised quote ' });
+    let [d] = await repo.listAll();
+    expect(d.bid).toMatchObject({ nextAt: '2026-11-27T15:00:00.000Z', nextText: 'send revised quote', lastTouchedAt: '2026-11-01T00:00:00.000Z' });
+    await repo.update(id, { nextAt: '2026-11-27T09:00:00-06:00' });
+    [d] = await repo.listAll();
+    expect(d.bid.nextAt).toBe('2026-11-27T15:00:00.000Z');
+    await repo.update(id, { nextAt: null, nextText: ' ' });
+    [d] = await repo.listAll();
+    expect(d.bid).toMatchObject({ nextAt: null, nextText: null });
+    await expect(repo.update(id, { nextAt: 'next friday' })).rejects.toThrow('Next step date is invalid');
+  });
+});
+
+describe('markFollowedUp', () => {
+  it('stamps followed_up_at and logs an email touch with the Procurement contact, in one call', async () => {
+    const r = createBidRepo(sql, fixedClock('2026-11-18T15:00:00.000Z'), seqIds('f'), undefined, () => 'u1');
+    const id = await r.createQuote({ title: 'T', agencyName: 'A', agencyType: 'city', timezone: 'UTC' });
+    const now = '2026-11-18T15:00:00.000Z';
+    await sql.execute(`INSERT INTO contacts (id, first_name, created_at, updated_at) VALUES ('c-a', 'Abe', ?, ?), ('c-z', 'Zed', ?, ?)`, [now, now, now, now]);
+    await sql.execute(`INSERT INTO bid_contacts (id, bid_id, contact_id, role, created_at, updated_at) VALUES
+      ('l1', ?, 'c-a', 'it', ?, ?), ('l2', ?, 'c-z', 'procurement', ?, ?)`, [id, now, now, id, now, now]);
+    await r.markFollowedUp(id);
+    const [d] = await r.listAll();
+    expect(d.bid.followedUpAt).toBe(now);
+    expect(d.touches).toHaveLength(1);
+    expect(d.touches[0]).toMatchObject({ kind: 'email', contactId: 'c-z', vendorQuoteId: null, source: 'followup', authorId: 'u1', at: now });
+    expect(d.bid.lastTouchedAt).toBe(now);
+  });
+
+  it('logs the touch with nobody when the bid has no contacts; rejects a missing bid', async () => {
+    const id = await repo.createQuote({ title: 'T', agencyName: 'A', agencyType: 'city', timezone: 'UTC' });
+    await repo.markFollowedUp(id);
+    expect((await repo.listAll())[0].touches[0]).toMatchObject({ contactId: null, source: 'followup' });
+    await expect(repo.markFollowedUp('nope')).rejects.toThrow('Bid not found');
   });
 });
 

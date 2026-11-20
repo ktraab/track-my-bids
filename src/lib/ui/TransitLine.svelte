@@ -24,13 +24,17 @@
   {#if todayPct !== null}
     <div class="today" style:left="{todayPct}%"></div>
   {/if}
+  {#each line.ticks as t (t.id)}
+    <div class="tick {t.party}" role="img" title={t.tooltip} aria-label={t.tooltip} style:left="{t.pct}%" style:top="{mid - 7}px"></div>
+  {/each}
   {#each line.stops as s (s.id)}
-    <div class="stop {s.kind}" class:past={s.past} role="img" title={s.tooltip} aria-label={s.tooltip} style:left="{s.pct}%" style:top="{mid}px"></div>
+    <div class="stop {s.kind}" class:past={s.past} class:late={s.late} role="img" title={s.tooltip} aria-label={s.tooltip} style:left="{s.pct}%" style:top="{mid}px"></div>
     {#if s.label}<div
       class="label"
       class:mand={s.kind === 'mandatory'}
       class:past={s.past}
       class:muted={s.kind === 'event' || s.kind === 'nudge'}
+      class:late={s.late}
       style:left="{s.pct}%"
       style:transform={s.pct < 8 ? 'none' : s.pct > 92 ? 'translateX(-100%)' : null}
       style:top={s.labelBelow ? `${mid + 16}px` : `${mid - 44}px`}
@@ -52,6 +56,10 @@
   .seg.customer { background: var(--cust); }
   .ghost { position: absolute; height: 0; border-top: 2px dotted var(--past); }
   .clip { position: absolute; left: 0; font-size: 10px; font-weight: 600; color: var(--muted); white-space: nowrap; }
+  .tick { position: absolute; width: 3px; height: 14px; margin-left: -1.5px; border-radius: 2px; z-index: 1; }
+  .tick.customer { background: var(--cust); }
+  .tick.vendor { background: var(--vendor); }
+  .tick.none { background: var(--us); }
   .today { position: absolute; top: 0; bottom: 0; width: 2px; margin-left: -1px; background: var(--red); opacity: 0.5; }
   .stop {
     position: absolute; transform: translate(-50%, -50%);
@@ -64,6 +72,8 @@
   .stop.terminus.past, .stop.mandatory.past { background: var(--past); }
   .stop.event, .stop.event.past { width: 12px; height: 12px; border: 3px solid var(--ink-2); }
   .stop.nudge { width: 14px; height: 14px; border: 2px dashed var(--muted); }
+  .stop.next { width: 14px; height: 14px; border: 2px dashed var(--ink-2); }
+  .stop.next.late { border-color: var(--red); }
   .label {
     position: absolute; transform: translateX(-50%); white-space: nowrap; text-align: center;
     font-size: 11px; line-height: 1.25; display: flex; flex-direction: column; color: var(--ink);
@@ -74,4 +84,5 @@
   .label.mand { color: var(--red); }
   .label.past { color: #6b7785; }
   .label.muted { color: var(--ink-2); }
+  .label.late { color: var(--red); }
 </style>

@@ -174,7 +174,7 @@ describe('needsYou list', () => {
   });
   it('counts per tab and the badge', () => {
     const items = needsYou(all, local);
-    expect(needsCounts(items)).toEqual({ all: 3, vendor: 1, unclaimed: 0, customer: 1, stop: 1 });
+    expect(needsCounts(items)).toEqual({ all: 3, next: 0, vendor: 1, unclaimed: 0, customer: 1, stop: 1 });
     expect(needsBadge(items)).toEqual({ count: 3, overdue: true });
     expect(needsBadge(needsYou([stopRow], local))).toEqual({ count: 1, overdue: false });
     expect(needsBadge([])).toEqual({ count: 0, overdue: false });
@@ -186,6 +186,34 @@ describe('needsYou list', () => {
   });
   it('snooze 1 day', () => {
     expect(needsSnoozeUntil(NOW)).toBe('2026-11-19T20:00:00.000Z');
+  });
+});
+
+describe('next step due', () => {
+  const due = '2026-11-18T14:00:00.000Z'; // today 09:00 ET
+  it('a bid or RFQ whose next step has come lands in Needs you, keyed by bid + next time', () => {
+    const [i] = rowNeeds(withChildren(makeBid({ id: 'b1', nextAt: due, nextText: 'send revised quote' }), []), local);
+    expect(i).toMatchObject({
+      key: 'needs:next:b1', notifyKey: `needs:next:b1:${Date.parse(due)}`, rule: 'next', bidId: 'b1', targetId: 'b1',
+      overdue: true, dueMs: Date.parse(due), why: 'send revised quote · was due today', kind: 'bid',
+    });
+    expect(rules(withChildren(makeQuote({ id: 'q1', stage: 'submitted', quotedAt: '2026-11-18T13:00:00.000Z', nextAt: due }), []))).toEqual(['next:q1']);
+    expect(rowNeeds(withChildren(makeBid({ nextAt: '2026-11-16T14:00:00.000Z' }), []), local)[0].why).toBe('Next step · was due Nov 16');
+  });
+  it('not before it is due, and never on closed bids', () => {
+    expect(rules(withChildren(makeBid({ nextAt: '2026-11-19T14:00:00.000Z' }), []))).toEqual([]);
+    expect(rules(withChildren(makeBid({ nextAt: due, stage: 'awarded' }), []))).toEqual([]);
+    expect(rules(withChildren(makeBid({ nextAt: null }), []))).toEqual([]);
+  });
+  it('snoozes like other rules, counts in its own tab, and makes the row overdue', () => {
+    const row = withChildren(makeBid({ id: 'b1', nextAt: due }), []);
+    expect(needsYou([row], { ...local, snoozes: new Map([['needs:next:b1', '2026-11-19T20:00:00.000Z']]) })).toEqual([]);
+    const items = needsYou([row], local);
+    expect(needsCounts(items)).toMatchObject({ all: 1, next: 1 });
+    expect(needsBadge(items)).toEqual({ count: 1, overdue: true });
+    expect(isRowOverdue(row, local)).toBe(true);
+    expect(needsAlerts(items)[0]).toMatchObject({ title: 'Needs you · Next step for Harbor County', key: `needs:next:b1:${Date.parse(due)}` });
+    expect(needsBaseKey(`needs:next:b1:${Date.parse(due)}`)).toBe('needs:next:b1');
   });
 });
 

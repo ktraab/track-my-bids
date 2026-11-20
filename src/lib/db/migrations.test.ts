@@ -11,7 +11,7 @@ describe('migrate', () => {
     expect(tables).toEqual([
       'bid_contacts', 'bids', 'checklist_items', 'checklist_template',
       'contacts', 'extract_labels', 'milestones', 'notification_log', 'quote_lines', 'settings',
-      'sync_flags', 'sync_outbox', 'sync_state', 'team_members', 'vendor_line_prices', 'vendor_quotes',
+      'sync_flags', 'sync_outbox', 'sync_state', 'team_members', 'touches', 'vendor_line_prices', 'vendor_quotes',
     ]);
   });
 
@@ -141,5 +141,46 @@ describe('migration v8', () => {
     await sql.execute(`INSERT INTO quote_lines (id, bid_id, position, qty, description, unit_cost, created_at, updated_at)
       VALUES ('l2', 'b1', 1, 1, 'Dock', 4, 't', 't')`);
     expect((await sql.select("SELECT 1 FROM sync_outbox WHERE tbl = 'quote_lines' AND row_id = 'l2' AND field = 'unit_cost'")).length).toBe(1);
+  });
+});
+
+describe('migration v9', () => {
+  it('adds next_at / next_text (null) to existing bids and keeps last_touched_at', async () => {
+    const sql = await memorySql();
+    for (let v = 0; v < 8; v++) await sql.execute(MIGRATIONS[v].join(';\n') + ';');
+    await sql.execute('PRAGMA user_version = 8');
+    await sql.execute(`INSERT INTO bids (id, title, agency_name, agency_type, submission_method, stage, timezone, last_touched_at, line_color, created_at, updated_at)
+      VALUES ('b1', 'T', 'A', 'k12', 'online', 'found', 'UTC', '2026-11-01T00:00:00.000Z', '#000', 't', 't')`);
+    expect(await migrate(sql)).toBe(MIGRATIONS.length);
+    const [b] = await sql.select<Record<string, unknown>>('SELECT next_at, next_text, last_touched_at FROM bids');
+    expect(b).toEqual({ next_at: null, next_text: null, last_touched_at: '2026-11-01T00:00:00.000Z' });
+    expect(await sql.select('SELECT * FROM touches')).toEqual([]);
+  });
+
+  it('records outbox rows for touches and the new bid columns', async () => {
+    const sql = await memorySql();
+    await migrate(sql);
+    await sql.execute('UPDATE sync_flags SET recording = 1 WHERE id = 1');
+    await sql.execute(`INSERT INTO bids (id, title, agency_name, agency_type, submission_method, stage, timezone, last_touched_at, line_color, created_at, updated_at)
+      VALUES ('b1', 'T', 'A', 'k12', 'online', 'found', 'UTC', 't', '#000', 't', 't')`);
+    await sql.execute(`INSERT INTO touches (id, bid_id, kind, at, created_at, updated_at) VALUES ('t1', 'b1', 'call', 't', 't', 't')`);
+    const fields = (await sql.select<{ field: string }>("SELECT field FROM sync_outbox WHERE tbl = 'touches' ORDER BY field")).map((r) => r.field);
+    expect(fields).toEqual(['at', 'author_id', 'bid_id', 'contact_id', 'created_at', 'deleted_at', 'kind', 'note', 'source', 'updated_at', 'vendor_quote_id']);
+    await sql.execute('DELETE FROM sync_outbox');
+    await sql.execute("UPDATE bids SET next_at = '2026-11-27T15:00:00.000Z', next_text = 'call' WHERE id = 'b1'");
+    const bidFields = (await sql.select<{ field: string }>("SELECT field FROM sync_outbox WHERE tbl = 'bids' ORDER BY field")).map((r) => r.field);
+    expect(bidFields).toEqual(['next_at', 'next_text']);
+  });
+
+  it('touches need a live bid row (foreign key) but not a contact row', async () => {
+    const sql = await memorySql();
+    await migrate(sql);
+    await expect(sql.execute(`INSERT INTO touches (id, bid_id, kind, at, created_at, updated_at) VALUES ('t1', 'nope', 'call', 't', 't', 't')`))
+      .rejects.toThrow(/FOREIGN KEY/);
+    await sql.execute(`INSERT INTO bids (id, title, agency_name, agency_type, submission_method, stage, timezone, last_touched_at, line_color, created_at, updated_at)
+      VALUES ('b1', 'T', 'A', 'k12', 'online', 'found', 'UTC', 't', '#000', 't', 't')`);
+    await sql.execute(`INSERT INTO touches (id, bid_id, kind, contact_id, at, created_at, updated_at) VALUES ('t1', 'b1', 'call', 'gone-contact', 't', 't', 't')`);
+    const [t] = await sql.select<{ source: string }>('SELECT source FROM touches');
+    expect(t.source).toBe('manual');
   });
 });

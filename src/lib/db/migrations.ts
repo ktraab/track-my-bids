@@ -1,4 +1,4 @@
-import { SYNC_COLUMNS_V6, SYNC_COLUMNS_V7, SYNC_COLUMNS_V8, SYNC_TABLES_V6 } from '../sync/tables';
+import { SYNC_COLUMNS_V6, SYNC_COLUMNS_V7, SYNC_COLUMNS_V8, SYNC_COLUMNS_V9, SYNC_TABLES_V6 } from '../sync/tables';
 import { syncTriggerSql } from '../sync/triggers';
 import type { Sql } from './sql';
 
@@ -158,6 +158,18 @@ export const MIGRATIONS: string[][] = [
     // A line's own cost, used when no chosen vendor priced it (pricing works without vendors).
     `ALTER TABLE quote_lines ADD COLUMN unit_cost REAL`,
     ...(['bids', 'extract_labels', 'quote_lines'] as const).flatMap((t) => syncTriggerSql(t, SYNC_COLUMNS_V8[t])),
+  ],
+  [
+    // v9: Touchpoint log (calls, emails, meetings, notes) and the bid's next step.
+    `ALTER TABLE bids ADD COLUMN next_at TEXT`,
+    `ALTER TABLE bids ADD COLUMN next_text TEXT`,
+    // contact_id has no FK: contact merges hard-delete never-synced duplicates (see applyRemote), like vendor_quotes.
+    `CREATE TABLE IF NOT EXISTS touches (
+      id TEXT PRIMARY KEY, bid_id TEXT NOT NULL REFERENCES bids(id), kind TEXT NOT NULL, contact_id TEXT,
+      vendor_quote_id TEXT REFERENCES vendor_quotes(id), note TEXT, at TEXT NOT NULL, author_id TEXT,
+      source TEXT NOT NULL DEFAULT 'manual', ${STAMPS})`,
+    `CREATE INDEX IF NOT EXISTS idx_touches_bid_at ON touches(bid_id, at)`,
+    ...(['bids', 'touches'] as const).flatMap((t) => syncTriggerSql(t, SYNC_COLUMNS_V9[t])),
   ],
 ];
 

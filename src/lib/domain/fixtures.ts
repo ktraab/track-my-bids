@@ -1,4 +1,4 @@
-import type { Bid, BidWithChildren, Milestone, MilestoneType, QuoteLine, VendorLinePrice, VendorQuote } from './types';
+import type { Bid, BidWithChildren, Milestone, MilestoneType, QuoteLine, Touch, VendorLinePrice, VendorQuote } from './types';
 
 const T = '2026-11-01T00:00:00.000Z';
 
@@ -13,6 +13,7 @@ export function makeBid(over: Partial<Bid> = {}): Bid {
     kind: 'bid', receivedAt: null, quotedAt: null, followedUpAt: null, pricingMode: 'whole',
     markupType: null, markupValue: null, sellRounding: 0.01, wholeVendorId: null,
     erate: false, erate470Number: null, erateFundingYear: null, erateCategory: null,
+    nextAt: null, nextText: null,
     createdAt: T, updatedAt: T, deletedAt: null,
     ...over,
   };
@@ -27,7 +28,7 @@ export function makeMilestone(id: string, type: MilestoneType, at: string, over:
 }
 
 export function withChildren(bid: Bid, milestones: Milestone[]): BidWithChildren {
-  return { bid, milestones, checklist: [], contacts: [], vendorQuotes: [], lines: [], prices: [] };
+  return { bid, milestones, checklist: [], contacts: [], vendorQuotes: [], lines: [], prices: [], touches: [] };
 }
 
 /** An open RFQ (kind 'rfq', stage 'reviewing', e-mail, no value). */
@@ -68,4 +69,13 @@ export function makePrice(vendorQuoteId: string, lineId: string, unitCost: numbe
 /** A bid with vendors, lines and prices (milestones/checklist/contacts empty). */
 export function withPricing(bid: Bid, vendorQuotes: VendorQuote[], lines: QuoteLine[], prices: VendorLinePrice[]): BidWithChildren {
   return { ...withChildren(bid, []), vendorQuotes, lines, prices };
+}
+
+/** A manual call on bid 'b1' with no party, at `at`. */
+export function makeTouch(id: string, at: string, over: Partial<Touch> = {}): Touch {
+  return {
+    id, bidId: 'b1', kind: 'call', contactId: null, vendorQuoteId: null, note: null, at, authorId: null,
+    source: 'manual', createdAt: at, updatedAt: at, deletedAt: null,
+    ...over,
+  };
 }

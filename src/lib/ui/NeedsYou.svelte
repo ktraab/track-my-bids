@@ -145,6 +145,10 @@
                     {#each owners as m (m.id)}<option value={m.id}>{m.displayName || m.email}</option>{/each}
                   </select>
                 {/if}
+              {:else if i.rule === 'next'}
+                <button class="mini primary" disabled={!!busy} data-key={i.key} data-action="next-done" title="Clear this next step"
+                  onclick={() => act(i, 'next-done', () => app.clearNextStep(i.bidId))}>Done</button>
+                <button class="mini" onclick={() => openBid(i.bidId)}>Open</button>
               {:else if i.rule === 'customer'}
                 <button class="mini primary" disabled={!!busy} data-key={i.key} data-action="followed" onclick={() => act(i, 'followed', () => app.markFollowedUp(i.bidId))}>Followed up</button>
               {:else}

@@ -1,4 +1,4 @@
-import type { Bid, ChecklistItem, Contact, Milestone, QuoteLine, VendorLinePrice, VendorQuote } from '../domain/types';
+import type { Bid, ChecklistItem, Contact, Milestone, QuoteLine, Touch, TouchKind, TouchSource, VendorLinePrice, VendorQuote } from '../domain/types';
 import type { Row } from './sql';
 import { normalizeOffsets } from '../domain/settings';
 
@@ -19,6 +19,7 @@ export function rowToBid(r: Row): Bid {
     sellRounding: Number(r.sell_rounding ?? 0.01) || 0.01, wholeVendorId: r.whole_vendor_id ?? null,
     erate: !!r.erate, erate470Number: r.erate_470_number ?? null, erateFundingYear: numOrNull(r.erate_funding_year),
     erateCategory: Number(r.erate_category) === 1 ? 1 : Number(r.erate_category) === 2 ? 2 : null,
+    nextAt: r.next_at ?? null, nextText: r.next_text ?? null,
     createdAt: r.created_at, updatedAt: r.updated_at, deletedAt: r.deleted_at,
   };
 }
@@ -84,6 +85,18 @@ export function rowToQuoteLine(r: Row): QuoteLine {
 export function rowToVendorLinePrice(r: Row): VendorLinePrice {
   return {
     id: r.id, bidId: r.bid_id, vendorQuoteId: r.vendor_quote_id, lineId: r.line_id, unitCost: numOrNull(r.unit_cost),
+    createdAt: r.created_at, updatedAt: r.updated_at, deletedAt: r.deleted_at ?? null,
+  };
+}
+
+const TOUCH_KINDS: readonly TouchKind[] = ['call', 'email', 'meeting', 'note'];
+const TOUCH_SOURCES: readonly TouchSource[] = ['manual', 'nudge', 'followup'];
+
+export function rowToTouch(r: Row): Touch {
+  return {
+    id: r.id, bidId: r.bid_id, kind: TOUCH_KINDS.includes(r.kind) ? r.kind : 'note',
+    contactId: r.contact_id ?? null, vendorQuoteId: r.vendor_quote_id ?? null, note: r.note ?? null, at: r.at,
+    authorId: r.author_id ?? null, source: TOUCH_SOURCES.includes(r.source) ? r.source : 'manual',
     createdAt: r.created_at, updatedAt: r.updated_at, deletedAt: r.deleted_at ?? null,
   };
 }

@@ -2,9 +2,23 @@
 
 All notable changes to TrackMyBids.
 
+## v0.10.0 — 2026-11-20 (Touchpoint log)
+
+Keep a log of what you did on each bid and quote, and when the next thing is due.
+
+- **Log a touch** — hover a row on the map and click **+**, or use the new **Activity** section in a bid or quote. Pick Call, Email, Meeting or Note, who it was with (the bid's contacts, its vendors, or anyone), a note, and when it happened (backdating is fine).
+- **Next step** — logging a call, email or meeting fills in a next date (5 business days by default, earlier when the due date is close; holidays skipped). Change it, keep the current one, or pick none. The Activity section shows a Next banner with **Done** and **Change**. The default is set in Settings → Notifications.
+- **On the map** — the Status column shows "Next · … · Tuesday" (red when overdue) or the last touch; each touch puts a small tick on the line (green customer, amber vendor, slate note); the next step appears as a **NEXT** stop on the line; the hover card lists the last 3 touches.
+- **Reminders** — a due next step shows in Needs you (new Next tab, with Done) and sends a notification; the morning briefing counts next steps due today. A bid with a planned next step isn't flagged idle.
+- **"Last touched" means real work** — touches, stage changes, checking off checklist items and vendor activity (asking, replies, skips) count; plain field edits no longer reset the idle clock.
+- **One timeline** — Nudge and Followed up now also log a touch. A call or email with a quiet vendor restarts its nudge clock; a customer touch on a sent quote restarts the follow-up clock.
+- **Reports** — new Last touch, Touches and Next step columns, and a **Touches** export (one row per touch).
+- **Team servers must be updated first**: apply `supabase/migrations/20261121000000_touches.sql` before installing this version (sync schema 4). Teammates on older versions see "The team server needs an update" and their sync pauses until they update; nothing is lost.
+- Verified: 959 unit tests, type check, every part code-reviewed with fixes, hands-on check in an isolated test build. Migration applied to our team server 2026-11-20 (dry run first).
+
 ## v0.9.0 — 2026-11-20 (Bid document import, E-Rate, partial pricing)
 
-Drop a bid document on the app and get a filled-in New bid form. No AI and nothing leaves your computer: fixed rules read the text, and the app learns from your corrections.
+Drop a bid document on the app and get a filled-in New bid form. No AI and nothing leaves your computer: fixed rules read the text, and the app learns from your corrections. Spec: `docs/superpowers/specs/2026-11-19-bid-document-import-design.md`.
 
 - **Import a bid document** — drag a PDF, Word (.docx) or Excel (.xlsx) file anywhere onto the window, or use **From document…** next to **+ New**. The New bid form opens filled in: bid number, title, agency and type, due date, pre-bid (with the mandatory ring), questions deadline, site walk, submission method, portal, copies, notarization, delivery address and the buyer contact (only when an email is found; matched to an existing contact by email). Each filled field has a dot: hover it to see the sentence and page it came from. When the document has several candidates (e.g. three dates near "due"), the field offers a short list, best guess first. Nothing is saved until you click Save.
 - **Scope** — the Scope field gets a tag line (e.g. Networking · Wi-Fi · Licensing, from 16 product tags) plus a short summary taken from a Form 470's service table or the document's scope section.
@@ -15,10 +29,11 @@ Drop a bid document on the app and get a filled-in New bid form. No AI and nothi
 - **Own cost without vendors** — each line has its own **Cost**, so you can price a quote before (or without) asking vendors. Pasting from Excel with no vendors fills it. Once vendors exist, a narrow Own cost column stays; vendor prices win and own cost is used only when no vendor priced the line.
 - **Team servers must be updated first**: apply `supabase/migrations/20261120000000_extract_labels.sql` before installing this version (sync schema 3). Teammates on older versions see "The team server needs an update" and their sync pauses until they update; nothing is lost. See `docs/TEAM-SETUP.md`.
 - Verified: 879 unit tests, type check, every part code-reviewed with fixes; accuracy measured on 23 real bid documents (due date 96%, bid number 100%, questions deadline 100%, buyer email 100%, agency 96%, scope tags 94% found / 84% correct); hands-on check in an isolated test build.
+- **Released 2026-11-20:** the migration was applied to our team server first (dry-run, then push; `supabase migration list` shows 20261120000000 remote), then v0.9.0 was published from the public repo (Release run 44758046011: macOS universal .dmg, Windows .msi / -setup.exe, signed auto-update; feed `latest.json` serves 0.9.0). Not yet verified: auto-update from 0.8.0 to 0.9.0, and team sync on 0.9.0. Next planned: a touchpoint log per bid.
 
 ## v0.8.0 — 2026-11-18 (RFQ Quotes)
 
-Quick RFQs that have no due date now live on the same map as bids.
+Quick RFQs that have no due date now live on the same map as bids. Spec: `docs/superpowers/specs/2026-11-18-rfq-quotes-design.md`.
 
 - **Quotes on the network** — **+ New → Quote** (customer, what they want, when it came in, contact, owner or Unassigned). A quote's line runs from the day it came in up to today, colored by who has the ball: **Us**, a **Vendor**, or the **Customer**. A dotted line shows when the next follow-up is due.
 - **Status column** on every row — quotes show who has the ball and for how long, vendor replies (e.g. 2/3) and the next step; bids show the countdown to their next stop and checklist progress. Overdue follow-ups turn red and sort to the top.

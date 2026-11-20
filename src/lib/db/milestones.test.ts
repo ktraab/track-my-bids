@@ -23,13 +23,13 @@ beforeEach(async () => {
 });
 
 describe('milestone repo', () => {
-  it('adds a mandatory site walk and touches the bid', async () => {
+  it('adds a mandatory site walk without touching the bid', async () => {
     await repo.add({ bidId, type: 'site_walk', at: '2026-11-18T09:00:00.000-06:00', mandatory: true, location: 'Central Office' });
     const [d] = await bids.listAll();
     const walk = d.milestones.find((m) => m.type === 'site_walk')!;
     expect(walk.mandatory).toBe(true);
     expect(walk.location).toBe('Central Office');
-    expect(d.bid.lastTouchedAt).toBe('2026-11-16T13:42:00.000Z');
+    expect(d.bid.lastTouchedAt).toBe(d.bid.createdAt);
   });
 
   it('refuses a second due date', async () => {

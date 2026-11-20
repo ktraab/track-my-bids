@@ -32,5 +32,6 @@ To remove someone, untick **Active**. Their bids stay; reassign them from each b
 - Deleted bids: admins can restore them from **Settings → Team → Trash**.
 - "Restore from backup" is turned off in Team mode (it would overwrite the team's data). Backups still export.
 - "The team server needs an update": apply any new files in `supabase/migrations/` (step 1.3).
+- Upgrading to the Touchpoint log release (schema 4): apply `supabase/migrations/20261121000000_touches.sql` first, then publish the app update. Same pause-until-updated behaviour as below; nothing is lost.
 - Upgrading to the Document import release (schema 3): apply `supabase/migrations/20261120000000_extract_labels.sql` first, then publish the app update. Same pause-until-updated behaviour as below; nothing is lost.
 - Upgrading to the Quotes release (schema 2): apply `supabase/migrations/20261119000000_quotes.sql` first, then publish the app update. Teammates on older versions see "The team server needs an update" and sync pauses until their app auto-updates; nothing is lost (their changes stay queued). A v0.7.1 app that was already open when the server was upgraded may show a sync error instead of the update message until it is restarted or updated; nothing is lost.
